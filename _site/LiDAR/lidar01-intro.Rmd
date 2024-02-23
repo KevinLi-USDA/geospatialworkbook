@@ -1,0 +1,92 @@
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(
+  echo = TRUE,
+  collapse = TRUE,
+  comment = "#>",
+  fig.path = "assets/R_"
+)
+```
+
+<!--
+---
+title: Introduction to LiDAR concepts, data format, and lidR package
+layout: single
+author: Kevin Li
+author_profile: true
+header:
+  overlay_color: "444444"
+  overlay_image: 
+---
+--> 
+
+**Last Update:** 8 January 2024 <br />
+**Download RMarkdown**: [< notebook_name >.Rmd](https://geospatial.101workbook.org/tutorials/<notebook_name>.Rmd)
+
+<!-- ToDo: would be great to have an R binder badge here -->
+
+## Overview
+
+Brief overview of the objective for this tutorial
+
+*Language:* `R`
+
+*Primary Libraries/Packages:*
+
+| Name | Description | Link |
+|:--|:--|:--|
+| `lidR` | Package to view and process LiDAR point clouds in `R` | https://cran.r-project.org/web/packages/lidR/index.html |
+
+## Nomenclature
+
+* *LiDAR:* Light Detection and Ranging, a method of remote sensing using pulsed lasers to measure distances.
+* *Name:* < Description >
+* *Name:* < Description >
+* *Name:* < Description >
+
+## Data Details
+
+* Repository: < Link to Repository >
+* Data: < Name of Dataset >
+* Link: < Link to the dataset >
+* Other Details: < other >
+
+## Aanlysis Steps
+
+* Title… - desc….
+* Title… - desc….
+  * desc..
+  * desc..
+  * desc..
+* Title… - desc…. - desc….
+
+## Step 0: Import Libraries/Packages
+
+```{r libraries}
+# Import the libraries/packages used here
+```
+
+## Step 1: Title...
+
+```{r step1}
+# Put Your code below - be sure to include comments
+```
+
+## Step 2: Title...
+
+```{r step2}
+# Put Your code below - be sure to include comments
+```
+
+## Step 3: Title...
+
+```{r step3}
+# Put Your code below - be sure to include comments
+```
+
+## Step 4: Title...
+
+```{r step4}
+# Put Your code below - be sure to include comments
+```
+
+

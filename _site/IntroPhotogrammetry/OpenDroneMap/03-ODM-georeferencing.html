@@ -1,0 +1,1842 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.11.2 by Michael Rose
+  Copyright 2013-2018 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE.txt
+-->
+<html lang="en" class="no-js">
+  <head>
+    <meta charset="utf-8">
+
+<!-- begin _includes/seo.html --><title>Geolocation data for the ODM workflow - Geospatial Workbook</title>
+<meta name="description" content="Tutorial on Informatics for Geospatial Information">
+
+
+  <meta name="author" content="Aleksandra Badaczewska">
+
+
+<meta property="og:type" content="website">
+<meta property="og:locale" content="en_US">
+<meta property="og:site_name" content="Geospatial Workbook">
+<meta property="og:title" content="Geolocation data for the ODM workflow">
+<meta property="og:url" content="http://localhost:4000/IntroPhotogrammetry/OpenDroneMap/03-ODM-georeferencing.html">
+
+
+
+
+  <meta property="og:image" content="http://localhost:4000/IntroPhotogrammetry/assets/images/geospatial_workbook_banner.png">
+
+
+
+  <meta name="twitter:site" content="@isugif">
+  <meta name="twitter:title" content="Geolocation data for the ODM workflow">
+  <meta name="twitter:description" content="Tutorial on Informatics for Geospatial Information">
+  <meta name="twitter:url" content="http://localhost:4000/IntroPhotogrammetry/OpenDroneMap/03-ODM-georeferencing.html">
+
+  
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content="http://localhost:4000/IntroPhotogrammetry/assets/images/geospatial_workbook_banner.png">
+  
+
+  
+    <meta name="twitter:creator" content="@someone">
+  
+
+
+
+
+
+
+
+  
+
+  
+
+
+<link rel="canonical" href="http://localhost:4000/IntroPhotogrammetry/OpenDroneMap/03-ODM-georeferencing.html">
+
+
+
+
+
+
+
+  <script type="application/ld+json">
+    {
+      "@context": "http://schema.org",
+      "@type": "Person",
+      "name": "",
+      "url": "http://localhost:4000",
+      "sameAs": null
+    }
+  </script>
+
+
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+<link href="/feed.xml" type="application/atom+xml" rel="alternate" title="Geospatial Workbook Feed">
+
+<!-- http://t.co/dKP3o1e -->
+<meta name="HandheldFriendly" content="True">
+<meta name="MobileOptimized" content="320">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+
+<!--[if lte IE 9]>
+  <style>
+    /* old IE unsupported flexbox fixes */
+    .greedy-nav .site-title {
+      padding-right: 3em;
+    }
+    .greedy-nav button {
+      position: absolute;
+      top: 0;
+      right: 0;
+      height: 100%;
+    }
+  </style>
+<![endif]-->
+
+
+    <!-- start custom head snippets -->
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-E6BZVYF8ZY"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-E6BZVYF8ZY');
+</script>
+
+<!-- insert favicons. use https://realfavicongenerator.net/ -->
+
+<!-- end custom head snippets -->
+
+  </head>
+
+  <body class="layout--single">
+
+    <!--[if lt IE 9]>
+<div class="notice--danger align-center" style="margin: 0;">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience.</div>
+<![endif]-->
+
+    <div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        <a class="site-title" href="/">Geospatial Workbook</a>
+        <ul class="visible-links">
+          
+            
+            <li class="masthead__menu-item">
+              <a href="http://localhost:4000/about.html" >About</a>
+            </li>
+          
+            
+            <li class="masthead__menu-item">
+              <a href="http://localhost:4000/list.html" >Index</a>
+            </li>
+          
+            
+            <li class="masthead__menu-item">
+              <a href="http://localhost:4000/glossary.html" >Glossary</a>
+            </li>
+          
+            
+            <li class="masthead__menu-item">
+              <a href="http://localhost:4000/people.html" >People</a>
+            </li>
+          
+            
+            <li class="masthead__menu-item">
+              <a href="http://localhost:4000/contributing.html" >Contribute</a>
+            </li>
+          
+        </ul>
+        
+        <button class="search__toggle" type="button">
+          <svg class="icon" width="16" height="16" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 15.99 16">
+            <path d="M15.5,13.12L13.19,10.8a1.69,1.69,0,0,0-1.28-.55l-0.06-.06A6.5,6.5,0,0,0,5.77,0,6.5,6.5,0,0,0,2.46,11.59a6.47,6.47,0,0,0,7.74.26l0.05,0.05a1.65,1.65,0,0,0,.5,1.24l2.38,2.38A1.68,1.68,0,0,0,15.5,13.12ZM6.4,2A4.41,4.41,0,1,1,2,6.4,4.43,4.43,0,0,1,6.4,2Z" transform="translate(-.01)"></path>
+          </svg>
+        </button>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">Toggle Menu</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+    <div class="initial-content">
+      
+  
+
+
+
+
+
+
+
+
+
+
+
+<div class="page__hero--overlay"
+  style="background-color: 444444; background-image: url('/IntroPhotogrammetry/assets/images/geospatial_workbook_banner.png');"
+>
+  
+    <div class="wrapper">
+      <h1 id="page-title" class="page__title" itemprop="headline">
+        
+          Geolocation data for the ODM workflow
+
+        
+      </h1>
+      
+      
+      
+    </div>
+  
+  
+</div>
+
+
+
+
+
+<div id="main" role="main">
+  
+  <div class="sidebar sticky">
+  
+
+
+<div itemscope itemtype="http://schema.org/Person">
+
+  
+    <div class="author__avatar">
+      
+
+      
+        <img src="/assets/images/people/Alex.png" alt="Aleksandra Badaczewska" itemprop="image">
+      
+    </div>
+  
+
+  <div class="author__content">
+    
+      <h3 class="author__name" itemprop="name">Aleksandra Badaczewska</h3>
+    
+    
+      <p class="author__bio" itemprop="description">
+        Alex is a Research Scientist IV at the Genome Informatics Facility at Iowa State University. Her academic background is in Chemistry and Biotechnology, with a Ph.D. in Computational Biology and broad experience in programming and designing web applications. She develops a comprehensive collection of highly customizable visualization solutions for Bioinformatics and supports software optimization for the USDA Geospatial analyses.
+      </p>
+    
+  </div>
+
+  <div class="author__urls-wrapper">
+    <button class="btn btn--inverse">Follow</button>
+    <ul class="author__urls social-icons">
+      
+
+      
+
+      
+        <li>
+          <a href="mailto:mailto:abadacz@iastate.edu">
+            <meta itemprop="email" content="mailto:abadacz@iastate.edu" />
+            <i class="fas fa-fw fa-envelope-square" aria-hidden="true"></i> Email
+          </a>
+        </li>
+      
+
+      
+
+      
+        <li>
+          <a href="https://twitter.com/someone" itemprop="sameAs">
+            <i class="fab fa-fw fa-twitter-square" aria-hidden="true"></i> Twitter
+          </a>
+        </li>
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      <!--
+  <li>
+    <a href="http://link-to-whatever-social-network.com/user/" itemprop="sameAs">
+      <i class="fas fa-fw" aria-hidden="true"></i> Custom Social Profile Link
+    </a>
+  </li>
+-->
+    </ul>
+  </div>
+</div>
+
+<!-- Create a 2nd author for tutorials -->
+
+
+
+<div itemscope itemtype="http://schema.org/Person">
+
+  
+
+  <div class="author__content">
+    
+      <h3 class="author__name" itemprop="name"></h3>
+    
+    
+  </div>
+
+  <div class="author__urls-wrapper">
+    <button class="btn btn--inverse">Follow</button>
+    <ul class="author__urls social-icons">
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      <!--
+  <li>
+    <a href="http://link-to-whatever-social-network.com/user/" itemprop="sameAs">
+      <i class="fas fa-fw" aria-hidden="true"></i> Custom Social Profile Link
+    </a>
+  </li>
+-->
+    </ul>
+  </div>
+</div>
+
+  
+  </div>
+
+
+  <article class="page" itemscope itemtype="http://schema.org/CreativeWork">
+    <meta itemprop="headline" content="Geolocation data for the ODM workflow">
+    
+    
+    
+
+    <div class="page__inner-wrap">
+      
+
+      <section class="page__content" itemprop="text">
+        
+        <aside class="sidebar__right">
+<nav class="toc">
+    <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> On This Page</h4></header>
+<ul class="toc__menu" id="markdown-toc">
+  <li><a href="#georeferencing" id="markdown-toc-georeferencing">Georeferencing</a>    <ul>
+      <li><a href="#georeferencing-options-in-opendronemap" id="markdown-toc-georeferencing-options-in-opendronemap">Georeferencing options in OpenDroneMap</a></li>
+    </ul>
+  </li>
+  <li><a href="#software-for-manual-detection-of-any-gcps" id="markdown-toc-software-for-manual-detection-of-any-gcps">Software for manual detection of (any) GCPs</a></li>
+  <li><a href="#automatic-detection-of-aruco-targets" id="markdown-toc-automatic-detection-of-aruco-targets">Automatic detection of ArUco targets</a>    <ul>
+      <li><a href="#working-with-aruco-in-land-surveying-tasks" id="markdown-toc-working-with-aruco-in-land-surveying-tasks">Working with ArUco in Land Surveying Tasks</a>        <ul>
+          <li><a href="#steps-in-the-land-surveying" id="markdown-toc-steps-in-the-land-surveying">Steps in the land surveying</a></li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li><a href="#create-env-for-geospatial-analysis" id="markdown-toc-create-env-for-geospatial-analysis">Create env for geospatial analysis</a>    <ul>
+      <li><a href="#geo_utils-python-utility-installation" id="markdown-toc-geo_utils-python-utility-installation"><strong>geo_utils</strong> python utility: installation</a></li>
+      <li><a href="#find-gcp-python-utility-installation" id="markdown-toc-find-gcp-python-utility-installation"><strong>Find-GCP</strong> python utility: installation</a></li>
+      <li><a href="#automatic-generation-of-aruco-codes" id="markdown-toc-automatic-generation-of-aruco-codes"><strong>Automatic generation of ArUco codes</strong></a></li>
+      <li><a href="#automatic-recognition-of-aruco-codes" id="markdown-toc-automatic-recognition-of-aruco-codes"><strong>Automatic recognition of ArUco codes</strong></a>        <ul>
+          <li><a href="#scenario-1-gcp-file-with-known-aruco-ids" id="markdown-toc-scenario-1-gcp-file-with-known-aruco-ids"><strong>SCENARIO 1:</strong> <em>GCP file with known ArUco IDs</em></a></li>
+          <li><a href="#select-representative-images-for-a-marker" id="markdown-toc-select-representative-images-for-a-marker"><strong><em>Select representative images for a marker</em></strong></a></li>
+          <li><a href="#visual-check-of-representative-images-for-a-marker" id="markdown-toc-visual-check-of-representative-images-for-a-marker"><strong><em>Visual check of representative images for a marker</em></strong></a></li>
+          <li><a href="#scenario-2-gcp-file-with-custom-ids" id="markdown-toc-scenario-2-gcp-file-with-custom-ids"><strong>SCENARIO 2:</strong> <em>GCP file with custom IDs</em></a></li>
+          <li><a href="#scenario-3-no-gcp-file" id="markdown-toc-scenario-3-no-gcp-file"><strong>SCENARIO 3:</strong> <em>no GCP file</em></a></li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li><a href="#further-reading" id="markdown-toc-further-reading">Further Reading</a></li>
+</ul>
+
+  </nav>
+</aside>
+
+<h1 id="georeferencing">Georeferencing</h1>
+
+<p>Georeferencing process results in locating a piece of the landscape visible in the photo in the corresponding geographic destination on the real-world map.</p>
+
+<p><img src="/IntroPhotogrammetry/assets/images/georeferencing.png" alt="Georeferencing" /></p>
+
+<p>Most software designed for photogrammetric workflows has a built-in geolocation step. The same is true for <b>OpenDroneMap</b>.
+In any case, to make geospatial localization of [aerial] photos, <strong>GPS data</strong> <em>(Global Positioning System)</em> is required. Most modern professional cameras record GPS coordinates automatically in the images, usually with an accuracy of 10-30 feet (3-9 meters) <em>[<a href="https://www.blog.jimdoty.com/?p=14661">source</a>]</em>. While such a result is sufficient for most ordinary purposes, your research may be more precision demanding. For example, consider the case where the target area is even smaller than the geolocation threshold. The novel, more accurate geolocation systems, such as VPS <em>(Visual Positioning System)</em> or CPS <em>(Camera Positioning Standard)</em>, are now being developed <em>[<a href="https://www.mosaic51.com/community/alternative-to-gps-how-to-get-better-accuracy/">learn more</a>]</em> and will probably supplant GPS technology in the future. By this time, though, the best patch for improving georeferencing process is still to use a <strong>high-accuracy GPS point reference</strong>, which will minimize the error.</p>
+
+<h2 id="georeferencing-options-in-opendronemap">Georeferencing options in OpenDroneMap</h2>
+
+<p>The user has some level of control over the ODM settings for the photo georeferencing stage. By default, ODM tries to use the GPS information embedded in the images automatically while recording the mission. If this is the case, you don’t need to add any additional option for geolocation to be performed.</p>
+
+<p><strong>1. Force the use of geolocation from images’ EXIF metadata</strong></p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>--force-gps --use-exif \
+</code></pre></div></div>
+
+<p>Use <code class="language-plaintext highlighter-rouge">--force-gps</code> and <code class="language-plaintext highlighter-rouge">--use-exif</code> flags when you have a GCP data file in the project file structure but <u>want to force</u> the use of the GPS data stored in the image metadata.</p>
+
+<p>That is especially useful when the original imagery is not geotagged, but you have GPS data in separate text files. In such a case, you can add this information to the image EXIF metadata using <a href="https://exiftool.org">ExifTool</a> software. Follow the instructions in the tutorial <a href="https://geospatial.101workbook.org/IntroPhotogrammetry/OpenDroneMap/00-IntroODM#keep-exif-geo-metadata">“Keep EXIF GEO metadata”</a> <em>(section: add EXIF tags from a text file using exiftool)</em> to accomplish this step.</p>
+
+<p><strong>2. Force the use of GPS data (e.g., RTK) from a text file</strong></p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>--geo geo.txt \
+</code></pre></div></div>
+
+<p>Regardless of whether your imagery is geotagged, once you have alternative GPS information <u>stored in a text file</u>, you can force direct use of it with the option <code class="language-plaintext highlighter-rouge">--geo geo.txt</code>. This is especially useful when you have more <strong>accurate geolocation data such as RTK</strong> <em>(Real-Time Kinematic positioning)</em> that corrects some of the common errors in current satellite navigation (GNSS) systems.</p>
+
+<div style="background: mistyrose; padding: 15px; margin-bottom: 20px;">
+<span style="font-weight:800;">WARNING:</span>
+<br /><span style="font-style:italic;">
+Keep in mind that the format of the text file containing the GPS data is strictly defined! <br /><br />
+If the <b>geo.txt</b> file is somewhere outside of your project's workdir or you have several GPS files, then provide the <b>absolute path</b> to the one you want.
+</span>
+</div>
+
+<div style="background: #cff4fc; padding: 15px; margin-bottom: 20px;">
+<span style="font-weight:800;">geo.txt</span> <i>(file content below)</i>
+<span style="color:navy;"><i>[see details in the <a href="https://docs.opendronemap.org/geo/#image-geolocation-files" style="color: blue;">ODM Documentation: GPS data</a>]</i></span>
+<br /><br />
++proj=utm +zone=11 +ellps=WGS84 +datum=WGS84 +units=m +no_defs &emsp; # header <br />
+DJI_0028.JPG &emsp; -91.9942096 &emsp; 46.8425252 &emsp; 198.609 &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp; # GPS data <br />
+DJI_0032.JPG &emsp; -91.9938293 &emsp; 46.8424584 &emsp; 198.609 &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp; # GPS data <br />
+</div>
+
+<ul>
+  <li>The first line should contain the name of the projection used for the geo-coordinates, in one of the following formats:</li>
+</ul>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>* PROJ string:   +proj=utm +zone=11 +ellps=WGS84 +datum=WGS84 +units=m +no_defs
+*   EPSG code:   EPSG:4326
+*   WGS84 UTM:   WGS84 UTM 16N
+</code></pre></div></div>
+
+<ul>
+  <li>Subsequent lines are the GPS information for a given image <u><i>(the first 3 columns are obligatory)</i></u>:</li>
+</ul>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>     col-1 col-2 col-3  col-4              col-5          col-6             col-7                    col-8                    col-9      col-10
+     _____ _____ _____ ______ _________________  ______________  ________________  _______________________  _______________________  ___________
+image_name geo_x geo_y [geo_z] [omega (degrees)] [phi (degrees)] [kappa (degrees)] [horz accuracy (meters)] [vert accuracy (meters)] [extras...]
+</code></pre></div></div>
+
+<p><strong>3. Force fixed value of GPS Dilution of Precision</strong> <em>(use along with variant 1 or 2)</em></p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>--gps-accuracy 10.0 \
+</code></pre></div></div>
+
+<p>If you know the <strong>estimated error of GPS</strong> location determined by the camera in use, consider setting it as a value of the <code class="language-plaintext highlighter-rouge">--gps-accuracy value</code> option. The value is a positive float in meters and will be used as a GPS Dilution of Precision for all images. <em>The default is 10 meters.</em></p>
+
+<div style="background: mistyrose; padding: 15px; margin-bottom: 20px;">
+<span style="font-weight:800;">WARNING:</span>
+<br /><span style="font-style:italic;">
+If you use high-precision GPS (RTK), this value will be set automatically. You can manually set it in case the reconstruction fails. Lowering the value can help control bowling effects over large areas.
+</span>
+</div>
+
+<p><strong>3. Force the use of GCP-based georeferencing</strong></p>
+
+<p><strong>Ground Control Points</strong> (GCPs) are clearly visible objects which can be easily identified in several images. Using the precise GPS position of these ground points is a good reference that improves significantly the accuracy of the project’s geolocation. Ground control points can be any <strong>steady structure</strong> existing in the mission area, otherwise can be set using <strong>targets placed on the ground</strong>. <em>Learn more about recommended practices for GCPs in ODM workflow from the OpenDronMap Documentation: <a href="https://docs.opendronemap.org/gcp/#ground-control-points">Ground Control Points</a>.</em></p>
+
+<p>If you have a file with GCPs detected on the image collection, force georeferencing using it by option <code class="language-plaintext highlighter-rouge">--gcp gcp_list.txt</code>.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>--gcp gcp_list.txt \
+</code></pre></div></div>
+
+<div style="background: mistyrose; padding: 15px; margin-bottom: 20px;">
+<span style="font-weight:800;">WARNING:</span>
+<br /><span style="font-style:italic;">
+Keep in mind that the format of the text file containing the GCP data is strictly defined! <br /><br />
+If the <b>gcp_list.txt</b> file is somewhere outside of your project's workdir or you have several GCP files, then provide the <b>absolute path</b> to the one you want.
+</span>
+</div>
+
+<p><br /><span style="color: #ff3870;font-weight: 600; font-size:24px;">
+Detect each ground control point in at least 5-10 photos!
+</span><br /></p>
+
+<div style="background: #cff4fc; padding: 15px; margin-bottom: 20px;">
+<span style="font-weight:800;">gcp_list.txt</span> <i>(file content below)</i>
+<span style="color:navy;"><i>[see details in the <a href="https://docs.opendronemap.org/gcp/#ground-control-points" style="color: blue;">ODM Documentation: GCPs</a>]</i></span>
+<br /><br />
+EPSG:4326 <br />
+-116.74998 &emsp; 43.06477 &emsp; 2090.14 &emsp; 1559.41645 &emsp; 1372.84669 &emsp; DJI_0177.JPG &emsp; 100 <br />
+-116.74998 &emsp; 43.06477 &emsp; 2090.14 &emsp; 1491.01638 &emsp; 2471.85207 &emsp; DJI_0355.JPG &emsp; 100 <br />
+-116.74998 &emsp; 43.06477 &emsp; 2090.14 &emsp; 1524.14196 &emsp; 2214.43593 &emsp; DJI_0178.JPG &emsp; 100 <br />
+-116.74998 &emsp; 43.06477 &emsp; 2090.14 &emsp; 1142.59915 &emsp; 1739.80028 &emsp; DJI_0152.JPG &emsp; 100 <br />
+-116.74998 &emsp; 43.06477 &emsp; 2090.14 &emsp; 1207.88116 &emsp; 1863.28946 &emsp; DJI_0329.JPG &emsp; 100 <br />
+-116.75048 &emsp; 43.06475 &emsp; 2088.22 &emsp; 1737.22646 &emsp; 1763.28507 &emsp; DJI_0172.JPG &emsp; 101 <br />
+-116.75048 &emsp; 43.06475 &emsp; 2088.22 &emsp; 1660.24277 &emsp; 2912.50267 &emsp; DJI_0350.JPG &emsp; 101 <br />
+-116.75048 &emsp; 43.06475 &emsp; 2088.22 &emsp; 1736.70576 &emsp; 1411.55810 &emsp; DJI_0171.JPG &emsp; 101 <br />
+-116.75048 &emsp; 43.06475 &emsp; 2088.22 &emsp; 989.578526 &emsp; 1391.94185 &emsp; DJI_0157.JPG &emsp; 101 <br />
+-116.75048 &emsp; 43.06475 &emsp; 2088.22 &emsp; 877.826253 &emsp; 2459.65369 &emsp; DJI_0335.JPG &emsp; 101 <br />
+</div>
+
+<ul>
+  <li>The first line should contain the name of the projection used for the geo-coordinates, in one of the following formats:</li>
+</ul>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>* PROJ string:   +proj=utm +zone=11 +ellps=WGS84 +datum=WGS84 +units=m +no_defs
+*   EPSG code:   EPSG:4326
+*   WGS84 UTM:   WGS84 UTM 16N
+</code></pre></div></div>
+
+<ul>
+  <li>Subsequent lines are the GPS information for a given image <u><i>(the first 6 columns are obligatory)</i></u>:</li>
+</ul>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>col-1 col-2 col-3 col4 col5    col-6     col-7     col-8    col-9
+_____ _____ _____ ____ ____ __________ __________ ________ ________
+geo_x geo_y geo_z im_x im_y image_name [gcp_name] [extra1] [extra2]
+</code></pre></div></div>
+
+<hr />
+
+<h1 id="software-for-manual-detection-of-any-gcps">Software for manual detection of (any) GCPs</h1>
+
+<p><span style="color: #ff3870;font-weight: 600;">Section in development…</span></p>
+
+<p>Use any software for tagging GCPs, e.g., the <a href="https://uav4geo.com/software/gcpeditorpro">GCP Editor Pro</a> is a good match for the ODM. Download source code from the <a href="https://github.com/uav4geo/GCPEditorPro">GitHub</a>.</p>
+
+<hr />
+
+<h1 id="automatic-detection-of-aruco-targets">Automatic detection of ArUco targets</h1>
+
+<p>ArUco markers are a type of fiducial marker that are often used in computer vision applications. A fiducial marker is an object placed in the field of view of the camera which appears in the image with a known location, size, and appearance. <b>Aruco markers are square black-and-white patterns which can be easily detected</b>, identified, and used to calculate the camera’s pose with respect to the marker.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>ArUco_feature</th>
+      <th>description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Simple Structure</td>
+      <td><em>Being just black and white squares, they are relatively easy and efficient to detect in an image.</em></td>
+    </tr>
+    <tr>
+      <td>Identification</td>
+      <td><em>Each Aruco marker has a unique identifier assigned based on its pattern, which allows the system to distinguish between different markers.</em></td>
+    </tr>
+    <tr>
+      <td>Flexibility</td>
+      <td><em>Aruco markers come in different dictionaries, or sets of markers. Each dictionary varies in the number of bits in the marker and the number of different markers. This allows for a balance between the total number of unique markers and the robustness against detection errors.</em></td>
+    </tr>
+    <tr>
+      <td>Pose Estimation</td>
+      <td><em>By knowing the real size of the marker and its position in the image, one can determine the position and orientation (pose) of the camera with respect to the marker.</em></td>
+    </tr>
+    <tr>
+      <td>Calibration</td>
+      <td><em>ArUco markers can be employed to calibrate cameras by capturing images of the markers from different orientations and positions.</em></td>
+    </tr>
+  </tbody>
+</table>
+
+<div style="background: #dff5b3; padding: 15px;">
+<span style="font-weight:800;">NOTE:</span>
+<br /><span style="font-style:italic;">ArUco markers originated from academic research, and the term "aruco" is derived from the name of the library that introduced and popularized these markers. The <b>ArUco library</b> was initially a standalone project but later got integrated into the <b>OpenCV (Open Source Computer Vision Library)</b>. Therefore, when you're looking to utilize ArUco functionalities, you'd typically access it through OpenCV's ArUco module.</span>
+</div>
+
+<h2 id="working-with-aruco-in-land-surveying-tasks">Working with ArUco in Land Surveying Tasks</h2>
+
+<p>The most official and widely recognized source for information and usage of ArUco markers is within the <strong>OpenCV</strong> (<em>Open Source Computer Vision Library</em>) library, which has integrated ArUco module functionalities. The OpenCV documentation provides detailed information on how to use ArUco markers, and you can access it via the <a href="https://docs.opencv.org/master/d9/d6a/group__aruco.html">official OpenCV website</a>.</p>
+
+<p><strong>OpenCV is one of the most popular and comprehensive libraries for computer vision and machine learning tasks.</strong> It was initially developed by Intel and released in 2000. Since then, it has become a standard tool for computer vision researchers and developers due to its rich set of functionalities and performance optimizations.</p>
+<ul>
+  <li><strong>OpenCV is organized into modules</strong>, each focused on a specific aspect of computer vision or image processing. This includes modules for:
+    <ul>
+      <li>image filtering with <code class="language-plaintext highlighter-rouge">imgproc</code> module</li>
+      <li><strong>pose estimation with</strong> <code class="language-plaintext highlighter-rouge">aruco</code> <strong>module</strong></li>
+      <li>feature detection with <code class="language-plaintext highlighter-rouge">features2d</code> module</li>
+      <li>object detection with <code class="language-plaintext highlighter-rouge">objdetect</code> module</li>
+      <li>machine learning with <code class="language-plaintext highlighter-rouge">ml</code> module</li>
+      <li>camera calibration with <code class="language-plaintext highlighter-rouge">calib3d</code> module</li>
+      <li>motion analysis with <code class="language-plaintext highlighter-rouge">video</code> module</li>
+      <li>and more.</li>
+    </ul>
+  </li>
+  <li>While OpenCV was originally written in <code class="language-plaintext highlighter-rouge">C++</code>, it now has bindings for <code class="language-plaintext highlighter-rouge">Python</code>, <code class="language-plaintext highlighter-rouge">Java</code>, and several other languages. This makes it accessible to a wide range of developers. <strong>The Python bindings have become extremely popular</strong> enabling developers to create custom computer vision applications, such as <a href="https://github.com/zsiki/Find-GCP">Find-GCP</a> utility for finding ArUco markers in digital photos.</li>
+</ul>
+
+<p><span style="color: #ff3870;font-weight: 500;">Learn more about ArUco markers in OpenCV library: <a href="https://docs.opencv.org/3.2.0/d5/dae/tutorial_aruco_detection.html" target="_blank">https://docs.opencv.org/3.2.0/d5/dae/tutorial_aruco_detection.html</a></span></p>
+
+<h3 id="steps-in-the-land-surveying">Steps in the land surveying</h3>
+
+<p><strong>1. Markers Generation:</strong> Before the survey, ArUco markers are generated using specialized software or libraries, such as the <code class="language-plaintext highlighter-rouge">aruco_make.py</code> python utility <em>(using ArUco module in OpenCV library)</em>. <br /></p>
+
+<div style="background: #cff4fc; padding: 15px; margin-bottom: 30px;">
+<span style="font-weight:800;">PRO TIP:</span><br />
+You can generate GCP (Ground Control Point) markers ranging from 1 to up to 1000 using various ArUco dictionaries by leveraging OpenCV's built-in ArUco module. <span style="color: #ff3870;font-weight: 500;"> To learn more, see section <a href="#automatic-generation-of-aruco-codes ">Automatic generation of ArUco codes </a>.</span>
+</div>
+
+<p><strong>2. Printing and Placement:</strong> Once generated, these markers are printed on sturdy material to withstand outdoor conditions. They’re then placed strategically at known positions within the area to be surveyed.</p>
+
+<div style="background: #cff4fc; padding: 15px; margin-bottom: 20px;">
+<span style="font-weight:800;">PRO TIP:</span><br />
+When recording the exact positions of the placed Ground Control Points (GCPs), <b>always note which GCP corresponds to which ArUco marker ID</b><i> (e.g., create GCP_reference.txt file)</i>; this association will be crucial when pinpointing them on the images during post-processing. <br />
+Expected format of the <i>GCP_reference.txt</i> is 4-columns: <b>ArUco_ID x y z </b><br />
+0 523287.368 4779588.335 1397.823 <br />
+1 523305.976 4779572.588 1397.817 <br />
+2 523347.074 4779571.424 1397.653 <br />
+3 523364.648 4779587.932 1395.735 <br />
+4 523394.376 4779529.525 1398.728 <br />
+5 523363.938 4779530.027 1400.244 <br />
+</div>
+
+<div style="background: mistyrose; padding: 15px; margin-bottom: 20px;">
+<span style="font-weight:800;">WARNING:</span>
+<br /><span style="font-style:italic;">When using ArUco markers for Ground Control Points (GCPs), it's strongly recommended to <b>avoid using custom IDs</b>. If custom IDs are unavoidable, make sure to maintain an accurate reference that matches your custom IDs with the corresponding ArUco marker ID or type <i>(i.e., marker's pattern)</i>.</span>
+</div>
+
+<table style="background: mistyrose; padding: 15px; margin-bottom: 30px;">
+<tr><th style="width: 500px;">WARNING:</th><th>digital marker: ID 9</th><th>printed marker</th></tr>
+<tr><td><b>Always verify that the printed marker matches the digital version.</b> Printing errors can occasionally distort the marker, leading to recognition issues during post-processing of land surveying imagery. <br /><br /><i>In the given example, the printed marker is missing one black square. This omission can greatly hinder its recognition, making it challenging to correctly identify it as an ArUco marker with ID 9.</i></td>
+<td><img src="../assets/images/marker9.png" style="width:200px;" /></td>
+<td><img src="../assets/images/marker9_printed.jpg" style="width:200px;" /></td></tr>
+</table>
+
+<p><strong>3. Capturing Imagery:</strong> Using drones, satellites, or handheld cameras, images of the area are taken. These images capture the terrain as well as the ArUco markers.</p>
+
+<p><strong>4. Detection and Analysis:</strong> During the post-processing phase, software detects the ArUco markers in the captured images. Given the known size and ID of each marker, as well as its location in the image, software can estimate the camera’s pose and the 3D position of the marker. <span style="color: #ff3870;font-weight: 500;"><br />To learn more, see section <a href="#automatic-recognition-of-aruco-codes" target="_blank">Automatic recognition of ArUco codes</a>.</span></p>
+
+<p><strong>5. Georeferencing:</strong> Knowing the real-world coordinates of each ArUco marker, the captured images can be georeferenced (assigned to a specific location in a spatial reference system). This ensures that the imagery aligns accurately with geographic coordinates.</p>
+
+<hr />
+
+<h1 id="create-env-for-geospatial-analysis">Create env for geospatial analysis</h1>
+
+<p>Creating a Conda environment for geospatial analyses streamlines your workflow by isolating installations and dependencies specific to selected geospatial tools. This offers the advantage of consistency, compatibility and convenience, beneficial for both High-Performance Computing (HPC) and local machines.</p>
+
+<p>Isolating installations and dependencies ensures that you can <strong>effortlessly integrate ready-made packages and Python utilities</strong>, such as those for marker detection in imagery for further analysis with ODM. With a <strong>one-time setup of a unified “geospatial” environment</strong>, you can seamlessly utilize a suite of tools from various GitHub repositories, significantly streamlining your daily tasks.</p>
+
+<p><em>Give it a shot! It’s an investment that pays off!</em></p>
+
+<p><span style="font-size: 24px;"><b>A. On SCINet HPC: Atlas</b></span> <br />
+<em>(via ssh in CLI terminal or via OOD in JupyterLab Terminal app)</em></p>
+
+<p><strong>1.</strong>  check available <strong>conda</strong> modules and load selected one:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>module avail conda
+module load miniconda/4.12.0
+</code></pre></div></div>
+<p><img src="/IntroPhotogrammetry/assets/images/load_miniconda.png" alt="load_miniconda.png" /></p>
+
+<p><strong>2.</strong> create python environment for geospatial analysis:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>conda create -n geospatial python=3.9
+</code></pre></div></div>
+<p><img src="/IntroPhotogrammetry/assets/images/create_geospatial_env.png" alt="create_geospatial_env.png" /></p>
+
+<p><strong>3.</strong> activate this environment:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>source activate geospatial
+</code></pre></div></div>
+<p><img src="/IntroPhotogrammetry/assets/images/activate_geospatial_env.png" alt="activate_geospatial_env.png" /></p>
+
+<p><strong>4.</strong> install required libraries:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>pip install numpy==1.22.2 opencv-python==4.8.0.76 opencv-contrib-python==4.8.0.76 Pillow==10.0.0 pyproj==3.6.0 Shapely==1.8.1.post1 svgwrite==1.4.1 matplotlib pandas
+</code></pre></div></div>
+<p><i>This command installs a foundational set of dependencies crucial for the Python utilities detailed below (sourced from GitHub repos). With these dependencies in place and the environment activated, these tools are set to operate immediately post-cloning, eliminating the need of further setup.</i><br /></p>
+
+<div style="background: #cff4fc; padding: 15px; margin-bottom: 20px;">
+<span style="font-weight:800;">PRO TIP:</span>
+<br /><span style="font-style:italic;">
+In the future, if you seek to augment this environment with more packages, you can effortlessly do so at any point using either <b>conda install</b> or <b>pip install</b> commands in the activated environment.
+</span>
+</div>
+
+<p><strong>5.</strong> deactivate this environment <em>(if you no longer intend to use it for this session)</em>:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>conda deactivate
+</code></pre></div></div>
+
+<div style="background: mistyrose; padding: 15px; margin-bottom: 25px;">
+<span style="font-weight:800;">WARNING:</span>
+<br /><span style="font-style:italic;">
+Before starting to use Conda on HPC cluster <i>(e.g. Atlas or Ceres)</i>, it’s advisable to change the default location (your home directory) where Conda will install your customized libraries. Installing a lot of Python libraries may contribute to the default 5G soft limit quota on your home directory being surpassed. To overcome this issue you can <b>move .conda directory from your home directory to your project directory and create a symbolic link to the new location</b>.
+</span>
+</div>
+
+<p><span style="font-size:24px;"><b>6.* Change storage location of your Conda envs:</b></span> <br />
+<span style="color: #ff3870;font-weight: 500;">( <b>Do it only once!</b> <i>All your Conda envs are stored in .conda dir by default.</i> )</span><br />
+<em>Remember to replace the placeholders in &lt;&gt; with the appropriate paths from your file system.</em></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>cd ~
+mkdir /project/&lt;your_project_dir&gt;/&lt;account_name&gt;
+mv .conda /project/&lt;your_project_dir&gt;/&lt;account_name&gt;/
+chmod -R g+s /project/&lt;your_project_dir&gt;/&lt;account_name&gt;/.conda
+ln -s /project/&lt;your_project_dir&gt;/&lt;account_name&gt;/.conda .conda
+</code></pre></div></div>
+<p><em>The</em> <code class="language-plaintext highlighter-rouge">mv</code> <em>command may take longer time depending on how much data you have in the <b>.conda</b> directory.</em> <br />
+<img src="/IntroPhotogrammetry/assets/images/move_conda_dir.png" alt="move_conda_dir.png" /></p>
+
+<div style="background: #cff4fc; padding: 15px; margin-bottom: 20px;">
+<span style="font-weight:800;">PRO TIP:</span>
+<br /><span style="font-style:italic;">
+If you're unsure whether you've moved your <b>.conda directory</b> from <i>home</i> to the <i>project</i>, run <b>ls -lha</b> in your <i>home</i> directory to see the actual locations of all files, including the (eventually) <b>soft-linked .conda</b>. <br />
+<img style="margin-top: 10px;" src="../assets/images/check_conda_location.png" />
+</span>
+</div>
+
+<p><span style="font-size:24px;"><b>7.* Create the storage directory for custom software and GitHub repos:</b></span> <br />
+<span style="color: #ff3870;font-weight: 500;">( <b>Do it only once!</b> <i>You can keep all your self-installed useful tools here.</i> )</span> <br />
+You can establish a SOFTWARE or TOOLS directory within your <code class="language-plaintext highlighter-rouge">/project/&lt;account&gt;</code> location on the cluster, ensuring a well-organized repository for your custom tools, making them easily locatable in the future.</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>cd /project/&lt;your_project_dir&gt;/
+mkdir SOFTWARE
+</code></pre></div></div>
+<p><img src="/IntroPhotogrammetry/assets/images/create_software_dir.png" alt="create_software_dir.png" /> <br />
+<em>We will use this location later in this tutorial to</em> <code class="language-plaintext highlighter-rouge">git clone</code> <em>a few GitHub repositories with python utilities useful in land surveying tasks. You can also add your customized software here.</em></p>
+
+<p><br /><span style="font-size: 24px;"><b>B. On your local machine</b> <i>(alternatively)</i>:</span> <br /></p>
+<ul>
+  <li>If you already have the Conda environment manager installed, skip step 1 and proceed with the instructions outlined above.
+    <ul>
+      <li><strong>NOTE:</strong> On a local machine you will use <code class="language-plaintext highlighter-rouge">conda activate geospatial</code> instead of <code class="language-plaintext highlighter-rouge">source</code> command.</li>
+    </ul>
+  </li>
+  <li>
+    <p>For those unfamiliar with Conda, it’s a valuable tool for computational tasks, and you can learn how to use it through the practical tutorials in the DataScience workbook: <a href="https://datascience.101workbook.org/03-SetUpComputingMachine/03C-tutorial-installations-on-linux#conda">Conda on Linux</a>, <a href="https://datascience.101workbook.org/03-SetUpComputingMachine/03A-tutorial-installations-on-mac#-install-conda">Conda on macOS</a>, <a href="https://datascience.101workbook.org/04-DevelopmentEnvironment/02A-python-setup-locally#conda">Python Setup on your computing machine</a>.</p>
+  </li>
+  <li>If you choose not to use Conda, you can jump directly to step 4 in the guide, though <u>this is not recommended</u> because the necessary libraries will install system-wide, rather than in an isolated environment.</li>
+</ul>
+
+<hr />
+
+<p><br /><span style="font-size: 24px;">A few tips before working with Conda and GitHub repos</span></p>
+
+<p>Once you’ve set up the <code class="language-plaintext highlighter-rouge">geospatial</code> environment, theoretically all the necessary dependencies for the repos listed below should already be installed. However, dependencies may change over time.</p>
+<ul>
+  <li>If there are updates or changes to the repository, ensure that you activate the geospatial environment and install all the new requirements. The installation should be done once initially, or after each <code class="language-plaintext highlighter-rouge">git pull</code> (updates) from the repo.</li>
+  <li>For subsequent usage of the repo’s scripts, simply <strong>activate the geospatial environment and execute the scripts</strong>; there’s no need to reinstall requirements every time you use them.</li>
+</ul>
+
+<h2 id="geo_utils-python-utility-installation"><strong>geo_utils</strong> python utility: installation</h2>
+
+<p><strong><a href="https://github.com/ISUgenomics/geo_utils">geo_utils</a></strong> (GitHub repo) is an evolving collection of Python utilities tailored for geospatial analysis, developed at ISU as a part of the virtual research support for the USDA scientist. These utilities are designed to complement photogrammetry analysis using ODM software, enhancing the robustness of processing pipelines especially when calculations are executed on an HPC cluster. The GitHub repo contains a few small utilities useful in land surveying tasks:</p>
+
+<ul>
+  <li>
+    <p><a href="https://github.com/ISUgenomics/geo_utils/tree/main#gcp-to-aruco-mapper">gcp_to_aruco_mapper.py</a> - maps custom GCP IDs to corresponding ArUco marker IDs in imagery based on the distance between GCP coordinates and image GPS</p>
+  </li>
+  <li>
+    <p><a href="https://github.com/ISUgenomics/geo_utils/tree/main#gcp-images-picker">gcp_images_picker.py</a> - automatically selects the representative images for each GCP, minimizing manual inspection</p>
+  </li>
+</ul>
+
+<p><strong>INSTALLATION:</strong> <span style="color: #ff3870;font-weight: 500;">( <b>Do it only once!</b> <i>The cloned repo will persist in your file system.</i>)</span></p>
+
+<p><strong>On SCINet HPC: Atlas</strong> (via ssh in CLI terminal or via OOD in JupyterLab Terminal app)</p>
+
+<ol>
+  <li>navigate to the <strong>SOFTWARE</strong> directory in your <code class="language-plaintext highlighter-rouge">/project/&lt;your_project_dir&gt;/</code> path:
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  cd /project/&lt;your_project_dir&gt;/SOFTWARE
+</code></pre></div>    </div>
+  </li>
+  <li>clone the <code class="language-plaintext highlighter-rouge">geo_utils</code> repo from GitHub:
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  git clone https://github.com/ISUgenomics/geo_utils
+</code></pre></div>    </div>
+    <p>When you clone a repository from GitHub, it creates a new directory on your current path with the name of the repository. Inside this directory, you’ll find the contents of the repository. <br />
+  <img src="/IntroPhotogrammetry/assets/images/git_clone_geo_utils.png" alt="git_clone_geo_utils.png" /></p>
+  </li>
+  <li>check available <strong>conda</strong> modules and load selected one <em>(if not loaded yet in this session)</em>:
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  module avail conda
+  module load miniconda/4.12.0
+</code></pre></div>    </div>
+  </li>
+  <li>activate your <code class="language-plaintext highlighter-rouge">geospatial</code> environment <em>(if not activated yet in this session)</em>:
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  source activate geospatial
+</code></pre></div>    </div>
+  </li>
+  <li>*install required libraries <em>(optionally after</em> <code class="language-plaintext highlighter-rouge">git pull</code><em>)</em>:
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  cd geo_utils
+  pip install -r requirements.txt
+</code></pre></div>    </div>
+  </li>
+  <li>start using the scripts from the repo! <em>(they are located in the TOOLS subdir)</em>
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  # GCP images picker
+  python gcp_images_picker.py [-h] -i DATA_FILE_PATH -w IMAGE_WIDTH -l IMAGE_HEIGHT [-n IMAGES_NUMBER] [-o OUTPUT]
+  # GCP to ArUco mapper
+  python gcp_to_aruco_mapper.py [-h] -g GCP_FILE -i IMAGERY_PATH -z ZONE [-o OUTPUT] [-d MAX_DIST]
+</code></pre></div>    </div>
+    <p><img src="/IntroPhotogrammetry/assets/images/geo_utils_usage.png" alt="geo_utils_usage.png" /></p>
+  </li>
+</ol>
+
+<div style="background: #cff4fc; padding: 15px; margin-left: 37px;">
+  <span style="font-weight:800;">PRO TIP:</span>
+  <br /><span style="font-style:italic;">
+  To gain practical experience with the use of these scripts, please follow the instructions provided in the subsequent sections of this tutorial.
+  </span>
+  </div>
+
+<h2 id="find-gcp-python-utility-installation"><strong>Find-GCP</strong> python utility: installation</h2>
+
+<p><strong><a href="https://github.com/zsiki/Find-GCP">Find-GCP</a></strong> (GitHub repo) is a Python tool leveraging the OpenCV library, designed to detect ArUco Ground Control Points in imagery and generate the corresponding GCP file required for photogrammetric programs such as Open Drone Map. The GitHub repo contains a few small utilities useful in land surveying tasks:</p>
+
+<ul>
+  <li><a href="https://github.com/zsiki/Find-GCP#aruco_makepy">aruco_make.py</a> - generates aruco marker images using different standard dictionaries</li>
+  <li><a href="https://github.com/zsiki/Find-GCP#gcp_findpy">gcp_find.py</a> - identifies Ground Control Points (GCP) in imagery</li>
+  <li><a href="https://github.com/zsiki/Find-GCP#gcp_checkpy">gcp_check.py</a> - helps the visual check of the found GCPs by <code class="language-plaintext highlighter-rouge">gcp_find.py</code></li>
+</ul>
+
+<p><strong>INSTALLATION:</strong> <span style="color: #ff3870;font-weight: 500;">( <b>Do it only once!</b> <i>The cloned repo will persist in your file system.</i>)</span></p>
+
+<p><strong>On SCINet HPC: Atlas</strong> (via ssh in CLI terminal or via OOD in JupyterLab Terminal app)</p>
+
+<ol>
+  <li>navigate to the <strong>SOFTWARE</strong> directory in your <code class="language-plaintext highlighter-rouge">/project/&lt;your_project_dir&gt;/</code> path:
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  cd /project/&lt;your_project_dir&gt;/SOFTWARE
+</code></pre></div>    </div>
+  </li>
+  <li>clone the <code class="language-plaintext highlighter-rouge">Find-GCP</code> repo from GitHub:
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  git clone https://github.com/zsiki/Find-GCP.git
+</code></pre></div>    </div>
+    <p><img src="/IntroPhotogrammetry/assets/images/git_clone_find_gcp.png" alt="git_clone_find_gcp.png" /></p>
+  </li>
+  <li>check available <strong>conda</strong> modules and load selected one <em>(if not loaded yet in this session)</em>:
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  module avail conda
+  module load miniconda/4.12.0
+</code></pre></div>    </div>
+  </li>
+  <li>activate your <code class="language-plaintext highlighter-rouge">geospatial</code> environment <em>(if not activated yet in this session)</em>:
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  source activate geospatial
+</code></pre></div>    </div>
+  </li>
+  <li>*install required libraries <em>(optionally after</em> <code class="language-plaintext highlighter-rouge">git pull</code><em>)</em>:
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  pip install opencv-python opencv-contrib-python Pillow pil.imagetk numpy matplotlib
+</code></pre></div>    </div>
+  </li>
+</ol>
+<div style="background: mistyrose; padding: 15px; margin-bottom: 20px; margin-left: 37px;">
+  <span style="font-weight:800;">WARNING:</span>
+  <br /><span style="font-style:italic;">
+  Installing packages without specifying a version usually installs the latest version, which may be incompatible with older required ones, potentially causing scripts to malfunction.
+  </span>
+  </div>
+
+<p><span style="margin-left:10px;">6.   start using the scripts from the repo! <i>(they are placed directly in the directory)</i> </span><br />
+Once you navigate into the newly created Find-GCP directory, you should see 6 files with the <code class="language-plaintext highlighter-rouge">.py</code> extension. These <code class="language-plaintext highlighter-rouge">.py</code> files are the <strong>Find-GCP python utilities for working with ArUco markers in Land Surveying Tasks</strong>.</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>cd Find-GCP
+ls
+python gcp_find.py -h
+</code></pre></div></div>
+<p><img src="/IntroPhotogrammetry/assets/images/find_gcp_repo.png" alt="find_gcp_repo" /><br /><br />
+<img src="/IntroPhotogrammetry/assets/images/find_gcp_usage.png" alt="find_gcp_usage.png" /></p>
+
+<h2 id="automatic-generation-of-aruco-codes"><strong>Automatic generation of ArUco codes</strong></h2>
+
+<p><em>ArUco markers provide known reference points in the imagery, enhancing the accuracy of photogrammetric analysis. This ensures that data derived from the imagery correctly corresponds to actual locations on the ground.</em></p>
+
+<p><strong>Available ArUco dictionaries</strong> <br />
+<span style="color: #ff3870;font-weight: 400;">ArUco markers come in various dictionaries that defines a set of distinct markers.</span> The choice of dictionary affects the size and resilience of the markers, as well as how many unique markers the dictionary contains.
+In the naming convention like <code class="language-plaintext highlighter-rouge">DICT_4X4_100</code> or <code class="language-plaintext highlighter-rouge">DICT_6X6_250</code>: <br /></p>
+<ul>
+  <li>The first part (4X4 or 6X6) represents the size of the marker grid. <em>For example, a 4X4 marker has a 4x4 grid of black or white squares, while a 6X6 marker has a 6x6 grid.</em> <br /></li>
+  <li>The second part (100 or 250) indicates the number of unique markers available in that dictionary. <em>So, DICT_4X4_100 has 100 unique 4x4 markers, while DICT_6X6_250 contains 250 unique 6x6 markers.</em></li>
+</ul>
+
+<div style="background: #cff4fc; padding: 15px; margin-bottom: 10px;">
+<span style="font-weight:800;">PRO TIP:</span><br />
+<b><i>When choosing a dictionary,</i></b> one must consider the application.
+<li> Smaller markers (like 4x4) can be detected at shorter distances and might be harder to distinguish at low resolutions or with noise. Nevertheless, 4x4 markers are a popular and often sufficient choice for the majority of land surveying applications. <i>The contents of the 4X4_50 dictionary are displayed below.</i></li>
+<li> Larger markers (like 6x6 or 7x7) can be detected from a greater distance, are generally more resilient to noise, but they also take up more space in the image. The number of unique markers needed will also influence the choice of dictionary.</li>
+<li>In ArUco marker dictionaries, <b>each larger grid size includes all markers from its smaller counterparts in the same order</b>; <i>for example, the first 50 markers in all 4x4 dictionaries will be identical, and any additional markers in larger dictionaries are unique and extend the set.</i></li>
+</div>
+
+<p><img src="/IntroPhotogrammetry/assets/images/aruco_dict.png" alt="aruco_dict" /></p>
+
+<div style="background: mistyrose; padding: 15px; margin-bottom: 30px;">
+<span style="font-weight:800;">WARNING:</span>
+<br /><span style="font-style:italic;"><b>ArUco markers within each dictionary are numbered starting from zero.</b> For accurate reference and data processing, always save both the selected marker's ID and the type of the source dictionary used.</span>
+</div>
+
+<p><span style="font-size: 24px;"><b>Generating markers using ready-made tools</b></span> <br /></p>
+
+<p><strong>A. ArUco marker images in PNG</strong> <br />
+To produce ArUco markers for your land surveying project, start by installing the Find-GCP Python utility (<a href="#find-gcp-python-utility-installation">refer to the section above</a>). Within the cloned Find-GCP repository directory, you’ll locate the <code class="language-plaintext highlighter-rouge">aruco_make.py</code>. This tool assists you in generating markers from standard dictionaries, as well as more compact 3x3 square markers.</p>
+
+<ul>
+  <li>
+    <p>While in the <strong>Find-GCP</strong> directory, use <code class="language-plaintext highlighter-rouge">pwd</code> command to print the path on the screen. <em>You will need this path to run python scripts from another location in the file system.</em>
+<img src="/IntroPhotogrammetry/assets/images/keep_software_path.png" alt="keep_software_path.png" /></p>
+  </li>
+  <li>Navigate to the selected location in the file system and create the <strong>markers</strong> directory:
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>cd /project/&lt;your_project_dir&gt;/&lt;user_account&gt;/geospatial
+mkdir markers
+cd markers
+</code></pre></div>    </div>
+    <p><img src="/IntroPhotogrammetry/assets/images/dir_for_markers.png" alt="dir_for_markers.png" /></p>
+  </li>
+  <li>Then use the <code class="language-plaintext highlighter-rouge">aruco_make.py</code> script like this: <br />
+<code class="language-plaintext highlighter-rouge">python aruco_make.py -d &lt;DICT&gt; -s &lt;START&gt; -e &lt;END&gt; -v</code>, for example:
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>source activate geospatial         # activate environment (if not activated yet)
+python path_to_Find-GCP_dir/aruco_make.py -d 1 -s 0 -e 9 -v
+conda deactivate                   # deactivate env when you are done with Find-GCP tasks
+</code></pre></div>    </div>
+
+    <p><img src="/IntroPhotogrammetry/assets/images/aruco_make.png" alt="aruco_make" /></p>
+
+    <p><i>This command will create 10 markers, numbered from 0 to 9 (e.g., marker0.png), using the dictionary DICT_4x4_100.</i><br /></p>
+    <ul>
+      <li><code class="language-plaintext highlighter-rouge">-d &lt;int&gt;</code> option, the number determines the dictionary <em>(see the table below)</em>, default = 1</li>
+    </ul>
+
+    <table>
+      <thead>
+        <tr>
+          <th>code</th>
+          <th>dictionary</th>
+          <th>code</th>
+          <th>dictionary</th>
+          <th>code</th>
+          <th>dictionary</th>
+          <th>code</th>
+          <th>dictionary</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>0</strong></td>
+          <td>DICT_4X4_50</td>
+          <td><strong>1</strong></td>
+          <td>DICT_4X4_100</td>
+          <td><strong>2</strong></td>
+          <td>DICT_4X4_250</td>
+          <td><strong>3</strong></td>
+          <td>DICT_4X4_1000</td>
+        </tr>
+        <tr>
+          <td><strong>4</strong></td>
+          <td>DICT_5X5_50</td>
+          <td><strong>5</strong></td>
+          <td>DICT_5X5_100</td>
+          <td><strong>6</strong></td>
+          <td>DICT_5X5_250</td>
+          <td><strong>7</strong></td>
+          <td>DICT_5X5_1000</td>
+        </tr>
+        <tr>
+          <td><strong>8</strong></td>
+          <td>DICT_6X6_50</td>
+          <td><strong>9</strong></td>
+          <td>DICT_6X6_100</td>
+          <td><strong>10</strong></td>
+          <td>DICT_6X6_250</td>
+          <td><strong>11</strong></td>
+          <td>DICT_6X6_1000</td>
+        </tr>
+        <tr>
+          <td><strong>12</strong></td>
+          <td>DICT_7X7_50</td>
+          <td><strong>13</strong></td>
+          <td>DICT_7X7_100</td>
+          <td><strong>14</strong></td>
+          <td>DICT_7X7_250</td>
+          <td><strong>15</strong></td>
+          <td>DICT_7X7_1000</td>
+        </tr>
+        <tr>
+          <td><strong>16</strong></td>
+          <td>DICT_ARUCO_ORIGINAL</td>
+          <td> </td>
+          <td> </td>
+          <td> </td>
+          <td> </td>
+          <td> </td>
+          <td> </td>
+        </tr>
+        <tr>
+          <td><strong>17</strong></td>
+          <td>DICT_APRILTAG_16H5</td>
+          <td><strong>18</strong></td>
+          <td>DICT_APRILTAG_25H9</td>
+          <td><strong>19</strong></td>
+          <td>DICT_APRILTAG_36H10</td>
+          <td><strong>20</strong></td>
+          <td>DICT_APRILTAG_36H11</td>
+        </tr>
+        <tr>
+          <td><strong>99</strong></td>
+          <td>DICT_3X3_32 custom</td>
+          <td> </td>
+          <td> </td>
+          <td> </td>
+          <td> </td>
+          <td> </td>
+          <td> </td>
+        </tr>
+      </tbody>
+    </table>
+
+    <ul>
+      <li><code class="language-plaintext highlighter-rouge">-s &lt;int&gt;</code> option, the number determines the index of the first marker, default = 0</li>
+      <li><code class="language-plaintext highlighter-rouge">-e &lt;int&gt;</code> option, the number determines the index of the last marker, default = -1 <br /> <em>(only one marker is generated with index 0)</em></li>
+      <li><code class="language-plaintext highlighter-rouge">-v</code> flag (optional) shows marker on monitor <br /><em>(when applicable, e.g., when working on a local machine)</em></li>
+      <li><code class="language-plaintext highlighter-rouge">-g</code> flag (optional) generates black/gray marker <br /><em>(instead black/white to reduce the effect of white burnt in)</em>
+        <ul>
+          <li>the optional <code class="language-plaintext highlighter-rouge">--value &lt;VAL&gt;</code> determines shade of background <br /><em>(use with <code class="language-plaintext highlighter-rouge">-g</code>, default=95)</em></li>
+        </ul>
+      </li>
+      <li><code class="language-plaintext highlighter-rouge">-p &lt;PAD&gt;</code> (optional) determines border width around marker in inches, default= 0.5
+<br /><br /></li>
+    </ul>
+  </li>
+</ul>
+
+<p><strong>B. ArUco marker images in SVG</strong> <br />
+There is another GitHub repo, <a href="https://github.com/qaptadrone/gcp_aruco_generator">gcp_aruco_generator</a>, providing a simple python tool for generating ArUco markers with a real sizing of the image saved in SVG format. It also has a few more options, including <code class="language-plaintext highlighter-rouge">--print-id</code> in the corner of the marker and adding a watermark on the four borders. Follow the <a href="https://github.com/qaptadrone/gcp_aruco_generator#setup-and-use">Setup and use</a> guide to get started with this tool.</p>
+
+<table>
+<tr style="width: 100%">
+  <td style="border: 1px solid white; width: 630px">
+    <div style="background: #cff4fc; padding: 15px; height: 200px;">
+    <span style="font-weight:800;">PRO TIP:</span><br />
+    <span style="font-style:italic;">For good size recommendations, please see <a href="http://www.agt.bme.hu/on_line/gsd_calc/gsd_calc.html" target="_blank">http://www.agt.bme.hu/on_line/gsd_calc/gsd_calc.html</a>.<br /><br />The generated ArUco markers are compatible with the Find-GCP tool, so you can use it after the flight to find the markers in your pictures.</span>
+    </div><br />
+    <div style="background: mistyrose; padding: 15px; margin-bottom: 20px;">
+    <span style="font-weight:800;">WARNING:</span>
+    <br /><span style="font-style:italic;">When using the <b>gcp_aruco_generator</b> tool, be aware that the <b>ArUco marker IDs also start numbering from 0</b>, just like in standard ArUco dictionaries.</span>
+    </div>
+  </td>
+  <td style="border: 1px solid white;"><img src="../assets/images/gcp_aruco_generator.png" style="width:270px;" /></td>
+</tr>
+</table>
+
+<div style="background: mistyrose; padding: 15px; margin-bottom: 20px; margin-top: 0px;">
+<span style="font-weight:800;">WARNING:</span>
+<br /><span style="font-style:italic;">
+If you're using <b>gcp_aruco_generator</b> to create ArUco codes for detection with the Find_GCP tool, <b>avoid using codes with IDs 9, 12, and 19</b>, as they are missing the central black square compared to the reference codes from the OpenCV library and will not be detectable. Check the repository's issue tracker (<a href="https://github.com/qaptadrone/gcp_aruco_generator/issues/3" target="_blank">issue #3</a>) to see if the developers have addressed this concern.
+</span>
+</div>
+
+<ul>
+  <li>generate a single marker from selected dictionary in size = 1000 mm (without margins):
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>python path/marker_generator.py -b -d 4X4_50 -s 1000 --id 0 --print-id
+</code></pre></div>    </div>
+  </li>
+  <li>generate 10 hand selected markers:
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>for i in 0 5 10 15 20 21 22 23 24 25
+do
+  python path/marker_generator.py -b -d 4X4_50 -s 1000 --id $i --print-id
+done
+</code></pre></div>    </div>
+    <p><img src="/IntroPhotogrammetry/assets/images/aruco_svg_1.png" alt="aruco_svg_1" /></p>
+  </li>
+  <li>generate 10 consecutive markers with IDs in selected range:
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>for i in `seq 0 9`
+do
+  python path/marker_generator.py -b -d 4X4_50 -s 1000 --id $i --print-id
+done
+</code></pre></div>    </div>
+    <p><img src="/IntroPhotogrammetry/assets/images/aruco_svg_2.png" alt="aruco_svg_2" /></p>
+  </li>
+</ul>
+
+<p><strong>C. ArUco marker images <u>generated online</u> (SVG or PDF)</strong> <br /></p>
+
+<table>
+<tr style="width: 100%">
+<td style="border: 1px solid white; width: 600px; font-size: 20px;">
+Finally, you can use the free online <br />ArUco markers generator: <a href="https://chev.me/arucogen/" target="_blank">https://chev.me/arucogen/</a> <br /><br />
+<i>See the corresponding GitHub repo:</i> <a href="https://github.com/okalachev/arucogen" target="_blank">https://github.com/okalachev/arucogen</a> <hr />
+Save this marker as SVG, or open standard browser's print dialog to print or get the PDF.
+</td>
+<td style="border: 1px solid white;"><img src="../assets/images/online_generator.png" style="width:300px;" /></td>
+</tr>
+</table>
+
+<h2 id="automatic-recognition-of-aruco-codes"><strong>Automatic recognition of ArUco codes</strong></h2>
+
+<p>For automatic recognition of ArUco markers, it’s optimal to have your <strong>land surveying imagery in the JPG format</strong>. It’s presumed that you’ve utilized printed ArUco markers as your Ground Control Points and <strong>have diligently recorded GCPs precise positions</strong>. This data should be saved in a text file, for instance, <code class="language-plaintext highlighter-rouge">GCP_reference.txt</code>. This file should feature four columns: <code class="language-plaintext highlighter-rouge">aruco_id</code>, <code class="language-plaintext highlighter-rouge">x</code>, <code class="language-plaintext highlighter-rouge">y</code>, and <code class="language-plaintext highlighter-rouge">z</code>, representing the marker ID and its three-dimensional coordinates respectively.</p>
+
+<p><strong>INPUTS:</strong> <br />
+<strong>-</strong> imagery in JPG format <br />
+<strong>-</strong> GCPs coordinate file, <em>e.g.,</em> <code class="language-plaintext highlighter-rouge">GCP_reference.txt</code>:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>0 523287.368 4779588.335 1397.823
+1 523394.376 4779529.525 1398.728
+2 523350.181 4779492.395 1403.140
+3 523363.938 4779530.027 1400.244
+4 523364.648 4779587.932 1395.735
+5 523329.480 4779525.642 1400.983
+6 523347.074 4779571.424 1397.653
+</code></pre></div></div>
+<div style="background: mistyrose; padding: 15px; margin-bottom: 20px;">
+<span style="font-weight:800;">WARNING:</span><br />
+<i><b>If your GCPs coordinate file uses custom IDs</b> (e.g., 131, 135, 143 when you used 4X4_50 ArUco dictionary)</i>, ensure you replace these with the appropriate ArUco marker IDs from the relevant dictionary before proceeding with automatic recognition of ArUco codes in your imagery.
+</div>
+
+<div style="background: #cff4fc; padding: 15px;">
+<span style="font-weight:800;">PRO TIP:</span><br />
+<i><b>If you're unable to match your custom IDs with the corresponding ArUco marker IDs</b></i>, you can still detect the markers in your imagery, but you won't be able to directly align them with the precise positions in your GCP coordinates file. <br /><br />
+<b>If you encounter this issue, you may follow one of the two scenarios:</b>
+<ul><li>For simply identifying individual markers on your imagery and obtaining a list of images categorized by the detected markers, refer to section <a href="#scenario-3-no-gcp-file">SCENARIO 3: no GCP file</a>.</li>
+<li>However, if your markers were placed at a sufficient distance apart, there's a good chance you can programmatically match the GCPs coordinates to the markers using the GPS coordinates embedded in the representative images <i>(I prepared a <u>ready-made Python script for this task</u>)</i>. To detect markers on imagery and subsequently assign them precise GCP coordinates, follow the guide in section <a href="#scenario-2-gcp-file-with-custom-ids">SCENARIO 2: GCP file with custom IDs</a>.</li>
+<b>Note:</b> <i>Approach the results with caution, recognizing that the precision of such a method may be limited.</i>
+</ul>
+</div>
+<p><br /></p>
+
+<hr />
+
+<h3 id="scenario-1-gcp-file-with-known-aruco-ids"><strong>SCENARIO 1:</strong> <em>GCP file with known ArUco IDs</em></h3>
+
+<p><strong><em>i.e., Direct ArUco ID match</em></strong></p>
+
+<p>This approach is for those possessing a GCP file with recognized ArUco IDs:</p>
+<ul>
+  <li>by <strong>inputting your imagery</strong> and the <code class="language-plaintext highlighter-rouge">GCP_reference.txt</code> file along with the <strong>known ArUco dictionary</strong>,</li>
+  <li>you’ll receive an output in the form of <code class="language-plaintext highlighter-rouge">gcp_list.txt</code>. <em>This file provides precise world coordinates for the GCPs as well as coordinates on the corresponding images.</em>
+    <ul>
+      <li><strong><em>This output file is ready for immediate use with OpenDroneMap (ODM) software.</em></strong></li>
+    </ul>
+  </li>
+</ul>
+
+<ol>
+  <li>Login to the Atlas cluster using SSH protocol (command line) or OOD access (web-based).</li>
+  <li>Navigate to your ODM working directory. <em>Use the command below:</em>
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>cd /project/&lt;path_to_your_project_directory&gt;/ODM
+</code></pre></div>    </div>
+    <p><img src="/IntroPhotogrammetry/assets/images/navigate_to_odm.png" alt="navigate_to_odm.png" />
+<b>PRO TIP:</b> <i>If you haven’t set up the ODM directory structure yet, please follow the guide provided in section <a href="https://geospatial.101workbook.org/IntroPhotogrammetry/OpenDroneMap/02-ODM-modules#create-file-structure">Create File Structure</a> in the tutorial <a href="https://geospatial.101workbook.org/IntroPhotogrammetry/OpenDroneMap/02-ODM-modules">Command-line ODM modules</a>.</i> <br />
+Create a subdirectory for your new project in the IMAGES directory and create soft links for your imagery and (eventually) the <code class="language-plaintext highlighter-rouge">GCP_reference.txt</code> file:</p>
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>cd IMAGES
+mkdir project-X
+cd project-X
+ln -s &lt;source_path_to_imagery&gt;/* ./
+ls | head -10
+pwd                                  # copy this path in the next step as the INPUTS_PATH variable
+</code></pre></div>    </div>
+    <p><img src="/IntroPhotogrammetry/assets/images/set_up_inputs.png" alt="/set_up_inputs.png" /> <br /><br />
+<i>If your GCP reference file (here: gcp_epsg32611_2021_wbs1_coresite.csv) has format different than <b>space-separated 4 columns: aruco_ID X Y Z</b>, then you should adjust it accordingly to get something like this:</i></p>
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>0 523287.368 4779588.335 1397.823
+1 523394.376 4779529.525 1398.728
+2 523350.181 4779492.395 1403.140
+3 523363.938 4779530.027 1400.244
+4 523364.648 4779587.932 1395.735
+5 523329.480 4779525.642 1400.983
+6 523347.074 4779571.424 1397.653
+</code></pre></div>    </div>
+    <p><i>You can use</i> <code class="language-plaintext highlighter-rouge">awk</code> <em>command to easily extract the columns you need.</em> <b>Note that GCP_reference.txt file should not have a header.</b>
+<img src="/IntroPhotogrammetry/assets/images/adjust_gcp_reference.png" alt="adjust_gcp_reference.png" /></p>
+  </li>
+  <li>Set paths as temporary variables or use them directly:
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>FIND_GCP_PATH=/path/to/Find-GCP_repo
+INPUTS_PATH=/path/to/input_imagery
+</code></pre></div>    </div>
+    <p><i>In my case the path variables look like this:</i>
+<img src="/IntroPhotogrammetry/assets/images/paths_as_variables.png" alt="paths_as_variables.png" /></p>
+  </li>
+  <li>Activate the Conda environment (if not activated yet). <em>You should activate a specific conda environment related to this project (e.g., the geospatial env created in section <br /><a href="#find-gcp-python-utility-installation">Find-GCP python utility: installation</a>):</em>
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>source activate geospatial
+</code></pre></div>    </div>
+  </li>
+  <li>Run the <code class="language-plaintext highlighter-rouge">gcp_find.py</code> Python tool:
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>python $FIND_GCP_PATH/gcp_find.py -v -t ODM -i $INPUTS_PATH/GCP_reference.txt --epsg &lt;code&gt; -d &lt;int&gt; -o gcp_list.txt $INPUTS_PATH/*.JPG
+</code></pre></div>    </div>
+    <p><i>Replace &lt;code&gt; with the EPSG of your GCP coordinate system and &lt;int&gt; with an ID corresponding to the used ArUco dictionary. For example:</i></p>
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>python $FIND_GCP_PATH/gcp_find.py -v -t ODM -i $INPUTS_PATH/GCP_reference.txt --epsg 32611 -d 0 -o gcp_list.txt $INPUTS_PATH/*.JPG
+</code></pre></div>    </div>
+  </li>
+</ol>
+
+<details><summary style="color: #ff3870;font-weight: 500; margin-left: 37px;"><b>Explore all options</b></summary>
+
+<div style="background: #e6f0f0; padding: 5px; margin-top: 10px;">
+usage: gcp_find.py [-h] [-d DICT] [-o OUTPUT] [-t {ODM,VisualSfM}] [-i INPUT] <br />
+&emsp; &emsp; &emsp; [-s SEPARATOR] [-v] [--debug | --multi] [-l] [--epsg EPSG] <br />
+&emsp; &emsp; &emsp; [-a] [--markersize MARKERSIZE] [--markerstyle MARKERSTYLE] <br />
+&emsp; &emsp; &emsp; [--markerstyle1 MARKERSTYLE1] [--edgecolor EDGECOLOR] <br />
+&emsp; &emsp; &emsp; [--edgewidth EDGEWIDTH] [--fontsize FONTSIZE] <br />
+&emsp; &emsp; &emsp; [--fontcolor FONTCOLOR] [--fontcolor1 FONTCOLOR1] <br />
+&emsp; &emsp; &emsp; [--fontweight FONTWEIGHT] [--fontweight1 FONTWEIGHT1] <br />
+&emsp; &emsp; &emsp; [--limit LIMIT] [--nez] [-r] [--winmin WINMIN] <br />
+&emsp; &emsp; &emsp; [--winmax WINMAX] [--winstep WINSTEP] [--thres THRES] <br />
+&emsp; &emsp; &emsp; [--minrate MINRATE] [--maxrate MAXRATE] [--poly POLY] <br />
+&emsp; &emsp; &emsp; [--corner CORNER] [--markerdist MARKERDIST] <br />
+&emsp; &emsp; &emsp; [--borderdist BORDERDIST] [--borderbits BORDERBITS] <br />
+&emsp; &emsp; &emsp; [--otsu OTSU] [--persp PERSP] [--ignore IGNORE] <br />
+&emsp; &emsp; &emsp; [--error ERROR] [--correct CORRECT] <br />
+&emsp; &emsp; &emsp; [--refinement REFINEMENT] [--refwin REFWIN] <br />
+&emsp; &emsp; &emsp; [--maxiter MAXITER] [--minacc MINACC] <br />
+&emsp; &emsp; &emsp; [file_names [file_names ...]]
+</div><br />
+<b>positional arguments:</b><br />
+&emsp; file_names &emsp; &emsp; &emsp; image files to process <br /><br />
+<b>optional arguments (common):</b><br />
+
+<table>
+  <tr style="background-color:#f0f0f0; border-bottom: 1px solid black;">
+    <th width="180">flag</th><th>values</th><th>default</th><th width="250">description</th><th>notes</th></tr>
+  <tr>
+    <td>-h <br />--help</td><td> </td><td> </td><td>show this help message and exit</td><td> </td></tr>
+  <tr>
+    <td><b>-d DICT <br />--dict DICT</b></td><td>integer</td><td>1</td><td>marker dictionary ID, default=1 (DICT_4X4_100)</td><td><i>ID determines which set of markers the program will recognize. Ensure you match this with the markers you're using. </i></td></tr>
+  <tr>
+    <td>-l <br />--list</td><td> </td><td> </td><td>output dictionary names and ids and exit</td><td><i>This is a quick way to view available dictionaries. It's useful if you're unsure which dictionary ID to use.</i></td></tr>
+  <tr>
+    <td><b>-o FILE <br />--output FILE</b></td><td>filename</td><td><i>stdout</i></td><td>name of output GCP list file, default stdout</td><td><i> If no output file name is specified, the results will be printed directly to the terminal (stdout).</i></td></tr>
+  <tr>
+    <td><b>-t {ODM,VisualSfM} <br />--type {ODM,VisualSfM}</b></td><td>ODM, VisualSfM</td><td> </td><td>target program ODM or VisualSfM, default</td><td><i>Make sure to select the target program that aligns with your project needs. Both ODM (OpenDroneMap) and VisualSfM have different formats.</i></td></tr>
+  <tr>
+    <td><b>-i GCP_FILE <br />--input GCP_FILE</b></td><td> </td><td><i>4-col file</i></td><td>name of input GCP coordinate file, default None</td><td><i>If not provided, the tool won't assign the reference coordinates to detected markers.</i></td></tr>
+  <tr>
+    <td><b>--epsg EPSG</b></td><td> </td><td> </td><td>epsg code for gcp coordinates, default None</td><td><i>Ensure the EPSG code matches the coordinate system of your GCPs. This ensures that coordinates are interpreted correctly.</i></td></tr>
+  <tr>
+    <td>-s SEPARATOR <br />--separator SEP</td><td>' ' , </td><td><i>space</i></td><td>input file separator</td><td><i>If you notice issues with reading your input file, double-check that the specified separator matches the one used in your file.</i></td></tr>
+  <tr>
+    <td>-v <br />--verbose</td><td> </td><td><i>off</i></td><td>verbose output to stdout</td><td><i>Use this option if you want detailed logs during processing. It can help with troubleshooting.</i></td></tr>
+  <tr>
+    <td>--debug</td><td> </td><td><i>off</i></td><td>show detected markers on image</td><td><i>This is particularly helpful for visual verification. When activated, you'll get images showing where markers were detected. Works on a local machine or with X11 forwarding.</i></td></tr>
+  <tr>
+    <td>--multi</td><td> </td><td><i>off</i></td><td>process images paralel</td><td><i>Use this for faster processing if you're working with multiple images, as it processes them in parallel.</i></td></tr>
+  <tr>
+    <td>-r, --inverted</td><td> </td><td><i>off</i></td><td>detect inverted markers</td><td><i>This ensures the tool will recognize markers even if they're inverted, increasing the robustness of your detection process.</i></td></tr>
+</table>
+
+<br /><b>optional arguments (more customization):</b><br />
+<a href="https://github.com/zsiki/Find-GCP#gcp_findpy" target="_blank">Additional customization options  ⤴</a> allow users to adjust color schemes, define marker styles and attributes, set font characteristics for debug images, limit record output, reorder coordinates, detect inverted markers, fine-tune adaptive thresholding, specify marker characteristics, determine marker-border relations, and refine marker detection through various parameters such as accuracy, error rates, and iteration limits.
+</details>
+
+<div style="margin-left: 37px; margin-top: 10px;">
+<img src="../assets/images/run_gcp_find.png" alt="run_gcp_find.png" />
+
+This will search the ArUco markers from DICT_4x4_50 in your imagery and match them with corresponding IDs provided in your <b>GCP_reference.txt</b> file. Providing the exact EPSG code will ensure the returned coordinates of the GCPs detected in the imagery are in the correct coordinate system. The list of images with detected GCPs is saved to the <b>gcp_list.txt</b> file, which looks like this: <br />
+<div style="background: #e6f0f0; padding: 15px;">
+EPSG:32611 <br />
+523287.368 4779588.335 1397.823 5041 91 R0036021.JPG 0 <br />
+523287.368 4779588.335 1397.823 5190 1110 R0036023.JPG 0 <br />
+523287.368 4779588.335 1397.823 5462 1856 R0036024.JPG 0 <br />
+523287.368 4779588.335 1397.823 5680 2998 R0036026.JPG 0 <br />
+523364.648 4779587.932 1395.735 3170 60 R0036061.JPG 4 <br />
+523347.074 4779571.424 1397.653 624 700 R0036065.JPG 6 <br />
+523347.074 4779571.424 1397.653 539 1349 R0036066.JPG 6 <br />
+523305.976 4779572.588 1397.817 162 701 R0036073.JPG 10 <br />
+523305.976 4779572.588 1397.817 87 1597 R0036074.JPG 10 <br />
+523364.648 4779587.932 1395.735 4892 3940 R0036042.JPG 4 <br />
+</div><br />
+You can further refine the output file by sorting the records based on the ArUco marker ID, allowing you to <b>choose a subset of 5-10 images for each marker, required by the ODM software</b>. While manually reviewing the images is the most reliable approach to select the best representations, you can initially narrow down the number of images per marker programmatically. After this automatic reduction, a visual review is recommended to address any ambiguous images.
+</div>
+
+<h3 id="select-representative-images-for-a-marker"><strong><em>Select representative images for a marker</em></strong></h3>
+
+<p>Optimally, a marker should be positioned near the center of the image. The marker’s position in an image can be approximated using its target coordinates, which are located in the 4th and 5th columns of the output file, i.e., <code class="language-plaintext highlighter-rouge">gcp_list.txt</code>. <br />
+In some cases, you might find that a given marker is detected in several dozens to even hundreds of images.</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>awk '{print $7}' &lt; gcp_list.txt | sort | uniq -c
+</code></pre></div></div>
+<p><em>The 7th column stores the ArUco marker ID. You can easily count the number of images matched with a given ID. In my case, the result is like this (counts, ID):</em></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  30 0
+  40 1
+  40 2
+  20 3
+  23 4
+  37 5
+  24 6
+  25 7
+  37 8
+  33 10
+  28 11
+</code></pre></div></div>
+
+<p>A practical strategy is to first <strong>employ an automated filter to narrow down to approximately 10 images per marker</strong>, and subsequently perform a visual check to ensure accuracy.</p>
+<ul>
+  <li>To select the N=10 images per marker ID where the marker is placed closest to the center of the image, we can use a Python script <code class="language-plaintext highlighter-rouge">gcp_images_picker.py</code>. Here’s the outline of the steps:
+    <ul>
+      <li>Calculate the distance of each marker from the center of the image using the Euclidean distance formula.</li>
+      <li>Sort the images for each marker ID based on this distance in ascending order.</li>
+      <li>Select the top N images for each marker ID.</li>
+    </ul>
+  </li>
+</ul>
+
+<ol>
+  <li>Make sure you have your local copy of the <strong><a href="https://github.com/ISUgenomics/geo_utils">geo_utils</a></strong> GitHub repository, placed in your SOFTWARE or TOOLS directory on Atlas (e.g., <code class="language-plaintext highlighter-rouge">project/&lt;account&gt;/&lt;user&gt;/SOFTWARE</code>). <em>(You can follow the instructions in section <a href="#geo_utils-python-utility-installation">geo_utils Python utility: installation</a> to download this repository.)</em> We will use the Python script <code class="language-plaintext highlighter-rouge">gcp_images_picker.py</code> located in the TOOLS subdir of this repo:
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  ls /project/&lt;your_project_dir&gt;/&lt;user_account&gt;/SOFTWARE
+</code></pre></div>    </div>
+  </li>
+  <li>Make sure you navigate back to the IMAGES directory in your photogrammetry project. You can softlink the <code class="language-plaintext highlighter-rouge">gcp_images_picker.py</code> script for easy use:
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  cd project/&lt;your_project_dir&gt;/&lt;user_account&gt;/ODM/IMAGES/&lt;project-X&gt;
+  ln -s /project/&lt;your_project_dir&gt;/&lt;user_account&gt;/SOFTWARE/geo_utils/TOOLS/gcp_images_picker.py ./
+</code></pre></div>    </div>
+  </li>
+  <li>Run the <code class="language-plaintext highlighter-rouge">gcp_images_picker.py</code> script to automate selection of representative GCP images, minimizing manual inspection:
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  # Usage:
+  python gcp_images_picker.py -i &lt;data_file_path&gt; -w &lt;image_width&gt; -l &lt;image_height&gt; -n &lt;images_number&gt; -o &lt;custom_outfile&gt;
+</code></pre></div>    </div>
+    <p><em>for example:</em></p>
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  python gcp_images_picker.py -i gcp_list.txt -w 6000 -l 4000 -n 10
+</code></pre></div>    </div>
+    <p><em>The script will write the selected data to the file specified by the -o option. If the option isn’t provided, it defaults to</em> <code class="language-plaintext highlighter-rouge">gcp_list_selected.txt</code>.</p>
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  523394.376 4779529.525 1398.728 3420 1497 R0036704.JPG 4
+  523394.376 4779529.525 1398.728 2236 1940 R0036753.JPG 4
+  523394.376 4779529.525 1398.728 2329 1549 R0036752.JPG 4
+  523394.376 4779529.525 1398.728 3526 1127 R0036703.JPG 4
+  523394.376 4779529.525 1398.728 3924 1274 R0036038.JPG 4
+  523394.376 4779529.525 1398.728 4216 1930 R0036039.JPG 4
+  523394.376 4779529.525 1398.728 4372 2125 R0036678.JPG 4
+  523394.376 4779529.525 1398.728 4302 1536 R0036677.JPG 4
+  523394.376 4779529.525 1398.728 4364 2421 R0036040.JPG 4
+  523394.376 4779529.525 1398.728 4216 1199 R0036676.JPG 4
+</code></pre></div>    </div>
+  </li>
+</ol>
+
+<div style="background: #cff4fc; padding: 15px; margin-left: 37px;">
+  <span style="font-weight:800;">PRO TIP:</span><br />
+  While the script does a job of pre-selecting images, it's recommended taking a moment to <b>visually inspect the chosen images</b>. This ensures that markers are clearly visible and that the annotations with ArUco ID align with the correct pattern. A brief manual check can help enhance the accuracy and reliability of your dataset. <br />
+  <i>Automation aids efficiency, but a human touch ensures precision!</i>
+  </div>
+<p><br /></p>
+
+<h3 id="visual-check-of-representative-images-for-a-marker"><strong><em>Visual check of representative images for a marker</em></strong></h3>
+
+<p>Ensuring that selected images are truly representative for each Ground Control Point (GCP) is a crucial step for accurate georeferencing. The <code class="language-plaintext highlighter-rouge">gcp_check.py</code> tool (from <a href="https://github.com/zsiki/Find-GCP">Find-GCP repo</a>) offers a <strong>user-friendly graphical interface to facilitate the visual check</strong> of GCPs detected by <code class="language-plaintext highlighter-rouge">gcp_find.py</code>.</p>
+
+<div style="background: mistyrose; padding: 15px; margin-bottom: 30px;">
+<span style="font-weight:800;">WARNING:</span>
+<br /><span style="font-style:italic;">
+Proceeding with this section <b>requires the use of Secure SHell (SSH) paired with X11 forwarding</b>. X11 forwarding enables graphical applications run on the cluster to manifest visually on your local machine. <br /><br />
+When connecting via SSH, use the -X (or -Y, which is less secure but more permissive) option to enable X11 forwarding. <br />
+<i>(For me, the -Y variant worked. Note it may be slow!)</i><br />
+<b>ssh -Y user.name@atlas-login.hpc.msstate.edu</b><br /><br />
+Using <a href="https://atlas-ood.hpc.msstate.edu" target="_blank">Atlas Open OnDemand (OOD)  ⤴</a> (in-browser access) can offer a more responsive experience compared to traditional SSH with X11 forwarding, especially over slower connections. <br /><br />
+If the cluster doesn't permit the use of X11 forwarding and OOD also didn't work for you, you'll need to take a detour:<br />
+1. Download the relevant images (only those from gcp_list.txt) to your local machine. <br />
+2. Clone the Find-GCP repository again but this time on your local setup. <br />
+3. Then continue with the subsequent steps of this section. <br />
+*<i>Be sure to modify the paths to align with your local filesystem during this process.</i>
+</span>
+</div>
+
+<p>If you’ve followed this tutorial, you should have already cloned the Find-GCP repository (see section <a href="https://geospatial.101workbook.org/IntroPhotogrammetry/OpenDroneMap/03-ODM-georeferencing#find-gcp-python-utility-installation">Find-GCP Python utility: installation</a>). As a result, the <code class="language-plaintext highlighter-rouge">gcp_check.py</code> utility would be included within your cloned repo, ready for use.</p>
+
+<p>Check your <code class="language-plaintext highlighter-rouge">SOFTWARE</code> path on the Atlas cluster (for reference, see step 7 <em>“Create the storage directory for custom software and GitHub repos”</em> in section <a href="#create-env-for-geospatial-analysis">Create env for geospatial analysis</a>):</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ls /project/&lt;your_project_dir&gt;/SOFTWARE
+</code></pre></div></div>
+<p>If you have the <strong>Find-GCP</strong> repo cloned already:</p>
+<ul>
+  <li>set up its path as a local variable <em>(remember to adjuct the path)</em>:
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>FIND_GCP_PATH=/project/&lt;your_project_dir&gt;/SOFTWARE/Find-GCP
+</code></pre></div>    </div>
+  </li>
+  <li>activate your <code class="language-plaintext highlighter-rouge">geospatial</code> Conda environment <em>(if not activated yet)</em> or follow the guide provided in section <a href="#create-env-for-geospatial-analysis">reate env for geospatial analysis</a> to make up for this step.
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>source activate geospatial
+</code></pre></div>    </div>
+  </li>
+</ul>
+
+<p><strong>INPUTS:</strong></p>
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">project-X</code> directory with the complete imagery</li>
+  <li><code class="language-plaintext highlighter-rouge">gcp_list_selected.txt</code> file <em>(The (filtered) output file of the</em> <code class="language-plaintext highlighter-rouge">gcp_find.py</code> <em>is the input file of this program.)</em></li>
+</ul>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>EPSG:32611
+523287.368 4779588.335 1397.823 5041 91 R0036021.JPG 0
+523287.368 4779588.335 1397.823 5190 1110 R0036023.JPG 0
+523287.368 4779588.335 1397.823 5462 1856 R0036024.JPG 0
+523287.368 4779588.335 1397.823 5680 2998 R0036026.JPG 0
+523364.648 4779587.932 1395.735 3611 96 R0036036.JPG 4
+523364.648 4779587.932 1395.735 3714 535 R0036037.JPG 4
+523364.648 4779587.932 1395.735 3924 1274 R0036038.JPG 4
+523364.648 4779587.932 1395.735 4216 1930 R0036039.JPG 4
+</code></pre></div></div>
+
+<div style="background: mistyrose; padding: 15px; margin-bottom: 20px;">
+<span style="font-weight:800;">WARNING:</span>
+<br /><span style="font-style:italic;">
+Please be cautious: the script <b>gcp_check.py can NOT be executed within the directory containing the input images</b>. Instead, navigate one level up in the directory structure before running it.
+</span>
+</div>
+
+<p>Let’s assume you store your <code class="language-plaintext highlighter-rouge">gcp_list.txt</code> file along with your imagery at the <code class="language-plaintext highlighter-rouge">IMAGES/&lt;project-X&gt;</code> path. If so, navigate one level up:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>cd /project/&lt;your_project_dir&gt;/&lt;user_account&gt;/ODM/IMAGES
+</code></pre></div></div>
+
+<p>Now, you can launch the <code class="language-plaintext highlighter-rouge">gcp_check.py</code> GUI by executing this command in the terminal:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>python FIND_GCP_PATH/gcp_check.py --path ./&lt;project-X&gt;/ --edgewidth 5 --fontsize 300 ./&lt;project-X&gt;/gcp_list_selected.txt
+</code></pre></div></div>
+<p><i>To modify how detected markers are highlighted,<b> explore the command-line parameters</b> outlined in the <a href="https://github.com/zsiki/Find-GCP#gcp_checkpy">official documentation</a>.</i></p>
+
+<p>After executing the command, a window showcasing the GUI will appear. Within this interface, you can use:</p>
+<ul>
+  <li>forward and backward buttons (on the top) to navigate between images</li>
+  <li>the mouse wheel to zoom in or out</li>
+  <li>the left mouse button to pan across the image</li>
+</ul>
+
+<p><img src="/IntroPhotogrammetry/assets/images/check_gcp.png" alt="check_gcp.png" /> <br />
+<i>The tool is designed to automatically identify markers within images. Once detected, it highlights these markers with a circle and displays the corresponding ArUco ID. This setup aids in easy visual verification, ensuring that markers are correctly recognized and labeled.</i></p>
+
+<hr />
+
+<h3 id="scenario-2-gcp-file-with-custom-ids"><strong>SCENARIO 2:</strong> <em>GCP file with custom IDs</em></h3>
+
+<p><strong><em>i.e., Custom ID integration</em></strong></p>
+
+<p>For cases where you have a GCP file with custom IDs, your inputs will be <strong>the imagery</strong>, a <code class="language-plaintext highlighter-rouge">GCP_reference.txt</code> file with <u>custom marker IDs</u>, a <strong>known ArUco dictionary</strong>, and the <strong>EPSG code</strong> for the registered GCPs.</p>
+
+<p><strong>EPSG</strong>: 32611 <br /></p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code># GCP_reference.txt
+131 523287.368 4779588.335 1397.823
+135 523305.976 4779572.588 1397.817
+137 523347.074 4779571.424 1397.653
+141 523364.648 4779587.932 1395.735
+134 523394.376 4779529.525 1398.728
+133 523363.938 4779530.027 1400.244
+138 523329.480 4779525.642 1400.983
+136 523350.181 4779492.395 1403.140
+132 523289.018 4779469.252 1407.142
+139 523292.432 4779530.710 1401.051
+143 523261.422 4779532.114 1401.978
+</code></pre></div></div>
+
+<p><strong>STEP 0.</strong> Prepare your working space.</p>
+
+<ol>
+  <li>Login to the Atlas cluster using SSH protocol (command line) or OOD access (web-based).</li>
+  <li>Navigate to your project working directory. <em>Use the command below:</em>
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>cd /project/&lt;path_to_your_project_directory&gt;/ODM
+</code></pre></div>    </div>
+    <p><img src="/IntroPhotogrammetry/assets/images/navigate_to_odm.png" alt="navigate_to_odm.png" />
+<b>PRO TIP:</b> <i>If you haven’t set up the ODM directory structure yet, please follow the guide provided in section <a href="https://geospatial.101workbook.org/IntroPhotogrammetry/OpenDroneMap/02-ODM-modules#create-file-structure">Create File Structure</a> in the tutorial <a href="https://geospatial.101workbook.org/IntroPhotogrammetry/OpenDroneMap/02-ODM-modules">Command-line ODM modules</a>.</i> <br />
+Create a subdirectory for your new project in the IMAGES directory and create soft links for your imagery and (eventually) the <code class="language-plaintext highlighter-rouge">GCP_reference.txt</code> file:</p>
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>cd IMAGES
+mkdir project-X
+cd project-X
+ln -s &lt;source_path_to_imagery&gt;/* ./
+ls | head -10
+pwd                                  # copy this path in the next step as the INPUTS_PATH variable
+</code></pre></div>    </div>
+  </li>
+  <li>Set paths as temporary variables or use them directly:
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>FIND_GCP_PATH=/path/to/Find-GCP_repo
+INPUTS_PATH=/path/to/input_imagery
+</code></pre></div>    </div>
+    <p><i>In my case the path variables look like this:</i>
+<img src="/IntroPhotogrammetry/assets/images/paths_as_variables.png" alt="paths_as_variables.png" /></p>
+  </li>
+  <li>Activate the Conda environment (if not activated yet). <em>You should activate a specific conda environment related to this project (e.g., the geospatial env created in section <a href="#find-gcp-python-utility-installation">Find-GCP python utility: installation</a>):</em>
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>source activate geospatial
+</code></pre></div>    </div>
+  </li>
+</ol>
+
+<p><strong>STEP 1.</strong> The first step involves identifying the ArUco IDs of markers detected on the imagery and selecting a representative image for each. Ideally, this image should predominantly feature the marker centrally placed.</p>
+
+<ol>
+  <li>Run the <code class="language-plaintext highlighter-rouge">gcp_find.py</code> Python tool with basic settings to detect ArUco markers:
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>python $FIND_GCP_PATH/gcp_find.py -d 0 $INPUTS_PATH/*.JPG &gt;&gt; markers_detected.txt
+</code></pre></div>    </div>
+    <p><i>Remember to use the correct ArUco dictionary with the <b>-d</b> option (for example, in this case, the -d 0 denotes the DICT_4x4_50 dictionary).</i><br />
+The output <code class="language-plaintext highlighter-rouge">markers_detected.txt</code> should looks like this (<em>columns:</em> <code class="language-plaintext highlighter-rouge">x</code> <code class="language-plaintext highlighter-rouge">y</code> <code class="language-plaintext highlighter-rouge">image</code> <code class="language-plaintext highlighter-rouge">aruco_id</code>):</p>
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>5041 91 R0036021.JPG 0
+5190 1110 R0036023.JPG 0
+5462 1856 R0036024.JPG 0
+5680 2998 R0036026.JPG 0
+3170 60 R0036061.JPG 4
+624 700 R0036065.JPG 6
+539 1349 R0036066.JPG 6
+162 701 R0036073.JPG 10
+</code></pre></div>    </div>
+    <p>Let’s filter the output to include only the images with a single detected marker on them.</p>
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>awk '{print $3}' markers_detected.txt | sort | uniq -c | awk '$1 == 1 {print $2}' | while read image; do grep "$image" markers_detected.txt; done &gt; single_markers.txt
+</code></pre></div>    </div>
+    <p><i>The </i> <code class="language-plaintext highlighter-rouge">single_markers.txt</code> <em>has the same data structure but contains filtered records.</em></p>
+  </li>
+  <li>Extract unique ArUco marker IDs from the 4th column:
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>awk '{print $4}' &lt; markers_detected.txt | sort -n | uniq &gt; marker_ids
+</code></pre></div>    </div>
+    <p><i>The </i> <code class="language-plaintext highlighter-rouge">marker_ids</code> <em>file contains unique marker IDs stored in a column.</em></p>
+  </li>
+  <li>For each marker ID, select representative image, i.e., the image where the marker is placed closest to the center:
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>for i in `cat marker_ids`; do awk -v A=$i '{if ($4==A) print $0}' &lt; single_markers.txt | awk 'BEGIN {min_dist = 1000000000} {dist = sqrt(($1-3000)^2 + ($2-2000)^2); if(dist &lt; min_dist) {min_dist = dist; closest = $0}} END {print closest}' &gt;&gt; representatives; done
+</code></pre></div>    </div>
+    <p><i>This assumes that the image dimensions are 6000x4000 px, so the coordinates of the center of the picture are (x = 6000/2 = <b>3000</b>, y = 4000/2 = <b>2000</b>). <b>Remember to adjust the command for your values.</b></i><br />
+The output <code class="language-plaintext highlighter-rouge">representatives</code> should contain the representative image for each marker ID: <br /><em>(with marker’s XY coordinates in the image provided in the first 2 columns)</em></p>
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>3546 1937 R0036737.JPG 0
+3631 2017 R0036909.JPG 1
+3290 1831 R0036401.JPG 2
+3118 1948 R0036914.JPG 3
+3420 1497 R0036704.JPG 4
+3001 1808 R0036953.JPG 5
+3345 2661 R0036140.JPG 6
+2531 2038 R0036933.JPG 7
+2693 1783 R0036927.JPG 8
+2993 2141 R0036789.JPG 10
+3120 2112 R0037136.JPG 11
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>You can visually inspect the selected images to ensure they indeed showcase the distinct pattern of the detected ArUco marker ID and confirm that each image contains only one marker. <em>In my case, all detected markers match the pattern of a suggested ArUco ID.</em>
+<img src="/IntroPhotogrammetry/assets/images/aruco_detected.png" alt="" /> <br /></p>
+  </li>
+  <li>Create a subdirectory and copy in or soft link the representative images:
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>mkdir representative
+awk '{print $3}' &lt; representatives &gt; list
+for i in `cat list`; do k=`echo $i | awk -F"." '{print $1}'`; n=`cat representatives | awk -v A=$i '{if ($3==A) print $4}'` ; cp $INPUTS_PATH/$i representative/$k"_"$n.JPG; done
+</code></pre></div>    </div>
+    <p><i>Now, the images should be copied into the <b>representative</b> subdirectory and their names should change from R0036737.JPG to R0036737<b>_0</b>.JPG denoting the ID of detected ArUco marker (which is required in the next step).</i><br />
+<img src="/IntroPhotogrammetry/assets/images/selected_representatives.png" alt="selected_representatives.png" /></p>
+  </li>
+</ol>
+
+<p><strong>STEP 2.</strong> In the second step, a Python script <code class="language-plaintext highlighter-rouge">gcp_to_aruco_mapper.py</code> automatically matches the GCP coordinates with the representative images (by calculating the distance between GCPs from reference file and GPS coordinates of each picture).</p>
+<ul>
+  <li>If there’s a coordinate system difference between reference GCPs and imagery GPS, a conversion is carried out for the GCPs. <br /><strong><em>(So, that’s why you must provide the correct EPSG code.)</em></strong><br /></li>
+</ul>
+
+<ol>
+  <li>Make sure you have your local copy of the <strong><a href="https://github.com/ISUgenomics/geo_utils">geo_utils</a></strong> GitHub repository, placed in your SOFTWARE or TOOLS directory on Atlas (e.g., <code class="language-plaintext highlighter-rouge">project/&lt;account&gt;/&lt;user&gt;/SOFTWARE</code>). <em>(You can follow the instructions in section <a href="#geo_utils-python-utility-installation">geo_utils Python utility: installation</a> to download this repository.)</em> We will use the Python script <code class="language-plaintext highlighter-rouge">gcp_to_aruco_mapper.py</code> located in the TOOLS subdir of this repo:
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  ls project/&lt;your_project_dir&gt;/&lt;user_account&gt;/SOFTWARE
+</code></pre></div>    </div>
+  </li>
+  <li>Make sure you navigate back to the <code class="language-plaintext highlighter-rouge">representative</code> directory in your photogrammetry project. You can softlink the <code class="language-plaintext highlighter-rouge">gcp_to_aruco_mapper.py</code> script for easy use:
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  cd project/&lt;your_project_dir&gt;/&lt;user_account&gt;/ODM/&lt;project_X&gt;/IMAGES/representative
+  ln -s project/&lt;your_project_dir&gt;/&lt;user_account&gt;/SOFTWARE/geo_utils/TOOLS/gcp_to_aruco_mapper.py ./
+</code></pre></div>    </div>
+    <p><img src="/IntroPhotogrammetry/assets/images/softlink_tool.png" alt="softlink_tool.png" /></p>
+  </li>
+  <li>Run the <code class="language-plaintext highlighter-rouge">gcp_to_aruco_mapper.py</code> script to match the GCP coordinates with the representative images:
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>python gcp_to_aruco_mapper.py -g ../GCP_reference.txt -i "./" -z 11 -o matching_results -d 50 &gt; out_distances
+grep "Match" &lt; matching_results | sort -nk4 &gt; ID_matches
+cat ID_matches
+</code></pre></div>    </div>
+    <p><i>In this command, the <b>-g</b> argument specifies the GCP file with custom IDs, the <b>-b</b> option provides the path with selected representative images for unique ArUco codes detected, <b>-z</b> option expects you to provide the UTM zone (e.g., if EPSG is 32611 then the UTM zone is 11), <b>-d</b> option determines the maximum distance threshold between GCP coordinates and image GPS.</i></p>
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Match found: GCP 131 (d=16.84m) is likely in image R0036737_0.JPG with ArUco marker 0.
+Match found: GCP 132 (d=12.69m) is likely in image R0037136_11.JPG with ArUco marker 11.
+Match found: GCP 133 (d=1.64m) is likely in image R0036914_3.JPG with ArUco marker 3.
+Match found: GCP 134 (d=1.00m) is likely in image R0036909_1.JPG with ArUco marker 1.
+Match found: GCP 135 (d=3.09m) is likely in image R0036789_10.JPG with ArUco marker 10.
+Match found: GCP 136 (d=18.49m) is likely in image R0036401_2.JPG with ArUco marker 2.
+Match found: GCP 137 (d=25.80m) is likely in image R0036140_6.JPG with ArUco marker 6.
+Match found: GCP 138 (d=15.18m) is likely in image R0036953_5.JPG with ArUco marker 5.
+Match found: GCP 139 (d=4.29m) is likely in image R0036927_8.JPG with ArUco marker 8.
+Match found: GCP 141 (d=5.95m) is likely in image R0036704_4.JPG with ArUco marker 4.
+Match found: GCP 143 (d=7.09m) is likely in image R0036933_7.JPG with ArUco marker 7.
+</code></pre></div>    </div>
+  </li>
+</ol>
+
+<div style="background: mistyrose; padding: 15px; margin-bottom: 25px; margin-left: 37px;">
+<span style="font-weight:800;">WARNING:</span>
+<br /><span style="font-style:italic;">Note that you should have activated a specific conda environment related to this project. See the <b>STEP 0</b> in this section. </span>
+</div>
+
+<ul>
+  <li><strong><em>You might be curious about the success rate of matching GCPs with image GPS.</em></strong><br /> Thankfully, I got reference data where GCPs were paired with ArUco codes during land surveying. As you can see below, the <code class="language-plaintext highlighter-rouge">gcp_to_aruco_mapper.py</code> accurately matched all GCPs with their corresponding ArUco markers. Thus, <b>this method serves as a reliable fallback when you’re unsure of the ArUco IDs for your ground control coordinates.</b>
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code># programmatic detection                  |  reference created during land surveying
+GCP 131 (d=16.84m) with ArUco marker  0   |   0 523287.368 4779588.335 1397.823 131
+GCP 132 (d=12.69m) with ArUco marker 11   |  11 523289.018 4779469.252 1407.142 132
+GCP 133  (d=1.64m) with ArUco marker  3   |   3 523363.938 4779530.027 1400.244 133
+GCP 134  (d=1.00m) with ArUco marker  1   |   1 523394.376 4779529.525 1398.728 134
+GCP 135  (d=3.09m) with ArUco marker 10   |  10 523305.976 4779572.588 1397.817 135
+GCP 136 (d=18.49m) with ArUco marker  2   |   2 523350.181 4779492.395 1403.140 136
+GCP 137 (d=25.80m) with ArUco marker  6   |   6 523347.074 4779571.424 1397.653 137
+GCP 138 (d=15.18m) with ArUco marker  5   |   5 523329.480 4779525.642 1400.983 138
+GCP 139  (d=4.29m) with ArUco marker  8   |   8 523292.432 4779530.710 1401.051 139
+GCP 141  (d=5.95m) with ArUco marker  4   |   4 523364.648 4779587.932 1395.735 141
+GCP 143  (d=7.09m) with ArUco marker  7   |   7 523261.422 4779532.114 1401.978 143
+</code></pre></div>    </div>
+  </li>
+</ul>
+
+<div style="background: #cff4fc; padding: 15px;  margin-bottom: 25px; margin-left: 37px;">
+<span style="font-weight:800;">PRO TIP:</span>
+<br /><span style="font-style:italic;">
+<b>Always create a GCP-to-ArUco reference during land surveying.</b> This crucial step simplifies your geospatial analysis and georeferencing, allowing you to easily adhere to the guidelines outlined in <a href="https://geospatial.101workbook.org/IntroPhotogrammetry/OpenDroneMap/03-ODM-georeferencing#scenario-1-gcp-file-with-known-aruco-ids">SCENARIO 1: GCP file with known ArUco IDs</a>.
+</span>
+</div>
+
+<p><strong>STEP 3.</strong> Once the matches are made, create a <strong>new</strong> <code class="language-plaintext highlighter-rouge">GCP_reference.txt</code> file replacing the custom IDs with ArUco IDs.</p>
+
+<p>Create a one column <code class="language-plaintext highlighter-rouge">tmp</code> file with matching IDs in a format <code class="language-plaintext highlighter-rouge">GCP_ArUco</code>. Then, replace the custom GCP ID with the corresponding ArUco ID in your original <code class="language-plaintext highlighter-rouge">GCP_reference.txt</code> file.</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>awk '{print $4"_"$14}' &lt; ID_matches | tr '.' ' ' &gt; ../tmp
+cd ../                               # navigate to the IMAGES dir with the GCP_reference.file
+
+for i in `cat tmp`
+do
+    old=`echo $i | awk -F"_" '{print $1}'`
+    new=`echo $i | awk -F"_" '{print $2}'`
+    awk -v A=$old -v B=$new '{if ($1==A) print B,$2,$3,$4}' &lt; GCP_reference.txt &gt;&gt; GCP_reference_aruco.txt
+done
+</code></pre></div></div>
+<p><i>The output from this operation is the </i> <code class="language-plaintext highlighter-rouge">GCP_reference_aruco.txt</code> file, used in STEP 4.</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>0 523287.368 4779588.335 1397.823
+11 523289.018 4779469.252 1407.142
+3 523363.938 4779530.027 1400.244
+1 523394.376 4779529.525 1398.728
+10 523305.976 4779572.588 1397.817
+2 523350.181 4779492.395 1403.14
+6 523347.074 4779571.424 1397.653
+5 523329.48 4779525.642 1400.983
+8 523292.432 4779530.71 1401.051
+4 523364.648 4779587.932 1395.735
+7 523261.422 4779532.114 1401.978
+</code></pre></div></div>
+
+<p><strong>STEP 4.</strong> The <code class="language-plaintext highlighter-rouge">gcp_find.py</code> tool is then utilized again as in <a href="#scenario-1-gcp-file-with-known-aruco-ids">SCENARIO 1: GCP file with known ArUco IDs</a>. The end output, <code class="language-plaintext highlighter-rouge">gcp_list.txt</code>, is compatible with ODM software, but it should be used cautiously due to limited precision of GCP matching in this approach.</p>
+
+<hr />
+
+<h3 id="scenario-3-no-gcp-file"><strong>SCENARIO 3:</strong> <em>no GCP file</em></h3>
+
+<p><strong><em>i.e., No GCP reference, pure detection of ArUco markers</em></strong></p>
+
+<p>In instances where no GCP file is available:</p>
+<ul>
+  <li>The goal here is straightforward: <strong><em>How many and which ArUco markers are detectable within your imagery?</em></strong></li>
+  <li>You only need <strong>your imagery</strong> and a <strong>known ArUco dictionary</strong>, <em>which can be discerned through a visual inspection of a sample marker in a photo</em>.</li>
+  <li>The output will be a list that pairs ArUco IDs with the respective image names where they were spotted <em>(with marker coordinates in the picture)</em>.</li>
+</ul>
+
+<p><strong>Identify marker IDs in the selected ArUco dictionary:</strong></p>
+
+<p>Run the <code class="language-plaintext highlighter-rouge">gcp_find.py</code> Python tool with basic settings to detect ArUco markers:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$FIND_GCP_PATH/gcp_find.py -d 0 $INPUTS_PATH/*.JPG &gt;&gt; markers_detected.txt
+</code></pre></div></div>
+
+<p><i>Remember to use the correct ArUco dictionary with the <b>-d</b> option (for example, in this case, the -d 0 denotes the DICT_4x4_50 dictionary).</i>
+The output <code class="language-plaintext highlighter-rouge">markers_detected.txt</code> should looks like this (<em>columns:</em> <code class="language-plaintext highlighter-rouge">x</code> <code class="language-plaintext highlighter-rouge">y</code> <code class="language-plaintext highlighter-rouge">image</code> <code class="language-plaintext highlighter-rouge">aruco_id</code>):</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>5041 91 R0036021.JPG 0
+5190 1110 R0036023.JPG 0
+5462 1856 R0036024.JPG 0
+5680 2998 R0036026.JPG 0
+3170 60 R0036061.JPG 4
+624 700 R0036065.JPG 6
+539 1349 R0036066.JPG 6
+162 701 R0036073.JPG 10
+</code></pre></div></div>
+<p>Let’s filter the output to include only the images with a single detected marker on them.</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>awk '{print $3}' markers_detected.txt | sort | uniq -c | awk '$1 == 1 {print $2}' | while read image; do grep "$image" markers_detected.txt; done &gt; single_markers.txt
+</code></pre></div></div>
+
+<p>You can further refine your results by selecting the top 10 most representative images for each identified ArUco marker, as outlined in section
+<a href="#select-representative-images-for-a-marker">Select representative images for a marker</a>.</p>
+
+<hr />
+<h1 id="further-reading">Further Reading</h1>
+<!-- * [Command-line ODM modules](02-ODM-modules) -->
+
+<hr />
+
+<p><a href="../index.md" class="btn btn--primary">Homepage</a>
+<a href="../00-IntroPhotogrammetry-LandingPage" class="btn btn--primary">Section Index</a>
+<a href="02-ODM-modules" class="btn btn--primary">Previous</a>
+<!-- [Next](){: .btn  .btn--primary} --></p>
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+
+
+        
+      </footer>
+
+      
+
+      
+
+    </div>
+
+    
+  </article>
+
+  
+  
+</div>
+    </div>
+
+    
+      <div class="search-content">
+        <div class="search-content__inner-wrap"><form onsubmit="return googleCustomSearchExecute();" id="cse-search-box-form-id">
+    <input type="search" id="cse-search-input-box-id" aria-placeholder="Enter your search term..." class="search-input" tabindex="-1" placeholder="Enter your search term..." />
+    </form>
+    <div id="results" class="results">
+        <gcse:searchresults-only></gcse:searchresults-only>
+    </div></div>
+
+      </div>
+    
+    
+    <div class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+
+        <div class="page__footer-follow">
+  <ul class="social-icons">
+    
+      <li><strong>Follow:</strong></li>
+    
+    
+      <li><a href="https://twitter.com/isugif"><i class="fab fa-fw fa-twitter-square" aria-hidden="true"></i> Twitter</a></li>
+    
+    
+    
+      <li><a href="https://github.com/https://github.com/isugenomics"><i class="fab fa-fw fa-github" aria-hidden="true"></i> GitHub</a></li>
+    
+    
+    
+    
+  </ul>
+</div>
+
+<div class="page__footer-copyright">&copy; 2024 Geospatial Workbook</div>
+
+      </footer>
+    </div>
+
+    
+  <script src="/assets/js/main.min.js"></script>
+  <script src="https://use.fontawesome.com/releases/v5.0.13/js/all.js"></script>
+
+
+<script>
+  (function () {
+    var cx = '009853197685285203469:nsvri1pa88d';
+    var gcse = document.createElement('script');
+    gcse.type = 'text/javascript';
+    gcse.async = true;
+    gcse.src = 'https://cse.google.com/cse.js?cx=' + cx;
+    var s = document.getElementsByTagName('script')[0];
+    s.parentNode.insertBefore(gcse, s);
+  })();
+
+  function googleCustomSearchExecute() {
+    var input = document.getElementById('cse-search-input-box-id');
+    var element = google.search.cse.element.getElement('searchresults-only0');
+    if (input.value == '') {
+      element.clearAllResults();
+    } else {
+      element.execute(input.value);
+    }
+    return false;
+  }
+
+  
+</script>
+
+
+
+
+<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+<script id="MathJax-script" defer
+        src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+</script>
+
+
+
+
+  </body>
+</html>

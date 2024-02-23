@@ -1,0 +1,841 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.11.2 by Michael Rose
+  Copyright 2013-2018 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE.txt
+-->
+<html lang="en" class="no-js">
+  <head>
+    <meta charset="utf-8">
+
+<!-- begin _includes/seo.html --><title>Image Processing Fundamentals - Geospatial Workbook</title>
+<meta name="description" content="Tutorial on Informatics for Geospatial Information">
+
+
+  <meta name="author" content="Jennifer Chang">
+
+
+<meta property="og:type" content="website">
+<meta property="og:locale" content="en_US">
+<meta property="og:site_name" content="Geospatial Workbook">
+<meta property="og:title" content="Image Processing Fundamentals">
+<meta property="og:url" content="http://localhost:4000/IntroductionToImageAnalysis/R_Image_Processing.html">
+
+
+
+
+  <meta property="og:image" content="http://localhost:4000/assets/images/margaret-weir-GZyjbLNOaFg-unsplash_dark.jpg">
+
+
+
+  <meta name="twitter:site" content="@isugif">
+  <meta name="twitter:title" content="Image Processing Fundamentals">
+  <meta name="twitter:description" content="Tutorial on Informatics for Geospatial Information">
+  <meta name="twitter:url" content="http://localhost:4000/IntroductionToImageAnalysis/R_Image_Processing.html">
+
+  
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content="http://localhost:4000/assets/images/margaret-weir-GZyjbLNOaFg-unsplash_dark.jpg">
+  
+
+  
+    <meta name="twitter:creator" content="@jenchang212">
+  
+
+
+
+
+
+
+
+  
+
+  
+
+
+<link rel="canonical" href="http://localhost:4000/IntroductionToImageAnalysis/R_Image_Processing.html">
+
+
+
+
+
+
+
+  <script type="application/ld+json">
+    {
+      "@context": "http://schema.org",
+      "@type": "Person",
+      "name": "",
+      "url": "http://localhost:4000",
+      "sameAs": null
+    }
+  </script>
+
+
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+<link href="/feed.xml" type="application/atom+xml" rel="alternate" title="Geospatial Workbook Feed">
+
+<!-- http://t.co/dKP3o1e -->
+<meta name="HandheldFriendly" content="True">
+<meta name="MobileOptimized" content="320">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+
+<!--[if lte IE 9]>
+  <style>
+    /* old IE unsupported flexbox fixes */
+    .greedy-nav .site-title {
+      padding-right: 3em;
+    }
+    .greedy-nav button {
+      position: absolute;
+      top: 0;
+      right: 0;
+      height: 100%;
+    }
+  </style>
+<![endif]-->
+
+
+    <!-- start custom head snippets -->
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-E6BZVYF8ZY"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-E6BZVYF8ZY');
+</script>
+
+<!-- insert favicons. use https://realfavicongenerator.net/ -->
+
+<!-- end custom head snippets -->
+
+  </head>
+
+  <body class="layout--single">
+
+    <!--[if lt IE 9]>
+<div class="notice--danger align-center" style="margin: 0;">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience.</div>
+<![endif]-->
+
+    <div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        <a class="site-title" href="/">Geospatial Workbook</a>
+        <ul class="visible-links">
+          
+            
+            <li class="masthead__menu-item">
+              <a href="http://localhost:4000/about.html" >About</a>
+            </li>
+          
+            
+            <li class="masthead__menu-item">
+              <a href="http://localhost:4000/list.html" >Index</a>
+            </li>
+          
+            
+            <li class="masthead__menu-item">
+              <a href="http://localhost:4000/glossary.html" >Glossary</a>
+            </li>
+          
+            
+            <li class="masthead__menu-item">
+              <a href="http://localhost:4000/people.html" >People</a>
+            </li>
+          
+            
+            <li class="masthead__menu-item">
+              <a href="http://localhost:4000/contributing.html" >Contribute</a>
+            </li>
+          
+        </ul>
+        
+        <button class="search__toggle" type="button">
+          <svg class="icon" width="16" height="16" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 15.99 16">
+            <path d="M15.5,13.12L13.19,10.8a1.69,1.69,0,0,0-1.28-.55l-0.06-.06A6.5,6.5,0,0,0,5.77,0,6.5,6.5,0,0,0,2.46,11.59a6.47,6.47,0,0,0,7.74.26l0.05,0.05a1.65,1.65,0,0,0,.5,1.24l2.38,2.38A1.68,1.68,0,0,0,15.5,13.12ZM6.4,2A4.41,4.41,0,1,1,2,6.4,4.43,4.43,0,0,1,6.4,2Z" transform="translate(-.01)"></path>
+          </svg>
+        </button>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">Toggle Menu</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+    <div class="initial-content">
+      
+  
+
+
+
+
+
+
+
+
+
+
+
+<div class="page__hero--overlay"
+  style="background-color: 444444; background-image: url('/assets/images/margaret-weir-GZyjbLNOaFg-unsplash_dark.jpg');"
+>
+  
+    <div class="wrapper">
+      <h1 id="page-title" class="page__title" itemprop="headline">
+        
+          Image Processing Fundamentals
+
+        
+      </h1>
+      
+      
+      
+    </div>
+  
+  
+</div>
+
+
+
+
+
+<div id="main" role="main">
+  
+  <div class="sidebar sticky">
+  
+
+
+<div itemscope itemtype="http://schema.org/Person">
+
+  
+    <div class="author__avatar">
+      
+
+      
+        <img src="/assets/images/people/JenChang.png" alt="Jennifer Chang" itemprop="image">
+      
+    </div>
+  
+
+  <div class="author__content">
+    
+      <h3 class="author__name" itemprop="name">Jennifer Chang</h3>
+    
+    
+      <p class="author__bio" itemprop="description">
+        Her PhD was in Bioinformatics and Computational Biology with a minor in Statistics. During her PhD, she developed the C++ software Mango Graph Studio which has been licensed to a startup. Since then, she has worked on automating the Influenza A Virus in Swine reports and recently has been designing Nextflow pipelines for highly scalable and reproducible pipelines. She enjoys designing workflows to reduce tedium and increase joy of discovery.
+      </p>
+    
+  </div>
+
+  <div class="author__urls-wrapper">
+    <button class="btn btn--inverse">Follow</button>
+    <ul class="author__urls social-icons">
+      
+
+      
+
+      
+        <li>
+          <a href="mailto:mailto:jenchang@iastate.edu">
+            <meta itemprop="email" content="mailto:jenchang@iastate.edu" />
+            <i class="fas fa-fw fa-envelope-square" aria-hidden="true"></i> Email
+          </a>
+        </li>
+      
+
+      
+
+      
+        <li>
+          <a href="https://twitter.com/jenchang212" itemprop="sameAs">
+            <i class="fab fa-fw fa-twitter-square" aria-hidden="true"></i> Twitter
+          </a>
+        </li>
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      <!--
+  <li>
+    <a href="http://link-to-whatever-social-network.com/user/" itemprop="sameAs">
+      <i class="fas fa-fw" aria-hidden="true"></i> Custom Social Profile Link
+    </a>
+  </li>
+-->
+    </ul>
+  </div>
+</div>
+
+<!-- Create a 2nd author for tutorials -->
+
+
+
+<div itemscope itemtype="http://schema.org/Person">
+
+  
+
+  <div class="author__content">
+    
+      <h3 class="author__name" itemprop="name"></h3>
+    
+    
+  </div>
+
+  <div class="author__urls-wrapper">
+    <button class="btn btn--inverse">Follow</button>
+    <ul class="author__urls social-icons">
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      <!--
+  <li>
+    <a href="http://link-to-whatever-social-network.com/user/" itemprop="sameAs">
+      <i class="fas fa-fw" aria-hidden="true"></i> Custom Social Profile Link
+    </a>
+  </li>
+-->
+    </ul>
+  </div>
+</div>
+
+  
+  </div>
+
+
+  <article class="page" itemscope itemtype="http://schema.org/CreativeWork">
+    <meta itemprop="headline" content="Image Processing Fundamentals">
+    
+    
+    
+
+    <div class="page__inner-wrap">
+      
+
+      <section class="page__content" itemprop="text">
+        
+        <p><strong>Last Update:</strong> 14 Jan 2021 <br /> <strong>RMarkdown:</strong>
+<a href="https://geospatial.101workbook.org/tutorials/R_Image_Processing.Rmd">R_Image_Processing.Rmd</a></p>
+
+<h2 id="overview">Overview</h2>
+
+<p>In this tutorial, we present a brief overview of image processing
+concepts necessary to understand machine learning and deep learning.
+This walk through was originally written in python: <a href="https://geospatial.101workbook.org/Workshops/Tutorial1_Image_Processing_Essentials_Boucheron.html">link to python
+version</a>.
+We have tried to maintain functionality across both languages but
+certain libraries/features may only be available in one or the other.
+The basics of image processing should be the same across both.</p>
+
+<p>This tutorial explores:</p>
+
+<ul>
+  <li>Loading image files into R</li>
+  <li>Printing properties of an image</li>
+  <li>Converting an image between color and grayscale</li>
+  <li>Identifying features (edges) within an image</li>
+</ul>
+
+<h2 id="downloading-images">Downloading Images</h2>
+
+<!-- TODO: replace these with landsat images. This should be a geospatial tutorial. -->
+
+<p>We will be using two images which can be downloaded from the following
+links:</p>
+
+<ul>
+  <li><a href="https://geospatial.101workbook.org/Workshops/Tutorial1_Image_Processing_Essentials_Boucheron.html">cameraman.png</a></li>
+  <li><a href="">peppers.png</a></li>
+</ul>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center">cameraman.png</th>
+      <th style="text-align: center">peppers.png</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center"><img src="https://geospatial.101workbook.org/tutorials/data/cameraman.png" /></td>
+      <td style="text-align: center"><img src="https://geospatial.101workbook.org/tutorials/data/peppers.png" /></td>
+    </tr>
+  </tbody>
+</table>
+
+<p>From a terminal, we could have used the <code class="language-plaintext highlighter-rouge">wget</code> or <code class="language-plaintext highlighter-rouge">curl</code> commands to
+download the images.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>wget https://geospatial.101workbook.org/tutorials/data/cameraman.png
+wget https://geospatial.101workbook.org/tutorials/data/peppers.png
+
+<span class="nb">ls</span> <span class="nt">-1</span> <span class="k">*</span>.png
+<span class="c">#&gt; cameraman.png</span>
+<span class="c">#&gt; peppers.png</span>
+</code></pre></div></div>
+
+<p>The <code class="language-plaintext highlighter-rouge">cameraman.png</code> on the left is in grayscale and the <code class="language-plaintext highlighter-rouge">peppers.png</code> on
+the right is in color. Processing color or grayscale images is slightly
+different, which we will explore in the following tutorial.</p>
+
+<h2 id="loading-images-into-r">Loading images into R</h2>
+
+<p>We will assume you have a working R environment; however, see the
+following for a tutorial on setting up an R environment:</p>
+
+<ul>
+  <li><a href="https://bioinformaticsworkbook.org/dataWrangling/R/r-setup.html#gsc.tab=0">Set up R and R
+Environment</a></li>
+</ul>
+
+<p>The nice thing about scripting languages is the fact that many tools are
+published as libraries. Which means you do not have to write your own
+functions from scratch. For this tutorial, we will be using R’s <code class="language-plaintext highlighter-rouge">imager</code>
+library available on CRAN (<a href="http://dahtah.github.io/imager/">link to more
+info</a>). There may be other image
+libraries more suited to your analysis, and we highly encourage you to
+explore, especially as new libraries are constantly being developed.</p>
+
+<p>Below, we can install and load the <code class="language-plaintext highlighter-rouge">imager</code> library.</p>
+
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># install.packages("imager")       # &lt;= uncomment to install from CRAN</span><span class="w">
+</span><span class="n">library</span><span class="p">(</span><span class="n">imager</span><span class="p">)</span><span class="w">
+</span></code></pre></div></div>
+
+<p>From there, we can use the <code class="language-plaintext highlighter-rouge">load.image</code> function to read in
+<code class="language-plaintext highlighter-rouge">cameraman.png</code>. You may need the path to your input file, if they are
+not in the same location.</p>
+
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">I_camera</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">load.image</span><span class="p">(</span><span class="s1">'data/cameraman.png'</span><span class="p">)</span><span class="w">   </span><span class="c1"># &lt;= path to input image here</span><span class="w">
+</span><span class="n">plot</span><span class="p">(</span><span class="n">I_camera</span><span class="p">)</span><span class="w">
+</span></code></pre></div></div>
+
+<p><img src="/IntroductionToImageAnalysis/images/R_I_camera-1.png" alt="" /><!-- --></p>
+
+<p>Here, we have read in the image and stored it as <code class="language-plaintext highlighter-rouge">I_camera</code>. To verify
+that the image was successfully loaded into R, we have displayed the
+image using the <code class="language-plaintext highlighter-rouge">plot</code> function.</p>
+
+<p>From the plot, notice how the x-axis goes from 0 to 300 from left to
+right. Strangely, the y-axis goes from 0 to 300, top to bottom.
+Therefore, the xy point (0,0) is actually the <strong>top left</strong> of the image.
+This can be very important <strong>as your analysis results may be different
+if the (0,0) is top left, right, bottom, or center</strong>. It’s a good idea
+to check where (0,0) is in the image.</p>
+
+<p>Now, we can also load the <code class="language-plaintext highlighter-rouge">peppers.png</code> in the same way, and store it as
+<code class="language-plaintext highlighter-rouge">I_peppers</code>.</p>
+
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">I_peppers</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">load.image</span><span class="p">(</span><span class="s1">'data/peppers.png'</span><span class="p">)</span><span class="w">   </span><span class="c1"># &lt;= path to input image here</span><span class="w">
+</span><span class="n">plot</span><span class="p">(</span><span class="n">I_peppers</span><span class="p">)</span><span class="w">
+</span></code></pre></div></div>
+
+<p><img src="/IntroductionToImageAnalysis/images/R_I_peppers-1.png" alt="" /><!-- --></p>
+
+<h2 id="properties-of-an-image">Properties of an image</h2>
+
+<p>Now that we’ve loaded and plotted the images. What is an image object
+and its properties?</p>
+
+<p>An image is actually stored as a matrix of pixels, usually stored in
+multiple layers. The diagram from
+<a href="https://media.geeksforgeeks.org/wp-content/uploads/Pixel.jpg">https://media.geeksforgeeks.org/wp-content/uploads/Pixel.jpg</a> is a good
+illustration of the concept of image layers.</p>
+
+<p><img src="https://media.geeksforgeeks.org/wp-content/uploads/Pixel.jpg" alt="image" /></p>
+
+<p>From R, we can look at the structure (<code class="language-plaintext highlighter-rouge">str</code>) of a variable (<code class="language-plaintext highlighter-rouge">I_camera</code>)
+by the following:</p>
+
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">str</span><span class="p">(</span><span class="n">I_camera</span><span class="p">)</span><span class="w">
+</span><span class="c1">#&gt;  'cimg' num [1:256, 1:256, 1, 1] 0.612 0.624 0.62 0.608 0.62 ...</span><span class="w">
+</span></code></pre></div></div>
+
+<p>The structure of <code class="language-plaintext highlighter-rouge">I_camera</code> is an array of numbers
+<code class="language-plaintext highlighter-rouge">cimg num [1:256, 1:256, 1, 1]</code>. This is showing the dimension of the
+images to be 256 pixels wide, 256 pixels high, with 1 depth (layer), and
+1 channel (because it’s a grayscale image).</p>
+
+<p>Now, let’s look at <code class="language-plaintext highlighter-rouge">I_peppers</code>, which is a color image. How is the
+structure different?</p>
+
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">str</span><span class="p">(</span><span class="n">I_peppers</span><span class="p">)</span><span class="w">
+</span><span class="c1">#&gt;  'cimg' num [1:512, 1:384, 1, 1:3] 0.243 0.247 0.247 0.255 0.259 ...</span><span class="w">
+</span></code></pre></div></div>
+
+<p>Other then a 512 pixel width and 384 pixel height, notice how the 4th
+term is <code class="language-plaintext highlighter-rouge">1:3</code> which indicates three channels (RGB or Red Green Blue).</p>
+
+<p>We could have also used the dimension (<code class="language-plaintext highlighter-rouge">dim</code>) function to quickly
+compare them.</p>
+
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nf">dim</span><span class="p">(</span><span class="n">I_camera</span><span class="p">)</span><span class="w">        </span><span class="c1"># Width_in_pixels Height_in_pixels Depth(layers) color(1=grayscale, 3=RGB)</span><span class="w">
+</span><span class="c1">#&gt; [1] 256 256   1   1</span><span class="w">
+</span><span class="nf">dim</span><span class="p">(</span><span class="n">I_peppers</span><span class="p">)</span><span class="w">
+</span><span class="c1">#&gt; [1] 512 384   1   3</span><span class="w">
+</span></code></pre></div></div>
+
+<h2 id="subregions-of-the-image">Subregions of the image</h2>
+
+<p>Since an image object is really an R matrix, the matrix sub setting
+functions work to subset an image. Here, we pull out a subregion near
+the center of the image (100 to 110 pixels high and wide) and store it
+as <code class="language-plaintext highlighter-rouge">sub_I_camera</code></p>
+
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">sub_I_camera</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">as.cimg</span><span class="p">(</span><span class="n">I_camera</span><span class="p">[</span><span class="m">100</span><span class="o">:</span><span class="m">110</span><span class="p">,</span><span class="m">100</span><span class="o">:</span><span class="m">110</span><span class="p">,,]</span><span class="w"> </span><span class="p">)</span><span class="w">
+</span><span class="n">plot</span><span class="p">(</span><span class="n">sub_I_camera</span><span class="p">)</span><span class="w">
+</span></code></pre></div></div>
+
+<p><img src="/IntroductionToImageAnalysis/images/R_sub_I_camera-1.png" alt="" /><!-- --></p>
+
+<p>From this smaller <code class="language-plaintext highlighter-rouge">sub_I_camera</code>, we can print out the pixel values, get
+the minimum value and maximum value.</p>
+
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">sub_I_camera</span><span class="p">[,,,</span><span class="m">1</span><span class="p">]</span><span class="w">
+</span><span class="c1">#&gt;             [,1]       [,2]       [,3]       [,4]       [,5]       [,6]</span><span class="w">
+</span><span class="c1">#&gt;  [1,] 0.04705882 0.03921569 0.04313725 0.04705882 0.04313725 0.04313725</span><span class="w">
+</span><span class="c1">#&gt;  [2,] 0.03529412 0.03529412 0.04705882 0.05098039 0.04313725 0.03921569</span><span class="w">
+</span><span class="c1">#&gt;  [3,] 0.03137255 0.04313725 0.04705882 0.04705882 0.03921569 0.03921569</span><span class="w">
+</span><span class="c1">#&gt;  [4,] 0.03921569 0.05098039 0.04705882 0.04705882 0.03529412 0.03921569</span><span class="w">
+</span><span class="c1">#&gt;  [5,] 0.04313725 0.04313725 0.04313725 0.04313725 0.03921569 0.27843137</span><span class="w">
+</span><span class="c1">#&gt;  [6,] 0.03529412 0.04313725 0.04705882 0.04705882 0.27058824 0.78431373</span><span class="w">
+</span><span class="c1">#&gt;  [7,] 0.06666667 0.04313725 0.04313725 0.32156863 0.71372549 0.31764706</span><span class="w">
+</span><span class="c1">#&gt;  [8,] 0.05098039 0.06274510 0.27058824 0.65882353 0.26274510 0.05882353</span><span class="w">
+</span><span class="c1">#&gt;  [9,] 0.06666667 0.41568627 0.70980392 0.23529412 0.05490196 0.04705882</span><span class="w">
+</span><span class="c1">#&gt; [10,] 0.46274510 0.69803922 0.24313725 0.05490196 0.04705882 0.05490196</span><span class="w">
+</span><span class="c1">#&gt; [11,] 0.69803922 0.26666667 0.05882353 0.05098039 0.05490196 0.05490196</span><span class="w">
+</span><span class="c1">#&gt;             [,7]       [,8]       [,9]      [,10]      [,11]</span><span class="w">
+</span><span class="c1">#&gt;  [1,] 0.04705882 0.04313725 0.03921569 0.10196078 0.67058824</span><span class="w">
+</span><span class="c1">#&gt;  [2,] 0.04705882 0.04313725 0.13333333 0.72941176 0.60392157</span><span class="w">
+</span><span class="c1">#&gt;  [3,] 0.04705882 0.18039216 0.72549020 0.52941176 0.12941176</span><span class="w">
+</span><span class="c1">#&gt;  [4,] 0.22745098 0.78823529 0.47843137 0.11764706 0.04313725</span><span class="w">
+</span><span class="c1">#&gt;  [5,] 0.80000000 0.41568627 0.09019608 0.04313725 0.05098039</span><span class="w">
+</span><span class="c1">#&gt;  [6,] 0.35686275 0.07058824 0.03921569 0.03529412 0.04705882</span><span class="w">
+</span><span class="c1">#&gt;  [7,] 0.06666667 0.05490196 0.05490196 0.03529412 0.03529412</span><span class="w">
+</span><span class="c1">#&gt;  [8,] 0.04705882 0.06274510 0.06666667 0.03921569 0.03529412</span><span class="w">
+</span><span class="c1">#&gt;  [9,] 0.05490196 0.05882353 0.06274510 0.03921569 0.03529412</span><span class="w">
+</span><span class="c1">#&gt; [10,] 0.05490196 0.06274510 0.05098039 0.03529412 0.03529412</span><span class="w">
+</span><span class="c1">#&gt; [11,] 0.06666667 0.06274510 0.05098039 0.03921569 0.04313725</span><span class="w">
+</span><span class="nf">min</span><span class="p">(</span><span class="n">sub_I_camera</span><span class="p">[,,,</span><span class="m">1</span><span class="p">])</span><span class="w">
+</span><span class="c1">#&gt; [1] 0.03137255</span><span class="w">
+</span><span class="nf">max</span><span class="p">(</span><span class="n">sub_I_camera</span><span class="p">[,,,</span><span class="m">1</span><span class="p">])</span><span class="w">
+</span><span class="c1">#&gt; [1] 0.8</span><span class="w">
+</span></code></pre></div></div>
+
+<p>See if you can subset and explore the <code class="language-plaintext highlighter-rouge">I_peppers</code> color image. Try to
+pull out a subimage that only contains one pepper.</p>
+
+<h2 id="convert-to-color-images-to-grayscale">Convert to Color Images to Grayscale</h2>
+
+<p>There are many reasons why we might want to convert a color image to a
+grayscale image. For one thing, it results in a reduction in image size
+(drop the 3 channels into 1). Another reason, is we want to focus on one
+color to identify an object in a busy scene. Or we may want to flatten
+certain layers to better identify edges of an object of interest.</p>
+
+<p>Recall the <code class="language-plaintext highlighter-rouge">I_peppers</code> color image?</p>
+
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">I_peppers</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">load.image</span><span class="p">(</span><span class="s1">'data/peppers.png'</span><span class="p">)</span><span class="w">       </span><span class="c1"># &lt;= path to peppers.png</span><span class="w">
+</span><span class="n">plot</span><span class="p">(</span><span class="n">I_peppers</span><span class="p">)</span><span class="w">
+</span></code></pre></div></div>
+
+<p><img src="/IntroductionToImageAnalysis/images/R_I_pepper-1.png" alt="" /><!-- --></p>
+
+<p>The <code class="language-plaintext highlighter-rouge">imager</code> package provides a convenient <code class="language-plaintext highlighter-rouge">grayscale</code> function.</p>
+
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">gray_I_peppers</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">grayscale</span><span class="p">(</span><span class="n">I_peppers</span><span class="p">)</span><span class="w">
+</span><span class="n">plot</span><span class="p">(</span><span class="n">gray_I_peppers</span><span class="p">)</span><span class="w">
+</span></code></pre></div></div>
+
+<p><img src="/IntroductionToImageAnalysis/images/R_gray_I_peppers-1.png" alt="" /><!-- --></p>
+
+<p>Recall that an image is really a matrix of numbers. Let’s compare the
+dimensions of the original with the new image.</p>
+
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nf">dim</span><span class="p">(</span><span class="n">I_peppers</span><span class="p">)</span><span class="w">          </span><span class="c1"># Color Original</span><span class="w">
+</span><span class="c1">#&gt; [1] 512 384   1   3</span><span class="w">
+</span><span class="nf">dim</span><span class="p">(</span><span class="n">gray_I_peppers</span><span class="p">)</span><span class="w">     </span><span class="c1"># Grayscale Transformed</span><span class="w">
+</span><span class="c1">#&gt; [1] 512 384   1   1</span><span class="w">
+</span></code></pre></div></div>
+
+<p>The only difference should be the 4th entry.</p>
+
+<h2 id="identify-edge-features-in-an-image">Identify edge features in an image.</h2>
+
+<p>In order to identify objects in an image, it is often necessary to
+identify edges. While humans can intuitively identify edges to an
+object, computational edge detection is a bit more noisy. Usually it
+involves defining some gradiant function. An example shown below:</p>
+
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">dx</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">imgradient</span><span class="p">(</span><span class="n">I_camera</span><span class="p">,</span><span class="w"> </span><span class="s2">"x"</span><span class="p">)</span><span class="w">
+</span><span class="n">dy</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">imgradient</span><span class="p">(</span><span class="n">I_camera</span><span class="p">,</span><span class="w"> </span><span class="s2">"y"</span><span class="p">)</span><span class="w">
+</span><span class="n">grad.mag</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">sqrt</span><span class="p">(</span><span class="n">dx</span><span class="o">^</span><span class="m">2</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">dy</span><span class="o">^</span><span class="m">2</span><span class="p">)</span><span class="w">
+</span><span class="n">plot</span><span class="p">(</span><span class="n">grad.mag</span><span class="p">,</span><span class="w"> </span><span class="n">main</span><span class="o">=</span><span class="s2">"Gradient magnitude"</span><span class="p">)</span><span class="w">
+</span></code></pre></div></div>
+
+<p><img src="/IntroductionToImageAnalysis/images/R_edge_I_camera-1.png" alt="" /><!-- --></p>
+
+<p>This particular function is called a Sobal Filter. To read more about
+Sobal filters, see this link: <a href="https://en.wikipedia.org/wiki/Sobel_operator">wikipedia - sobel
+operator</a></p>
+
+<p>What happens if we identify edges in the color image <code class="language-plaintext highlighter-rouge">I_peppers</code>?</p>
+
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">dx</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">imgradient</span><span class="p">(</span><span class="n">I_peppers</span><span class="p">,</span><span class="w"> </span><span class="s2">"x"</span><span class="p">)</span><span class="w">
+</span><span class="n">dy</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">imgradient</span><span class="p">(</span><span class="n">I_peppers</span><span class="p">,</span><span class="w"> </span><span class="s2">"y"</span><span class="p">)</span><span class="w">
+</span><span class="n">grad.mag</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">sqrt</span><span class="p">(</span><span class="n">dx</span><span class="o">^</span><span class="m">2</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">dy</span><span class="o">^</span><span class="m">2</span><span class="p">)</span><span class="w">
+</span><span class="n">plot</span><span class="p">(</span><span class="n">grad.mag</span><span class="p">,</span><span class="w"> </span><span class="n">main</span><span class="o">=</span><span class="s2">"Gradient magnitude"</span><span class="p">)</span><span class="w">
+</span></code></pre></div></div>
+
+<p><img src="/IntroductionToImageAnalysis/images/R_edge_I_peppers-1.png" alt="" /><!-- --></p>
+
+<p>What happens if we convert the color image to a gray scale image first?</p>
+
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">gray_I_peppers</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">grayscale</span><span class="p">(</span><span class="n">I_peppers</span><span class="p">)</span><span class="w">
+</span><span class="n">dx</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">imgradient</span><span class="p">(</span><span class="n">gray_I_peppers</span><span class="p">,</span><span class="w"> </span><span class="s2">"x"</span><span class="p">)</span><span class="w">
+</span><span class="n">dy</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">imgradient</span><span class="p">(</span><span class="n">gray_I_peppers</span><span class="p">,</span><span class="w"> </span><span class="s2">"y"</span><span class="p">)</span><span class="w">
+</span><span class="n">grad.mag</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">sqrt</span><span class="p">(</span><span class="n">dx</span><span class="o">^</span><span class="m">2</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">dy</span><span class="o">^</span><span class="m">2</span><span class="p">)</span><span class="w">
+</span><span class="n">plot</span><span class="p">(</span><span class="n">grad.mag</span><span class="p">,</span><span class="w"> </span><span class="n">main</span><span class="o">=</span><span class="s2">"Gradient magnitude"</span><span class="p">)</span><span class="w">
+</span></code></pre></div></div>
+
+<p><img src="/IntroductionToImageAnalysis/images/R_edge2_I_peppers-1.png" alt="" /><!-- --></p>
+
+<h1 id="in-summary">In Summary</h1>
+
+<p>Hopefully, you have learned how to:</p>
+
+<ul>
+  <li>load image files into R,</li>
+  <li>identify the dimensions of the image (gray vs color),</li>
+  <li>learned some common transformations (pull out subregions, convert to
+grayscale),</li>
+  <li>and identify edge features.</li>
+</ul>
+
+<p>These colors and features can be fed into Machine Learning algorithms
+for image recognition such as but not limited to identifying roadways,
+forest cover, and snow cover. Hopefully, this has provided you with some
+intuition on how to perform analysis/transformations on image files.</p>
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+
+
+        
+      </footer>
+
+      
+
+      
+
+    </div>
+
+    
+  </article>
+
+  
+  
+</div>
+    </div>
+
+    
+      <div class="search-content">
+        <div class="search-content__inner-wrap"><form onsubmit="return googleCustomSearchExecute();" id="cse-search-box-form-id">
+    <input type="search" id="cse-search-input-box-id" aria-placeholder="Enter your search term..." class="search-input" tabindex="-1" placeholder="Enter your search term..." />
+    </form>
+    <div id="results" class="results">
+        <gcse:searchresults-only></gcse:searchresults-only>
+    </div></div>
+
+      </div>
+    
+    
+    <div class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+
+        <div class="page__footer-follow">
+  <ul class="social-icons">
+    
+      <li><strong>Follow:</strong></li>
+    
+    
+      <li><a href="https://twitter.com/isugif"><i class="fab fa-fw fa-twitter-square" aria-hidden="true"></i> Twitter</a></li>
+    
+    
+    
+      <li><a href="https://github.com/https://github.com/isugenomics"><i class="fab fa-fw fa-github" aria-hidden="true"></i> GitHub</a></li>
+    
+    
+    
+    
+  </ul>
+</div>
+
+<div class="page__footer-copyright">&copy; 2024 Geospatial Workbook</div>
+
+      </footer>
+    </div>
+
+    
+  <script src="/assets/js/main.min.js"></script>
+  <script src="https://use.fontawesome.com/releases/v5.0.13/js/all.js"></script>
+
+
+<script>
+  (function () {
+    var cx = '009853197685285203469:nsvri1pa88d';
+    var gcse = document.createElement('script');
+    gcse.type = 'text/javascript';
+    gcse.async = true;
+    gcse.src = 'https://cse.google.com/cse.js?cx=' + cx;
+    var s = document.getElementsByTagName('script')[0];
+    s.parentNode.insertBefore(gcse, s);
+  })();
+
+  function googleCustomSearchExecute() {
+    var input = document.getElementById('cse-search-input-box-id');
+    var element = google.search.cse.element.getElement('searchresults-only0');
+    if (input.value == '') {
+      element.clearAllResults();
+    } else {
+      element.execute(input.value);
+    }
+    return false;
+  }
+
+  
+</script>
+
+
+
+
+<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+<script id="MathJax-script" defer
+        src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+</script>
+
+
+
+
+  </body>
+</html>

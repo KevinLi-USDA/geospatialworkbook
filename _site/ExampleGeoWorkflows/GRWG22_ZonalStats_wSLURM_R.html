@@ -1,0 +1,859 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.11.2 by Michael Rose
+  Copyright 2013-2018 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE.txt
+-->
+<html lang="en" class="no-js">
+  <head>
+    <meta charset="utf-8">
+
+<!-- begin _includes/seo.html --><title>Extract zonal statistics from many files in parallel - Geospatial Workbook</title>
+<meta name="description" content="Tutorial on Informatics for Geospatial Information">
+
+
+  <meta name="author" content="Heather Savoy">
+
+
+<meta property="og:type" content="website">
+<meta property="og:locale" content="en_US">
+<meta property="og:site_name" content="Geospatial Workbook">
+<meta property="og:title" content="Extract zonal statistics from many files in parallel">
+<meta property="og:url" content="http://localhost:4000/ExampleGeoWorkflows/GRWG22_ZonalStats_wSLURM_R.html">
+
+
+
+
+  <meta property="og:image" content="http://localhost:4000/assets/images/margaret-weir-GZyjbLNOaFg-unsplash_dark.jpg">
+
+
+
+  <meta name="twitter:site" content="@isugif">
+  <meta name="twitter:title" content="Extract zonal statistics from many files in parallel">
+  <meta name="twitter:description" content="Tutorial on Informatics for Geospatial Information">
+  <meta name="twitter:url" content="http://localhost:4000/ExampleGeoWorkflows/GRWG22_ZonalStats_wSLURM_R.html">
+
+  
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content="http://localhost:4000/assets/images/margaret-weir-GZyjbLNOaFg-unsplash_dark.jpg">
+  
+
+  
+    <meta name="twitter:creator" content="@someone">
+  
+
+
+
+
+
+
+
+  
+
+  
+
+
+<link rel="canonical" href="http://localhost:4000/ExampleGeoWorkflows/GRWG22_ZonalStats_wSLURM_R.html">
+
+
+
+
+
+
+
+  <script type="application/ld+json">
+    {
+      "@context": "http://schema.org",
+      "@type": "Person",
+      "name": "",
+      "url": "http://localhost:4000",
+      "sameAs": null
+    }
+  </script>
+
+
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+<link href="/feed.xml" type="application/atom+xml" rel="alternate" title="Geospatial Workbook Feed">
+
+<!-- http://t.co/dKP3o1e -->
+<meta name="HandheldFriendly" content="True">
+<meta name="MobileOptimized" content="320">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+
+<!--[if lte IE 9]>
+  <style>
+    /* old IE unsupported flexbox fixes */
+    .greedy-nav .site-title {
+      padding-right: 3em;
+    }
+    .greedy-nav button {
+      position: absolute;
+      top: 0;
+      right: 0;
+      height: 100%;
+    }
+  </style>
+<![endif]-->
+
+
+    <!-- start custom head snippets -->
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-E6BZVYF8ZY"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-E6BZVYF8ZY');
+</script>
+
+<!-- insert favicons. use https://realfavicongenerator.net/ -->
+
+<!-- end custom head snippets -->
+
+  </head>
+
+  <body class="layout--single">
+
+    <!--[if lt IE 9]>
+<div class="notice--danger align-center" style="margin: 0;">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience.</div>
+<![endif]-->
+
+    <div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        <a class="site-title" href="/">Geospatial Workbook</a>
+        <ul class="visible-links">
+          
+            
+            <li class="masthead__menu-item">
+              <a href="http://localhost:4000/about.html" >About</a>
+            </li>
+          
+            
+            <li class="masthead__menu-item">
+              <a href="http://localhost:4000/list.html" >Index</a>
+            </li>
+          
+            
+            <li class="masthead__menu-item">
+              <a href="http://localhost:4000/glossary.html" >Glossary</a>
+            </li>
+          
+            
+            <li class="masthead__menu-item">
+              <a href="http://localhost:4000/people.html" >People</a>
+            </li>
+          
+            
+            <li class="masthead__menu-item">
+              <a href="http://localhost:4000/contributing.html" >Contribute</a>
+            </li>
+          
+        </ul>
+        
+        <button class="search__toggle" type="button">
+          <svg class="icon" width="16" height="16" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 15.99 16">
+            <path d="M15.5,13.12L13.19,10.8a1.69,1.69,0,0,0-1.28-.55l-0.06-.06A6.5,6.5,0,0,0,5.77,0,6.5,6.5,0,0,0,2.46,11.59a6.47,6.47,0,0,0,7.74.26l0.05,0.05a1.65,1.65,0,0,0,.5,1.24l2.38,2.38A1.68,1.68,0,0,0,15.5,13.12ZM6.4,2A4.41,4.41,0,1,1,2,6.4,4.43,4.43,0,0,1,6.4,2Z" transform="translate(-.01)"></path>
+          </svg>
+        </button>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">Toggle Menu</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+    <div class="initial-content">
+      
+  
+
+
+
+
+
+
+
+
+
+
+
+<div class="page__hero--overlay"
+  style="background-color: 444444; background-image: url('/assets/images/margaret-weir-GZyjbLNOaFg-unsplash_dark.jpg');"
+>
+  
+    <div class="wrapper">
+      <h1 id="page-title" class="page__title" itemprop="headline">
+        
+          Extract zonal statistics from many files in parallel
+
+        
+      </h1>
+      
+      
+      
+    </div>
+  
+  
+</div>
+
+
+
+
+
+<div id="main" role="main">
+  
+  <div class="sidebar sticky">
+  
+
+
+<div itemscope itemtype="http://schema.org/Person">
+
+  
+    <div class="author__avatar">
+      
+
+      
+        <img src="/assets/images/people/HeatherSavoy.png" alt="Heather Savoy" itemprop="image">
+      
+    </div>
+  
+
+  <div class="author__content">
+    
+      <h3 class="author__name" itemprop="name">Heather Savoy</h3>
+    
+    
+      <p class="author__bio" itemprop="description">
+        Heather is a Computational Biologist (Data Scientist) in the USDA-ARS SCINet Office. Her research interests include applying informatics methods to multidisciplinary agro-ecosystem problems and building data science software tools for geospatial research. She received her Ph.D. in Civil and Environmental Engineering with an emphasis in Computational Data Science and Engineering from the University of California Berkeley. She also holds a B.S. in Environmental Science with a minor in Computational Mathematics from the Florida Institute of Technology.
+      </p>
+    
+  </div>
+
+  <div class="author__urls-wrapper">
+    <button class="btn btn--inverse">Follow</button>
+    <ul class="author__urls social-icons">
+      
+
+      
+
+      
+        <li>
+          <a href="mailto:mailto:heather.savoy@usda.gov">
+            <meta itemprop="email" content="mailto:heather.savoy@usda.gov" />
+            <i class="fas fa-fw fa-envelope-square" aria-hidden="true"></i> Email
+          </a>
+        </li>
+      
+
+      
+
+      
+        <li>
+          <a href="https://twitter.com/someone" itemprop="sameAs">
+            <i class="fab fa-fw fa-twitter-square" aria-hidden="true"></i> Twitter
+          </a>
+        </li>
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      <!--
+  <li>
+    <a href="http://link-to-whatever-social-network.com/user/" itemprop="sameAs">
+      <i class="fas fa-fw" aria-hidden="true"></i> Custom Social Profile Link
+    </a>
+  </li>
+-->
+    </ul>
+  </div>
+</div>
+
+<!-- Create a 2nd author for tutorials -->
+
+
+
+<div itemscope itemtype="http://schema.org/Person">
+
+  
+
+  <div class="author__content">
+    
+      <h3 class="author__name" itemprop="name"></h3>
+    
+    
+  </div>
+
+  <div class="author__urls-wrapper">
+    <button class="btn btn--inverse">Follow</button>
+    <ul class="author__urls social-icons">
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      <!--
+  <li>
+    <a href="http://link-to-whatever-social-network.com/user/" itemprop="sameAs">
+      <i class="fas fa-fw" aria-hidden="true"></i> Custom Social Profile Link
+    </a>
+  </li>
+-->
+    </ul>
+  </div>
+</div>
+
+  
+  </div>
+
+
+  <article class="page" itemscope itemtype="http://schema.org/CreativeWork">
+    <meta itemprop="headline" content="Extract zonal statistics from many files in parallel">
+    
+    
+    
+
+    <div class="page__inner-wrap">
+      
+
+      <section class="page__content" itemprop="text">
+        
+        <p><strong>Last Update:</strong> 28 September 2022 <br />
+<strong>Download RMarkdown</strong>: <a href="https://geospatial.101workbook.org/tutorials/GRWG22_ZonalStats_wSLURM.Rmd">GRWG22_ZonalStats_wSLURM.Rmd</a></p>
+
+<h2 id="overview">Overview</h2>
+
+<p>This tutorial covers how to:</p>
+
+<ol>
+  <li>calculate zonal statistics (i.e., extract summaries of raster values 
+intersecting polygons) in R, and</li>
+  <li>use SLURM job arrays to execute an R script with different inputs across 
+multiple cores.</li>
+</ol>
+
+<p>We will use 21 years of the PRISM gridded dataset’s annual precipitation variable 
+and the US Census counties polygon dataset to calculate the mean annual precipitation 
+in each county per year. We will request SLURM to distribute the 21 years of input data 
+across as many cores and run our zonal statistics R script on each one.</p>
+
+<p>If you prefer to have an R script handle looping over your data inputs and 
+submitting many job submission scripts, see <a href="https://geospatial.101workbook.org/ExampleGeoWorkflows/GRWG22_JobPerDataFile_R">this tutorial</a>.</p>
+
+<p><em>Language:</em> <code class="language-plaintext highlighter-rouge">R</code></p>
+
+<p><em>Primary Libraries/Packages:</em></p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left">Name</th>
+      <th style="text-align: left">Description</th>
+      <th style="text-align: left">Link</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">rgeocdl</code></td>
+      <td style="text-align: left">R interface for SCINet GeoCDL API</td>
+      <td style="text-align: left">https://github.com/USDA-SCINet/rgeocdl</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">terra</code></td>
+      <td style="text-align: left">Methods for spatial data analysis with raster and vector data</td>
+      <td style="text-align: left">https://rspatial.org/terra/pkg/index.html</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="nomenclature">Nomenclature</h2>
+
+<ul>
+  <li><em>GeoCDL:</em> <a href="https://geospatial.101workbook.org/ExampleGeoWorkflows/GRWG22_GeoCDL_R">Geospatial Common Data Library</a>, 
+a collection of commonly used raster datasets accessible from an API running 
+on SCINet’s Ceres cluster</li>
+  <li><em>SLURM Workload Manager:</em> The software on Ceres and Atlas that allocates 
+compute cores to users for their submitted jobs.</li>
+  <li><em>Zonal statistics:</em> Calculating summary statistics, e.g. mean, of cell values
+from a raster in each region, where regions can be defined by an overlapping 
+polygon feature collection.</li>
+</ul>
+
+<h2 id="data-details">Data Details</h2>
+
+<ul>
+  <li>Data: US Census Cartographic Boundary Files</li>
+  <li>Link: https://www.census.gov/geographies/mapping-files/time-series/geo/cartographic-boundary.html</li>
+  <li>
+    <p>Other Details: The cartographic boundary files are simplified representations 
+of selected geographic areas from the Census Bureau’s MAF/TIGER geographic 
+database. These boundary files are specifically designed for small scale 
+thematic mapping.</p>
+  </li>
+  <li>Data: PRISM</li>
+  <li>Link: https://prism.oregonstate.edu/</li>
+  <li>Other Details: The PRISM Climate Group gathers climate observations from a 
+wide range of monitoring networks, applies sophisticated quality control measures, 
+and develops spatial climate datasets to reveal short- and long-term climate 
+patterns. The resulting datasets incorporate a variety of modeling techniques 
+and are available at multiple spatial/temporal resolutions, covering the period 
+from 1895 to the present.</li>
+</ul>
+
+<h2 id="analysis-steps">Analysis Steps</h2>
+
+<ul>
+  <li>Write serial R script - this script will accept a year argument, open the 
+raster file associated with that year, open the polygon dataset, calculate 
+the mean value per polygon, and write a new shapefile with the mean values.</li>
+  <li>Write and save a SLURM job submission script - Create a batch script with
+SLURM commands requesting resources to execute your calculations on multiple
+cores.</li>
+  <li>Submit your job - Submit your batch script to SLURM</li>
+  <li>Check results - Monitor the SLURM queue until your job is complete and then 
+ensure your job executed successfully.</li>
+</ul>
+
+<h2 id="step-0-install-packages-and-download-data">Step 0: Install packages and download data</h2>
+
+<p>For this tutorial, we are not running our spatial analyses via Open OnDemand,
+so we do not have access to the same breadth of geospatial R packages in the
+site library. If you have not used <code class="language-plaintext highlighter-rouge">terra</code> or <code class="language-plaintext highlighter-rouge">rgeocdl</code> outside of Open 
+OnDemand on Ceres before, you can install it in a shell with the code chunks 
+below. The first three <code class="language-plaintext highlighter-rouge">module load</code> commands load versions of non-R<br />
+libraries on which <code class="language-plaintext highlighter-rouge">terra</code> or <code class="language-plaintext highlighter-rouge">rgeocdl</code> depends. Then we load the 3.6 
+version of R, which is a version recent enough for <code class="language-plaintext highlighter-rouge">terra</code> to install that also
+has some <code class="language-plaintext highlighter-rouge">rgeocdl</code> install dependencies also available in the site library on 
+Ceres. You may use a newer version of R, but may need to do some additional package
+installations yourself.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>module load gdal
+module load geos
+module load udunits
+module load r/3.6
+R
+</code></pre></div></div>
+
+<p>Which will open R and you can run the following lines to install <code class="language-plaintext highlighter-rouge">terra</code>. The 
+second line installs the SCINet <code class="language-plaintext highlighter-rouge">rgeocdl</code> package used for downloading the 
+example data for this tutorial.</p>
+
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Install packages</span><span class="w">
+</span><span class="n">install.packages</span><span class="p">(</span><span class="s1">'terra'</span><span class="p">)</span><span class="w"> </span><span class="c1"># if needed</span><span class="w">
+</span><span class="n">devtools</span><span class="o">::</span><span class="n">install_github</span><span class="p">(</span><span class="s1">'USDA-SCINet/rgeocdl'</span><span class="p">)</span><span class="w"> </span><span class="c1"># if needed</span><span class="w">
+
+</span></code></pre></div></div>
+
+<p>The code chunk below will download the example data. For our US county polygons, 
+we are downloading a zipped folder containing a shapefile. The folder is then 
+unzipped. For our precipitation data, we are using the SCINet GeoCDL’s R package
+<code class="language-plaintext highlighter-rouge">rgeocdl</code> to download annual precipitation for 2000-2020 in a bounding box 
+approximately covering the state of Florida. Feel free to change the latitude
+and longitude to your preferred area, but any mentions of processing times below 
+will reflect the bounds provided.</p>
+
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Load packages for downloading data</span><span class="w">
+</span><span class="n">library</span><span class="p">(</span><span class="n">rgeocdl</span><span class="p">)</span><span class="w">
+
+</span><span class="c1"># Download vector data - US Counties shapefile from US Census </span><span class="w">
+</span><span class="n">vector_f</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="s1">'us_counties2021'</span><span class="w">
+</span><span class="n">vector_zip</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">paste0</span><span class="p">(</span><span class="n">vector_f</span><span class="p">,</span><span class="s1">'.zip'</span><span class="p">)</span><span class="w">
+</span><span class="n">httr</span><span class="o">::</span><span class="n">GET</span><span class="p">(</span><span class="s1">'https://www2.census.gov/geo/tiger/GENZ2021/shp/cb_2021_us_county_20m.zip'</span><span class="p">,</span><span class="w">
+          </span><span class="n">httr</span><span class="o">::</span><span class="n">write_disk</span><span class="p">(</span><span class="n">vector_zip</span><span class="p">,</span><span class="w">
+                           </span><span class="n">overwrite</span><span class="o">=</span><span class="kc">TRUE</span><span class="p">))</span><span class="w">
+</span><span class="n">unzip</span><span class="p">(</span><span class="n">vector_zip</span><span class="p">,</span><span class="w">
+      </span><span class="n">exdir</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">vector_f</span><span class="p">)</span><span class="w">
+
+
+</span><span class="c1"># Download raster data - PRISM's annual precipitation in box around Florida</span><span class="w">
+</span><span class="n">download_polygon_subset</span><span class="p">(</span><span class="n">dsvars</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">data.frame</span><span class="p">(</span><span class="n">ds</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'PRISM'</span><span class="p">,</span><span class="n">var</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'ppt'</span><span class="p">),</span><span class="w">
+                        </span><span class="n">years</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'2000:2020'</span><span class="p">,</span><span class="w">
+                        </span><span class="n">t_geom</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">data.frame</span><span class="p">(</span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="m">-87.5</span><span class="p">,</span><span class="m">-79</span><span class="p">),</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="m">31</span><span class="p">,</span><span class="m">24.5</span><span class="p">)),</span><span class="w">
+                        </span><span class="n">req_name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'ppt_for_zonal_stats'</span><span class="p">)</span><span class="w">
+</span></code></pre></div></div>
+
+<p>You may now exit R by typing:</p>
+
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">q</span><span class="p">()</span><span class="w">
+</span></code></pre></div></div>
+
+<h2 id="step-1-write-and-save-a-serial-r-script-that-accepts-command-line-arguments">Step 1: Write and save a serial R script that accepts command line arguments</h2>
+
+<p>Save these lines below as <code class="language-plaintext highlighter-rouge">zonal_stats.R</code> on Ceres. It is an R script that:</p>
+
+<ol>
+  <li>Takes one argument from the command line to specify the data input year</li>
+  <li>Uses the <code class="language-plaintext highlighter-rouge">terra</code> package to open the data file associated with that year</li>
+  <li>Opens the vector data</li>
+  <li>Extracts the mean values per polygon</li>
+</ol>
+
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Read in command line arguments. Expecting a year value.</span><span class="w">
+</span><span class="n">args</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">commandArgs</span><span class="p">(</span><span class="n">trailingOnly</span><span class="o">=</span><span class="kc">TRUE</span><span class="p">)</span><span class="w">
+
+</span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nf">length</span><span class="p">(</span><span class="n">args</span><span class="p">)</span><span class="o">==</span><span class="m">0</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+  </span><span class="n">stop</span><span class="p">(</span><span class="s2">"Enter the year of data you want extracted"</span><span class="p">,</span><span class="w"> 
+       </span><span class="n">call.</span><span class="o">=</span><span class="kc">FALSE</span><span class="p">)</span><span class="w">
+</span><span class="p">}</span><span class="w"> 
+
+</span><span class="c1"># Load terra library for spatial analyses</span><span class="w">
+</span><span class="n">library</span><span class="p">(</span><span class="n">terra</span><span class="p">)</span><span class="w">
+
+</span><span class="c1"># Read in the raster corresponding to the year argument</span><span class="w">
+</span><span class="n">my_raster</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">rast</span><span class="p">(</span><span class="n">paste0</span><span class="p">(</span><span class="s1">'ppt_for_zonal_stats-1/PRISM_ppt_'</span><span class="p">,</span><span class="w"> 
+                         </span><span class="n">args</span><span class="p">[</span><span class="m">1</span><span class="p">],</span><span class="w"> 
+                         </span><span class="s1">'.tif'</span><span class="p">))</span><span class="w">
+
+</span><span class="c1"># Read in the polygon shapefile and transform it to match raster</span><span class="w">
+</span><span class="n">my_polygons</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">crop</span><span class="p">(</span><span class="n">project</span><span class="p">(</span><span class="n">vect</span><span class="p">(</span><span class="s1">'us_counties2021/cb_2021_us_county_20m.shp'</span><span class="p">),</span><span class="w">
+                            </span><span class="n">my_raster</span><span class="p">),</span><span class="w">
+                    </span><span class="n">my_raster</span><span class="p">)</span><span class="w">
+
+</span><span class="c1"># Extract mean raster value per polygon</span><span class="w">
+</span><span class="n">my_polygons</span><span class="o">$</span><span class="n">mean</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">extract</span><span class="p">(</span><span class="n">my_raster</span><span class="p">,</span><span class="w">
+                            </span><span class="n">my_polygons</span><span class="p">,</span><span class="w">
+                            </span><span class="n">na.rm</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">,</span><span class="w">
+                            </span><span class="n">fun</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">mean</span><span class="p">)</span><span class="o">$</span><span class="n">ppt</span><span class="w">
+
+</span><span class="c1"># Save extracted mean values in a shapefile</span><span class="w">
+</span><span class="n">writeVector</span><span class="p">(</span><span class="n">my_polygons</span><span class="p">,</span><span class="w"> </span><span class="n">filename</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">paste0</span><span class="p">(</span><span class="s1">'stats_'</span><span class="p">,</span><span class="w"> </span><span class="n">args</span><span class="p">[</span><span class="m">1</span><span class="p">],</span><span class="w"> </span><span class="s1">'.shp'</span><span class="p">))</span><span class="w">
+</span></code></pre></div></div>
+
+<h2 id="step-2-write-and-save-a-slurm-job-submission-script">Step 2: Write and save a SLURM job submission script</h2>
+
+<p>Now that we have our R script that accepts a year as input, we will write a 
+SLURM job batch script to request that R script be called over an array of years. 
+This kind of job submission is known as a ‘job array’. Each ‘task’ in the job 
+array, each year in our case, will be treated like its own job in the SLURM queue,
+but with the benefit of only having to submit one submission batch script.</p>
+
+<p>Save the lines below as <code class="language-plaintext highlighter-rouge">zonal_stats.sh</code>. The lines starting with <code class="language-plaintext highlighter-rouge">#SBATCH</code> are
+instructions for SLURM about how long your job will take to run, how many cores
+you need, etc. The lines that follow afterwards are like any other batch script.
+Here, we are loading required modules and then executing our R script.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">#!/bin/bash</span>
+
+<span class="c">#SBATCH --time=00:30:00       # walltime limit (HH:MM:SS) </span>
+<span class="c">#SBATCH --nodes=1             # number of nodes</span>
+<span class="c">#SBATCH --ntasks-per-node=2   # 1 processor core(s) per node X 2 threads per core</span>
+<span class="c">#SBATCH --partition=short     # standard node(s)</span>
+<span class="c">#SBATCH --array=2000-2020     # your script input (the years)</span>
+<span class="c">#SBATCH --output=slurm_%A_%a.out  # format of output filename</span>
+
+<span class="c"># LOAD MODULES, INSERT CODE, AND RUN YOUR PROGRAMS HERE</span>
+module load r/3.6
+
+<span class="c"># Execute the R script and pass the year (task ID) as argument</span>
+Rscript <span class="nt">--vanilla</span> zonal_stats.R <span class="k">${</span><span class="nv">SLURM_ARRAY_TASK_ID</span><span class="k">}</span>
+</code></pre></div></div>
+
+<p>The meaning of our parameter choices:</p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">time=00:30:00</code>: Our tasks will take up to 30 minutes to run.</li>
+  <li><code class="language-plaintext highlighter-rouge">nodes=1</code>: We only need one node. If you are just getting started with parallel
+processing, you will likely only need one node.</li>
+  <li><code class="language-plaintext highlighter-rouge">ntasks-per-node=2</code>: We want two logical cores on our one node, i.e. each task
+will use one physical core. Our individual tasks are serial and only need one core.</li>
+  <li><code class="language-plaintext highlighter-rouge">partition=short</code>: We will use the ‘short’ partition on Ceres, the collection 
+of nodes dedicated to shorter walltime jobs not requiring extensive memory. See
+<a href="https://scinet.usda.gov/guide/ceres/#partitions-or-queues">this guide</a> for more 
+information about the available partitions on Ceres.</li>
+  <li><code class="language-plaintext highlighter-rouge">array=2000-2020</code>: This is the parameter that tells SLURM we want a job array:
+although we are submitting one job script, treat it as an array of many tasks. 
+Those tasks should have IDs in the range of 2000-2020 to represent the years of
+data we want analyzed.</li>
+  <li><code class="language-plaintext highlighter-rouge">--output=slurm_%A_%a.out</code>: Save any output from R (e.g. printed messages,
+warnings, and errors) to a file with a filename in the format of 
+<em>output_JOBID_TASKID.out</em>. The <em>JOBID</em> is assigned when the job is submitted (see
+the next step) and the <em>TASKID</em> will be in the range of our tasks in the array, 
+2000-2020. This way, if a particular year runs into an error, it can be easily
+found.</li>
+</ul>
+
+<p>Note: there are additional SLURM parameters you may use, including how to specify
+your own job ID or setting memory requirements. Check out the 
+<a href="https://scinet.usda.gov/support/ceres-job-script">Ceres job script generator</a> 
+to see more examples on how to populate job submission scripts on Ceres.</p>
+
+<h2 id="step-3-submit-your-job">Step 3: Submit your job</h2>
+
+<p>Now that we have our packages, data, R script, and job submission script prepared,
+we can finally submit the job. To submit a batch job to SLURM, we use the command 
+<code class="language-plaintext highlighter-rouge">sbatch</code> followed by the job submission script filename via our shell. After you 
+run this line, you will see a message with your job ID. You can use this to 
+identify this job in the queue.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sbatch zonal_stats.sh
+</code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Submitted batch job 8145006
+</code></pre></div></div>
+
+<h2 id="step-4-check-results">Step 4: Check results</h2>
+
+<p>To see the status of your job, you can view the SLURM queue. The queue lists all
+of the jobs currently submitted, who submitted them, the job status, and what
+nodes are allocated to the job. Since this can be a very long list, it is easiest
+to find your jobs if you filter the queue to only the jobs you submitted. The 
+command to view the queue is <code class="language-plaintext highlighter-rouge">squeue</code> and you can filter it to a specific user
+with the <code class="language-plaintext highlighter-rouge">-u</code> parameter followed by their SCINet account name.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>squeue <span class="nt">-u</span> firstname.lastname
+</code></pre></div></div>
+
+<p>Below is a partial output for the queue showing this job array. You can see the
+JOBID column has job IDs that start with the submitted job ID printed above with
+<code class="language-plaintext highlighter-rouge">_X</code> after it indicating the tasks in our job array.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>             JOBID PARTITION     NAME     USER ST       TIME  NODES NODELIST(REASON)
+      8145006_2000     short zonal_st heather.  R       0:01      1 ceres19-compute-57
+      8145006_2001     short zonal_st heather.  R       0:01      1 ceres20-compute-3
+      8145006_2002     short zonal_st heather.  R       0:01      1 ceres20-compute-3
+      8145006_2003     short zonal_st heather.  R       0:01      1 ceres20-compute-3
+      8145006_2004     short zonal_st heather.  R       0:01      1 ceres20-compute-3
+</code></pre></div></div>
+
+<p>If you see jobs listed in the queue: you have jobs currently in the queue and the status 
+column will indicate if that job is pending, running, or completing. If you do NOT 
+see jobs listed in the queue: you do not have jobs currently in the
+queue. If you submitted jobs but they are not listed, then they completed - either
+successfully or unsuccessfully.</p>
+
+<p>To determine if the job executed successfully, 
+you may check if your anticipated output was created. In our case, we would expect
+to see new shapefiles of the format <em>stats_YYYY.shp</em>. If you do not see your 
+anticipated results, you can read the contents of the <em>output_JOBID_TASKID.out</em>
+files to check for error messages.</p>
+
+<p>Here is a visual of our 2020 result in <em>stats_2020.shp</em> showing the mean 2020 
+total precipitation per county in Florida. Note: if you want to run these lines
+and create the plot, it is easiest to do so in RStudio Server via Open OnDemand.</p>
+
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">library</span><span class="p">(</span><span class="n">terra</span><span class="p">)</span><span class="w">
+</span><span class="n">result</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">vect</span><span class="p">(</span><span class="s1">'stats_2020.shp'</span><span class="p">)</span><span class="w">
+</span><span class="n">plot</span><span class="p">(</span><span class="n">result</span><span class="p">,</span><span class="w"> </span><span class="s1">'mean'</span><span class="p">)</span><span class="w">
+</span></code></pre></div></div>
+
+<p><img src="/ExampleGeoWorkflows/assets/R_county_ppt-1.png" alt="county_ppt" /></p>
+
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+
+
+        
+      </footer>
+
+      
+
+      
+
+    </div>
+
+    
+  </article>
+
+  
+  
+</div>
+    </div>
+
+    
+      <div class="search-content">
+        <div class="search-content__inner-wrap"><form onsubmit="return googleCustomSearchExecute();" id="cse-search-box-form-id">
+    <input type="search" id="cse-search-input-box-id" aria-placeholder="Enter your search term..." class="search-input" tabindex="-1" placeholder="Enter your search term..." />
+    </form>
+    <div id="results" class="results">
+        <gcse:searchresults-only></gcse:searchresults-only>
+    </div></div>
+
+      </div>
+    
+    
+    <div class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+
+        <div class="page__footer-follow">
+  <ul class="social-icons">
+    
+      <li><strong>Follow:</strong></li>
+    
+    
+      <li><a href="https://twitter.com/isugif"><i class="fab fa-fw fa-twitter-square" aria-hidden="true"></i> Twitter</a></li>
+    
+    
+    
+      <li><a href="https://github.com/https://github.com/isugenomics"><i class="fab fa-fw fa-github" aria-hidden="true"></i> GitHub</a></li>
+    
+    
+    
+    
+  </ul>
+</div>
+
+<div class="page__footer-copyright">&copy; 2024 Geospatial Workbook</div>
+
+      </footer>
+    </div>
+
+    
+  <script src="/assets/js/main.min.js"></script>
+  <script src="https://use.fontawesome.com/releases/v5.0.13/js/all.js"></script>
+
+
+<script>
+  (function () {
+    var cx = '009853197685285203469:nsvri1pa88d';
+    var gcse = document.createElement('script');
+    gcse.type = 'text/javascript';
+    gcse.async = true;
+    gcse.src = 'https://cse.google.com/cse.js?cx=' + cx;
+    var s = document.getElementsByTagName('script')[0];
+    s.parentNode.insertBefore(gcse, s);
+  })();
+
+  function googleCustomSearchExecute() {
+    var input = document.getElementById('cse-search-input-box-id');
+    var element = google.search.cse.element.getElement('searchresults-only0');
+    if (input.value == '') {
+      element.clearAllResults();
+    } else {
+      element.execute(input.value);
+    }
+    return false;
+  }
+
+  
+</script>
+
+
+
+
+<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+<script id="MathJax-script" defer
+        src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+</script>
+
+
+
+
+  </body>
+</html>

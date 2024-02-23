@@ -1,0 +1,1308 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.11.2 by Michael Rose
+  Copyright 2013-2018 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE.txt
+-->
+<html lang="en" class="no-js">
+  <head>
+    <meta charset="utf-8">
+
+<!-- begin _includes/seo.html --><title>Unix CheatSheet - Geospatial Workbook</title>
+<meta name="description" content="Tutorial on Informatics for Geospatial Information">
+
+
+
+<meta property="og:type" content="website">
+<meta property="og:locale" content="en_US">
+<meta property="og:site_name" content="Geospatial Workbook">
+<meta property="og:title" content="Unix CheatSheet">
+<meta property="og:url" content="http://localhost:4000/IntroductionToCommandLine/Unix/UnixCheatSheet.html">
+
+
+
+
+  <meta property="og:image" content="http://localhost:4000/assets/images/margaret-weir-GZyjbLNOaFg-unsplash_dark.jpg">
+
+
+
+  <meta name="twitter:site" content="@isugif">
+  <meta name="twitter:title" content="Unix CheatSheet">
+  <meta name="twitter:description" content="Tutorial on Informatics for Geospatial Information">
+  <meta name="twitter:url" content="http://localhost:4000/IntroductionToCommandLine/Unix/UnixCheatSheet.html">
+
+  
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content="http://localhost:4000/assets/images/margaret-weir-GZyjbLNOaFg-unsplash_dark.jpg">
+  
+
+  
+
+
+
+
+
+
+
+  
+
+  
+
+
+<link rel="canonical" href="http://localhost:4000/IntroductionToCommandLine/Unix/UnixCheatSheet.html">
+
+
+
+
+
+
+
+  <script type="application/ld+json">
+    {
+      "@context": "http://schema.org",
+      "@type": "Person",
+      "name": "",
+      "url": "http://localhost:4000",
+      "sameAs": null
+    }
+  </script>
+
+
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+<link href="/feed.xml" type="application/atom+xml" rel="alternate" title="Geospatial Workbook Feed">
+
+<!-- http://t.co/dKP3o1e -->
+<meta name="HandheldFriendly" content="True">
+<meta name="MobileOptimized" content="320">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+
+<!--[if lte IE 9]>
+  <style>
+    /* old IE unsupported flexbox fixes */
+    .greedy-nav .site-title {
+      padding-right: 3em;
+    }
+    .greedy-nav button {
+      position: absolute;
+      top: 0;
+      right: 0;
+      height: 100%;
+    }
+  </style>
+<![endif]-->
+
+
+    <!-- start custom head snippets -->
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-E6BZVYF8ZY"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-E6BZVYF8ZY');
+</script>
+
+<!-- insert favicons. use https://realfavicongenerator.net/ -->
+
+<!-- end custom head snippets -->
+
+  </head>
+
+  <body class="layout--single">
+
+    <!--[if lt IE 9]>
+<div class="notice--danger align-center" style="margin: 0;">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience.</div>
+<![endif]-->
+
+    <div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        <a class="site-title" href="/">Geospatial Workbook</a>
+        <ul class="visible-links">
+          
+            
+            <li class="masthead__menu-item">
+              <a href="http://localhost:4000/about.html" >About</a>
+            </li>
+          
+            
+            <li class="masthead__menu-item">
+              <a href="http://localhost:4000/list.html" >Index</a>
+            </li>
+          
+            
+            <li class="masthead__menu-item">
+              <a href="http://localhost:4000/glossary.html" >Glossary</a>
+            </li>
+          
+            
+            <li class="masthead__menu-item">
+              <a href="http://localhost:4000/people.html" >People</a>
+            </li>
+          
+            
+            <li class="masthead__menu-item">
+              <a href="http://localhost:4000/contributing.html" >Contribute</a>
+            </li>
+          
+        </ul>
+        
+        <button class="search__toggle" type="button">
+          <svg class="icon" width="16" height="16" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 15.99 16">
+            <path d="M15.5,13.12L13.19,10.8a1.69,1.69,0,0,0-1.28-.55l-0.06-.06A6.5,6.5,0,0,0,5.77,0,6.5,6.5,0,0,0,2.46,11.59a6.47,6.47,0,0,0,7.74.26l0.05,0.05a1.65,1.65,0,0,0,.5,1.24l2.38,2.38A1.68,1.68,0,0,0,15.5,13.12ZM6.4,2A4.41,4.41,0,1,1,2,6.4,4.43,4.43,0,0,1,6.4,2Z" transform="translate(-.01)"></path>
+          </svg>
+        </button>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">Toggle Menu</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+    <div class="initial-content">
+      
+  
+
+
+
+
+
+
+
+
+
+
+
+<div class="page__hero--overlay"
+  style="background-color: 444444; background-image: url('/assets/images/margaret-weir-GZyjbLNOaFg-unsplash_dark.jpg');"
+>
+  
+    <div class="wrapper">
+      <h1 id="page-title" class="page__title" itemprop="headline">
+        
+          Unix CheatSheet
+
+        
+      </h1>
+      
+      
+      
+    </div>
+  
+  
+</div>
+
+
+
+
+
+<div id="main" role="main">
+  
+  <div class="sidebar sticky">
+  
+
+
+<div itemscope itemtype="http://schema.org/Person">
+
+  
+
+  <div class="author__content">
+    
+      <h3 class="author__name" itemprop="name"></h3>
+    
+    
+  </div>
+
+  <div class="author__urls-wrapper">
+    <button class="btn btn--inverse">Follow</button>
+    <ul class="author__urls social-icons">
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      <!--
+  <li>
+    <a href="http://link-to-whatever-social-network.com/user/" itemprop="sameAs">
+      <i class="fas fa-fw" aria-hidden="true"></i> Custom Social Profile Link
+    </a>
+  </li>
+-->
+    </ul>
+  </div>
+</div>
+
+<!-- Create a 2nd author for tutorials -->
+
+
+
+<div itemscope itemtype="http://schema.org/Person">
+
+  
+    <div class="author__avatar">
+      
+
+      
+        <img src="/assets/images/people/Andrew.png" alt="Andrew Severin" itemprop="image">
+      
+    </div>
+  
+
+  <div class="author__content">
+    
+      <h3 class="author__name" itemprop="name">Andrew Severin</h3>
+    
+    
+      <p class="author__bio" itemprop="description">
+        His PhD was in Biophysics/NMR spectroscopy.  He did a Bioinformatics Postdoc in Soybean genetics and now runs the Genome Informatics Facility at Iowa State University.  He is passionate about evolution and the science behind the genome. There is so much we don't know about how the elements in a genome interact to create the fine balance of gene expression, modification and 3D structure that create the dynamic range of phenotypes we observe.  As sequencing technology continues to improve and the cost continues to decrease, we will be able to ask more complex questions that increase our understanding via comparative and translational genomics.  
+      </p>
+    
+  </div>
+
+  <div class="author__urls-wrapper">
+    <button class="btn btn--inverse">Follow</button>
+    <ul class="author__urls social-icons">
+      
+
+      
+
+      
+        <li>
+          <a href="mailto:mailto:severin@iastate.edu">
+            <meta itemprop="email" content="mailto:severin@iastate.edu" />
+            <i class="fas fa-fw fa-envelope-square" aria-hidden="true"></i> Email
+          </a>
+        </li>
+      
+
+      
+
+      
+        <li>
+          <a href="https://twitter.com/isugif" itemprop="sameAs">
+            <i class="fab fa-fw fa-twitter-square" aria-hidden="true"></i> Twitter
+          </a>
+        </li>
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      <!--
+  <li>
+    <a href="http://link-to-whatever-social-network.com/user/" itemprop="sameAs">
+      <i class="fas fa-fw" aria-hidden="true"></i> Custom Social Profile Link
+    </a>
+  </li>
+-->
+    </ul>
+  </div>
+</div>
+
+  
+  </div>
+
+
+  <article class="page" itemscope itemtype="http://schema.org/CreativeWork">
+    <meta itemprop="headline" content="Unix CheatSheet">
+    
+    
+    
+
+    <div class="page__inner-wrap">
+      
+
+      <section class="page__content" itemprop="text">
+        
+        <h2 id="navigation">Navigation</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th>Navigation</th>
+      <th> </th>
+      <th> </th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><span style="color:Green"><em>Command</em></span></td>
+      <td><span style="color:Green"><em>Function</em></span></td>
+      <td><span style="color:Green"><em>Syntax/example usage</em></span></td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">ls</code></td>
+      <td>list contents</td>
+      <td><code class="language-plaintext highlighter-rouge">ls</code> <span style="color:Red">[OPTIONS] DIRECTORY</span></td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">pwd</code></td>
+      <td>print working directory</td>
+      <td><code class="language-plaintext highlighter-rouge">pwd</code></td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">cd</code></td>
+      <td>change directory</td>
+      <td><code class="language-plaintext highlighter-rouge">cd</code> ~ or <code class="language-plaintext highlighter-rouge">cd</code> 		#home directory</td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td> </td>
+      <td><code class="language-plaintext highlighter-rouge">cd</code> .. #previous (parent directory)</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="filedirectory-operations">File/Directory operations</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th>File/Directory operations</th>
+      <th> </th>
+      <th> </th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><span style="color:Green"><em>Command</em></span></td>
+      <td><span style="color:Green"><em>Function</em></span></td>
+      <td><span style="color:Green"><em>Syntax/example usage</em></span></td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">mkdir</code></td>
+      <td>make directory</td>
+      <td><code class="language-plaintext highlighter-rouge">mkdir</code> <span style="color:Red">DIRECTORY</span></td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">cp</code></td>
+      <td>copy files/directories</td>
+      <td><code class="language-plaintext highlighter-rouge">cp </code><span style="color:Red">SOURCE DESTINATION</span></td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">man</code></td>
+      <td>manual page (help)</td>
+      <td><code class="language-plaintext highlighter-rouge">man </code><span style="color:Red">COMMAND</span></td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">mv</code></td>
+      <td>move files/directories</td>
+      <td><code class="language-plaintext highlighter-rouge">mv</code> <span style="color:Red">SOURCE DESTINATION</span></td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">touch</code></td>
+      <td>create file</td>
+      <td><code class="language-plaintext highlighter-rouge">touch</code> <span style="color:Red">FILE</span></td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">nano</code></td>
+      <td>edit file</td>
+      <td><code class="language-plaintext highlighter-rouge">nano</code> <span style="color:Red">FILE</span></td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">less</code></td>
+      <td>view file (with more options)</td>
+      <td><code class="language-plaintext highlighter-rouge">less</code> <span style="color:Red">FILE</span></td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">more</code></td>
+      <td>view file (with less options)</td>
+      <td><code class="language-plaintext highlighter-rouge">more</code> <span style="color:Red">FILE</span></td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">cat</code></td>
+      <td>catalog file contents</td>
+      <td><code class="language-plaintext highlighter-rouge">cat</code> <span style="color:Red">FILE</span></td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">head</code></td>
+      <td>show first few lines of a file</td>
+      <td><code class="language-plaintext highlighter-rouge">head</code> <span style="color:Red">FILE</span></td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">tail</code></td>
+      <td>show last few lines of a file</td>
+      <td><code class="language-plaintext highlighter-rouge">tail</code> <span style="color:Red">FILE</span></td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">rmdir</code></td>
+      <td>remove empty directory</td>
+      <td><code class="language-plaintext highlighter-rouge">rmdir</code> <span style="color:Red">DIRECTORY</span></td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">rm</code></td>
+      <td>remove file(s)</td>
+      <td><code class="language-plaintext highlighter-rouge">rm</code> <span style="color:Red">FILE</span></td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="file-manipulations">File manipulations</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th>File manipulations</th>
+      <th> </th>
+      <th> </th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><span style="color:Green"><em>Command</em></span></td>
+      <td><span style="color:Green"><em>Function</em></span></td>
+      <td><span style="color:Green"><em>Syntax/example usage</em></span></td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">grep</code></td>
+      <td>search a pattern</td>
+      <td>grep <span style="color:Red">[OPTIONS] “PATTERN” FILENAME</span></td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">sed</code></td>
+      <td>stream edit a file</td>
+      <td><code class="language-plaintext highlighter-rouge">sed 's/search/replace/g'</code> <span style="color:Red">FILENAME</span></td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">awk</code></td>
+      <td>multi-purpose command</td>
+      <td><code class="language-plaintext highlighter-rouge">awk 'PATTERN {ACTION}'</code> <span style="color:Red">FILENAME</span></td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">tr</code></td>
+      <td>translate or transliterate a file</td>
+      <td><code class="language-plaintext highlighter-rouge">tr</code> <span style="color:Red">[OPTIONS] “STRING1” “STRING2”</span>  <code class="language-plaintext highlighter-rouge">&lt;</code> <span style="color:Red">INFILE</span></td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">wc</code></td>
+      <td>word count</td>
+      <td><code class="language-plaintext highlighter-rouge">wc</code> <span style="color:Red">FILENAME</span></td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">sort</code></td>
+      <td>sort files</td>
+      <td><code class="language-plaintext highlighter-rouge">sort</code> <span style="color:Red">FILE1</span> <code class="language-plaintext highlighter-rouge">&gt;</code> <span style="color:Red">SORTED_FILE1</span></td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">uniq</code></td>
+      <td>display unique lines</td>
+      <td><code class="language-plaintext highlighter-rouge">uniq</code> <span style="color:Red">[OPTIONS] INFILE</span> <code class="language-plaintext highlighter-rouge">&gt;</code> <span style="color:Red">OUTFILE</span></td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">diff</code></td>
+      <td>display difference</td>
+      <td><code class="language-plaintext highlighter-rouge">diff</code> <span style="color:Red">[OPTIONS] FILE1 FILE2</span></td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">comm</code></td>
+      <td>display common lines among files</td>
+      <td><code class="language-plaintext highlighter-rouge">comm</code> <span style="color:Red">[OPTIONS] FILE1 FILE2</span></td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">cut</code></td>
+      <td>break files vertically based on fields</td>
+      <td><code class="language-plaintext highlighter-rouge">cut</code> <code class="language-plaintext highlighter-rouge">–d</code> <span style="color:Red">“DELIMITER”</span> <code class="language-plaintext highlighter-rouge">–f</code> <span style="color:Red">NUMBER FILE</span></td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">split</code></td>
+      <td>break files horizontally</td>
+      <td>split <span style="color:Red">[OPTIONS] FILENAME</span></td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">paste</code></td>
+      <td>combine files side by side</td>
+      <td><code class="language-plaintext highlighter-rouge">paste</code> <span style="color:Red">FILE1 FILE2</span> <code class="language-plaintext highlighter-rouge">&gt;</code> <span style="color:Red">FILE3</span></td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">join</code></td>
+      <td>join files based on common field</td>
+      <td><code class="language-plaintext highlighter-rouge">join -t</code> <span style="color:Red">‘DELIMITER’</span> <code class="language-plaintext highlighter-rouge">-1</code> <span style="color:Red">N</span> <code class="language-plaintext highlighter-rouge">-2</code> <span style="color:Red">N FILE1 FILE2</span></td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="compressionarchiving">Compression/archiving</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th>Compression/archiving</th>
+      <th> </th>
+      <th> </th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><span style="color:Green"><em>Command</em></span></td>
+      <td><span style="color:Green"><em>Function</em></span></td>
+      <td><span style="color:Green"><em>Syntax/example usage</em></span></td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">zip</code></td>
+      <td>zip compress</td>
+      <td><code class="language-plaintext highlighter-rouge">zip</code> <span style="color:Red">OUTFILE.zip INFILE.txt</span></td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td> </td>
+      <td><code class="language-plaintext highlighter-rouge">zip</code> <code class="language-plaintext highlighter-rouge">-r</code> <span style="color:Red">OUTDIR.zip DIRECTORY</span></td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">unzip</code></td>
+      <td>decompress zipped file</td>
+      <td><code class="language-plaintext highlighter-rouge">unzip</code> <span style="color:Red">ANYTHING.zip</span></td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">tar</code></td>
+      <td>archive and compress files/directories</td>
+      <td><code class="language-plaintext highlighter-rouge">tar</code> <code class="language-plaintext highlighter-rouge">-czvf</code> <span style="color:Red">OUTFILE.tar.gz DIRECTORY</span> #compress</td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td> </td>
+      <td><code class="language-plaintext highlighter-rouge">tar</code> <code class="language-plaintext highlighter-rouge">-xzvf</code> <span style="color:Red">OUTFILE.tar.gz</span> # extract</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">gzip</code></td>
+      <td>gzip files</td>
+      <td><code class="language-plaintext highlighter-rouge">gzip</code> <span style="color:Red">SOMEFILE</span></td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">gunzip</code></td>
+      <td>decompress gzipped files</td>
+      <td><code class="language-plaintext highlighter-rouge">gunzip</code> <span style="color:Red">SOMEFILE.gz</span></td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="file-permissions">File permissions</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th>File permissions</th>
+      <th> </th>
+      <th> </th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><span style="color:Green"><em>Command</em></span></td>
+      <td><span style="color:Green"><em>Function</em></span></td>
+      <td><span style="color:Green"><em>Syntax/example usage</em></span></td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">chmod</code></td>
+      <td>change permissions for files/directories</td>
+      <td><code class="language-plaintext highlighter-rouge">chmod</code> <span style="color:Red">[OPTIONS] RELATIONS[+/-]PERMISSIONS FILE</span></td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="additional-commands">ADDITIONAL COMMANDS</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th>ADDITIONAL COMMANDS</th>
+      <th> </th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><span style="color:Green"><em>Command</em></span></td>
+      <td><span style="color:Green"><em>Function</em></span></td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">du –sh</code></td>
+      <td>DIR	show directory size</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">whoami</code></td>
+      <td>display username</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">date</code></td>
+      <td>system date/time</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">cal</code></td>
+      <td>calendar</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">find . –name FILE</code></td>
+      <td>find a file/directory</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">which CMD</code></td>
+      <td>display default cmd path</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">whereis CMD</code></td>
+      <td>show possible locations of cmd</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">locate FILE</code></td>
+      <td>find instances of a file</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">clear</code></td>
+      <td>clear screen</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">sleep 5</code></td>
+      <td>pause 5 (any) seconds</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">top</code></td>
+      <td>current running processes</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">ps</code></td>
+      <td>current running processes</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">wget</code></td>
+      <td>URL	download specified URL</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="shortcuts">SHORTCUTS</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th>SHORTCUTS</th>
+      <th> </th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><span style="color:Green"><em>Command</em></span></td>
+      <td><span style="color:Green"><em>Function</em></span></td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">TAB</code></td>
+      <td>autocomplete names</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">UP/DOWN</code></td>
+      <td>browse previous commands</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">ctrl+c</code></td>
+      <td>interrupt/kill anything</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">ctrl+l</code></td>
+      <td>clear screen</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">ctrl+d</code></td>
+      <td>quit, exit</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">ctrl+z</code></td>
+      <td>suspend (use fg to restore)</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">!!</code></td>
+      <td>repeat last command</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">alt+.</code></td>
+      <td>last argument of previous cmd</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">ctrl+insert</code></td>
+      <td>copy selection</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">shift+insert</code></td>
+      <td>paste copied text</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">ctrl+a</code></td>
+      <td>go to start of the line</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">ctrl+e</code></td>
+      <td>go to end of the line</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">ctrl+r</code></td>
+      <td>reverse search history</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">cd ~</code></td>
+      <td>go to home</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="nano-shortcuts">NANO SHORTCUTS</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th>NANO SHORTCUTS</th>
+      <th> </th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><span style="color:Green"><em>Command</em></span></td>
+      <td><span style="color:Green"><em>Function</em></span></td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">ctrl+r</code></td>
+      <td>read/insert file</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">ctrl+o</code></td>
+      <td>save file</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">ctrl+x</code></td>
+      <td>close file</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">alt+a</code></td>
+      <td>start selecting text</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">ctrl+k</code></td>
+      <td>cut selection</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">ctrl+u</code></td>
+      <td>uncut (paste) selection</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">alt+/</code></td>
+      <td>go to end of the file</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">ctrl+a</code></td>
+      <td>go to start of the line</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">ctrl+e</code></td>
+      <td>go to end of the line</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">ctrl+c</code></td>
+      <td>show line number</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">ctrl+_</code></td>
+      <td>go to line number</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">ctrl+w</code></td>
+      <td>find matching word</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">alt+w</code></td>
+      <td>find next match</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">ctrl+\</code></td>
+      <td>find and replace</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="pipes-redirects">PIPES, REDIRECTS</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th>PIPES, REDIRECTS</th>
+      <th> </th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><span style="color:Green"><em>Command</em></span></td>
+      <td><span style="color:Green"><em>Function</em></span></td>
+    </tr>
+    <tr>
+      <td>cmd <code class="language-plaintext highlighter-rouge">&lt;</code> <span style="color:Red">file</span></td>
+      <td>use file as input</td>
+    </tr>
+    <tr>
+      <td>cmd <code class="language-plaintext highlighter-rouge">&gt;</code> <span style="color:Red">file</span></td>
+      <td>write output to file</td>
+    </tr>
+    <tr>
+      <td>cmd <code class="language-plaintext highlighter-rouge">&gt;&gt;</code> <span style="color:Red">file</span></td>
+      <td>append output to file</td>
+    </tr>
+    <tr>
+      <td>cmd <code class="language-plaintext highlighter-rouge">2&gt;</code> <span style="color:Red">stderr</span></td>
+      <td>error output to file</td>
+    </tr>
+    <tr>
+      <td>cmd <code class="language-plaintext highlighter-rouge">1&gt;&amp;2</code> <span style="color:Red">file</span></td>
+      <td>send output and error to file</td>
+    </tr>
+    <tr>
+      <td>cmd1 <code class="language-plaintext highlighter-rouge">\|</code> <span style="color:Red">cmd2</span></td>
+      <td>send output of cmd1 to cmd2</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="pre-declared-variables">PRE-DECLARED VARIABLES</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th>PRE-DECLARED VARIABLES</th>
+      <th> </th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><span style="color:Green">Variables*</span></td>
+      <td><span style="color:Green">Description</span></td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">$USER</code></td>
+      <td>username</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">$HOME</code></td>
+      <td>home path</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">$PWD</code></td>
+      <td>working directory path</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">$PATH</code></td>
+      <td>path for executables</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">$HOSTNAME</code></td>
+      <td>machine name</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">$SHELL</code></td>
+      <td>current shell</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">$SSH_CLIENT</code></td>
+      <td>local client’s IP address</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">$TERM</code></td>
+      <td>type of terminal</td>
+    </tr>
+  </tbody>
+</table>
+
+<ul>
+  <li>env command lists all the assigned variables</li>
+</ul>
+
+<h2 id="hpc-cluster-commands-for-slurm">HPC-CLUSTER Commands for SLURM</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th>HPC-CLUSTER Commands</th>
+      <th> </th>
+      <th>TORQUE</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><span style="color:Green">Command</span></td>
+      <td><span style="color:Green">Function</span></td>
+      <td><span style="color:Green">Syntax/example usage</span></td>
+    </tr>
+    <tr>
+      <td>sinfo -a</td>
+      <td>list all queues</td>
+      <td>sinfo -a</td>
+    </tr>
+    <tr>
+      <td>squeue</td>
+      <td>list all jobs</td>
+      <td>squeue</td>
+    </tr>
+    <tr>
+      <td>squeue -u userid</td>
+      <td>list jobs for userid</td>
+      <td>squeue -u userid</td>
+    </tr>
+    <tr>
+      <td>squeue -t R</td>
+      <td>list running jobs</td>
+      <td>squeue -t R</td>
+    </tr>
+    <tr>
+      <td>smap</td>
+      <td>show jobs, partitions and nodes in a graphical network topology</td>
+      <td>smap</td>
+    </tr>
+    <tr>
+      <td>sbatch</td>
+      <td>submit a slurm job</td>
+      <td>sbatch [script]</td>
+    </tr>
+    <tr>
+      <td>scancel</td>
+      <td>delete slurm batch job</td>
+      <td>scancel [job_id]</td>
+    </tr>
+    <tr>
+      <td>scontrol hold</td>
+      <td>hold slurm batch jobs</td>
+      <td>scontrol hold [job_id]</td>
+    </tr>
+    <tr>
+      <td>scontrol release</td>
+      <td>release hold on slurm batch jobs</td>
+      <td>scontrol release [job_id]</td>
+    </tr>
+  </tbody>
+</table>
+
+<ul>
+  <li><a href="/IntroductionToCommandLine/HPC/SLURM/slurm-cheatsheat.html">Tutorial on SLURM commands</a></li>
+</ul>
+
+<h2 id="hpc-cluster-commands-for-torque">HPC-CLUSTER Commands for TORQUE</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th>HPC-CLUSTER Commands</th>
+      <th> </th>
+      <th>TORQUE</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><span style="color:Green">Command</span></td>
+      <td><span style="color:Green">Function</span></td>
+      <td><span style="color:Green">Syntax/example usage</span></td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">squeue</code></td>
+      <td>show state of jobs</td>
+      <td><code class="language-plaintext highlighter-rouge">squeue</code> <code class="language-plaintext highlighter-rouge">–a</code>		# current jobs on cluster</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">squeue</code> <code class="language-plaintext highlighter-rouge">–u</code> <span style="color:Red">username</span></td>
+      <td> </td>
+      <td># current jobs by the user</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">squeue</code> <code class="language-plaintext highlighter-rouge">–j</code> <span style="color:Red">jobid</span></td>
+      <td> </td>
+      <td># information about the job (id#)</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">squeue</code> <code class="language-plaintext highlighter-rouge">-l –u</code> <span style="color:Red">username</span></td>
+      <td> </td>
+      <td># current jobs by the user</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">scancel</code></td>
+      <td>delete job from the queue</td>
+      <td><code class="language-plaintext highlighter-rouge">scancel</code> <span style="color:Red">jobid</span></td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">sbatch</code></td>
+      <td>submit job to the queue</td>
+      <td><code class="language-plaintext highlighter-rouge">sbatch</code> <span style="color:Red">submissionfile.sub</span></td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">scontrol</code></td>
+      <td>control jobs</td>
+      <td><code class="language-plaintext highlighter-rouge">scontrol hold</code> <span style="color:Red">jobid jobid</span> # hold the job</td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td> </td>
+      <td><code class="language-plaintext highlighter-rouge">scontrol release</code> <span style="color:Red">jobid jobid</span> # release the job</td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td> </td>
+      <td><code class="language-plaintext highlighter-rouge">scontrol show</code> <span style="color:Red">jobid jobid</span> # info on the job</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">srun</code></td>
+      <td>run a job command</td>
+      <td><code class="language-plaintext highlighter-rouge">srun</code> <code class="language-plaintext highlighter-rouge">-N 1 -n 16 -t 4:00:00 --pty bash</code> # start a interactive job session</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">sinfo</code></td>
+      <td>show state of nodes and partitions</td>
+      <td><code class="language-plaintext highlighter-rouge">sinfo</code></td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td> </td>
+      <td><code class="language-plaintext highlighter-rouge">sinfo</code> <code class="language-plaintext highlighter-rouge">-p</code> <span style="color:Red">tiny</span>      # show info on tiny partition</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">smap</code></td>
+      <td>show state of jobs, nodes and partitions (colored)</td>
+      <td><code class="language-plaintext highlighter-rouge">smap</code></td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">module</code></td>
+      <td>use preinstalled programs</td>
+      <td><code class="language-plaintext highlighter-rouge">module load</code> <span style="color:Red">PROGRAM</span>		# loads program for use</td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td> </td>
+      <td><code class="language-plaintext highlighter-rouge">module list</code>			# lists all loaded modules</td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td> </td>
+      <td><code class="language-plaintext highlighter-rouge">module avail</code>			# lists available modules</td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td> </td>
+      <td><code class="language-plaintext highlighter-rouge">module unload</code> <span style="color:Red">PROGRAM</span>	# unloads module</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>PS: An A-Z Index of the Bash command line for Linux can be found at found <a href="http://ss64.com/bash/index.html">Here</a></p>
+
+<h2 id="other-cheat-sheets-by-other-people">Other Cheat Sheets by other people</h2>
+
+<ul>
+  <li>https://www.pcwdld.com/linux-commands-cheat-sheet</li>
+</ul>
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+
+
+        
+      </footer>
+
+      
+
+      
+
+    </div>
+
+    
+  </article>
+
+  
+  
+</div>
+    </div>
+
+    
+      <div class="search-content">
+        <div class="search-content__inner-wrap"><form onsubmit="return googleCustomSearchExecute();" id="cse-search-box-form-id">
+    <input type="search" id="cse-search-input-box-id" aria-placeholder="Enter your search term..." class="search-input" tabindex="-1" placeholder="Enter your search term..." />
+    </form>
+    <div id="results" class="results">
+        <gcse:searchresults-only></gcse:searchresults-only>
+    </div></div>
+
+      </div>
+    
+    
+    <div class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+
+        <div class="page__footer-follow">
+  <ul class="social-icons">
+    
+      <li><strong>Follow:</strong></li>
+    
+    
+      <li><a href="https://twitter.com/isugif"><i class="fab fa-fw fa-twitter-square" aria-hidden="true"></i> Twitter</a></li>
+    
+    
+    
+      <li><a href="https://github.com/https://github.com/isugenomics"><i class="fab fa-fw fa-github" aria-hidden="true"></i> GitHub</a></li>
+    
+    
+    
+    
+  </ul>
+</div>
+
+<div class="page__footer-copyright">&copy; 2024 Geospatial Workbook</div>
+
+      </footer>
+    </div>
+
+    
+  <script src="/assets/js/main.min.js"></script>
+  <script src="https://use.fontawesome.com/releases/v5.0.13/js/all.js"></script>
+
+
+<script>
+  (function () {
+    var cx = '009853197685285203469:nsvri1pa88d';
+    var gcse = document.createElement('script');
+    gcse.type = 'text/javascript';
+    gcse.async = true;
+    gcse.src = 'https://cse.google.com/cse.js?cx=' + cx;
+    var s = document.getElementsByTagName('script')[0];
+    s.parentNode.insertBefore(gcse, s);
+  })();
+
+  function googleCustomSearchExecute() {
+    var input = document.getElementById('cse-search-input-box-id');
+    var element = google.search.cse.element.getElement('searchresults-only0');
+    if (input.value == '') {
+      element.clearAllResults();
+    } else {
+      element.execute(input.value);
+    }
+    return false;
+  }
+
+  
+</script>
+
+
+
+
+<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+<script id="MathJax-script" defer
+        src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+</script>
+
+
+
+
+  </body>
+</html>

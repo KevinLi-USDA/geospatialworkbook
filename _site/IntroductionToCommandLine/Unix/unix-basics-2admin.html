@@ -1,0 +1,693 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.11.2 by Michael Rose
+  Copyright 2013-2018 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE.txt
+-->
+<html lang="en" class="no-js">
+  <head>
+    <meta charset="utf-8">
+
+<!-- begin _includes/seo.html --><title>Administrative Commands - Geospatial Workbook</title>
+<meta name="description" content="Tutorial on Informatics for Geospatial Information">
+
+
+
+<meta property="og:type" content="website">
+<meta property="og:locale" content="en_US">
+<meta property="og:site_name" content="Geospatial Workbook">
+<meta property="og:title" content="Administrative Commands">
+<meta property="og:url" content="http://localhost:4000/IntroductionToCommandLine/Unix/unix-basics-2admin.html">
+
+
+
+
+  <meta property="og:image" content="http://localhost:4000/assets/images/margaret-weir-GZyjbLNOaFg-unsplash_dark.jpg">
+
+
+
+  <meta name="twitter:site" content="@isugif">
+  <meta name="twitter:title" content="Administrative Commands">
+  <meta name="twitter:description" content="Tutorial on Informatics for Geospatial Information">
+  <meta name="twitter:url" content="http://localhost:4000/IntroductionToCommandLine/Unix/unix-basics-2admin.html">
+
+  
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content="http://localhost:4000/assets/images/margaret-weir-GZyjbLNOaFg-unsplash_dark.jpg">
+  
+
+  
+
+
+
+
+
+
+
+  
+
+  
+
+
+<link rel="canonical" href="http://localhost:4000/IntroductionToCommandLine/Unix/unix-basics-2admin.html">
+
+
+
+
+
+
+
+  <script type="application/ld+json">
+    {
+      "@context": "http://schema.org",
+      "@type": "Person",
+      "name": "",
+      "url": "http://localhost:4000",
+      "sameAs": null
+    }
+  </script>
+
+
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+<link href="/feed.xml" type="application/atom+xml" rel="alternate" title="Geospatial Workbook Feed">
+
+<!-- http://t.co/dKP3o1e -->
+<meta name="HandheldFriendly" content="True">
+<meta name="MobileOptimized" content="320">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+
+<!--[if lte IE 9]>
+  <style>
+    /* old IE unsupported flexbox fixes */
+    .greedy-nav .site-title {
+      padding-right: 3em;
+    }
+    .greedy-nav button {
+      position: absolute;
+      top: 0;
+      right: 0;
+      height: 100%;
+    }
+  </style>
+<![endif]-->
+
+
+    <!-- start custom head snippets -->
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-E6BZVYF8ZY"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-E6BZVYF8ZY');
+</script>
+
+<!-- insert favicons. use https://realfavicongenerator.net/ -->
+
+<!-- end custom head snippets -->
+
+  </head>
+
+  <body class="layout--single">
+
+    <!--[if lt IE 9]>
+<div class="notice--danger align-center" style="margin: 0;">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience.</div>
+<![endif]-->
+
+    <div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        <a class="site-title" href="/">Geospatial Workbook</a>
+        <ul class="visible-links">
+          
+            
+            <li class="masthead__menu-item">
+              <a href="http://localhost:4000/about.html" >About</a>
+            </li>
+          
+            
+            <li class="masthead__menu-item">
+              <a href="http://localhost:4000/list.html" >Index</a>
+            </li>
+          
+            
+            <li class="masthead__menu-item">
+              <a href="http://localhost:4000/glossary.html" >Glossary</a>
+            </li>
+          
+            
+            <li class="masthead__menu-item">
+              <a href="http://localhost:4000/people.html" >People</a>
+            </li>
+          
+            
+            <li class="masthead__menu-item">
+              <a href="http://localhost:4000/contributing.html" >Contribute</a>
+            </li>
+          
+        </ul>
+        
+        <button class="search__toggle" type="button">
+          <svg class="icon" width="16" height="16" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 15.99 16">
+            <path d="M15.5,13.12L13.19,10.8a1.69,1.69,0,0,0-1.28-.55l-0.06-.06A6.5,6.5,0,0,0,5.77,0,6.5,6.5,0,0,0,2.46,11.59a6.47,6.47,0,0,0,7.74.26l0.05,0.05a1.65,1.65,0,0,0,.5,1.24l2.38,2.38A1.68,1.68,0,0,0,15.5,13.12ZM6.4,2A4.41,4.41,0,1,1,2,6.4,4.43,4.43,0,0,1,6.4,2Z" transform="translate(-.01)"></path>
+          </svg>
+        </button>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">Toggle Menu</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+    <div class="initial-content">
+      
+  
+
+
+
+
+
+
+
+
+
+
+
+<div class="page__hero--overlay"
+  style="background-color: 444444; background-image: url('/assets/images/margaret-weir-GZyjbLNOaFg-unsplash_dark.jpg');"
+>
+  
+    <div class="wrapper">
+      <h1 id="page-title" class="page__title" itemprop="headline">
+        
+          Administrative Commands
+
+        
+      </h1>
+      
+      
+      
+    </div>
+  
+  
+</div>
+
+
+
+
+
+<div id="main" role="main">
+  
+
+  <article class="page" itemscope itemtype="http://schema.org/CreativeWork">
+    <meta itemprop="headline" content="Administrative Commands">
+    
+    
+    
+
+    <div class="page__inner-wrap">
+      
+
+      <section class="page__content" itemprop="text">
+        
+        <h1 id="unix-basics-2">Unix Basics 2</h1>
+<p>This exercise will provide you details about some administrative commands with examples. Here, you can learn how to change permissions for files and folders to modify its accessibility and commands to obtain information about the system you are using.</p>
+
+<h2 id="changing-permissions">Changing permissions</h2>
+
+<p>All files in the UNIX system will have a set of permissions which define what can be done with that file and by whom. Here, what refers to read (view contents), write (modify) and execute (run as a script) and whom refers to user (owner), group (collection of users that the user belongs to) and others (everyone else).</p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left">Permissions</th>
+      <th style="text-align: right">Symbol</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left">read</td>
+      <td style="text-align: right"><code class="language-plaintext highlighter-rouge">r</code></td>
+    </tr>
+    <tr>
+      <td style="text-align: left">write</td>
+      <td style="text-align: right"><code class="language-plaintext highlighter-rouge">w</code></td>
+    </tr>
+    <tr>
+      <td style="text-align: left">execute</td>
+      <td style="text-align: right"><code class="language-plaintext highlighter-rouge">x</code></td>
+    </tr>
+    <tr>
+      <td style="text-align: left">all users</td>
+      <td style="text-align: right"><code class="language-plaintext highlighter-rouge">a</code></td>
+    </tr>
+  </tbody>
+</table>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left">Relations</th>
+      <th style="text-align: right">Symbol</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left">owner</td>
+      <td style="text-align: right"><code class="language-plaintext highlighter-rouge">u</code></td>
+    </tr>
+    <tr>
+      <td style="text-align: left">group</td>
+      <td style="text-align: right"><code class="language-plaintext highlighter-rouge">g</code></td>
+    </tr>
+    <tr>
+      <td style="text-align: left">others</td>
+      <td style="text-align: right"><code class="language-plaintext highlighter-rouge">o</code></td>
+    </tr>
+  </tbody>
+</table>
+
+<p>To look at the permissions for any file, you can list the files with <code class="language-plaintext highlighter-rouge">l</code> option (<code class="language-plaintext highlighter-rouge">ls –l</code>).
+Permissions	User	Group	Size	Date modified	Name</p>
+
+<p>It looks something like this:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>total 200
+-rw-r--r--. 1 arnstrm domain users             174 Jan 15 23:36 1
+drwxr-xr-x. 3 arnstrm domain users              38 Nov 15 10:31 Desktop
+drwx------. 2 arnstrm domain users              10 Nov 15 10:38 Downloads
+drwxr-xr-x. 3 arnstrm domain users              49 Jan  4 12:38 R
+lrwxrwxrwx. 1 arnstrm domain users              17 Feb  3  2017 arnstrm -&gt; /work/GIF/arnstrm
+drwxr-xr-x. 3 arnstrm domain users             252 Mar 11  2017 bash_config
+drwxr-xr-x. 2 arnstrm domain users              48 Aug 11 14:07 bin
+drwxr-xr-x. 2 arnstrm domain users              10 Oct 25 12:15 ccp4_tmp
+-rw-r--r--. 1 arnstrm domain users            4796 Jan 15 23:34 compnode
+-rw-r--r--. 1 arnstrm domain users            3213 Jan 15 23:33 headnonde
+-rwxr-xr-x. 1 arnstrm domain users          159656 Jan 15 23:47 ld-linux.so.2
+-rw-r--r--. 1 arnstrm domain users             699 Oct 31 09:10 md5sum_severin
+lrwxrwxrwx. 1 arnstrm domain users              12 Mar 20  2017 ncbi -&gt; arnstrm/ncbi
+-rw-r--r--. 1 arnstrm domain users            9968 Dec 31 14:35 ncbi_error_report.xml
+-rw-------. 1 arnstrm domain users             522 Oct 30 14:45 nohup.out
+-rw-r-----. 1 arnstrm domain users             287 Feb  7  2017 template.slurm
+     -1-   -2-  -3-       -4-                  -5-       -6-       -7-
+</code></pre></div></div>
+<ol>
+  <li>First letter of the first column specifies the type. It can be either <code class="language-plaintext highlighter-rouge">d</code> is directory, <code class="language-plaintext highlighter-rouge">l</code> is link or <code class="language-plaintext highlighter-rouge">-</code> is regular file. Remaining 9 letters of the first column, each 3 specifies permissions set for <code class="language-plaintext highlighter-rouge">user</code>, <code class="language-plaintext highlighter-rouge">group</code> and <code class="language-plaintext highlighter-rouge">others</code>, respectively. Here <code class="language-plaintext highlighter-rouge">r</code> is read, <code class="language-plaintext highlighter-rouge">w</code> is write, <code class="language-plaintext highlighter-rouge">x</code> is execute and <code class="language-plaintext highlighter-rouge">-</code> is blank or unset. The last <code class="language-plaintext highlighter-rouge">.</code> sign specifies attributes for this item (to see complete list go the official manual <a href="https://www.gnu.org/software/coreutils/manual/html_node/What-information-is-listed.html">here</a>)</li>
+  <li>Second column, specifies number of sub directories housed inside. It can also be number of links that points to it.</li>
+  <li>The owner of the file/directory: <code class="language-plaintext highlighter-rouge">user</code></li>
+  <li>The fourth column <code class="language-plaintext highlighter-rouge">domain users</code> is the group, <code class="language-plaintext highlighter-rouge">user</code> belongs to.</li>
+  <li>Next, the number you see is the size of the listed entry. For a file, it will show the actualy size of the file in bytes, but for folder, it will not display them correctly as it wont consider the file sizes that are inside the directory.</li>
+  <li>The sixth column (<code class="language-plaintext highlighter-rouge">Jan 15 23:36</code>) is the month, day, and time on which the entry was last modified.</li>
+  <li>The last field, is the name of the listed entry.</li>
+</ol>
+
+<p>To set/modify a file’s permissions you need to use the <code class="language-plaintext highlighter-rouge">chmod</code> command (<code class="language-plaintext highlighter-rouge">ch</code>ange <code class="language-plaintext highlighter-rouge">mod</code>e). Only the owner of a file can alter a file’s permissions. The syntax:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>chmod [OPTIONS] RELATIONS[+ or -]PERMISSIONS FILE
+</code></pre></div></div>
+<h3 id="1-adding-permissions">1. Adding permissions</h3>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>chmod RELATIONS+PERMISSIONS FILENAME
+</code></pre></div></div>
+<p>is the add permissions syntax, an example</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>chmod g+rwx FILENAME
+</code></pre></div></div>
+<p>which grants read, write and execute permissions for group</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>chmod g+r FILENAME
+</code></pre></div></div>
+<p>grants read permission for group</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>chmod a+rwx FILENAME
+</code></pre></div></div>
+<p>makes the file public (don’t do this to any file/directory unless you want to share)</p>
+
+<h3 id="2-removing-permissions">2. Removing permissions:</h3>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>chmod RELATIONS-PERMISSIONS FILENAME
+</code></pre></div></div>
+<p>is the syntax for removing permissions, examples:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>chmod g-wx FILENAME
+</code></pre></div></div>
+<p>removes write and execute permissions for group</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>chmod g-rwx FILENAME
+</code></pre></div></div>
+<p>removes all permissions for group</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>chmod a-rwx FILENAME
+</code></pre></div></div>
+<p>removes all permissions for others</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>chmod a-x FILENAME
+</code></pre></div></div>
+<p>removes execution permissions for others</p>
+
+<p>OPTIONS include <code class="language-plaintext highlighter-rouge">-R</code> recursively (the permissions are applied to all the files, directories present inside the directory)</p>
+
+<p><strong><em>Task 1.12: Check the permissions for the files located in the tutorials directory.</em></strong></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ls -l
+</code></pre></div></div>
+<p><em>What permissions does the group have on these files? Which group does your account belong to?</em></p>
+
+<h2 id="check-system-properties">Check system properties</h2>
+
+<p>In this section, you will learn how to check system resources (space, memory, disk usage, storage properties), system properties (operating system, Linux version, kernel version) and commands to access other information (CPU type, memory type, variables available etc ) about the environment</p>
+
+<h3 id="1-directory-size">1. Directory size</h3>
+
+<p>To get the size of the directory, you can use the <code class="language-plaintext highlighter-rouge">du</code> command (<code class="language-plaintext highlighter-rouge">d</code>isk <code class="language-plaintext highlighter-rouge">u</code>sage)</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>du -sh DIRECTORY
+</code></pre></div></div>
+<p>The options are to summarize (<code class="language-plaintext highlighter-rouge">s</code>) and human readable format (<code class="language-plaintext highlighter-rouge">h</code>). While the summarize will avoid printing size for every file in the directory, the human readable format will give the folder size in kilo/mega/giga bytes  (instead of bytes).</p>
+
+<h3 id="2-file-size">2. File size</h3>
+
+<p>If you are interested in knowing the size of a particular file, you can use the <code class="language-plaintext highlighter-rouge">ls</code> command with <code class="language-plaintext highlighter-rouge">l</code> and <code class="language-plaintext highlighter-rouge">h</code> options</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ls -lh FILENAME
+</code></pre></div></div>
+<p>Check unix-basics-1 for more details about list command. The option <code class="language-plaintext highlighter-rouge">l</code> list in a long format and <code class="language-plaintext highlighter-rouge">h</code> in human readable file sizes.</p>
+
+<h3 id="3-available-storage-and-mounts">3. Available storage and mounts</h3>
+
+<p>To display free disk space and mounted devices, you can use the <code class="language-plaintext highlighter-rouge">df</code> command. If no file name is given, the space available on all currently mounted file systems is shown</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>df -h
+</code></pre></div></div>
+<p>again, using the option <code class="language-plaintext highlighter-rouge">-h</code> will give you results in human readable format.</p>
+
+<h3 id="4-available-memory">4. Available memory</h3>
+
+<p>If you want to see how much memory is available on your machine, you can use the <code class="language-plaintext highlighter-rouge">free</code> command.</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>free
+</code></pre></div></div>
+<p>Output would be:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>             total       used       free     shared    buffers     cached
+Mem:      32874744   32607664     267080          0      77600   31013192
+-/+ buffers/cache:    1516872   31357872
+Swap:     61438900     873856   60565044
+</code></pre></div></div>
+<p>As you can see the numbers are in bytes and very difficult to understand. You can modify this default behavior using some options. some options to modify this are:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: right">Options</th>
+      <th style="text-align: left">What it does</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: right"><code class="language-plaintext highlighter-rouge">-g</code></td>
+      <td style="text-align: left">display numbers in gigabytes</td>
+    </tr>
+    <tr>
+      <td style="text-align: right"><code class="language-plaintext highlighter-rouge">-m</code></td>
+      <td style="text-align: left">display numbers in megabytes</td>
+    </tr>
+    <tr>
+      <td style="text-align: right"><code class="language-plaintext highlighter-rouge">-k</code></td>
+      <td style="text-align: left">display numbers in kilobytes</td>
+    </tr>
+    <tr>
+      <td style="text-align: right"><code class="language-plaintext highlighter-rouge">-b</code></td>
+      <td style="text-align: left">display numbers in bytes, (default).</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>Example:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>free -g
+</code></pre></div></div>
+<p>output would be:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>             total       used       free     shared    buffers     cached
+Mem:            31         31          0          0          0         29
+-/+ buffers/cache:          1         29
+Swap:           58          0         57
+</code></pre></div></div>
+<p>This is much easier to understand.</p>
+
+<h3 id="5-system-properties">5. System properties</h3>
+
+<p>Just to get the Operating system name:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>cat /etc/system-release
+</code></pre></div></div>
+<p>Output would be:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Red Hat Enterprise Linux Server release 6.4 (Santiago)
+</code></pre></div></div>
+
+<p>If no such file, they try:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>cat /etc/*release*
+</code></pre></div></div>
+<p>you might get:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Red Hat Enterprise Linux Server release 6.4 (Santiago)
+Red Hat Enterprise Linux Server release 6.4 (Santiago)
+cpe:/o:redhat:enterprise_linux:6server:ga:server
+</code></pre></div></div>
+
+<p>The other command is the <code class="language-plaintext highlighter-rouge">uname</code></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>uname -a
+</code></pre></div></div>
+<p>output would be:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Linux hpc5 2.6.32-358.11.1.el6.x86_64 #1 SMP Wed May 15 10:48:38 EDT 2013 x86_64 x86_64 x86_64 GNU/Linux
+</code></pre></div></div>
+<p>which is Kernel, node, kernel version, kernel release date, machine type, processor type, platform and OS type, respectively.</p>
+
+<p>You can also ask for a specific thing by using these options:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>uname -s # kernel name
+uname -n # node
+uname -v # version
+uname -r # release version date
+uname -i # platform
+uname -m # machine type
+uname -p # processor type
+uname -o # OS type
+</code></pre></div></div>
+
+<h3 id="7-processor-and-memory-information">7. Processor and Memory information:</h3>
+
+<p>These information will be in the file. Just by cataloging the file, you can find read these information:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>cat /proc/meminfo
+</code></pre></div></div>
+<p>for the memory information, and</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>cat /proc/cpuinfo
+</code></pre></div></div>
+<p>for the CPU information</p>
+
+<h3 id="8-ip-address">8. IP address:</h3>
+
+<p>To get the IP address for the machine you can use the <code class="language-plaintext highlighter-rouge">ifconfig</code> command.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ifconfig
+</code></pre></div></div>
+<p>it will lists all properties as follows:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>eth2      Link encap:Ethernet  HWaddr 00:0N:00:00:N0:NN
+          inet addr:00.00.000.000  Bcast:00.00.000.000  Mask:000.000.000.0
+          inet6 addr: 0000:000:000:000:00n:00nn:nn00:n000/00 Scope:Link
+          UP BROADCAST RUNNING MULTICAST  MTU:9000  Metric:1
+          RX packets:1693260659 errors:0 dropped:0 overruns:0 frame:0
+          TX packets:600815878 errors:0 dropped:0 overruns:0 carrier:0
+          collisions:0 txqueuelen:10000
+          RX bytes:14812199265240 (13.4 TiB)  TX bytes:52487439229 (48.8 GiB)
+...
+&lt;clipped rest of the output&gt;
+</code></pre></div></div>
+<p>you can use the combination of commands to just display the IP address as follows:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ifconfig | grep -Eo 'inet (addr:)?([0-9]*\.){3}[0-9]*' | grep -Eo '([0-9]*\.){3}[0-9]*' | grep -v '127.0.0.1'
+</code></pre></div></div>
+
+<h3 id="9-other-information">9. Other information:</h3>
+
+<p>For getting more information about the environment, you can type <code class="language-plaintext highlighter-rouge">env</code>, which lists all the variables currently set. If you want to know specifically about a variable, you can do:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>echo $VARIABLE
+</code></pre></div></div>
+<p>Some variables that are useful are:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left">Variable</th>
+      <th style="text-align: left">Information</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">HOSTNAME</code></td>
+      <td style="text-align: left">hostname for the system</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">TERM</code></td>
+      <td style="text-align: left">terminal</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">SHELL</code></td>
+      <td style="text-align: left">Shell type (bash, csh, ksh etc)</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">USER</code></td>
+      <td style="text-align: left">Username</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">PATH</code></td>
+      <td style="text-align: left">paths where executables are stored</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">PWD</code></td>
+      <td style="text-align: left">present working directory</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">EDITOR</code></td>
+      <td style="text-align: left">default text editor</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">HOME</code></td>
+      <td style="text-align: left">path for home</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">DISPLAY</code></td>
+      <td style="text-align: left">where to route the display</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">HISTFILE</code></td>
+      <td style="text-align: left">file where the history is saved</td>
+    </tr>
+  </tbody>
+</table>
+
+<hr />
+<p><a href="../programs.md">Table of contents</a></p>
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+
+
+        
+      </footer>
+
+      
+
+      
+
+    </div>
+
+    
+  </article>
+
+  
+  
+</div>
+    </div>
+
+    
+      <div class="search-content">
+        <div class="search-content__inner-wrap"><form onsubmit="return googleCustomSearchExecute();" id="cse-search-box-form-id">
+    <input type="search" id="cse-search-input-box-id" aria-placeholder="Enter your search term..." class="search-input" tabindex="-1" placeholder="Enter your search term..." />
+    </form>
+    <div id="results" class="results">
+        <gcse:searchresults-only></gcse:searchresults-only>
+    </div></div>
+
+      </div>
+    
+    
+    <div class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+
+        <div class="page__footer-follow">
+  <ul class="social-icons">
+    
+      <li><strong>Follow:</strong></li>
+    
+    
+      <li><a href="https://twitter.com/isugif"><i class="fab fa-fw fa-twitter-square" aria-hidden="true"></i> Twitter</a></li>
+    
+    
+    
+      <li><a href="https://github.com/https://github.com/isugenomics"><i class="fab fa-fw fa-github" aria-hidden="true"></i> GitHub</a></li>
+    
+    
+    
+    
+  </ul>
+</div>
+
+<div class="page__footer-copyright">&copy; 2024 Geospatial Workbook</div>
+
+      </footer>
+    </div>
+
+    
+  <script src="/assets/js/main.min.js"></script>
+  <script src="https://use.fontawesome.com/releases/v5.0.13/js/all.js"></script>
+
+
+<script>
+  (function () {
+    var cx = '009853197685285203469:nsvri1pa88d';
+    var gcse = document.createElement('script');
+    gcse.type = 'text/javascript';
+    gcse.async = true;
+    gcse.src = 'https://cse.google.com/cse.js?cx=' + cx;
+    var s = document.getElementsByTagName('script')[0];
+    s.parentNode.insertBefore(gcse, s);
+  })();
+
+  function googleCustomSearchExecute() {
+    var input = document.getElementById('cse-search-input-box-id');
+    var element = google.search.cse.element.getElement('searchresults-only0');
+    if (input.value == '') {
+      element.clearAllResults();
+    } else {
+      element.execute(input.value);
+    }
+    return false;
+  }
+
+  
+</script>
+
+
+
+
+<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+<script id="MathJax-script" defer
+        src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+</script>
+
+
+
+
+  </body>
+</html>

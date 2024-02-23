@@ -1,0 +1,393 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.11.2 by Michael Rose
+  Copyright 2013-2018 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE.txt
+-->
+<html lang="en" class="no-js">
+  <head>
+    <meta charset="utf-8">
+
+<!-- begin _includes/seo.html --><title>Syntax high-lighting for Biology specific files - Geospatial Workbook</title>
+<meta name="description" content="Tutorial on Informatics for Geospatial Information">
+
+
+
+<meta property="og:type" content="website">
+<meta property="og:locale" content="en_US">
+<meta property="og:site_name" content="Geospatial Workbook">
+<meta property="og:title" content="Syntax high-lighting for Biology specific files">
+<meta property="og:url" content="http://localhost:4000/IntroductionToCommandLine/HPC/syntax-highlighting-for-bioinformatics.html">
+
+
+
+
+
+
+  <meta name="twitter:site" content="@isugif">
+  <meta name="twitter:title" content="Syntax high-lighting for Biology specific files">
+  <meta name="twitter:description" content="Tutorial on Informatics for Geospatial Information">
+  <meta name="twitter:url" content="http://localhost:4000/IntroductionToCommandLine/HPC/syntax-highlighting-for-bioinformatics.html">
+
+  
+    <meta name="twitter:card" content="summary">
+    
+  
+
+  
+
+
+
+
+
+
+
+  
+
+  
+
+
+<link rel="canonical" href="http://localhost:4000/IntroductionToCommandLine/HPC/syntax-highlighting-for-bioinformatics.html">
+
+
+
+
+
+
+
+  <script type="application/ld+json">
+    {
+      "@context": "http://schema.org",
+      "@type": "Person",
+      "name": "",
+      "url": "http://localhost:4000",
+      "sameAs": null
+    }
+  </script>
+
+
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+<link href="/feed.xml" type="application/atom+xml" rel="alternate" title="Geospatial Workbook Feed">
+
+<!-- http://t.co/dKP3o1e -->
+<meta name="HandheldFriendly" content="True">
+<meta name="MobileOptimized" content="320">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+
+<!--[if lte IE 9]>
+  <style>
+    /* old IE unsupported flexbox fixes */
+    .greedy-nav .site-title {
+      padding-right: 3em;
+    }
+    .greedy-nav button {
+      position: absolute;
+      top: 0;
+      right: 0;
+      height: 100%;
+    }
+  </style>
+<![endif]-->
+
+
+    <!-- start custom head snippets -->
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-E6BZVYF8ZY"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-E6BZVYF8ZY');
+</script>
+
+<!-- insert favicons. use https://realfavicongenerator.net/ -->
+
+<!-- end custom head snippets -->
+
+  </head>
+
+  <body class="layout--default">
+
+    <!--[if lt IE 9]>
+<div class="notice--danger align-center" style="margin: 0;">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience.</div>
+<![endif]-->
+
+    <div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        <a class="site-title" href="/">Geospatial Workbook</a>
+        <ul class="visible-links">
+          
+            
+            <li class="masthead__menu-item">
+              <a href="http://localhost:4000/about.html" >About</a>
+            </li>
+          
+            
+            <li class="masthead__menu-item">
+              <a href="http://localhost:4000/list.html" >Index</a>
+            </li>
+          
+            
+            <li class="masthead__menu-item">
+              <a href="http://localhost:4000/glossary.html" >Glossary</a>
+            </li>
+          
+            
+            <li class="masthead__menu-item">
+              <a href="http://localhost:4000/people.html" >People</a>
+            </li>
+          
+            
+            <li class="masthead__menu-item">
+              <a href="http://localhost:4000/contributing.html" >Contribute</a>
+            </li>
+          
+        </ul>
+        
+        <button class="search__toggle" type="button">
+          <svg class="icon" width="16" height="16" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 15.99 16">
+            <path d="M15.5,13.12L13.19,10.8a1.69,1.69,0,0,0-1.28-.55l-0.06-.06A6.5,6.5,0,0,0,5.77,0,6.5,6.5,0,0,0,2.46,11.59a6.47,6.47,0,0,0,7.74.26l0.05,0.05a1.65,1.65,0,0,0,.5,1.24l2.38,2.38A1.68,1.68,0,0,0,15.5,13.12ZM6.4,2A4.41,4.41,0,1,1,2,6.4,4.43,4.43,0,0,1,6.4,2Z" transform="translate(-.01)"></path>
+          </svg>
+        </button>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">Toggle Menu</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+    <div class="initial-content">
+      <h1 id="syntax-high-lighting-for-biology-specific-files">Syntax high-lighting for Biology specific files</h1>
+
+<p>If you’re a coder, then you already know how useful the syntax highlighting is for your programming language. However, if you’re a biologist and work with lots of biology specific files (fasta, msa, vcf etc) on command-line, then you might have noticed how non-intuitive it feels for manually inspecting them. This tutorial aims to reduce that feeling a little bit and makes working on CLI a bit better!</p>
+
+<p>If you want a hands-on approach with support to custom files, first section covers <code class="language-plaintext highlighter-rouge">nano</code> text editor syntax coloring. Since for <code class="language-plaintext highlighter-rouge">vim</code> has complicated syntax file formats, we will use a readymade solution that uses the program called <code class="language-plaintext highlighter-rouge">BioSyntax</code>. BioSyntax comes with present syntax coloring for pretty much all types of files in Biology/Bioinformatics and works with various other commands as well (like <code class="language-plaintext highlighter-rouge">less</code>, <code class="language-plaintext highlighter-rouge">vim</code> etc.).</p>
+
+<h2 id="nano-as-the-text-editor-custom-syntax-coloring">Nano as the text editor (custom syntax coloring)</h2>
+
+<p>For <code class="language-plaintext highlighter-rouge">nano</code> most settings can be set in <code class="language-plaintext highlighter-rouge">.nanorc</code> file located in your home directory (<code class="language-plaintext highlighter-rouge">/home/username/.nanorc</code> or simply <code class="language-plaintext highlighter-rouge">~/.nanorc</code>).</p>
+
+<p>You can add file specific syntax coloring by editing <code class="language-plaintext highlighter-rouge">.nanorc</code> file. For example, for nucleotide file (file extensions <code class="language-plaintext highlighter-rouge">.fna</code> <code class="language-plaintext highlighter-rouge">.fasta</code> or <code class="language-plaintext highlighter-rouge">.fa</code>), you can add this section:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># fasta format nucleotide sequences.</span>
+syntax <span class="s2">"fasta"</span> <span class="s2">"</span><span class="se">\.</span><span class="s2">fasta$"</span> <span class="s2">"</span><span class="se">\.</span><span class="s2">fas$"</span> <span class="s2">"</span><span class="se">\.</span><span class="s2">fa$"</span>
+color brightwhite <span class="s2">"^</span><span class="se">\&gt;</span><span class="s2">.*"</span>
+color brightgreen <span class="s2">"[Aa]"</span>
+color brightred <span class="s2">"[Tt]"</span>
+color brightblue <span class="s2">"[Cc]"</span>
+color brightyellow <span class="s2">"[Gg]"</span>
+
+</code></pre></div></div>
+
+<p>Similarly, for amino acid fasta files, you can add these lines (ending with <code class="language-plaintext highlighter-rouge">.faa</code> or <code class="language-plaintext highlighter-rouge">.aa</code>):</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">#colored based on aminoacid properties</span>
+syntax <span class="s2">"fasta"</span> <span class="s2">"</span><span class="se">\.</span><span class="s2">faa$"</span> <span class="s2">"</span><span class="se">\.</span><span class="s2">aa$"</span>
+color brightwhite <span class="s2">"^</span><span class="se">\&gt;</span><span class="s2">.*"</span>
+color brightblue <span class="s2">"[AILMFWV]"</span>
+color brightred <span class="s2">"[RK]"</span>
+color brightgreen <span class="s2">"[NQ]"</span>
+color white <span class="s2">"[C]"</span>
+color magenta <span class="s2">"[ED]"</span>
+color red <span class="s2">"[G]"</span>
+color cyan <span class="s2">"[HY]"</span>
+color brightyellow <span class="s2">"[P]"</span>
+color green <span class="s2">"[ST]"</span>
+</code></pre></div></div>
+
+<p>This can also be used for alignment files (nucleotide or proteins) by adding more extensions to the above syntax coloring. You can also add other coloring patterns for other file extensions using the same method.</p>
+
+<p>Other examples:</p>
+
+<p>FASTQ file</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">## For FASTQ file</span>
+syntax <span class="s2">"fastq"</span> <span class="s2">"</span><span class="se">\.</span><span class="s2">fq$"</span> <span class="s2">"</span><span class="se">\.</span><span class="s2">fastq$"</span>
+color brightred <span class="s2">"^(@|</span><span class="se">\+</span><span class="s2">).*$"</span>
+color brightgreen <span class="s2">"^[ATGCN]+$"</span>
+</code></pre></div></div>
+<p>For DNA sequence in NEXUS/PAUP format</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="s2">"nexus"</span> <span class="s2">"</span><span class="se">\.</span><span class="s2">nexus$"</span> <span class="s2">"</span><span class="se">\.</span><span class="s2">nex$"</span>
+color brightgreen <span class="s2">"[Aa]"</span>
+color brightred <span class="s2">"[Tt]"</span>
+color brightblue <span class="s2">"[Cc]"</span>
+color brightyellow <span class="s2">"[Gg]"</span>
+color brightwhite <span class="s2">"(^[  ])</span><span class="se">\{</span><span class="s2">?[0-9A-Z_!@#</span><span class="nv">$*</span><span class="s2">?-]+</span><span class="se">\}</span><span class="s2">?"</span>
+color brightwhite  <span class="nv">start</span><span class="o">=</span><span class="s2">"</span><span class="se">\[</span><span class="s2">"</span> <span class="nv">end</span><span class="o">=</span><span class="s2">"</span><span class="se">\]</span><span class="s2">"</span>
+color brightred <span class="s2">"(#NEXUS|End|;)"</span>
+color brightyellow <span class="s2">"(Dimensions|Format|Matrix)"</span>
+color brightcyan <span class="s2">"(Begin DATA|ntax|nchar|datatype|gap)"</span>
+color brightred <span class="s2">"</span><span class="se">\=\{</span><span class="s2">?[0-9A-Z_!@#</span><span class="nv">$*</span><span class="s2">?-]+</span><span class="se">\}</span><span class="s2">?"</span>
+</code></pre></div></div>
+
+<p>Alignment files (protein)</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">## For Protein CLUSTALW format</span>
+syntax <span class="s2">"clustalw"</span> <span class="s2">"</span><span class="se">\.</span><span class="s2">clw$"</span> <span class="s2">"</span><span class="se">\.</span><span class="s2">aln$"</span>
+color brightblue <span class="s2">"[AILMFWV]"</span>
+color brightred <span class="s2">"[RK]"</span>
+color brightgreen <span class="s2">"[NQ]"</span>
+color white <span class="s2">"[C]"</span>
+color magenta <span class="s2">"[ED]"</span>
+color red <span class="s2">"[G]"</span>
+color cyan <span class="s2">"[HY]"</span>
+color brightyellow <span class="s2">"[P]"</span>
+color green <span class="s2">"[ST]"</span>
+</code></pre></div></div>
+
+<p>The screenshot for the above format:</p>
+
+<p><img src="/IntroductionToCommandLine/HPC/assets/nanorc_alignment.png" alt="clustalw alignment format" /></p>
+
+<h2 id="using-biosyntax-for-vim-and-other-tools">Using BioSyntax (for vim and other tools)</h2>
+
+<p><a href="https://github.com/bioSyntax/bioSyntax">BioSyntax</a> integrates  with vim, less, gedit, &amp; sublime and automatically recognizes file formats for various biological <a href="https://biosyntax.org/man#supported-file-formats">file formats</a>. The publication is available <a href="https://bmcbioinformatics.biomedcentral.com/articles/10.1186/s12859-018-2315-y">here</a> and you should cite the article if you use this tool in your project.</p>
+
+<h3 id="install">Install</h3>
+
+<p>Follow <a href="biosyntax.org/install">these</a> guidelines from their official website. SInce you will most likely not have <code class="language-plaintext highlighter-rouge">sudo</code> access, you may have to install <code class="language-plaintext highlighter-rouge">source-highlight</code> program manually first before attempting BioSyntax installation. Follow these steps:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>wget ftp://ftp.gnu.org/gnu/src-highlite/source-highlight-3.1.8.tar.gz
+tar xf source-highlight-3.1.8.tar.gz
+mkdir /path/to/somedir/sourcehighlight/
+cd source-highlight-3.1.8
+./configure --prefix=/path/to/somedir/sourcehighlight
+make
+make install
+</code></pre></div></div>
+<p>Once installed, set the variables correctly so that the program can find the files it needs. Add these lines to your <code class="language-plaintext highlighter-rouge">.bashrc</code></p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code> PATH=PATH:/path/to/installationdir/bin
+LD_LIBRARY_PATH=LD_LIBRARY_PATH:/path/to/installationdir/lib
+LIBRARY_PATH=LIBRARY_PATH:/path/to/installationdir/lib
+PKG_CONFIG_PATH=PKG_CONFIG_PATH:/path/to/installationdir/lib/pkgconfig
+CMAKE_LIBRARY_PATH=CMAKE_LIBRARY_PATH:/path/to/installationdir/lib
+LD_LIBRARY_PATH=LD_LIBRARY_PATH:/path/to/installationdir/lib
+C_INCLUDE_PATH=C_INCLUDE_PATH:/path/to/installationdir/include
+CPLUS_INCLUDE_PATH=CPLUS_INCLUDE_PATH:/path/to/installationdir/include
+CMAKE_INCLUDE_PATH=CMAKE_INCLUDE_PATH:/path/to/installationdir/include
+MANPATH=MANPATH:/path/to/installationdir/share/man
+</code></pre></div></div>
+
+<p>Now, you are ready to install <code class="language-plaintext highlighter-rouge">bioSyntax</code></p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>wget https://github.com/bioSyntax/bioSyntax/releases/download/v1.0.0/bioSyntax-1.0.0.zip
+unzip bioSyntax-1.0.0.zip
+<span class="nb">cd </span>bioSyntax-master
+<span class="c"># for installing colors for less</span>
+bash bioSyntax_INSTALL.sh less
+<span class="c"># or for vim</span>
+bash bioSyntax_INSTALL.sh vim
+</code></pre></div></div>
+
+<p>restart the terminal and you’re all set to use the bioSyntax!</p>
+
+    </div>
+
+    
+      <div class="search-content">
+        <div class="search-content__inner-wrap"><form onsubmit="return googleCustomSearchExecute();" id="cse-search-box-form-id">
+    <input type="search" id="cse-search-input-box-id" aria-placeholder="Enter your search term..." class="search-input" tabindex="-1" placeholder="Enter your search term..." />
+    </form>
+    <div id="results" class="results">
+        <gcse:searchresults-only></gcse:searchresults-only>
+    </div></div>
+
+      </div>
+    
+    
+    <div class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+
+        <div class="page__footer-follow">
+  <ul class="social-icons">
+    
+      <li><strong>Follow:</strong></li>
+    
+    
+      <li><a href="https://twitter.com/isugif"><i class="fab fa-fw fa-twitter-square" aria-hidden="true"></i> Twitter</a></li>
+    
+    
+    
+      <li><a href="https://github.com/https://github.com/isugenomics"><i class="fab fa-fw fa-github" aria-hidden="true"></i> GitHub</a></li>
+    
+    
+    
+    
+  </ul>
+</div>
+
+<div class="page__footer-copyright">&copy; 2024 Geospatial Workbook</div>
+
+      </footer>
+    </div>
+
+    
+  <script src="/assets/js/main.min.js"></script>
+  <script src="https://use.fontawesome.com/releases/v5.0.13/js/all.js"></script>
+
+
+<script>
+  (function () {
+    var cx = '009853197685285203469:nsvri1pa88d';
+    var gcse = document.createElement('script');
+    gcse.type = 'text/javascript';
+    gcse.async = true;
+    gcse.src = 'https://cse.google.com/cse.js?cx=' + cx;
+    var s = document.getElementsByTagName('script')[0];
+    s.parentNode.insertBefore(gcse, s);
+  })();
+
+  function googleCustomSearchExecute() {
+    var input = document.getElementById('cse-search-input-box-id');
+    var element = google.search.cse.element.getElement('searchresults-only0');
+    if (input.value == '') {
+      element.clearAllResults();
+    } else {
+      element.execute(input.value);
+    }
+    return false;
+  }
+
+  
+</script>
+
+
+
+
+<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+<script id="MathJax-script" defer
+        src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+</script>
+
+
+
+
+  </body>
+</html>

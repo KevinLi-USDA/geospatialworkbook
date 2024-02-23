@@ -1,0 +1,651 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.11.2 by Michael Rose
+  Copyright 2013-2018 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE.txt
+-->
+<html lang="en" class="no-js">
+  <head>
+    <meta charset="utf-8">
+
+<!-- begin _includes/seo.html --><title>Introduction to Python Dask - Geospatial Workbook</title>
+<meta name="description" content="Tutorial on Informatics for Geospatial Information">
+
+
+  <meta name="author" content="Kerrie Geil">
+
+
+<meta property="og:type" content="website">
+<meta property="og:locale" content="en_US">
+<meta property="og:site_name" content="Geospatial Workbook">
+<meta property="og:title" content="Introduction to Python Dask">
+<meta property="og:url" content="http://localhost:4000/Workshops/3-Session3-intro-to-python-dask.html">
+
+
+
+
+  <meta property="og:image" content="http://localhost:4000/assets/images/margaret-weir-GZyjbLNOaFg-unsplash_dark.jpg">
+
+
+
+  <meta name="twitter:site" content="@isugif">
+  <meta name="twitter:title" content="Introduction to Python Dask">
+  <meta name="twitter:description" content="Tutorial on Informatics for Geospatial Information">
+  <meta name="twitter:url" content="http://localhost:4000/Workshops/3-Session3-intro-to-python-dask.html">
+
+  
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content="http://localhost:4000/assets/images/margaret-weir-GZyjbLNOaFg-unsplash_dark.jpg">
+  
+
+  
+    <meta name="twitter:creator" content="@someone">
+  
+
+
+
+
+
+
+
+  
+
+  
+
+
+<link rel="canonical" href="http://localhost:4000/Workshops/3-Session3-intro-to-python-dask.html">
+
+
+
+
+
+
+
+  <script type="application/ld+json">
+    {
+      "@context": "http://schema.org",
+      "@type": "Person",
+      "name": "",
+      "url": "http://localhost:4000",
+      "sameAs": null
+    }
+  </script>
+
+
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+<link href="/feed.xml" type="application/atom+xml" rel="alternate" title="Geospatial Workbook Feed">
+
+<!-- http://t.co/dKP3o1e -->
+<meta name="HandheldFriendly" content="True">
+<meta name="MobileOptimized" content="320">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+
+<!--[if lte IE 9]>
+  <style>
+    /* old IE unsupported flexbox fixes */
+    .greedy-nav .site-title {
+      padding-right: 3em;
+    }
+    .greedy-nav button {
+      position: absolute;
+      top: 0;
+      right: 0;
+      height: 100%;
+    }
+  </style>
+<![endif]-->
+
+
+    <!-- start custom head snippets -->
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-E6BZVYF8ZY"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-E6BZVYF8ZY');
+</script>
+
+<!-- insert favicons. use https://realfavicongenerator.net/ -->
+
+<!-- end custom head snippets -->
+
+  </head>
+
+  <body class="layout--single">
+
+    <!--[if lt IE 9]>
+<div class="notice--danger align-center" style="margin: 0;">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience.</div>
+<![endif]-->
+
+    <div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        <a class="site-title" href="/">Geospatial Workbook</a>
+        <ul class="visible-links">
+          
+            
+            <li class="masthead__menu-item">
+              <a href="http://localhost:4000/about.html" >About</a>
+            </li>
+          
+            
+            <li class="masthead__menu-item">
+              <a href="http://localhost:4000/list.html" >Index</a>
+            </li>
+          
+            
+            <li class="masthead__menu-item">
+              <a href="http://localhost:4000/glossary.html" >Glossary</a>
+            </li>
+          
+            
+            <li class="masthead__menu-item">
+              <a href="http://localhost:4000/people.html" >People</a>
+            </li>
+          
+            
+            <li class="masthead__menu-item">
+              <a href="http://localhost:4000/contributing.html" >Contribute</a>
+            </li>
+          
+        </ul>
+        
+        <button class="search__toggle" type="button">
+          <svg class="icon" width="16" height="16" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 15.99 16">
+            <path d="M15.5,13.12L13.19,10.8a1.69,1.69,0,0,0-1.28-.55l-0.06-.06A6.5,6.5,0,0,0,5.77,0,6.5,6.5,0,0,0,2.46,11.59a6.47,6.47,0,0,0,7.74.26l0.05,0.05a1.65,1.65,0,0,0,.5,1.24l2.38,2.38A1.68,1.68,0,0,0,15.5,13.12ZM6.4,2A4.41,4.41,0,1,1,2,6.4,4.43,4.43,0,0,1,6.4,2Z" transform="translate(-.01)"></path>
+          </svg>
+        </button>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">Toggle Menu</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+    <div class="initial-content">
+      
+  
+
+
+
+
+
+
+
+
+
+
+
+<div class="page__hero--overlay"
+  style="background-color: 444444; background-image: url('/assets/images/margaret-weir-GZyjbLNOaFg-unsplash_dark.jpg');"
+>
+  
+    <div class="wrapper">
+      <h1 id="page-title" class="page__title" itemprop="headline">
+        
+          Introduction to Python Dask
+
+        
+      </h1>
+      
+      
+      
+    </div>
+  
+  
+</div>
+
+
+
+
+
+<div id="main" role="main">
+  
+  <div class="sidebar sticky">
+  
+
+
+<div itemscope itemtype="http://schema.org/Person">
+
+  
+    <div class="author__avatar">
+      
+
+      
+        <img src="/assets/images/people/KerrieGeil.png" alt="Kerrie Geil" itemprop="image">
+      
+    </div>
+  
+
+  <div class="author__content">
+    
+      <h3 class="author__name" itemprop="name">Kerrie Geil</h3>
+    
+    
+      <p class="author__bio" itemprop="description">
+        Kerrie is an ARS SCINet postdoc in the research group of Dr. Deb Peters in Las Cruces, NM. Her M.S. and Ph.D. degrees are in Atmospheric Sciences and her research background is in climate modeling.
+      </p>
+    
+  </div>
+
+  <div class="author__urls-wrapper">
+    <button class="btn btn--inverse">Follow</button>
+    <ul class="author__urls social-icons">
+      
+
+      
+
+      
+        <li>
+          <a href="mailto:mailto:someone@iastate.edu">
+            <meta itemprop="email" content="mailto:someone@iastate.edu" />
+            <i class="fas fa-fw fa-envelope-square" aria-hidden="true"></i> Email
+          </a>
+        </li>
+      
+
+      
+
+      
+        <li>
+          <a href="https://twitter.com/someone" itemprop="sameAs">
+            <i class="fab fa-fw fa-twitter-square" aria-hidden="true"></i> Twitter
+          </a>
+        </li>
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      <!--
+  <li>
+    <a href="http://link-to-whatever-social-network.com/user/" itemprop="sameAs">
+      <i class="fas fa-fw" aria-hidden="true"></i> Custom Social Profile Link
+    </a>
+  </li>
+-->
+    </ul>
+  </div>
+</div>
+
+<!-- Create a 2nd author for tutorials -->
+
+
+
+<div itemscope itemtype="http://schema.org/Person">
+
+  
+
+  <div class="author__content">
+    
+      <h3 class="author__name" itemprop="name"></h3>
+    
+    
+  </div>
+
+  <div class="author__urls-wrapper">
+    <button class="btn btn--inverse">Follow</button>
+    <ul class="author__urls social-icons">
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      <!--
+  <li>
+    <a href="http://link-to-whatever-social-network.com/user/" itemprop="sameAs">
+      <i class="fas fa-fw" aria-hidden="true"></i> Custom Social Profile Link
+    </a>
+  </li>
+-->
+    </ul>
+  </div>
+</div>
+
+  
+  </div>
+
+
+  <article class="page" itemscope itemtype="http://schema.org/CreativeWork">
+    <meta itemprop="headline" content="Introduction to Python Dask">
+    
+    
+    
+
+    <div class="page__inner-wrap">
+      
+
+      <section class="page__content" itemprop="text">
+        
+        <p>This page was modified from Session 3 of the SCINet Geospatial Workshop 2020. Ceres HPC Resources have been used to publish scientific papers:</p>
+
+<ul>
+  <li><a href="https://www.ncbi.nlm.nih.gov/pmc/?term=Dask+python">List of articles on PMC which mention the Dask Project</a></li>
+</ul>
+
+<h1 id="intro-to-distributed-computing-on-the-ceres-hpc-system-using-python-and-dask">Intro to Distributed Computing on the Ceres HPC System Using Python and Dask</h1>
+
+<p>This page contains all the info you need to participate in Session 3 of the SCINet Geospatial Workshop 2020.</p>
+
+<p><strong>A note about running this tutorial in your home directory:</strong> some participants got errors either downloading to or running the tutorial from their home directory because they did not have enough space free in their home directory. If this happens to you, download to and run the tutorial from a project directory. If you are a new HPC user and don’t yet have a project directory, you can request a small increase in space to your home directory from the SCINet VRSC at scinet_vrsc@usda.gov.</p>
+
+<p><br /></p>
+
+<p><strong>Learning Goals</strong></p>
+
+<ul>
+  <li>data analysis technique for very large datasets (the tools in this tutorial are most appropriate for analysis of large earth-science-type datasets)</li>
+  <li>set up SLURM cluster to compute “in parallel”</li>
+  <li>scale clusters for heavy compute</li>
+  <li>use adaptive clusters to dynamically scale up and down your computing</li>
+  <li>view Dask diagnostics to visualize cluster computations in real time</li>
+</ul>
+
+<p><br /><br /></p>
+
+<hr />
+
+<h2 id="contents">Contents</h2>
+
+<!--[Session Rules](#session-rules)-->
+
+<p><a href="#how-to-run-the-tutorial-on-ceres">How to Run the Tutorial on Ceres</a></p>
+
+<p><a href="#view-the-tutorial-online">View the Tutorial Online</a></p>
+
+<p><br /><br /></p>
+
+<hr />
+
+<!--
+## Session Rules
+
+**GREEN LIGHT, RED LIGHT** - Use the Zoom participant feedback indicators to show us if you are following along successfully as well as when you need help. To access participant feed back, click on the "Participants" icon to open the participants pane/window. Click the green "yes" to indicate that you are following along successfully, click the red "no" to indicate when you need help. Ideally, you will have either the red or green indicator displayed for yourself throughout the entire tutorial. We will pause every so often to work through solutions for participants displaying a red light.
+
+**CHAT QUESTIONS/COMMENTS TAKE FIRST PRIORITY** - Chat your questions/comments either to everyone (preferred) or to the chat moderator (Rowan Gaffney) privately to have your question/comment read out loud anonamously. We will address chat questions/comments first and call on people who have written in the chat before we take questions from raised hands.
+
+**SHARE YOUR VIDEO WHEN SPEAKING** - If your internet plan/connectivity allows, please share your video when speaking.
+
+**KEEP YOURSELF ON MUTE** - Please mute yourself unless you are called on.
+<br><br>
+
+---
+-->
+
+<h2 id="how-to-run-the-tutorial-on-ceres">How to Run the Tutorial on Ceres</h2>
+
+<p><strong>Step 1: Login to your SCINet/Ceres account through the JupyterHub web interface</strong></p>
+
+<ul>
+  <li>Go to <a href="https://jupyterhub.scinet.usda.gov">https://jupyterhub.scinet.usda.gov</a></li>
+  <li>Login to the system with your SCINet credentials</li>
+  <li>Submit the Spawning Page with the following information (if not specified below, leave blank):<br />
+      Node Type: <code class="language-plaintext highlighter-rouge">short</code><br />
+      Number of Cores: <code class="language-plaintext highlighter-rouge">4</code><br />
+      Job Duration: <code class="language-plaintext highlighter-rouge">02:00:00</code><br /></li>
+</ul>
+
+<p>These next two fields are important to enter correctly on the Spawning Page or you will not be able to run the tutorials once you are logged in. Please use copy/paste to avoid mistakes instead of typing these lines:<br /></p>
+
+<p>      Path to the container image: <code class="language-plaintext highlighter-rouge">/lustre/project/geospatial_tutorials/wg_2020_ws/data_science_im_rs_vSCINetGeoWS_2020.sif</code><br />
+      Container Exec Args: <code class="language-plaintext highlighter-rouge">--bind /etc/munge --bind /var/log/munge --bind /var/run/munge --bind /usr/bin/squeue --bind /usr/bin/scancel --bind /usr/bin/sbatch --bind /usr/bin/scontrol --bind /usr/bin/sinfo --bind /system/slurm:/etc/slurm --bind /run/munge --bind /usr/lib64/libslurm.so --bind /usr/lib64/libmunge.so.2 --bind /usr/lib64/slurm --bind  /project --bind /lustre</code></p>
+
+<p>After a few minutes, a JupyterLab instance running on the Ceres HPC should open in your browser. After several attempts, if the spawner fails and JupyterLab does not open correctly, please contact the SCINet Virtual Research Support Core (VRSC) for assistance at scinet_vrsc@usda.gov.</p>
+
+<p><strong>Step 2: Copy the tutorial jupyter notebook file into your home directory</strong></p>
+
+<p>From inside JupyterLab File &gt; New &gt; Terminal to open a terminal tab.</p>
+
+<p>At the command line</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">cp</span> /project/shared_files/GEOSPATIAL_WORKSHOP/session3-intro-to-python-dask-on-ceres.ipynb <span class="nb">.</span>
+</code></pre></div></div>
+
+<p>Note: The original method listed here for accessing our tutorials (from GitHub) was not working for some participants. It will be easiest to copy the files from the shared folder on Ceres as above… but an alternate method you can try is to download the tutorial material from the workshop GitHub repo.</p>
+<ul>
+  <li>Open a terminal: File–&gt;New–&gt;terminal (alternatively, click the “+” icon (launcher) on the left and then choose the “terminal” icon on the launcher screen)</li>
+  <li>Download the tutorials to your home directory</li>
+</ul>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git clone <span class="nt">--single-branch</span> https://github.com/kerriegeil/SCINET-GEOSPATIAL-RESEARCH-WG.git
+</code></pre></div></div>
+
+<p><strong>Step 3: Run a notebook</strong></p>
+
+<ul>
+  <li>You should now see the file session3-intro-to-python-dask-on-ceres.ipynb (in the file system extension on the left hand side of JupyterLab, you may have to click the refresh icon in JupyterLab)</li>
+  <li>Double click the session3 file to open it</li>
+  <li>Select the py_geo kernel (upper right corner in the notebook)</li>
+  <li>
+    <p>Execute blocks of script by clicking the “play” icon in the notebook or typing Shift+Enter</p>
+  </li>
+  <li>If you used git clone to get the tutorial Navigate to <em>~/SCINET-GEOSPATIAL-RESEARCH-WG/tutorials/session3-intro-to-python-dask-on-ceres.ipynb</em></li>
+</ul>
+
+<p><br /><br /></p>
+
+<hr />
+
+<h2 id="view-the-tutorial-online">View the Tutorial Online</h2>
+
+<p>If you are not running the tutorial on Ceres during the session you can view a static version of it at <a href="https://kerriegeil.github.io/SCINET-GEOSPATIAL-RESEARCH-WG/html-tutorials/session3-intro-to-python-dask-on-ceres.html">https://kerriegeil.github.io/SCINET-GEOSPATIAL-RESEARCH-WG/html-tutorials/session3-intro-to-python-dask-on-ceres.html</a></p>
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+
+
+        
+      </footer>
+
+      
+
+      
+
+    </div>
+
+    
+  </article>
+
+  
+  
+</div>
+    </div>
+
+    
+      <div class="search-content">
+        <div class="search-content__inner-wrap"><form onsubmit="return googleCustomSearchExecute();" id="cse-search-box-form-id">
+    <input type="search" id="cse-search-input-box-id" aria-placeholder="Enter your search term..." class="search-input" tabindex="-1" placeholder="Enter your search term..." />
+    </form>
+    <div id="results" class="results">
+        <gcse:searchresults-only></gcse:searchresults-only>
+    </div></div>
+
+      </div>
+    
+    
+    <div class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+
+        <div class="page__footer-follow">
+  <ul class="social-icons">
+    
+      <li><strong>Follow:</strong></li>
+    
+    
+      <li><a href="https://twitter.com/isugif"><i class="fab fa-fw fa-twitter-square" aria-hidden="true"></i> Twitter</a></li>
+    
+    
+    
+      <li><a href="https://github.com/https://github.com/isugenomics"><i class="fab fa-fw fa-github" aria-hidden="true"></i> GitHub</a></li>
+    
+    
+    
+    
+  </ul>
+</div>
+
+<div class="page__footer-copyright">&copy; 2024 Geospatial Workbook</div>
+
+      </footer>
+    </div>
+
+    
+  <script src="/assets/js/main.min.js"></script>
+  <script src="https://use.fontawesome.com/releases/v5.0.13/js/all.js"></script>
+
+
+<script>
+  (function () {
+    var cx = '009853197685285203469:nsvri1pa88d';
+    var gcse = document.createElement('script');
+    gcse.type = 'text/javascript';
+    gcse.async = true;
+    gcse.src = 'https://cse.google.com/cse.js?cx=' + cx;
+    var s = document.getElementsByTagName('script')[0];
+    s.parentNode.insertBefore(gcse, s);
+  })();
+
+  function googleCustomSearchExecute() {
+    var input = document.getElementById('cse-search-input-box-id');
+    var element = google.search.cse.element.getElement('searchresults-only0');
+    if (input.value == '') {
+      element.clearAllResults();
+    } else {
+      element.execute(input.value);
+    }
+    return false;
+  }
+
+  
+</script>
+
+
+
+
+<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+<script id="MathJax-script" defer
+        src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+</script>
+
+
+
+
+  </body>
+</html>

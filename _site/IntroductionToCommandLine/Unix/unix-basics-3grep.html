@@ -1,0 +1,566 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.11.2 by Michael Rose
+  Copyright 2013-2018 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE.txt
+-->
+<html lang="en" class="no-js">
+  <head>
+    <meta charset="utf-8">
+
+<!-- begin _includes/seo.html --><title>Grep Command - Geospatial Workbook</title>
+<meta name="description" content="Tutorial on Informatics for Geospatial Information">
+
+
+
+<meta property="og:type" content="website">
+<meta property="og:locale" content="en_US">
+<meta property="og:site_name" content="Geospatial Workbook">
+<meta property="og:title" content="Grep Command">
+<meta property="og:url" content="http://localhost:4000/IntroductionToCommandLine/Unix/unix-basics-3grep.html">
+
+
+
+
+  <meta property="og:image" content="http://localhost:4000/assets/images/margaret-weir-GZyjbLNOaFg-unsplash_dark.jpg">
+
+
+
+  <meta name="twitter:site" content="@isugif">
+  <meta name="twitter:title" content="Grep Command">
+  <meta name="twitter:description" content="Tutorial on Informatics for Geospatial Information">
+  <meta name="twitter:url" content="http://localhost:4000/IntroductionToCommandLine/Unix/unix-basics-3grep.html">
+
+  
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content="http://localhost:4000/assets/images/margaret-weir-GZyjbLNOaFg-unsplash_dark.jpg">
+  
+
+  
+
+
+
+
+
+
+
+  
+
+  
+
+
+<link rel="canonical" href="http://localhost:4000/IntroductionToCommandLine/Unix/unix-basics-3grep.html">
+
+
+
+
+
+
+
+  <script type="application/ld+json">
+    {
+      "@context": "http://schema.org",
+      "@type": "Person",
+      "name": "",
+      "url": "http://localhost:4000",
+      "sameAs": null
+    }
+  </script>
+
+
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+<link href="/feed.xml" type="application/atom+xml" rel="alternate" title="Geospatial Workbook Feed">
+
+<!-- http://t.co/dKP3o1e -->
+<meta name="HandheldFriendly" content="True">
+<meta name="MobileOptimized" content="320">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+
+<!--[if lte IE 9]>
+  <style>
+    /* old IE unsupported flexbox fixes */
+    .greedy-nav .site-title {
+      padding-right: 3em;
+    }
+    .greedy-nav button {
+      position: absolute;
+      top: 0;
+      right: 0;
+      height: 100%;
+    }
+  </style>
+<![endif]-->
+
+
+    <!-- start custom head snippets -->
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-E6BZVYF8ZY"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-E6BZVYF8ZY');
+</script>
+
+<!-- insert favicons. use https://realfavicongenerator.net/ -->
+
+<!-- end custom head snippets -->
+
+  </head>
+
+  <body class="layout--single">
+
+    <!--[if lt IE 9]>
+<div class="notice--danger align-center" style="margin: 0;">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience.</div>
+<![endif]-->
+
+    <div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        <a class="site-title" href="/">Geospatial Workbook</a>
+        <ul class="visible-links">
+          
+            
+            <li class="masthead__menu-item">
+              <a href="http://localhost:4000/about.html" >About</a>
+            </li>
+          
+            
+            <li class="masthead__menu-item">
+              <a href="http://localhost:4000/list.html" >Index</a>
+            </li>
+          
+            
+            <li class="masthead__menu-item">
+              <a href="http://localhost:4000/glossary.html" >Glossary</a>
+            </li>
+          
+            
+            <li class="masthead__menu-item">
+              <a href="http://localhost:4000/people.html" >People</a>
+            </li>
+          
+            
+            <li class="masthead__menu-item">
+              <a href="http://localhost:4000/contributing.html" >Contribute</a>
+            </li>
+          
+        </ul>
+        
+        <button class="search__toggle" type="button">
+          <svg class="icon" width="16" height="16" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 15.99 16">
+            <path d="M15.5,13.12L13.19,10.8a1.69,1.69,0,0,0-1.28-.55l-0.06-.06A6.5,6.5,0,0,0,5.77,0,6.5,6.5,0,0,0,2.46,11.59a6.47,6.47,0,0,0,7.74.26l0.05,0.05a1.65,1.65,0,0,0,.5,1.24l2.38,2.38A1.68,1.68,0,0,0,15.5,13.12ZM6.4,2A4.41,4.41,0,1,1,2,6.4,4.43,4.43,0,0,1,6.4,2Z" transform="translate(-.01)"></path>
+          </svg>
+        </button>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">Toggle Menu</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+    <div class="initial-content">
+      
+  
+
+
+
+
+
+
+
+
+
+
+
+<div class="page__hero--overlay"
+  style="background-color: 444444; background-image: url('/assets/images/margaret-weir-GZyjbLNOaFg-unsplash_dark.jpg');"
+>
+  
+    <div class="wrapper">
+      <h1 id="page-title" class="page__title" itemprop="headline">
+        
+          Grep Command
+
+        
+      </h1>
+      
+      
+      
+    </div>
+  
+  
+</div>
+
+
+
+
+
+<div id="main" role="main">
+  
+
+  <article class="page" itemscope itemtype="http://schema.org/CreativeWork">
+    <meta itemprop="headline" content="Grep Command">
+    
+    
+    
+
+    <div class="page__inner-wrap">
+      
+
+      <section class="page__content" itemprop="text">
+        
+        <h2 id="grep"><code class="language-plaintext highlighter-rouge">grep</code></h2>
+
+<p><code class="language-plaintext highlighter-rouge">grep</code> (<code class="language-plaintext highlighter-rouge">g</code>lobally search a <code class="language-plaintext highlighter-rouge">r</code>egular <code class="language-plaintext highlighter-rouge">e</code>xpression and <code class="language-plaintext highlighter-rouge">p</code>rint) is one of the most useful commands in UNIX and it is commonly used to filter a file/input, line by line, against a pattern eg., to print each line of a file which contains a match for pattern.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>grep PATTERN FILENAME
+</code></pre></div></div>
+<p>Like any other command there are various options available for this command. Most useful options include:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: right">Argument</th>
+      <th style="text-align: left">Function</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: right"><code class="language-plaintext highlighter-rouge">-v</code></td>
+      <td style="text-align: left">inverts the match or finds lines NOT containing the pattern.</td>
+    </tr>
+    <tr>
+      <td style="text-align: right"><code class="language-plaintext highlighter-rouge">--color</code></td>
+      <td style="text-align: left">colors the matched text for easy visualization</td>
+    </tr>
+    <tr>
+      <td style="text-align: right"><code class="language-plaintext highlighter-rouge">-F</code></td>
+      <td style="text-align: left">interprets the pattern as a literal string.</td>
+    </tr>
+    <tr>
+      <td style="text-align: right"><code class="language-plaintext highlighter-rouge">-H</code>,<code class="language-plaintext highlighter-rouge">-h</code></td>
+      <td style="text-align: left">print, don’t print the matched filename</td>
+    </tr>
+    <tr>
+      <td style="text-align: right"><code class="language-plaintext highlighter-rouge">-i</code></td>
+      <td style="text-align: left">ignore case for the pattern matching.</td>
+    </tr>
+    <tr>
+      <td style="text-align: right"><code class="language-plaintext highlighter-rouge">-l</code></td>
+      <td style="text-align: left">lists the file names containing the pattern (instead of match).</td>
+    </tr>
+    <tr>
+      <td style="text-align: right"><code class="language-plaintext highlighter-rouge">-n</code></td>
+      <td style="text-align: left">prints the line number containing the pattern (instead of match).</td>
+    </tr>
+    <tr>
+      <td style="text-align: right"><code class="language-plaintext highlighter-rouge">-c</code></td>
+      <td style="text-align: left">counts the number of matches for a pattern</td>
+    </tr>
+    <tr>
+      <td style="text-align: right"><code class="language-plaintext highlighter-rouge">-o</code></td>
+      <td style="text-align: left">only print the matching pattern</td>
+    </tr>
+    <tr>
+      <td style="text-align: right"><code class="language-plaintext highlighter-rouge">-w</code></td>
+      <td style="text-align: left">forces the pattern to match an entire word.</td>
+    </tr>
+    <tr>
+      <td style="text-align: right"><code class="language-plaintext highlighter-rouge">-x</code></td>
+      <td style="text-align: left">forces patterns to match the whole line.</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>With options, syntax is</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>grep [OPTIONS] PATTERN FILENAME
+</code></pre></div></div>
+
+<p>Some typical scenarios to use <code class="language-plaintext highlighter-rouge">grep</code>:</p>
+<ul>
+  <li>Counting number of sequences in a multi-fasta sequence file</li>
+  <li>Get the header lines of fasta sequence file</li>
+  <li>Find a matching motif in a sequence file</li>
+  <li>Find restriction sites in sequence(s)</li>
+  <li>Get all the Gene IDs from a multi-fasta sequence files and many more.</li>
+</ul>
+
+<p>Now let’s use <code class="language-plaintext highlighter-rouge">grep</code> command to do some simple jobs with the sequences:</p>
+
+<h3 id="1-counting-sequences">1. Counting sequences:</h3>
+
+<p>By <code class="language-plaintext highlighter-rouge">FASTA</code> format definition, we know that number of sequences in a file should be equal to the number of description lines. So by counting <code class="language-plaintext highlighter-rouge">&gt;</code> in file, you can count the number of sequences. This can be done using counting option of the <code class="language-plaintext highlighter-rouge">grep</code> with its count option <code class="language-plaintext highlighter-rouge">-c</code>.</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>grep -c "&gt;" FILENAME
+</code></pre></div></div>
+<p>However, note that if the deflines somehow have <code class="language-plaintext highlighter-rouge">&gt;</code> more than once, it will mess up the count! to be safe, you can use:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>grep -c "^&gt;" FILENAME
+</code></pre></div></div>
+<p><strong><em>Task 2.3: Count the number of sequences AT_cDNA.fa and RefSeq.faa</em></strong></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>grep -c "&gt;" AT_cDNA.fa
+grep -c "&gt;" RefSeq.faa
+</code></pre></div></div>
+
+<h3 id="2--looking-for-genes-or-features">2.  Looking for genes or features:</h3>
+
+<p>If you are looking for information about the sequences, you can list all the headers (description lines) for the sequences using grep. Simply search for <code class="language-plaintext highlighter-rouge">&gt;</code> and grep will list all the description lines.</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>grep "&gt;" FILENAME
+grep "&gt;" AT_cDNA.fa
+</code></pre></div></div>
+<p>Alternatively, you can send it to a file if you want to use it later or you can just pipe it to less or more command to scroll through it line by line or page by page.</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>grep "&gt;" FILENAME &gt; HEADERFILE.txt
+grep "&gt;" FILENAME | less
+grep "&gt;" AT_cDNA.fa | less		
+</code></pre></div></div>
+<p>Use  ↑ or ↓ arrow keys to move up and down, press <code class="language-plaintext highlighter-rouge">q</code> to exit</p>
+
+<h3 id="3-subtracting-one-list-from-another">3. Subtracting one list from another:</h3>
+
+<p>If there is a small list of genes that you want to remove from a larger list, you can use the grep function with these options:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>grep -Fvw -f sub_list.txt full_list.txt
+</code></pre></div></div>
+<p>here <code class="language-plaintext highlighter-rouge">-F</code> and <code class="language-plaintext highlighter-rouge">-w</code> will make sure that the full word is used as literal string, <code class="language-plaintext highlighter-rouge">-v</code> will NOT print the matching patterns and <code class="language-plaintext highlighter-rouge">-f filename.txt</code> is to say that the input patterns are in the file.</p>
+
+<h3 id="4-count-a-word">4. Count a word:</h3>
+
+<p>Unlike previous example, if the word your are searching occurs more than once in a line, it will only be counted once. To avoid this, you need to use a special option</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>grep -o "PATTERN" FILENAME
+</code></pre></div></div>
+
+<p>Now, all sorts of useful information can be obtained by just printing the pattern, instead of entire line. For example, how many times do you see a word in every line:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>grep -on "PATTERN" FILENAME | cut -f 1 -d ":" | sort | uniq -c
+</code></pre></div></div>
+<p>This will print line number followed by number of times you see the <code class="language-plaintext highlighter-rouge">PATTERN</code> in that line.</p>
+
+<p>Now, let us have some fun with <code class="language-plaintext highlighter-rouge">grep</code>! See what kind of sequences are in <code class="language-plaintext highlighter-rouge">AT_cDNA.fa</code> file. Do they all seem to belong to same organism? Which organism?</p>
+
+<p>Using <code class="language-plaintext highlighter-rouge">grep</code> you can also locate all the lines that contain a specific term you are looking for. This is very useful, especially to look for a specific gene among a large number of annotated sequences.</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>grep "word or phrase to search" FILENAME
+</code></pre></div></div>
+<p><strong><em>Task 2.4: Try searching for your favorite gene, to see if it is present in AT_cDNA.fa (this file contains all annotated sequences for Arabidopsis thaliana). Unlike Google or any search engines, only exact search terms will be identified, but you can ask grep to ignore cases while searching using -i option. Try these:</em></strong></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>grep -i "transcription factor" AT_cDNA.fa
+grep -i "TFIIIA" AT_cDNA.fa
+</code></pre></div></div>
+<p>You can also use this feature to see if your sequence of interest has a specific feature (restriction site, motif etc.,) or not. This can be performed better using <code class="language-plaintext highlighter-rouge">--color</code> option of the <code class="language-plaintext highlighter-rouge">grep</code>.</p>
+
+<h3 id="5-search-a-motif">5. Search a motif:</h3>
+
+<p>Go to the sequences directory, search for <code class="language-plaintext highlighter-rouge">EcoR1</code> (<code class="language-plaintext highlighter-rouge">GAATTC</code>) site in the <code class="language-plaintext highlighter-rouge">NT21.fa</code> file, and use the color option. Also, try looking for a <code class="language-plaintext highlighter-rouge">C2H2</code> zinc finger motif in <code class="language-plaintext highlighter-rouge">RefSeq.faa</code> file (for simplicity let’s assume zinc finger motif to be <code class="language-plaintext highlighter-rouge">CXXXCXXXXXXXXXXHXXXH</code>. Either you can use dots to represent any amino acids or use complex regular expressions to come up with a more representative pattern. Try these:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>grep --color "GAATTC" ./Sequences/NT21.fa
+grep --color "C..C............H...H" RefSeq.faa
+</code></pre></div></div>
+
+<h3 id="6-finding-patterns-that-does-not-match">6. Finding patterns that DOES NOT match:</h3>
+
+<p>You can also use <code class="language-plaintext highlighter-rouge">grep</code> command to exclude the results containing your search term. Say if you want to look at genes that are not located in chromosome 1, you can exclude it form your search by specifying <code class="language-plaintext highlighter-rouge">-v</code> option.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>grep -i "transcription factor" AT_cDNA.fa| grep -v "chr1"
+grep -i "transcription factor" AT_cDNA.fa| grep "chr1"
+</code></pre></div></div>
+
+<p>Notice the difference in output from the above two commands.</p>
+
+<h3 id="7-searching-for-more-than-one-pattern">7. Searching for more than one pattern:</h3>
+
+<p>You can also use <code class="language-plaintext highlighter-rouge">grep</code> to find as set of patterns in the same command. <code class="language-plaintext highlighter-rouge">grep</code> will print the line containing any one of those patterns you specify. For this, run it as follows:</p>
+
+<p>Any one pattern of the three (<code class="language-plaintext highlighter-rouge">OR</code>)</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>grep 'pattern1|pattern2|pattern3' FILENAME
+</code></pre></div></div>
+
+<p>All three patterns (<code class="language-plaintext highlighter-rouge">AND</code>)</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>grep 'pattern1' FILENAME | grep 'pattern2' | grep 'pattern3'
+</code></pre></div></div>
+
+<p>Note that in the <code class="language-plaintext highlighter-rouge">OR</code> example, <code class="language-plaintext highlighter-rouge">|</code> stands for <code class="language-plaintext highlighter-rouge">or</code> while in the <code class="language-plaintext highlighter-rouge">AND</code> example it pipes the output from one command to another.</p>
+
+<p>Try to understand the following command lines (and record your results, where applicable):</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>grep -c -w "ATP" RefSeq.faa
+grep -c CGT[CA]GTG AT_cDNA.fa
+grep -l "ATG" ./sequences/*.fa
+</code></pre></div></div>
+
+<p>You can also try some regular expressions related to nucleotide/protein sequences provided earlier to see how it works.</p>
+
+<h3 id="8-finding-blank-lines">8. Finding blank lines</h3>
+
+<p><code class="language-plaintext highlighter-rouge">grep</code> can also be used to find blank lines. From the <code class="language-plaintext highlighter-rouge">regex</code> above, you have seen that <code class="language-plaintext highlighter-rouge">^</code> marks the beginning of a line, while <code class="language-plaintext highlighter-rouge">$</code> marks the end. So, by searching for <code class="language-plaintext highlighter-rouge">^$</code> you are looking for lines that have no content (blank).</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>grep "^$" FILENAME
+</code></pre></div></div>
+
+<p>Similarly, if you want to remove blank lines, you can try:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>grep -v "^$" FILENAME
+</code></pre></div></div>
+
+<h3 id="9-finding-all-the-files-that-contain-a-term">9. Finding all the files that contain a term</h3>
+
+<p>When dealing with multiple files, you will end up in situations where you want to process subset of files that are of interest. To quickly find those file, knowing a unique term that occurs in them, you can use <code class="language-plaintext highlighter-rouge">grep</code></p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>grep -rl "PATTERN" .
+</code></pre></div></div>
+<p>here <code class="language-plaintext highlighter-rouge">-r</code> recursively searches all files in sub-folders and <code class="language-plaintext highlighter-rouge">-l</code>, rather than printing the matching line, prints the filename after the first occurrence. Note the <code class="language-plaintext highlighter-rouge">.</code> at the end, it tells <code class="language-plaintext highlighter-rouge">grep</code> to use all the files that are in the directory. The result is that you will have a subset of files that are of interest to you.</p>
+
+<p>If you want files that do not you the term, you can replace <code class="language-plaintext highlighter-rouge">-l</code> with <code class="language-plaintext highlighter-rouge">-L</code> (like the option <code class="language-plaintext highlighter-rouge">-v</code> for negative match). This will list only files that <strong>DO NOT</strong> have any match.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>grep -rL "PATTERN" .
+</code></pre></div></div>
+
+<h3 id="10-print-lines-before-or-after-the-matching-term">10. Print lines before or after the matching term</h3>
+
+<p>With the regular <code class="language-plaintext highlighter-rouge">grep</code> search, you get the line containing the matching term. Sometimes, in order to know the context of this term, it is useful to print either lines before or after the term occurrence. With <code class="language-plaintext highlighter-rouge">-B</code> (for before) and <code class="language-plaintext highlighter-rouge">-A</code> (for after), you can specify the number of lines that you want to see.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>grep -B 10 "PATTERN" FILENAME
+</code></pre></div></div>
+<p>This will print 10 lines (including the line that has the <code class="language-plaintext highlighter-rouge">PATTERN</code>) before the match</p>
+
+<p>Similarly, to print lines after the match:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>grep -A 10 "PATTERN" FILENAME
+</code></pre></div></div>
+
+<p>You can also combine to get both before and after lines</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>grep -B 10 -A 10 "PATTERN" FILENAME
+</code></pre></div></div>
+
+<hr />
+<p><a href="../programs.md">Table of contents</a></p>
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+
+
+        
+      </footer>
+
+      
+
+      
+
+    </div>
+
+    
+  </article>
+
+  
+  
+</div>
+    </div>
+
+    
+      <div class="search-content">
+        <div class="search-content__inner-wrap"><form onsubmit="return googleCustomSearchExecute();" id="cse-search-box-form-id">
+    <input type="search" id="cse-search-input-box-id" aria-placeholder="Enter your search term..." class="search-input" tabindex="-1" placeholder="Enter your search term..." />
+    </form>
+    <div id="results" class="results">
+        <gcse:searchresults-only></gcse:searchresults-only>
+    </div></div>
+
+      </div>
+    
+    
+    <div class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+
+        <div class="page__footer-follow">
+  <ul class="social-icons">
+    
+      <li><strong>Follow:</strong></li>
+    
+    
+      <li><a href="https://twitter.com/isugif"><i class="fab fa-fw fa-twitter-square" aria-hidden="true"></i> Twitter</a></li>
+    
+    
+    
+      <li><a href="https://github.com/https://github.com/isugenomics"><i class="fab fa-fw fa-github" aria-hidden="true"></i> GitHub</a></li>
+    
+    
+    
+    
+  </ul>
+</div>
+
+<div class="page__footer-copyright">&copy; 2024 Geospatial Workbook</div>
+
+      </footer>
+    </div>
+
+    
+  <script src="/assets/js/main.min.js"></script>
+  <script src="https://use.fontawesome.com/releases/v5.0.13/js/all.js"></script>
+
+
+<script>
+  (function () {
+    var cx = '009853197685285203469:nsvri1pa88d';
+    var gcse = document.createElement('script');
+    gcse.type = 'text/javascript';
+    gcse.async = true;
+    gcse.src = 'https://cse.google.com/cse.js?cx=' + cx;
+    var s = document.getElementsByTagName('script')[0];
+    s.parentNode.insertBefore(gcse, s);
+  })();
+
+  function googleCustomSearchExecute() {
+    var input = document.getElementById('cse-search-input-box-id');
+    var element = google.search.cse.element.getElement('searchresults-only0');
+    if (input.value == '') {
+      element.clearAllResults();
+    } else {
+      element.execute(input.value);
+    }
+    return false;
+  }
+
+  
+</script>
+
+
+
+
+<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+<script id="MathJax-script" defer
+        src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+</script>
+
+
+
+
+  </body>
+</html>

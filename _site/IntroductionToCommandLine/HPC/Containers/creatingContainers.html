@@ -1,0 +1,519 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.11.2 by Michael Rose
+  Copyright 2013-2018 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE.txt
+-->
+<html lang="en" class="no-js">
+  <head>
+    <meta charset="utf-8">
+
+<!-- begin _includes/seo.html --><title>Useful Programs and Unix Basics - Geospatial Workbook</title>
+<meta name="description" content="Tutorial on Informatics for Geospatial Information">
+
+
+
+<meta property="og:type" content="website">
+<meta property="og:locale" content="en_US">
+<meta property="og:site_name" content="Geospatial Workbook">
+<meta property="og:title" content="Useful Programs and Unix Basics">
+<meta property="og:url" content="http://localhost:4000/IntroductionToCommandLine/HPC/Containers/creatingContainers.html">
+
+
+
+
+  <meta property="og:image" content="http://localhost:4000/assets/images/margaret-weir-GZyjbLNOaFg-unsplash_dark.jpg">
+
+
+
+  <meta name="twitter:site" content="@isugif">
+  <meta name="twitter:title" content="Useful Programs and Unix Basics">
+  <meta name="twitter:description" content="Tutorial on Informatics for Geospatial Information">
+  <meta name="twitter:url" content="http://localhost:4000/IntroductionToCommandLine/HPC/Containers/creatingContainers.html">
+
+  
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content="http://localhost:4000/assets/images/margaret-weir-GZyjbLNOaFg-unsplash_dark.jpg">
+  
+
+  
+
+
+
+
+
+
+
+  
+
+  
+
+
+<link rel="canonical" href="http://localhost:4000/IntroductionToCommandLine/HPC/Containers/creatingContainers.html">
+
+
+
+
+
+
+
+  <script type="application/ld+json">
+    {
+      "@context": "http://schema.org",
+      "@type": "Person",
+      "name": "",
+      "url": "http://localhost:4000",
+      "sameAs": null
+    }
+  </script>
+
+
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+<link href="/feed.xml" type="application/atom+xml" rel="alternate" title="Geospatial Workbook Feed">
+
+<!-- http://t.co/dKP3o1e -->
+<meta name="HandheldFriendly" content="True">
+<meta name="MobileOptimized" content="320">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+
+<!--[if lte IE 9]>
+  <style>
+    /* old IE unsupported flexbox fixes */
+    .greedy-nav .site-title {
+      padding-right: 3em;
+    }
+    .greedy-nav button {
+      position: absolute;
+      top: 0;
+      right: 0;
+      height: 100%;
+    }
+  </style>
+<![endif]-->
+
+
+    <!-- start custom head snippets -->
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-E6BZVYF8ZY"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-E6BZVYF8ZY');
+</script>
+
+<!-- insert favicons. use https://realfavicongenerator.net/ -->
+
+<!-- end custom head snippets -->
+
+  </head>
+
+  <body class="layout--single">
+
+    <!--[if lt IE 9]>
+<div class="notice--danger align-center" style="margin: 0;">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience.</div>
+<![endif]-->
+
+    <div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        <a class="site-title" href="/">Geospatial Workbook</a>
+        <ul class="visible-links">
+          
+            
+            <li class="masthead__menu-item">
+              <a href="http://localhost:4000/about.html" >About</a>
+            </li>
+          
+            
+            <li class="masthead__menu-item">
+              <a href="http://localhost:4000/list.html" >Index</a>
+            </li>
+          
+            
+            <li class="masthead__menu-item">
+              <a href="http://localhost:4000/glossary.html" >Glossary</a>
+            </li>
+          
+            
+            <li class="masthead__menu-item">
+              <a href="http://localhost:4000/people.html" >People</a>
+            </li>
+          
+            
+            <li class="masthead__menu-item">
+              <a href="http://localhost:4000/contributing.html" >Contribute</a>
+            </li>
+          
+        </ul>
+        
+        <button class="search__toggle" type="button">
+          <svg class="icon" width="16" height="16" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 15.99 16">
+            <path d="M15.5,13.12L13.19,10.8a1.69,1.69,0,0,0-1.28-.55l-0.06-.06A6.5,6.5,0,0,0,5.77,0,6.5,6.5,0,0,0,2.46,11.59a6.47,6.47,0,0,0,7.74.26l0.05,0.05a1.65,1.65,0,0,0,.5,1.24l2.38,2.38A1.68,1.68,0,0,0,15.5,13.12ZM6.4,2A4.41,4.41,0,1,1,2,6.4,4.43,4.43,0,0,1,6.4,2Z" transform="translate(-.01)"></path>
+          </svg>
+        </button>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">Toggle Menu</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+    <div class="initial-content">
+      
+  
+
+
+
+
+
+
+
+
+
+
+
+<div class="page__hero--overlay"
+  style="background-color: 444444; background-image: url('/assets/images/margaret-weir-GZyjbLNOaFg-unsplash_dark.jpg');"
+>
+  
+    <div class="wrapper">
+      <h1 id="page-title" class="page__title" itemprop="headline">
+        
+          Useful Programs and Unix Basics
+
+        
+      </h1>
+      
+      
+      
+    </div>
+  
+  
+</div>
+
+
+
+
+
+<div id="main" role="main">
+  
+
+  <article class="page" itemscope itemtype="http://schema.org/CreativeWork">
+    <meta itemprop="headline" content="Useful Programs and Unix Basics">
+    
+    
+    
+
+    <div class="page__inner-wrap">
+      
+
+      <section class="page__content" itemprop="text">
+        
+        <h2 id="creating-your-own-singularity-containers--what-you-need-to-know">Creating your own Singularity containers.  What you need to know.</h2>
+
+<p>This tutorial will help you create your own Singularity container using a github, a recipe file and Singularity Hub.  It will also suggest a GitHub repo organization that will maximize a researcher’s ability to utilize your scripts and pipelines in your repo.</p>
+
+<p>You will need:</p>
+<ul>
+  <li>A GitHub Repo <a href="https://github.com/">https://github.com/</a></li>
+  <li>A Singularity Account <a href="https://www.singularity-hub.org/">https://www.singularity-hub.org/</a></li>
+  <li>Singularity installed locally via the vagrant virtual machine or on a linux machine where you have root access. <a href="/IntroductionToCommandLine/HPC/Containers/Intro_Singularity.html">See Intro to Singularity</a></li>
+</ul>
+
+<h4 id="example-recipe-shubisugifsingularityutilitiesutilities100-for-some-basic-scripts-we-use-in-gif">Example recipe (shub://ISUGIFsingularity/utilities:utilities.1.0.0) for some basic scripts we use in GIF</h4>
+<p>While it isn’t necessary to build a container for this as it is more efficient to have the scripts in your path on your machine, I used this a toy example to familiarize myself with container images, recipes and wrappers.</p>
+
+<p>Singularity Recipes have Five main sections</p>
+<ul>
+  <li><strong>Header information</strong></li>
+  <li><strong>%labels</strong>       :information about the container</li>
+  <li><strong>%environment</strong>  : environmental variables and modules to load.</li>
+  <li><strong>%post</strong>         : commands to run during the creation of the container</li>
+  <li><strong>%runscript</strong>    : program to run if the image is executed</li>
+</ul>
+
+<p>You can find more information about these sections on the <a href="http://singularity.lbl.gov/docs-recipes#environment">singularity website</a></p>
+
+<p>You can bootstrap from existing images either from Docker or Singularity.</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Bootstrap:docker
+From:centos:7
+
+Bootstrap:shub
+From:ResearchIT/spack-singularity:openmpi
+</code></pre></div></div>
+
+<p>Here is an example where we use a prebuilt singularity container that has spack installed.  <a href="https://spack.io/">Spack</a> is community driven package manager that attempts to improve scientific reproducibility by providing installation methods for software installation. By combining spack methods with container recipes we can capture both the reproducibility of installation but also the entire environment.  In addition, spack makes creating singularity containers extremely straight forward so long as the <a href="http://spack.readthedocs.io/en/latest/package_list.html">package is found in spack</a>.</p>
+
+<h4 id="example-prepare_genome_modules">Example prepare_genome_modules</h4>
+
+<p>In this example we use the spack base singularity image and build onto it by installing gsnap, bowtie2, bwa, gatk bedtools2, samtools, picard and java.  These installations which can be long and involved are a 3 word command in spack (see %post section below)</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Bootstrap:shub
+From:ResearchIT/spack-singularity:openmpi
+
+%labels
+MAINTAINER severin@iastate.edu
+APPLICATION genomeModules
+
+%help
+This container contains all the necessary programs to create genome modules.
+See https://github.com/ISUGIFsingularity/genomeModules.git for more information
+
+%environment
+source /etc/profile.d/modules.sh
+SPACK_ROOT=/opt/spack
+export SPACK_ROOT
+export PATH=$SPACK_ROOT/bin:$PATH
+source /etc/profile.d/modules.sh
+source $SPACK_ROOT/share/spack/setup-env.sh
+export PATH=$SPACK_ROOT/isugif/utilities/bin:$SPACK_ROOT/utilities/wrappers:$PATH
+#for d in /opt/spack/opt/spack/linux-centos7-x86_64/gcc-4.8.5/*/bin; do export PATH="$PATH:$d"; done
+
+module load gmap-gsnap
+module load bowtie2
+module load bwa
+module load gatk
+module load bedtools2
+module load samtools
+module load picard
+module load jdk
+export _JAVA_OPTIONS="-Xmx100G"
+module load parallel
+
+%post
+export SPACK_ROOT=/opt/spack
+export SPACK_ROOT
+export PATH=$SPACK_ROOT/bin:$PATH
+
+yum -y install bc paste
+yum clean all
+
+export FORCE_UNSAFE_CONFIGURE=1
+
+source $SPACK_ROOT/share/spack/setup-env.sh
+spack install picard
+spack install gmap-gsnap
+spack install bowtie2
+spack install bwa
+spack install gatk
+spack install bedtools2
+spack install samtools
+spack install parallel
+
+#for d in /opt/spack/opt/spack/linux-centos7-x86_64/gcc-4.8.5/*/bin; do export PATH="$PATH:$d"; done
+
+
+cd $SPACK_ROOT
+
+%runscript
+echo "This container contains a environment and all prequisite programs to run prepare_genome_modules.sh"
+
+
+</code></pre></div></div>
+
+<h4 id="building-an-image">Building an image</h4>
+<p>If working locally start a singularity VM</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>vagrant init singularityware/singularity-2.4
+vagrant up
+vagrant ssh
+</code></pre></div></div>
+
+<p>Place the example recipe above into a file named recipe then create a singularity image we will call test.simg using the following command.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sudo singularity build test.simg recipe
+</code></pre></div></div>
+
+<h2 id="singularity-containers-and-github-repos">Singularity containers and GitHub Repos</h2>
+
+<p>One of the goals of GitHub is to share code and scripts that we find useful so that others may also find it useful.  Containers take this to another level by providing all the prerequisites built into the script itself.  ISUGIF is implementing the use of containers for all our scripts we have online so that they can be used without fear of problems due to differences in HPC environment like different names for common required modules.  You can find our <a href="https://github.com/ISUGIFsingularity">singularity repos here</a></p>
+
+<h4 id="organization-of-the-github-repo">Organization of the GitHub Repo</h4>
+
+<p>let’s start by downloading the example we have used throughout this tutorial.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git clone https://github.com/ISUGIFsingularity/utilities.git
+cd utilities
+ls
+</code></pre></div></div>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>README.md         Singularity.1.0.0 utilities         wrappers
+</code></pre></div></div>
+
+<p>In this repo, you will find the</p>
+<ul>
+  <li><strong>README.md</strong> Text file that describes the repo which also includes where to download the singularity from singulairty-hub</li>
+  <li><strong>Singularity.1.0.1</strong> Text file with the recipe that Singularity hub uses to generate the singularity container on their website</li>
+  <li><strong>utilities</strong> A folder that contains all the scripts I wanted to share</li>
+  <li><strong>wrappers</strong> A folder that contains bash script wrappers that call the singularity program using the singularity image produced by Singularity-hub and the scripts in the utilities folder.</li>
+</ul>
+
+<p>The GitHub repo can now be used in the traditional way where you git clone the repo and use the functions inside utilities or it can be used with the new method by calling singularity containers.  The new method has the advantage that all modules and prerequisites you may need in a script or pipeline is already included!</p>
+
+<h4 id="creating-wrappers-for-the-singularity-commands">creating wrappers for the singularity commands</h4>
+
+<p>Here is an example bash script wrapper for a singularity execution of a command in a container.  The use of singularity is completely hidden to the user.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>new_assemblathon
+#!/bin/bash
+
+singularity exec ISUGIFsingularity-utilities-master.simg ../utilities/new_Assemblathon.pl
+</code></pre></div></div>
+
+<h4 id="naming-schema">Naming Schema</h4>
+
+<ul>
+  <li>Singularity requires that you have a recepe named as Singularity.XXX  Where XXX is usually the version number.</li>
+  <li>These Recipe files are contained in individual github Repos with more descriptive names.</li>
+  <li>On Singularityhub it will be OrganizationName/RepoName/recipeFilename</li>
+  <li>On Github you will create a descriptive named repo for every singularity container you want to make and create a recipe file contained in that Repo starting with Singularity.</li>
+</ul>
+
+<h4 id="more-information-about-containers">More Information about containers</h4>
+
+<ul>
+  <li><a href="http://singularity.lbl.gov/docs-scif-apps">Apps within containers</a></li>
+  <li><a href="http://singularity.lbl.gov/docs-recipes#environment">Recipe sections</a></li>
+</ul>
+
+<h4 id="next-tutorial-modifying-existing-containers-for-interesting">Next tutorial Modifying existing containers for interesting</h4>
+
+<ul>
+  <li><a href="/IntroductionToCommandLine/HPC/Containers/modifyingExistingContainers.html">Modifying Existing Containers</a></li>
+</ul>
+
+<hr />
+<p><a href="../../programs.md">Table of contents</a></p>
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+
+
+        
+      </footer>
+
+      
+
+      
+
+    </div>
+
+    
+  </article>
+
+  
+  
+</div>
+    </div>
+
+    
+      <div class="search-content">
+        <div class="search-content__inner-wrap"><form onsubmit="return googleCustomSearchExecute();" id="cse-search-box-form-id">
+    <input type="search" id="cse-search-input-box-id" aria-placeholder="Enter your search term..." class="search-input" tabindex="-1" placeholder="Enter your search term..." />
+    </form>
+    <div id="results" class="results">
+        <gcse:searchresults-only></gcse:searchresults-only>
+    </div></div>
+
+      </div>
+    
+    
+    <div class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+
+        <div class="page__footer-follow">
+  <ul class="social-icons">
+    
+      <li><strong>Follow:</strong></li>
+    
+    
+      <li><a href="https://twitter.com/isugif"><i class="fab fa-fw fa-twitter-square" aria-hidden="true"></i> Twitter</a></li>
+    
+    
+    
+      <li><a href="https://github.com/https://github.com/isugenomics"><i class="fab fa-fw fa-github" aria-hidden="true"></i> GitHub</a></li>
+    
+    
+    
+    
+  </ul>
+</div>
+
+<div class="page__footer-copyright">&copy; 2024 Geospatial Workbook</div>
+
+      </footer>
+    </div>
+
+    
+  <script src="/assets/js/main.min.js"></script>
+  <script src="https://use.fontawesome.com/releases/v5.0.13/js/all.js"></script>
+
+
+<script>
+  (function () {
+    var cx = '009853197685285203469:nsvri1pa88d';
+    var gcse = document.createElement('script');
+    gcse.type = 'text/javascript';
+    gcse.async = true;
+    gcse.src = 'https://cse.google.com/cse.js?cx=' + cx;
+    var s = document.getElementsByTagName('script')[0];
+    s.parentNode.insertBefore(gcse, s);
+  })();
+
+  function googleCustomSearchExecute() {
+    var input = document.getElementById('cse-search-input-box-id');
+    var element = google.search.cse.element.getElement('searchresults-only0');
+    if (input.value == '') {
+      element.clearAllResults();
+    } else {
+      element.execute(input.value);
+    }
+    return false;
+  }
+
+  
+</script>
+
+
+
+
+<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+<script id="MathJax-script" defer
+        src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+</script>
+
+
+
+
+  </body>
+</html>

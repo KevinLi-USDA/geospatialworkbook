@@ -1,0 +1,762 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.11.2 by Michael Rose
+  Copyright 2013-2018 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE.txt
+-->
+<html lang="en" class="no-js">
+  <head>
+    <meta charset="utf-8">
+
+<!-- begin _includes/seo.html --><title>R script to distribute another R script over many files - Geospatial Workbook</title>
+<meta name="description" content="Tutorial on Informatics for Geospatial Information">
+
+
+  <meta name="author" content="Heather Savoy">
+
+
+<meta property="og:type" content="website">
+<meta property="og:locale" content="en_US">
+<meta property="og:site_name" content="Geospatial Workbook">
+<meta property="og:title" content="R script to distribute another R script over many files">
+<meta property="og:url" content="http://localhost:4000/ExampleGeoWorkflows/GRWG22_JobPerDataFile_R.html">
+
+
+
+
+  <meta property="og:image" content="http://localhost:4000/assets/images/margaret-weir-GZyjbLNOaFg-unsplash_dark.jpg">
+
+
+
+  <meta name="twitter:site" content="@isugif">
+  <meta name="twitter:title" content="R script to distribute another R script over many files">
+  <meta name="twitter:description" content="Tutorial on Informatics for Geospatial Information">
+  <meta name="twitter:url" content="http://localhost:4000/ExampleGeoWorkflows/GRWG22_JobPerDataFile_R.html">
+
+  
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content="http://localhost:4000/assets/images/margaret-weir-GZyjbLNOaFg-unsplash_dark.jpg">
+  
+
+  
+    <meta name="twitter:creator" content="@someone">
+  
+
+
+
+
+
+
+
+  
+
+  
+
+
+<link rel="canonical" href="http://localhost:4000/ExampleGeoWorkflows/GRWG22_JobPerDataFile_R.html">
+
+
+
+
+
+
+
+  <script type="application/ld+json">
+    {
+      "@context": "http://schema.org",
+      "@type": "Person",
+      "name": "",
+      "url": "http://localhost:4000",
+      "sameAs": null
+    }
+  </script>
+
+
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+<link href="/feed.xml" type="application/atom+xml" rel="alternate" title="Geospatial Workbook Feed">
+
+<!-- http://t.co/dKP3o1e -->
+<meta name="HandheldFriendly" content="True">
+<meta name="MobileOptimized" content="320">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+
+<!--[if lte IE 9]>
+  <style>
+    /* old IE unsupported flexbox fixes */
+    .greedy-nav .site-title {
+      padding-right: 3em;
+    }
+    .greedy-nav button {
+      position: absolute;
+      top: 0;
+      right: 0;
+      height: 100%;
+    }
+  </style>
+<![endif]-->
+
+
+    <!-- start custom head snippets -->
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-E6BZVYF8ZY"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-E6BZVYF8ZY');
+</script>
+
+<!-- insert favicons. use https://realfavicongenerator.net/ -->
+
+<!-- end custom head snippets -->
+
+  </head>
+
+  <body class="layout--single">
+
+    <!--[if lt IE 9]>
+<div class="notice--danger align-center" style="margin: 0;">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience.</div>
+<![endif]-->
+
+    <div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        <a class="site-title" href="/">Geospatial Workbook</a>
+        <ul class="visible-links">
+          
+            
+            <li class="masthead__menu-item">
+              <a href="http://localhost:4000/about.html" >About</a>
+            </li>
+          
+            
+            <li class="masthead__menu-item">
+              <a href="http://localhost:4000/list.html" >Index</a>
+            </li>
+          
+            
+            <li class="masthead__menu-item">
+              <a href="http://localhost:4000/glossary.html" >Glossary</a>
+            </li>
+          
+            
+            <li class="masthead__menu-item">
+              <a href="http://localhost:4000/people.html" >People</a>
+            </li>
+          
+            
+            <li class="masthead__menu-item">
+              <a href="http://localhost:4000/contributing.html" >Contribute</a>
+            </li>
+          
+        </ul>
+        
+        <button class="search__toggle" type="button">
+          <svg class="icon" width="16" height="16" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 15.99 16">
+            <path d="M15.5,13.12L13.19,10.8a1.69,1.69,0,0,0-1.28-.55l-0.06-.06A6.5,6.5,0,0,0,5.77,0,6.5,6.5,0,0,0,2.46,11.59a6.47,6.47,0,0,0,7.74.26l0.05,0.05a1.65,1.65,0,0,0,.5,1.24l2.38,2.38A1.68,1.68,0,0,0,15.5,13.12ZM6.4,2A4.41,4.41,0,1,1,2,6.4,4.43,4.43,0,0,1,6.4,2Z" transform="translate(-.01)"></path>
+          </svg>
+        </button>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">Toggle Menu</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+    <div class="initial-content">
+      
+  
+
+
+
+
+
+
+
+
+
+
+
+<div class="page__hero--overlay"
+  style="background-color: 444444; background-image: url('/assets/images/margaret-weir-GZyjbLNOaFg-unsplash_dark.jpg');"
+>
+  
+    <div class="wrapper">
+      <h1 id="page-title" class="page__title" itemprop="headline">
+        
+          R script to distribute another R script over many files
+
+        
+      </h1>
+      
+      
+      
+    </div>
+  
+  
+</div>
+
+
+
+
+
+<div id="main" role="main">
+  
+  <div class="sidebar sticky">
+  
+
+
+<div itemscope itemtype="http://schema.org/Person">
+
+  
+    <div class="author__avatar">
+      
+
+      
+        <img src="/assets/images/people/HeatherSavoy.png" alt="Heather Savoy" itemprop="image">
+      
+    </div>
+  
+
+  <div class="author__content">
+    
+      <h3 class="author__name" itemprop="name">Heather Savoy</h3>
+    
+    
+      <p class="author__bio" itemprop="description">
+        Heather is a Computational Biologist (Data Scientist) in the USDA-ARS SCINet Office. Her research interests include applying informatics methods to multidisciplinary agro-ecosystem problems and building data science software tools for geospatial research. She received her Ph.D. in Civil and Environmental Engineering with an emphasis in Computational Data Science and Engineering from the University of California Berkeley. She also holds a B.S. in Environmental Science with a minor in Computational Mathematics from the Florida Institute of Technology.
+      </p>
+    
+  </div>
+
+  <div class="author__urls-wrapper">
+    <button class="btn btn--inverse">Follow</button>
+    <ul class="author__urls social-icons">
+      
+
+      
+
+      
+        <li>
+          <a href="mailto:mailto:heather.savoy@usda.gov">
+            <meta itemprop="email" content="mailto:heather.savoy@usda.gov" />
+            <i class="fas fa-fw fa-envelope-square" aria-hidden="true"></i> Email
+          </a>
+        </li>
+      
+
+      
+
+      
+        <li>
+          <a href="https://twitter.com/someone" itemprop="sameAs">
+            <i class="fab fa-fw fa-twitter-square" aria-hidden="true"></i> Twitter
+          </a>
+        </li>
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      <!--
+  <li>
+    <a href="http://link-to-whatever-social-network.com/user/" itemprop="sameAs">
+      <i class="fas fa-fw" aria-hidden="true"></i> Custom Social Profile Link
+    </a>
+  </li>
+-->
+    </ul>
+  </div>
+</div>
+
+<!-- Create a 2nd author for tutorials -->
+
+
+
+<div itemscope itemtype="http://schema.org/Person">
+
+  
+
+  <div class="author__content">
+    
+      <h3 class="author__name" itemprop="name"></h3>
+    
+    
+  </div>
+
+  <div class="author__urls-wrapper">
+    <button class="btn btn--inverse">Follow</button>
+    <ul class="author__urls social-icons">
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      <!--
+  <li>
+    <a href="http://link-to-whatever-social-network.com/user/" itemprop="sameAs">
+      <i class="fas fa-fw" aria-hidden="true"></i> Custom Social Profile Link
+    </a>
+  </li>
+-->
+    </ul>
+  </div>
+</div>
+
+  
+  </div>
+
+
+  <article class="page" itemscope itemtype="http://schema.org/CreativeWork">
+    <meta itemprop="headline" content="R script to distribute another R script over many files">
+    
+    
+    
+
+    <div class="page__inner-wrap">
+      
+
+      <section class="page__content" itemprop="text">
+        
+        <p><strong>Last Update:</strong> 7 October 2022 <br />
+<strong>Download RMarkdown</strong>: <a href="https://geospatial.101workbook.org/tutorials/GRWG22_JobPerDataFile.Rmd">GRWG22_JobPerDataFile.Rmd</a></p>
+
+<h2 id="overview">Overview</h2>
+
+<p>This tutorial covers how to use an R script to list many input files and submit
+a SLURM job script to apply another R script to the input files. No actual 
+geospatial analyses are applied in this example as it was a generic request
+during the 10th session of the Geospatial Research Working Group Workshop 2022.</p>
+
+<p>If you prefer to have a single SLURM submission script iterate over your data 
+inputs, see <a href="https://geospatial.101workbook.org/ExampleGeoWorkflows/GRWG22_ZonalStats_wSLURM_R">this tutorial</a>.</p>
+
+<p>The instructions below will be mostly the same for both Ceres and Atlas. Choose
+either cluster to work on for the tutorial. There is one line you will need to
+modify in this tutorial and your options depend on which cluster you are currently
+using.</p>
+
+<p><em>Language:</em> <code class="language-plaintext highlighter-rouge">R</code></p>
+
+<h2 id="nomenclature">Nomenclature</h2>
+
+<ul>
+  <li><em>SLURM Workload Manager:</em> The software on Ceres and Atlas that allocates 
+compute cores to users for their submitted jobs.</li>
+</ul>
+
+<h2 id="analysis-steps">Analysis Steps</h2>
+
+<ul>
+  <li>Write and save a serial R script that accepts command line arguments</li>
+  <li>Write and save a SLURM job submission script template</li>
+  <li>Write and save a serial R script that lists files and submits jobs</li>
+  <li>Execute the R script for submitting many jobs</li>
+</ul>
+
+<h2 id="step-1-write-and-save-a-serial-r-script-that-accepts-command-line-arguments">Step 1: Write and save a serial R script that accepts command line arguments</h2>
+
+<p>Save the code chunk below as <code class="language-plaintext highlighter-rouge">JobPerDataFile_calculate.R</code>. This is a fake 
+‘calculation’. The script will print the filename it was passed and wait for two 
+minutes just so we can see the job associated with it in the queue. The intent
+of this example R script is to represent a generic R script that accepts one
+command line argument, e.g. the filename of a data input file that you would
+like to process in R, and a calculation, e.g. the code associated with that 
+processing you want to do to each data input file.</p>
+
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">## You could put any R code here, with or without parallel packages like </span><span class="w">
+</span><span class="c1">## `parallel` or `doParallel`. If you do have parallel packages, you would need </span><span class="w">
+</span><span class="c1">## to requests more tasks in the submission script, e.g. --ntasks-per-node=16</span><span class="w">
+</span><span class="c1">## for 16 cores.</span><span class="w">
+
+</span><span class="c1"># Read in the input filename</span><span class="w">
+</span><span class="n">args</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">commandArgs</span><span class="p">(</span><span class="n">trailingOnly</span><span class="o">=</span><span class="kc">TRUE</span><span class="p">)</span><span class="w">
+</span><span class="n">my_file</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">args</span><span class="p">[</span><span class="m">1</span><span class="p">]</span><span class="w">
+
+</span><span class="c1"># Do the 'calculation'</span><span class="w">
+</span><span class="n">cat</span><span class="p">(</span><span class="s2">"Processing:"</span><span class="p">,</span><span class="w"> </span><span class="n">my_file</span><span class="p">)</span><span class="w">
+</span><span class="n">Sys.sleep</span><span class="p">(</span><span class="m">120</span><span class="p">)</span><span class="w">
+</span></code></pre></div></div>
+
+<h2 id="step-2-write-and-save-a-slurm-job-submission-script-template">Step 2: Write and save a SLURM job submission script template</h2>
+
+<p>Save the code chunk below as <code class="language-plaintext highlighter-rouge">JobPerDataFile_template.sh</code>. We will use these 
+lines as a job submission script template and replace the <code class="language-plaintext highlighter-rouge">&lt;THE_DATA_FILE_TRIM&gt;</code> 
+and <code class="language-plaintext highlighter-rouge">&lt;THE_DATA_FILE&gt;</code> strings with each of our filenames we want to pass to 
+<em>JobPerDataFile_calculate.R</em>. Note that the one thing you will need to change in
+this tutorial is the account name in this script template.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">#!/bin/bash</span>
+
+<span class="c">#SBATCH --time=00:05:00       # walltime limit (HH:MM:SS)</span>
+<span class="c">#SBATCH --nodes=1             # number of nodes</span>
+<span class="c">#SBATCH --ntasks-per-node=2   # 1 processor core(s) per node X 2 threads per core</span>
+<span class="c">#SBATCH --job-name=&lt;THE_DATA_FILE_TRIM&gt;</span>
+<span class="c">#SBATCH --output=slurm_%x.out</span>
+<span class="c">#SBATCH --account=yourProjectName  # REPLACE</span>
+
+<span class="c"># LOAD MODULES, INSERT CODE, AND RUN YOUR PROGRAMS HERE</span>
+module load r
+
+Rscript <span class="nt">--vanilla</span> JobPerDataFile_calculate.R &lt;THE_DATA_FILE&gt;
+
+</code></pre></div></div>
+
+<p>The meaning of our parameter choices:</p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">time=00:05:00</code>: Our tasks will take up to 5 minutes to run.</li>
+  <li><code class="language-plaintext highlighter-rouge">nodes=1</code>: We only need one node. If you are just getting started with parallel
+processing, you will likely only need one node.</li>
+  <li><code class="language-plaintext highlighter-rouge">ntasks-per-node=2</code>: We want two logical cores on our one node, i.e. each task
+will use one physical core. Our individual tasks are serial and only need one core.</li>
+  <li><code class="language-plaintext highlighter-rouge">job-name=&lt;THE_DATA_FILE_TRIM&gt;</code>: We want to assign a job name ourselves instead
+of relying on a JOBID assigned by SLURM for identifying our job on the queue. We will
+be overwriting <code class="language-plaintext highlighter-rouge">&lt;THE_DATA_FILE_TRIM&gt;</code> with trimmed filenames in the next step.</li>
+  <li><code class="language-plaintext highlighter-rouge">--output=slurm_%x.out</code>: Save any output from R (e.g. printed messages,
+warnings, and errors) to a file with a filename in the format of 
+<em>output_JOBNAME.out</em>.</li>
+  <li><code class="language-plaintext highlighter-rouge">--account=yourProjectName</code>: Atlas requires an account name but Ceres does not. 
+If you are on Atlas, you will need to replace <code class="language-plaintext highlighter-rouge">yourProjectName</code> with the name of
+one of your projects. If you do not know your available projects, you can
+run
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code> sacctmgr show associations where user=$USER format=account%20
+</code></pre></div>    </div>
+    <p>on either cluster to list the names. On Ceres, you have option to replace 
+<code class="language-plaintext highlighter-rouge">yourProjectName</code> with the name of one of your projects, or delete the whole 
+line from the script.</p>
+  </li>
+</ul>
+
+<p>Note: there are additional SLURM parameters you may use, including how to specify
+your own job ID or setting memory requirements. Check out the 
+<a href="https://scinet.usda.gov/support/ceres-job-script">Ceres</a> or 
+<a href="https://www.hpc.msstate.edu/computing/atlas/">Atlas (scroll down to ‘Atlas Job Script Generator’ section)</a>
+job script generator to see more examples on how to populate job submission scripts on Ceres.</p>
+
+<h2 id="step-3-list-files-and-submit-jobs">Step 3: List files and submit jobs</h2>
+
+<p>Save the code chunk below as <code class="language-plaintext highlighter-rouge">JobPerDataFile_submit.R</code>. It will:</p>
+
+<ol>
+  <li>Read in the job template we defined above</li>
+  <li>List data files with a certain pattern in a chosen directory (in this example,
+all ending in ‘R’ or ‘sh’ in our working directory, including sub-directories)</li>
+  <li>For each data file found, overwrite placeholders in template and submit the
+job to SLURM.</li>
+</ol>
+
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Objective: This R script will generate SLURM jobs to apply</span><span class="w">
+</span><span class="c1"># another R script to each data file in nested directories. </span><span class="w">
+
+</span><span class="c1"># 1. Read in SLURM submission template</span><span class="w">
+</span><span class="n">job_template_f</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="s1">'JobPerDataFile_template.sh'</span><span class="w">
+</span><span class="n">job_template</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">readLines</span><span class="p">(</span><span class="n">job_template_f</span><span class="p">)</span><span class="w">
+
+</span><span class="c1"># 2. List data files in directories</span><span class="w">
+</span><span class="n">dir_to_start</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">getwd</span><span class="p">()</span><span class="w"> </span><span class="c1"># wherever your data files begin</span><span class="w">
+</span><span class="n">file_pattern</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="s1">'R$|sh$'</span><span class="w"> </span><span class="c1"># only find certain filename patterns</span><span class="w">
+</span><span class="n">data_files</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">list.files</span><span class="p">(</span><span class="n">path</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">dir_to_start</span><span class="p">,</span><span class="w"> 
+                         </span><span class="n">pattern</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">file_pattern</span><span class="p">,</span><span class="w">  </span><span class="c1"># optional</span><span class="w">
+                         </span><span class="n">recursive</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">)</span><span class="w"> </span><span class="c1"># search in sub-directories</span><span class="w">
+
+</span><span class="c1"># 3. For each data file, write a submission script and submit</span><span class="w">
+</span><span class="c1"># Note, the submission script it being over-written for each</span><span class="w">
+</span><span class="c1"># data file. </span><span class="w">
+</span><span class="n">job_script_f</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="s1">'JobPerDataFile.sh'</span><span class="w">
+</span><span class="k">for</span><span class="p">(</span><span class="n">d_f</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="n">data_files</span><span class="p">){</span><span class="w">
+  </span><span class="c1"># Write data file into slurm job template</span><span class="w">
+  </span><span class="n">slurm_instructions</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">gsub</span><span class="p">(</span><span class="s1">'&lt;THE_DATA_FILE&gt;'</span><span class="p">,</span><span class="w">
+                             </span><span class="n">d_f</span><span class="p">,</span><span class="w"> 
+                             </span><span class="n">job_template</span><span class="p">)</span><span class="w">
+  </span><span class="c1"># Remove file extension and use the basename</span><span class="w">
+  </span><span class="c1"># as your job ID and name</span><span class="w">
+  </span><span class="n">d_f_trimmed</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">tools</span><span class="o">::</span><span class="n">file_path_sans_ext</span><span class="p">(</span><span class="n">d_f</span><span class="p">)</span><span class="w">
+  </span><span class="n">slurm_instructions</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">gsub</span><span class="p">(</span><span class="s1">'&lt;THE_DATA_FILE_TRIM&gt;'</span><span class="p">,</span><span class="w">
+                             </span><span class="n">d_f_trimmed</span><span class="p">,</span><span class="w"> 
+                             </span><span class="n">slurm_instructions</span><span class="p">)</span><span class="w">
+  
+  </span><span class="c1"># Save instructions to batch script</span><span class="w">
+  </span><span class="n">writeLines</span><span class="p">(</span><span class="n">slurm_instructions</span><span class="p">,</span><span class="w">
+             </span><span class="n">job_script_f</span><span class="p">)</span><span class="w">
+  
+  </span><span class="c1"># Submit the job</span><span class="w">
+  </span><span class="n">system</span><span class="p">(</span><span class="n">paste</span><span class="p">(</span><span class="s1">'sbatch'</span><span class="p">,</span><span class="n">job_script_f</span><span class="p">))</span><span class="w">
+</span><span class="p">}</span><span class="w">
+
+</span></code></pre></div></div>
+
+<h2 id="step-4-execute-the-r-script-for-submitting-many-jobs">Step 4: Execute the R script for submitting many jobs</h2>
+
+<p>Now that we have our calculation script (<em>JobPerDataFile_calculate.R</em>), our job
+script template (<em>JobPerDataFile_template.sh</em>), and a script for updating that template
+with our input files and then submitting it as a job (<em>JobPerDataFile_submit.R</em>), we
+can execute that last script to submit a job for each of our input files. The
+line below executed in the shell with run our <em>JobPerDataFile_submit.R</em> script.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>module load r
+Rscript <span class="nt">--vanilla</span> JobPerDataFile_submit.R
+</code></pre></div></div>
+
+<p>You will see a message from SLURM about a submitted job for each input file your 
+R script found:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Submitted batch job 8145023
+Submitted batch job 8145024
+Submitted batch job 8145025
+</code></pre></div></div>
+
+<h2 id="step-4-check-results">Step 4: Check results</h2>
+
+<p>To see the status of your job, you can view the SLURM queue. The queue lists all
+of the jobs currently submitted, who submitted them, the job status, and what
+nodes are allocated to the job. Since this can be a very long list, it is easiest
+to find your jobs if you filter the queue to only the jobs you submitted. The 
+command to view the queue is <code class="language-plaintext highlighter-rouge">squeue</code> and you can filter it to a specific user
+with the <code class="language-plaintext highlighter-rouge">-u</code> parameter followed by their SCINet account name.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>squeue <span class="nt">-u</span> firstname.lastname
+</code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>       JOBID PARTITION     NAME     USER ST       TIME  NODES NODELIST(REASON)
+     8145023     short JobPerDa heather.  R       0:04      1 ceres20-compute-3
+     8145024     short JobPerDa heather.  R       0:04      1 ceres20-compute-3
+     8145025     short JobPerDa heather.  R       0:04      1 ceres20-compute-3
+</code></pre></div></div>
+
+<p>If you see jobs listed in the queue: you have jobs currently in the queue and the 
+status column will indicate if that job is pending, running, or completing. Since 
+our ‘calculation’ takes two minutes, you should see these jobs (one for each 
+data input file) with the status ‘R’ for running for approximately two minutes.
+If you do NOT see jobs listed in the queue: you do not have jobs currently in the
+queue. If you submitted jobs but they are not listed, then they completed - either
+successfully or unsuccessfully.</p>
+
+<p>To determine if the job executed successfully, 
+you may check if your anticipated output was created. In our case, we would expect
+to see a <em>slurm_THE_DATA_FILE_TRIM.out</em> file for each .R or .sh file in our 
+current directory. At a minimum, you will have <em>JobPerDataFile_calculate.R</em>,
+<em>JobPerDataFile_template.sh</em>, and <em>JobPerDataFile_submit.R</em> from this example as input files.
+Inside each, there should be a message for each data file, for example:</p>
+
+<blockquote>
+  <p>Processing: JobPerDataFile_calculate.R</p>
+</blockquote>
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+
+
+        
+      </footer>
+
+      
+
+      
+
+    </div>
+
+    
+  </article>
+
+  
+  
+</div>
+    </div>
+
+    
+      <div class="search-content">
+        <div class="search-content__inner-wrap"><form onsubmit="return googleCustomSearchExecute();" id="cse-search-box-form-id">
+    <input type="search" id="cse-search-input-box-id" aria-placeholder="Enter your search term..." class="search-input" tabindex="-1" placeholder="Enter your search term..." />
+    </form>
+    <div id="results" class="results">
+        <gcse:searchresults-only></gcse:searchresults-only>
+    </div></div>
+
+      </div>
+    
+    
+    <div class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+
+        <div class="page__footer-follow">
+  <ul class="social-icons">
+    
+      <li><strong>Follow:</strong></li>
+    
+    
+      <li><a href="https://twitter.com/isugif"><i class="fab fa-fw fa-twitter-square" aria-hidden="true"></i> Twitter</a></li>
+    
+    
+    
+      <li><a href="https://github.com/https://github.com/isugenomics"><i class="fab fa-fw fa-github" aria-hidden="true"></i> GitHub</a></li>
+    
+    
+    
+    
+  </ul>
+</div>
+
+<div class="page__footer-copyright">&copy; 2024 Geospatial Workbook</div>
+
+      </footer>
+    </div>
+
+    
+  <script src="/assets/js/main.min.js"></script>
+  <script src="https://use.fontawesome.com/releases/v5.0.13/js/all.js"></script>
+
+
+<script>
+  (function () {
+    var cx = '009853197685285203469:nsvri1pa88d';
+    var gcse = document.createElement('script');
+    gcse.type = 'text/javascript';
+    gcse.async = true;
+    gcse.src = 'https://cse.google.com/cse.js?cx=' + cx;
+    var s = document.getElementsByTagName('script')[0];
+    s.parentNode.insertBefore(gcse, s);
+  })();
+
+  function googleCustomSearchExecute() {
+    var input = document.getElementById('cse-search-input-box-id');
+    var element = google.search.cse.element.getElement('searchresults-only0');
+    if (input.value == '') {
+      element.clearAllResults();
+    } else {
+      element.execute(input.value);
+    }
+    return false;
+  }
+
+  
+</script>
+
+
+
+
+<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+<script id="MathJax-script" defer
+        src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+</script>
+
+
+
+
+  </body>
+</html>

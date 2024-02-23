@@ -1,0 +1,669 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.11.2 by Michael Rose
+  Copyright 2013-2018 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE.txt
+-->
+<html lang="en" class="no-js">
+  <head>
+    <meta charset="utf-8">
+
+<!-- begin _includes/seo.html --><title>Useful Programs and Unix Basics - Geospatial Workbook</title>
+<meta name="description" content="Tutorial on Informatics for Geospatial Information">
+
+
+
+<meta property="og:type" content="website">
+<meta property="og:locale" content="en_US">
+<meta property="og:site_name" content="Geospatial Workbook">
+<meta property="og:title" content="Useful Programs and Unix Basics">
+<meta property="og:url" content="http://localhost:4000/IntroductionToCommandLine/Unix/unix-basics-1.orig-arun.html">
+
+
+
+
+  <meta property="og:image" content="http://localhost:4000/assets/images/margaret-weir-GZyjbLNOaFg-unsplash_dark.jpg">
+
+
+
+  <meta name="twitter:site" content="@isugif">
+  <meta name="twitter:title" content="Useful Programs and Unix Basics">
+  <meta name="twitter:description" content="Tutorial on Informatics for Geospatial Information">
+  <meta name="twitter:url" content="http://localhost:4000/IntroductionToCommandLine/Unix/unix-basics-1.orig-arun.html">
+
+  
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content="http://localhost:4000/assets/images/margaret-weir-GZyjbLNOaFg-unsplash_dark.jpg">
+  
+
+  
+
+
+
+
+
+
+
+  
+
+  
+
+
+<link rel="canonical" href="http://localhost:4000/IntroductionToCommandLine/Unix/unix-basics-1.orig-arun.html">
+
+
+
+
+
+
+
+  <script type="application/ld+json">
+    {
+      "@context": "http://schema.org",
+      "@type": "Person",
+      "name": "",
+      "url": "http://localhost:4000",
+      "sameAs": null
+    }
+  </script>
+
+
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+<link href="/feed.xml" type="application/atom+xml" rel="alternate" title="Geospatial Workbook Feed">
+
+<!-- http://t.co/dKP3o1e -->
+<meta name="HandheldFriendly" content="True">
+<meta name="MobileOptimized" content="320">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+
+<!--[if lte IE 9]>
+  <style>
+    /* old IE unsupported flexbox fixes */
+    .greedy-nav .site-title {
+      padding-right: 3em;
+    }
+    .greedy-nav button {
+      position: absolute;
+      top: 0;
+      right: 0;
+      height: 100%;
+    }
+  </style>
+<![endif]-->
+
+
+    <!-- start custom head snippets -->
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-E6BZVYF8ZY"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-E6BZVYF8ZY');
+</script>
+
+<!-- insert favicons. use https://realfavicongenerator.net/ -->
+
+<!-- end custom head snippets -->
+
+  </head>
+
+  <body class="layout--single">
+
+    <!--[if lt IE 9]>
+<div class="notice--danger align-center" style="margin: 0;">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience.</div>
+<![endif]-->
+
+    <div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        <a class="site-title" href="/">Geospatial Workbook</a>
+        <ul class="visible-links">
+          
+            
+            <li class="masthead__menu-item">
+              <a href="http://localhost:4000/about.html" >About</a>
+            </li>
+          
+            
+            <li class="masthead__menu-item">
+              <a href="http://localhost:4000/list.html" >Index</a>
+            </li>
+          
+            
+            <li class="masthead__menu-item">
+              <a href="http://localhost:4000/glossary.html" >Glossary</a>
+            </li>
+          
+            
+            <li class="masthead__menu-item">
+              <a href="http://localhost:4000/people.html" >People</a>
+            </li>
+          
+            
+            <li class="masthead__menu-item">
+              <a href="http://localhost:4000/contributing.html" >Contribute</a>
+            </li>
+          
+        </ul>
+        
+        <button class="search__toggle" type="button">
+          <svg class="icon" width="16" height="16" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 15.99 16">
+            <path d="M15.5,13.12L13.19,10.8a1.69,1.69,0,0,0-1.28-.55l-0.06-.06A6.5,6.5,0,0,0,5.77,0,6.5,6.5,0,0,0,2.46,11.59a6.47,6.47,0,0,0,7.74.26l0.05,0.05a1.65,1.65,0,0,0,.5,1.24l2.38,2.38A1.68,1.68,0,0,0,15.5,13.12ZM6.4,2A4.41,4.41,0,1,1,2,6.4,4.43,4.43,0,0,1,6.4,2Z" transform="translate(-.01)"></path>
+          </svg>
+        </button>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">Toggle Menu</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+    <div class="initial-content">
+      
+  
+
+
+
+
+
+
+
+
+
+
+
+<div class="page__hero--overlay"
+  style="background-color: 444444; background-image: url('/assets/images/margaret-weir-GZyjbLNOaFg-unsplash_dark.jpg');"
+>
+  
+    <div class="wrapper">
+      <h1 id="page-title" class="page__title" itemprop="headline">
+        
+          Useful Programs and Unix Basics
+
+        
+      </h1>
+      
+      
+      
+    </div>
+  
+  
+</div>
+
+
+
+
+
+<div id="main" role="main">
+  
+
+  <article class="page" itemscope itemtype="http://schema.org/CreativeWork">
+    <meta itemprop="headline" content="Useful Programs and Unix Basics">
+    
+    
+    
+
+    <div class="page__inner-wrap">
+      
+
+      <section class="page__content" itemprop="text">
+        
+        <h1 id="unix-basics-1">Unix Basics 1</h1>
+<p>This exercise is designed to provide the basic skills required for working in the UNIX environment, using plenty of relevant examples, specifically for biologists.  If you are using your personal computer, make sure that you have downloaded the files required for the workshop. This exercise will provide you information regarding navigation, files and directory creation/modification and some administrative things related to file permissions.</p>
+
+<h2 id="getting-started">Getting started</h2>
+
+<p>The data files required for this workshop can be found on our website. You need to download this and place it in your home directory (<code class="language-plaintext highlighter-rouge">/home/username</code>), before you start this exercise. Please use the commands below to get started (you will learn what these command does later in the exercise). Open the terminal and enter these commands (commands are case sensitive) and each command should be entered in a single line followed by ↵ (<code class="language-plaintext highlighter-rouge">Enter</code>) key.</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>cd ~
+curl -O http://gif-server.biotech.iastate.edu/arnstrm/WORKSHOP_FILES.tar.gz
+</code></pre></div></div>
+<p>Once your cursor (command prompt) comes back to the original position, type</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>tar xf WORKSHOP_FILES.tar.gz
+ls
+</code></pre></div></div>
+<p>You should see <code class="language-plaintext highlighter-rouge">WORKSHOP_FILES</code> listed there.</p>
+
+<p>PS: all materials, including the slides, handout and instructions to set up your computer should be in the folder you downloaded.</p>
+
+<h2 id="navigation">Navigation</h2>
+<p>This section will introduce you to some basic file/directory navigation and manipulation techniques.</p>
+
+<h3 id="to-know-the-present-location">To know the present location</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>pwd
+</code></pre></div></div>
+<p>Returns you the present working directory (print working directory)</p>
+
+<p>You should see the output something like <code class="language-plaintext highlighter-rouge">/home/username</code> This means, you are now working in the username directory, which is located in home directory. The directory that you will be in after logging in is your home directory. You can also avoid writing the full path by using ~ in front of your username or simply <code class="language-plaintext highlighter-rouge">~</code></p>
+
+<p><code class="language-plaintext highlighter-rouge">~</code> or <code class="language-plaintext highlighter-rouge">~username</code> 	same as	<code class="language-plaintext highlighter-rouge">/home/username</code></p>
+
+<p>Present directory is represented as <code class="language-plaintext highlighter-rouge">.</code> (dot) and parent directory is represented as <code class="language-plaintext highlighter-rouge">..</code> (dot dot).</p>
+
+<h3 id="changing-directories">Changing directories</h3>
+<p>To jump from one directory to another we use the cd (change directory) command.</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>cd ..
+</code></pre></div></div>
+<p>Changes your present location to the parent directory</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>cd DIRECTORY
+</code></pre></div></div>
+<p>This changes your location back to your DIRECTORY.</p>
+
+<p><strong><em>Task 1.1: Change your directory to the WORKSHOP_FILES directory present in your home directory.</em></strong></p>
+
+<p><strong>TIP</strong>: You can type in first few letters of the directory name and then press <code class="language-plaintext highlighter-rouge">Tab</code> to auto complete rest of the name (especially useful when the file/directory name is long). This only works when there are unique matches for the starting letters you have typed. If there is more than one matching files/directories, pressing <code class="language-plaintext highlighter-rouge">Tab</code> twice will list all the matching names. You can also recall your previous commands by pressing ↑ or ↓ arrow keys or browse all your previously used commands by typing <code class="language-plaintext highlighter-rouge">history</code> on your terminal (typically, last 500 commands will be saved in this file).</p>
+
+<h2 id="directories-and-files">Directories and files</h2>
+
+<h3 id="making-directories">Making directories</h3>
+
+<p>To create a directory, <code class="language-plaintext highlighter-rouge">mkdir</code> (<code class="language-plaintext highlighter-rouge">m</code>a<code class="language-plaintext highlighter-rouge">k</code>e <code class="language-plaintext highlighter-rouge">dir</code>ectory) can be used.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>mkdir DIRECTORY
+</code></pre></div></div>
+<p>Unlike PC/Mac folders, here you can’t have space in your directory name (but some special characters are okay). You can also specify the path where you want to create your new folder.</p>
+
+<p><strong><em>Task 1.2: Make a new directory named <code class="language-plaintext highlighter-rouge">FirstDirectory</code> within the <code class="language-plaintext highlighter-rouge">WORKSHOP_FILES</code> directory. Then change your directory to the <code class="language-plaintext highlighter-rouge">FirstDirectory</code>.</em></strong></p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>mkdir FirstDirectory
+</code></pre></div></div>
+
+<h3 id="copying-directories">Copying directories</h3>
+
+<p>To copy a file, <code class="language-plaintext highlighter-rouge">cp</code> (<code class="language-plaintext highlighter-rouge">c</code>o<code class="language-plaintext highlighter-rouge">p</code>y) command is used. When using this command you have to provide both source file and destination file.</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>cp SOURCE DESTINATION
+</code></pre></div></div>
+
+<p>You can also specify the absolute path of the source and/or destination file. To know more about any command you can use man command, which opens the manual of the command you ask (referred as <code class="language-plaintext highlighter-rouge">man page</code>).</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>man cp
+</code></pre></div></div>
+<p>This opens the manual for the <code class="language-plaintext highlighter-rouge">cp</code> command. Take a look at the manual of <code class="language-plaintext highlighter-rouge">cp</code> command (use arrow keys to move top or bottom of the page). <code class="language-plaintext highlighter-rouge">OPTIONS</code> are arguments that can be used to accomplish more from the same command (and are not required for regular operation). Eg., by using option <code class="language-plaintext highlighter-rouge">–i</code> with the regular <code class="language-plaintext highlighter-rouge">cp</code> command, you can always make sure that you are not overwriting the existing file while copying (if the target already contains the same file). The syntax for using the options will also be provided in the manual. <strong>To <code class="language-plaintext highlighter-rouge">exit</code>, press <code class="language-plaintext highlighter-rouge">q</code></strong>*.</p>
+
+<p><em>Looking at the man page for <code class="language-plaintext highlighter-rouge">cp</code> command, what options can be used to copy a directory (including all files within it)?</em></p>
+
+<p><em>How else you can get help on cp command (other than ‘man’)?</em></p>
+
+<p><strong><em>Task 1.3: Now change your directory back to the home directory. Create a copy of <code class="language-plaintext highlighter-rouge">WORKSHOP_FILES</code> and name it as <code class="language-plaintext highlighter-rouge">BACKUP_WORKSHOP</code>). This will serve as a backup copy of all files that are required for the workshop (in case you accidentally modify the contents while working).</em></strong></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>cp -r WORKSHOP_FILES BACKUP_WORKSHOP
+</code></pre></div></div>
+<h3 id="moving-directories">Moving directories</h3>
+<p>To move a file or a directory, <code class="language-plaintext highlighter-rouge">mv</code> (<code class="language-plaintext highlighter-rouge">m</code>o<code class="language-plaintext highlighter-rouge">v</code>e) command is used. Again, like the <code class="language-plaintext highlighter-rouge">cp</code> command you need to provide both source file and destination file.</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>mv SOURCE DESTINATION
+</code></pre></div></div>
+<p>Absolute path also works fine. Some of the options used by <code class="language-plaintext highlighter-rouge">cp</code> command also work with <code class="language-plaintext highlighter-rouge">mv</code> command. <code class="language-plaintext highlighter-rouge">mv</code> can also be used to rename files and directories</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>mv OLDNAME NEWNAME
+</code></pre></div></div>
+<p><strong><em>Task 1.4: Rename WORKSHOP_FILES as tutorials.</em></strong></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>mv WORKSHOP_FILES tutorials
+</code></pre></div></div>
+
+<h3 id="viewing-the-contents-of-the-directory">Viewing the contents of the directory</h3>
+
+<p>The contents of a directory can be viewed using <code class="language-plaintext highlighter-rouge">ls</code> (<code class="language-plaintext highlighter-rouge">l</code>i<code class="language-plaintext highlighter-rouge">s</code>t) command.</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ls DIRECTORY
+</code></pre></div></div>
+
+<p>If no directory name is provided then <code class="language-plaintext highlighter-rouge">ls</code> will list all the contents of the present directory. Like any other command, you can use absolute path or abbreviated path. There are also various options available for <code class="language-plaintext highlighter-rouge">ls</code> command.
+Some very useful options include:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ls –l #Lists all the files in lengthy or detailed view
+ls –t #Lists all the files, sorted based on creation time
+ls –S #Lists all the files, sorted based on size
+</code></pre></div></div>
+<p>You can also combine these options together for getting more focused results.</p>
+
+<p>Looking at the manual for <code class="language-plaintext highlighter-rouge">ls</code>, what option can you use to view hidden files in a directory (files starting with dot)?</p>
+
+<p>Can you sort the files based on its extension? How?</p>
+
+<p><strong><em>Task 1.5: Examine the contents of the tutorials directory. Try options such as <code class="language-plaintext highlighter-rouge">-l</code>, <code class="language-plaintext highlighter-rouge">-t</code>, <code class="language-plaintext highlighter-rouge">-a</code> and <code class="language-plaintext highlighter-rouge">-X</code>. Also check if you can combine many options together (like <code class="language-plaintext highlighter-rouge">-la</code> or <code class="language-plaintext highlighter-rouge">-lh</code> etc). Try these:</em></strong></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ls -l tutorials
+ls -a
+ls -1 tutorials
+ls -lh tutorials
+ls -t tutorials
+</code></pre></div></div>
+
+<h3 id="creating-and-editing-files">Creating and editing files</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>touch FILENAME
+</code></pre></div></div>
+
+<p>Creates a new file in the present location</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>nano FILENAME
+</code></pre></div></div>
+<p>Like notepad/textedit, this text editor lets you edit a file.</p>
+
+<p><strong><em>Task 1.6: Create a new file named firstfile inside the tutorials directory. You can create using touch or using nano. Then add some contents (Your name and email address) to the firstfile (using nano). After editing, press Ctrl + X to exit, then enter y to save changes and confirm the file name.</em></strong></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>touch firstfile
+nano firstfile
+</code></pre></div></div>
+
+<h3 id="viewing-contents-of-the-files">Viewing contents of the files</h3>
+<h3 id="moving-directories-1">Moving directories</h3>
+<p>To move a file or a directory, <code class="language-plaintext highlighter-rouge">mv</code> (<code class="language-plaintext highlighter-rouge">m</code>o<code class="language-plaintext highlighter-rouge">v</code>e) command is used. Again, like the <code class="language-plaintext highlighter-rouge">cp</code> command you need to provide both source file and destination file.</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>mv SOURCE DESTINATION
+</code></pre></div></div>
+<p>Absolute path also works fine. Some of the options used by <code class="language-plaintext highlighter-rouge">cp</code> command also work with <code class="language-plaintext highlighter-rouge">mv</code> command. <code class="language-plaintext highlighter-rouge">mv</code> can also be used to rename files and directories</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>mv OLDNAME NEWNAME
+</code></pre></div></div>
+<p><strong><em>Task 1.4: Rename WORKSHOP_FILES as tutorials.</em></strong></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>mv WORKSHOP_FILES tutorials
+</code></pre></div></div>
+
+<h3 id="viewing-the-contents-of-the-directory-1">Viewing the contents of the directory</h3>
+
+<p>The contents of a directory can be viewed using <code class="language-plaintext highlighter-rouge">ls</code> (<code class="language-plaintext highlighter-rouge">l</code>i<code class="language-plaintext highlighter-rouge">s</code>t) command.</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ls DIRECTORY
+</code></pre></div></div>
+
+<p>If no directory name is provided then <code class="language-plaintext highlighter-rouge">ls</code> will list all the contents of the present directory. Like any other command, you can use absolute path or abbreviated path. There are also various options available for <code class="language-plaintext highlighter-rouge">ls</code> command.
+Some very useful options include:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ls –l #Lists all the files in lengthy or detailed view
+ls –t #Lists all the files, sorted based on creation time
+ls –S #Lists all the files, sorted based on size
+</code></pre></div></div>
+<p>You can also combine these options together for getting more focused results.</p>
+
+<p>Looking at the manual for <code class="language-plaintext highlighter-rouge">ls</code>, what option can you use to view hidden files in a directory (files starting with dot)?</p>
+
+<p>Can you sort the files based on its extension? How?</p>
+
+<p><strong><em>Task 1.5: Examine the contents of the tutorials directory. Try options such as <code class="language-plaintext highlighter-rouge">-l</code>, <code class="language-plaintext highlighter-rouge">-t</code>, <code class="language-plaintext highlighter-rouge">-a</code> and <code class="language-plaintext highlighter-rouge">-X</code>. Also check if you can combine many options together (like <code class="language-plaintext highlighter-rouge">-la</code> or <code class="language-plaintext highlighter-rouge">-lh</code> etc). Try these:</em></strong></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ls -l tutorials
+ls -a
+ls -1 tutorials
+ls -lh tutorials
+ls -t tutorials
+</code></pre></div></div>
+
+<h3 id="creating-and-editing-files-1">Creating and editing files</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>touch FILENAME
+</code></pre></div></div>
+
+<p>Creates a new file in the present location</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>nano FILENAME
+</code></pre></div></div>
+<p>Like notepad/textedit, this text editor lets you edit a file.</p>
+
+<p><strong><em>Task 1.6: Create a new file named firstfile inside the tutorials directory. You can create using touch or using nano. Then add some contents (Your name and email address) to the firstfile (using nano). After editing, press Ctrl + X to exit, then enter y to save changes and confirm the file name.</em></strong></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>touch firstfile
+nano firstfile
+</code></pre></div></div>
+
+<h3 id="viewing-contents-of-the-files-1">Viewing contents of the files</h3>
+<p>There are various commands to print the contents of the file in bash. Most of these commands are often used in specific contexts. All these commands when executed with filenames displays the contents on the screen. Most common ones are <code class="language-plaintext highlighter-rouge">less</code>, <code class="language-plaintext highlighter-rouge">more</code>, <code class="language-plaintext highlighter-rouge">cat</code>, <code class="language-plaintext highlighter-rouge">head</code> and <code class="language-plaintext highlighter-rouge">tail</code></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>less FILENAME
+#try this:
+less AT_cDNA.fa
+</code></pre></div></div>
+<p>Displays file contents on the screen with line scrolling (to scroll you can use arrow keys, <code class="language-plaintext highlighter-rouge">PgUp</code>/<code class="language-plaintext highlighter-rouge">PgDn</code> keys, <code class="language-plaintext highlighter-rouge">space bar</code> or <code class="language-plaintext highlighter-rouge">Enter</code> key).</p>
+
+<p>When you are done press <code class="language-plaintext highlighter-rouge">q</code> to exit.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>more FILENAME
+# try this:
+more AT_cDNA.fa
+</code></pre></div></div>
+
+<p>Like <code class="language-plaintext highlighter-rouge">less</code> command, <code class="language-plaintext highlighter-rouge">more</code> also displays file contents on the screen with line scrolling, but uses only <code class="language-plaintext highlighter-rouge">space bar</code> or <code class="language-plaintext highlighter-rouge">Enter key</code> to scroll.</p>
+
+<p>When you are done press q to exit.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>cat FILENAME
+try this:
+cat AT_cDNA.fa
+</code></pre></div></div>
+<p>Simplest form of displaying contents. It <code class="language-plaintext highlighter-rouge">cat</code>alogs the contents of the file on the screen. In case of large files, entire file will scroll on the screen without pausing</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>head FILENAME
+# try this:
+head AT_cDNA.fa
+</code></pre></div></div>
+
+<p>Displays only the starting lines of a file. The default is first ten lines. But any number of lines can be displayed using <code class="language-plaintext highlighter-rouge">–n</code> option (followed by required number of lines).</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>tail FILENAME
+try this:
+tail AT_cDNA.fa
+</code></pre></div></div>
+
+<p>Similar to head, but displays the last 10 lines. Again <code class="language-plaintext highlighter-rouge">–n</code> option can be used to change this.</p>
+
+<p>More information about any of these commands can be found in man pages (man command)</p>
+
+<p><strong><em>Task 1.7: Try using all these commands on the RefSeq.faa. You are also welcome to try these commands on various other files that are present in the tutorials directory. These commands don’t change the contents of the file; they just display them on the screen.</em></strong></p>
+
+<h3 id="deleting-files-and-directories">Deleting files and directories</h3>
+
+<p>To delete directories from the system, you can use <code class="language-plaintext highlighter-rouge">rmdir</code> (<code class="language-plaintext highlighter-rouge">r</code>e<code class="language-plaintext highlighter-rouge">m</code>ove <code class="language-plaintext highlighter-rouge">dir</code>ectory) command. You can also use <code class="language-plaintext highlighter-rouge">rm</code> command to delete file(s).</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>rmdir DIRECTORY
+</code></pre></div></div>
+<p>The directory should be empty before you use the rmdir command.</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>rm FILE
+</code></pre></div></div>
+<p>To delete a file <code class="language-plaintext highlighter-rouge">rm</code> command can be used
+Some useful options include : <code class="language-plaintext highlighter-rouge">–r</code> recursively delete files, <code class="language-plaintext highlighter-rouge">-f</code> delete forcefully</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>rm –rf DIRECTORY  [DO NOT USE THIS NOW!]
+</code></pre></div></div>
+
+<p>When you want to delete a folder, with all its content</p>
+
+<p><strong><em>Task 1.8: Delete the directory named delete_me inside the tutorials directory (to do this you may first want to delete the sample.txt file inside this directory).</em></strong></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>cd delete_me
+rm sample.txt
+cd ..
+rmdir delete_me
+</code></pre></div></div>
+
+<h2 id="compressiondecompression">Compression/Decompression</h2>
+
+<p>There are several options for archiving and compressing groups of files or directories. Compressed files are not only easier to handle (copy/move) but also occupy less size on the disk (less than 1/3 of the original size). In Linux systems you can use <code class="language-plaintext highlighter-rouge">zip</code>, <code class="language-plaintext highlighter-rouge">tar</code> or <code class="language-plaintext highlighter-rouge">gz</code> for archiving and compressing files/directories.</p>
+
+<h3 id="zip">zip</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>zip OUTFILE.zip INFILE.txt
+</code></pre></div></div>
+<p>Compress <code class="language-plaintext highlighter-rouge">INFILE.txt</code></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>zip -r OUTDIR.zip DIRECTORY
+</code></pre></div></div>
+<p>Compress all files in a <code class="language-plaintext highlighter-rouge">DIRECTORY</code> into one archive file (<code class="language-plaintext highlighter-rouge">OUTDIR.zip</code>)</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>zip -r OUTFILE.zip . -i *.txt
+</code></pre></div></div>
+<p>Compress all txt files in a <code class="language-plaintext highlighter-rouge">DIRECTORY</code> into one archive file (<code class="language-plaintext highlighter-rouge">OUTFILE.zip</code>)</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>unzip SOMEFILE.zip
+</code></pre></div></div>
+<p>Decompress a file
+<strong><em>Task 1.9: Zip AT_genes.gff file located in the tutorials directory. Check the file size before and after zip compression (Hint: use <code class="language-plaintext highlighter-rouge">ls</code> command with special options to check file sizes).</em></strong></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>zip AT_genes.gff.zip AT_genes.gff
+</code></pre></div></div>
+<p><em>Is there any size difference before and after compressing?</em></p>
+
+<h3 id="tar">tar</h3>
+
+<p><code class="language-plaintext highlighter-rouge">tar</code> (<code class="language-plaintext highlighter-rouge">t</code>ape <code class="language-plaintext highlighter-rouge">ar</code>chive) utility saves many files together into a single archive file, and restores individual files from the archive. It also includes automatic archive compression/decompression options and special features for incremental and full backups.</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>tar -cvf OUTFILE.tar INFILE
+</code></pre></div></div>
+<p>archive <code class="language-plaintext highlighter-rouge">INFILE</code></p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>tar -czvf OUTFILE.tar.gz INFILE
+</code></pre></div></div>
+<p>archive and compress file <code class="language-plaintext highlighter-rouge">INFILE</code></p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>tar -tvf SOMEFILE.tar
+</code></pre></div></div>
+<p>list contents of archive <code class="language-plaintext highlighter-rouge">SOMEFILE.tar</code></p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>tar -xvf SOMEFILE.tar
+</code></pre></div></div>
+<p>extract contents of <code class="language-plaintext highlighter-rouge">SOMEFILE.tar</code></p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>tar -xzvf SOMEFILE.tar.gz
+</code></pre></div></div>
+<p>extract contents of gzipped archive <code class="language-plaintext highlighter-rouge">SOMEFILE.tar.gz</code></p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>tar -czvf OUTFILE.tar.gz DIRECTORY
+</code></pre></div></div>
+<p>archive and compress all files in a directory into one archive file</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>tar -czvf OUTFILE.tar.gz *.txt
+</code></pre></div></div>
+<p>archive and compress all “.txt” files in current directory into one archive file</p>
+
+<p><strong><em>Task 1.10: Archive and compress the <code class="language-plaintext highlighter-rouge">BACKUP_WORKSHOP</code> directory you created in Task 1.3 (you can name it as <code class="language-plaintext highlighter-rouge">backup.tar.gz</code> or anything you want)</em></strong></p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>tar -czvf backup.tar.gz BACKUP_WORKSHOP
+</code></pre></div></div>
+<h3 id="gzip">gzip</h3>
+
+<p><code class="language-plaintext highlighter-rouge">gzip</code> (<code class="language-plaintext highlighter-rouge">g</code>nu <code class="language-plaintext highlighter-rouge">zip</code>) compression utility designed as a replacement for <code class="language-plaintext highlighter-rouge">zip</code>, with much better compression and no patented algorithms. The standard compression system for all GNU software.</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>gzip SOMEFILE
+</code></pre></div></div>
+<p>compress <code class="language-plaintext highlighter-rouge">SOMEFILE</code> (also removes uncompressed file)</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>gunzip SOMEFILE.gz
+</code></pre></div></div>
+<p>uncompress <code class="language-plaintext highlighter-rouge">SOMEFILE.gz</code> (also removes compressed file)</p>
+
+<p><strong><em>Task 1.11: gzip the file AT_genes.gff and examine the size. gunzip it back so that you can use this file for the later exercises.</em></strong></p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>gzip AT_genes.gff
+ls -lh
+gunzip AT_genes.gff.gz
+ls –lh
+</code></pre></div></div>
+
+<hr />
+<p><a href="programs.md">Table of contents</a></p>
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+
+
+        
+      </footer>
+
+      
+
+      
+
+    </div>
+
+    
+  </article>
+
+  
+  
+</div>
+    </div>
+
+    
+      <div class="search-content">
+        <div class="search-content__inner-wrap"><form onsubmit="return googleCustomSearchExecute();" id="cse-search-box-form-id">
+    <input type="search" id="cse-search-input-box-id" aria-placeholder="Enter your search term..." class="search-input" tabindex="-1" placeholder="Enter your search term..." />
+    </form>
+    <div id="results" class="results">
+        <gcse:searchresults-only></gcse:searchresults-only>
+    </div></div>
+
+      </div>
+    
+    
+    <div class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+
+        <div class="page__footer-follow">
+  <ul class="social-icons">
+    
+      <li><strong>Follow:</strong></li>
+    
+    
+      <li><a href="https://twitter.com/isugif"><i class="fab fa-fw fa-twitter-square" aria-hidden="true"></i> Twitter</a></li>
+    
+    
+    
+      <li><a href="https://github.com/https://github.com/isugenomics"><i class="fab fa-fw fa-github" aria-hidden="true"></i> GitHub</a></li>
+    
+    
+    
+    
+  </ul>
+</div>
+
+<div class="page__footer-copyright">&copy; 2024 Geospatial Workbook</div>
+
+      </footer>
+    </div>
+
+    
+  <script src="/assets/js/main.min.js"></script>
+  <script src="https://use.fontawesome.com/releases/v5.0.13/js/all.js"></script>
+
+
+<script>
+  (function () {
+    var cx = '009853197685285203469:nsvri1pa88d';
+    var gcse = document.createElement('script');
+    gcse.type = 'text/javascript';
+    gcse.async = true;
+    gcse.src = 'https://cse.google.com/cse.js?cx=' + cx;
+    var s = document.getElementsByTagName('script')[0];
+    s.parentNode.insertBefore(gcse, s);
+  })();
+
+  function googleCustomSearchExecute() {
+    var input = document.getElementById('cse-search-input-box-id');
+    var element = google.search.cse.element.getElement('searchresults-only0');
+    if (input.value == '') {
+      element.clearAllResults();
+    } else {
+      element.execute(input.value);
+    }
+    return false;
+  }
+
+  
+</script>
+
+
+
+
+<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+<script id="MathJax-script" defer
+        src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+</script>
+
+
+
+
+  </body>
+</html>

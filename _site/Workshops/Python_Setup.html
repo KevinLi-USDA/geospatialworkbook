@@ -1,0 +1,688 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.11.2 by Michael Rose
+  Copyright 2013-2018 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE.txt
+-->
+<html lang="en" class="no-js">
+  <head>
+    <meta charset="utf-8">
+
+<!-- begin _includes/seo.html --><title>Python Setup - Geospatial Workbook</title>
+<meta name="description" content="Tutorial on Informatics for Geospatial Information">
+
+
+  <meta name="author" content="Jennifer Chang">
+
+
+<meta property="og:type" content="website">
+<meta property="og:locale" content="en_US">
+<meta property="og:site_name" content="Geospatial Workbook">
+<meta property="og:title" content="Python Setup">
+<meta property="og:url" content="http://localhost:4000/Workshops/Python_Setup.html">
+
+
+
+
+  <meta property="og:image" content="http://localhost:4000/assets/images/margaret-weir-GZyjbLNOaFg-unsplash_dark.jpg">
+
+
+
+  <meta name="twitter:site" content="@isugif">
+  <meta name="twitter:title" content="Python Setup">
+  <meta name="twitter:description" content="Tutorial on Informatics for Geospatial Information">
+  <meta name="twitter:url" content="http://localhost:4000/Workshops/Python_Setup.html">
+
+  
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content="http://localhost:4000/assets/images/margaret-weir-GZyjbLNOaFg-unsplash_dark.jpg">
+  
+
+  
+    <meta name="twitter:creator" content="@jenchang212">
+  
+
+
+
+
+
+
+
+  
+
+  
+
+
+<link rel="canonical" href="http://localhost:4000/Workshops/Python_Setup.html">
+
+
+
+
+
+
+
+  <script type="application/ld+json">
+    {
+      "@context": "http://schema.org",
+      "@type": "Person",
+      "name": "",
+      "url": "http://localhost:4000",
+      "sameAs": null
+    }
+  </script>
+
+
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+<link href="/feed.xml" type="application/atom+xml" rel="alternate" title="Geospatial Workbook Feed">
+
+<!-- http://t.co/dKP3o1e -->
+<meta name="HandheldFriendly" content="True">
+<meta name="MobileOptimized" content="320">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+
+<!--[if lte IE 9]>
+  <style>
+    /* old IE unsupported flexbox fixes */
+    .greedy-nav .site-title {
+      padding-right: 3em;
+    }
+    .greedy-nav button {
+      position: absolute;
+      top: 0;
+      right: 0;
+      height: 100%;
+    }
+  </style>
+<![endif]-->
+
+
+    <!-- start custom head snippets -->
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-E6BZVYF8ZY"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-E6BZVYF8ZY');
+</script>
+
+<!-- insert favicons. use https://realfavicongenerator.net/ -->
+
+<!-- end custom head snippets -->
+
+  </head>
+
+  <body class="layout--single">
+
+    <!--[if lt IE 9]>
+<div class="notice--danger align-center" style="margin: 0;">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience.</div>
+<![endif]-->
+
+    <div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        <a class="site-title" href="/">Geospatial Workbook</a>
+        <ul class="visible-links">
+          
+            
+            <li class="masthead__menu-item">
+              <a href="http://localhost:4000/about.html" >About</a>
+            </li>
+          
+            
+            <li class="masthead__menu-item">
+              <a href="http://localhost:4000/list.html" >Index</a>
+            </li>
+          
+            
+            <li class="masthead__menu-item">
+              <a href="http://localhost:4000/glossary.html" >Glossary</a>
+            </li>
+          
+            
+            <li class="masthead__menu-item">
+              <a href="http://localhost:4000/people.html" >People</a>
+            </li>
+          
+            
+            <li class="masthead__menu-item">
+              <a href="http://localhost:4000/contributing.html" >Contribute</a>
+            </li>
+          
+        </ul>
+        
+        <button class="search__toggle" type="button">
+          <svg class="icon" width="16" height="16" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 15.99 16">
+            <path d="M15.5,13.12L13.19,10.8a1.69,1.69,0,0,0-1.28-.55l-0.06-.06A6.5,6.5,0,0,0,5.77,0,6.5,6.5,0,0,0,2.46,11.59a6.47,6.47,0,0,0,7.74.26l0.05,0.05a1.65,1.65,0,0,0,.5,1.24l2.38,2.38A1.68,1.68,0,0,0,15.5,13.12ZM6.4,2A4.41,4.41,0,1,1,2,6.4,4.43,4.43,0,0,1,6.4,2Z" transform="translate(-.01)"></path>
+          </svg>
+        </button>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">Toggle Menu</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+    <div class="initial-content">
+      
+  
+
+
+
+
+
+
+
+
+
+
+
+<div class="page__hero--overlay"
+  style="background-color: 444444; background-image: url('/assets/images/margaret-weir-GZyjbLNOaFg-unsplash_dark.jpg');"
+>
+  
+    <div class="wrapper">
+      <h1 id="page-title" class="page__title" itemprop="headline">
+        
+          Python Setup
+
+        
+      </h1>
+      
+      
+      
+    </div>
+  
+  
+</div>
+
+
+
+
+
+<div id="main" role="main">
+  
+  <div class="sidebar sticky">
+  
+
+
+<div itemscope itemtype="http://schema.org/Person">
+
+  
+    <div class="author__avatar">
+      
+
+      
+        <img src="/assets/images/people/JenChang.png" alt="Jennifer Chang" itemprop="image">
+      
+    </div>
+  
+
+  <div class="author__content">
+    
+      <h3 class="author__name" itemprop="name">Jennifer Chang</h3>
+    
+    
+      <p class="author__bio" itemprop="description">
+        Her PhD was in Bioinformatics and Computational Biology with a minor in Statistics. During her PhD, she developed the C++ software Mango Graph Studio which has been licensed to a startup. Since then, she has worked on automating the Influenza A Virus in Swine reports and recently has been designing Nextflow pipelines for highly scalable and reproducible pipelines. She enjoys designing workflows to reduce tedium and increase joy of discovery.
+      </p>
+    
+  </div>
+
+  <div class="author__urls-wrapper">
+    <button class="btn btn--inverse">Follow</button>
+    <ul class="author__urls social-icons">
+      
+
+      
+
+      
+        <li>
+          <a href="mailto:mailto:jenchang@iastate.edu">
+            <meta itemprop="email" content="mailto:jenchang@iastate.edu" />
+            <i class="fas fa-fw fa-envelope-square" aria-hidden="true"></i> Email
+          </a>
+        </li>
+      
+
+      
+
+      
+        <li>
+          <a href="https://twitter.com/jenchang212" itemprop="sameAs">
+            <i class="fab fa-fw fa-twitter-square" aria-hidden="true"></i> Twitter
+          </a>
+        </li>
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      <!--
+  <li>
+    <a href="http://link-to-whatever-social-network.com/user/" itemprop="sameAs">
+      <i class="fas fa-fw" aria-hidden="true"></i> Custom Social Profile Link
+    </a>
+  </li>
+-->
+    </ul>
+  </div>
+</div>
+
+<!-- Create a 2nd author for tutorials -->
+
+
+
+<div itemscope itemtype="http://schema.org/Person">
+
+  
+
+  <div class="author__content">
+    
+      <h3 class="author__name" itemprop="name"></h3>
+    
+    
+  </div>
+
+  <div class="author__urls-wrapper">
+    <button class="btn btn--inverse">Follow</button>
+    <ul class="author__urls social-icons">
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      <!--
+  <li>
+    <a href="http://link-to-whatever-social-network.com/user/" itemprop="sameAs">
+      <i class="fas fa-fw" aria-hidden="true"></i> Custom Social Profile Link
+    </a>
+  </li>
+-->
+    </ul>
+  </div>
+</div>
+
+  
+  </div>
+
+
+  <article class="page" itemscope itemtype="http://schema.org/CreativeWork">
+    <meta itemprop="headline" content="Python Setup">
+    
+    
+    
+
+    <div class="page__inner-wrap">
+      
+
+      <section class="page__content" itemprop="text">
+        
+        <p><strong>Last Update:</strong> 15 Dec 2020</p>
+
+<h1 id="introduction">Introduction</h1>
+
+<p>Python is a dynamically typed, object-oriented scripting language developed by Guido van Rossum and released in 1991. Many important machine learning packages are available in python.</p>
+
+<p><strong>More Information</strong></p>
+
+<ul>
+  <li><a href="https://www.python.org">https://www.python.org</a></li>
+  <li><a href="https://en.wikipedia.org/wiki/Python_(programming_language)">Wikipedia - Python (programming language)</a></li>
+  <li><a href="https://github.com/topics/python">List of Python projects on GitHub</a></li>
+  <li>Medium Article: <a href="https://medium.com/dataprophet/best-python-libraries-for-machine-learning-and-deep-learning-646936aa01af">Best Python Libraries for Machine Learning and Deep Learning</a> - June 2, 2020</li>
+</ul>
+
+<h1 id="getting-started-in-python">Getting Started in Python</h1>
+
+<p>First you will need to install Python or have access to an Python environment. There are many ways to install Python. For most users, we highly recommend using the <strong>Anaconda</strong> install method.</p>
+
+<p><strong>Anaconda Python Install</strong></p>
+
+<ul>
+  <li>Install the free individual version - <a href="https://anaconda.org/">https://anaconda.org/</a></li>
+</ul>
+
+<p><img src="/Workshops/images/Anaconda.png" alt="Anaconda Dashboard" /></p>
+
+<p><strong>Local Python Install</strong></p>
+
+<p>If you prefer a local python install (only command line and without IDE), then install python from their main webste (<a href="https://www.python.org/">https://www.python.org/</a>).</p>
+
+<p><strong>Warning:</strong> Either pick Anaconda or local install. Try not to mix install methods or you will have weird conflict errors and may need to uninstall and reinstall python entirely. Python is notorious for weird pathing problems in mixed environments (see <a href="https://xkcd.com/1987/">xkcd comic</a>). If you keep to the Anaconda ecosystem, you shouldn’t have any major issues.</p>
+
+<ul>
+  <li></li>
+</ul>
+
+<p>Due to incompatabilities between certain python libraries, it is highly recommended to manage python packages in virtual environments (<code class="language-plaintext highlighter-rouge">conda</code> , <code class="language-plaintext highlighter-rouge">venv</code>, or equivalent) , one environment per project.</p>
+
+<h2 id="setup-python-locally">Setup Python Locally</h2>
+
+<p>Python has a notoriously complicated environment system. Which is why it is highly recommended to manage python environments (yml files) to track any dependencies.</p>
+
+<h2 id="pick-either-anaconda-install-or-local-install">Pick either Anaconda Install or Local Install</h2>
+
+<ul>
+  <li>(1) Anaconda comes with an IDE (easier entry point, recommended for Windows). Install Free Individual Version - <a href="https://www.anaconda.com">https://www.anaconda.com</a></li>
+  <li>(2) Local Install (more consistent for intermediate programmers). Install the latest version of Python from their website - <a href="https://www.python.org/downloads/">https://www.python.org/downloads/</a></li>
+</ul>
+
+<ol>
+  <li>Pick an IDE (integrated development Environment)
+    <ol>
+      <li><a href="https://www.jetbrains.com/pycharm/">PyCharm</a></li>
+      <li><a href="https://www.anaconda.com/">Anaconda</a></li>
+      <li><a href="https://atom.io/">Atom</a></li>
+      <li>… there are other options</li>
+      <li>A discussion on Python IDE - <a href="https://realpython.com/python-ides-code-editors-guide/">https://realpython.com/python-ides-code-editors-guide/</a></li>
+      <li>Skip to <a href="https://jupyter.org/install">JupyterLab Notebook</a></li>
+    </ol>
+  </li>
+  <li>Pick a Python Virtual Envirnoment Manager
+    <ol>
+      <li><a href="https://docs.conda.io/projects/conda/en/latest/">conda</a> / <a href="https://docs.conda.io/en/latest/miniconda.html">miniconda</a></li>
+      <li><a href="https://docs.python.org/3/library/venv.html">venv</a></li>
+    </ol>
+  </li>
+</ol>
+
+<p>Regardless of IDE, a python environment should have a way to edit code. Many of the geospatial workbook tutorials are written in a Jupyter Notebook. This is an interactive report where blocks of text are either code, or documentation:</p>
+
+<ol>
+  <li><strong>Code Block</strong></li>
+  <li><strong>Text Block</strong></li>
+</ol>
+
+<p>Work through the <a href="/Workshops/intro-to-jupyterhub.html">Introduction to JupyterHub</a> tutorial.</p>
+
+<p>Together these panes allow you to interactively design a Python pipeline.</p>
+
+<h3 id="hands-on-exercise---using-jupyter-notebooks">Hands-On Exercise - using Jupyter Notebooks</h3>
+
+<p>Copy the following into the <strong>Code Editor</strong>, run it line by line, and see if you can recreate the graph in the <strong>Graphics View</strong>.  If you can, try modifying and running the script. Experiment to see what changes break the script.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">#! /usr/bin/env python
+</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="n">np</span>
+
+<span class="k">print</span><span class="p">(</span><span class="s">"Hello World"</span><span class="p">)</span>
+</code></pre></div></div>
+
+<h2 id="installing-python-libraries">Installing Python Libraries</h2>
+
+<p>R functions are made available as libraries (also referred to as packages) which need to be installed from somewhere. R libraries can be indexed on CRAN, bioconductor and GitHub. What’s the difference between installing from these locations?</p>
+
+<ul>
+  <li>
+    <p><strong>pypy</strong> python libraries</p>
+
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>pip <span class="nb">install </span>libraryname
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p><strong>conda</strong> python libraries are focused on bioinformatic analysis and may or may not be available on CRAN but can be the latest version of a tools. <a href="https://www.bioconductor.org/install/">Bioconductor Website</a></p>
+
+    <div class="language-R highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">conda</span><span class="w"> </span><span class="n">install</span><span class="w"> </span><span class="o">-</span><span class="n">c</span><span class="w"> </span><span class="n">bioconda</span><span class="w"> </span><span class="n">libraryname</span><span class="w">
+</span></code></pre></div>    </div>
+  </li>
+  <li>
+    <p><strong>GitHub python libraries</strong> tend to be the most recently developed libraries and may not have been submitted to Bioconductor or CRAN yet.</p>
+
+    <div class="language-R highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">install.packages</span><span class="p">(</span><span class="s2">"devtools"</span><span class="p">)</span><span class="w">
+</span><span class="n">devtools</span><span class="o">::</span><span class="n">install_github</span><span class="p">(</span><span class="s2">"username/reponame"</span><span class="p">)</span><span class="w">      </span><span class="c1"># Github R Library name</span><span class="w">
+</span></code></pre></div>    </div>
+  </li>
+</ul>
+
+<p><strong>Warning:</strong> Do not mix python environments. Pick a python environment manager and stick with it. Ideally create a <code class="language-plaintext highlighter-rouge">environment.yml</code> for each project.</p>
+
+<h3 id="hands-on-exercise---installing-python-libraries">Hands-On Exercise - installing Python libraries</h3>
+
+<p>Create a <code class="language-plaintext highlighter-rouge">environment.yml</code> as your basic python envirnment install. This can serve as our basic outline for any other python environment setup.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>pip <span class="nb">install </span>python_library
+conda <span class="nb">install</span> <span class="nt">-c</span> bioconda r-wgcna
+conda <span class="nb">env </span>create <span class="nt">-f</span> environment.yml
+</code></pre></div></div>
+
+<h2 id="using-python-on-scinet">Using Python on SCINet</h2>
+
+<p>On the SCINet HPC resources (Ceres and Atlas), python should be available as a module. We recommend using miniconda environment for managing and creating python environments.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>module load miniconda                   <span class="c"># start miniconda</span>
+conda <span class="nb">env </span>create <span class="nt">-f</span> environment.yml     <span class="c"># create environment</span>
+conda <span class="nb">env </span>list                          <span class="c"># list existing environments</span>
+conda activate env_name                 <span class="c"># activate a python environment</span>
+</code></pre></div></div>
+
+<p>However since this will load base python without the libraries, you may need to install your own python libraries which are installed to home directory by default.</p>
+
+<p>Since the home directory may have restricted space, see the SCINet documentation on linking libraries on the HPC.</p>
+
+<ul>
+  <li>SCINet Package Install - <a href="https://scinet.usda.gov/guide/packageinstall/">https://scinet.usda.gov/guide/packageinstall/</a></li>
+</ul>
+
+<h2 id="using-jupyterlab-on-scinet">Using JupyterLab on SCINet</h2>
+
+<p>Recently, Ceres HPC was configured to run JupyterLab. This allows you to run an Jupyter Notebook like interface to the Ceres HPC. See full instructions on the SCINet website: <a href="https://scinet.usda.gov/guide/jupyter/">https://scinet.usda.gov/guide/jupyter/</a></p>
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+
+
+        
+      </footer>
+
+      
+
+      
+
+    </div>
+
+    
+  </article>
+
+  
+  
+</div>
+    </div>
+
+    
+      <div class="search-content">
+        <div class="search-content__inner-wrap"><form onsubmit="return googleCustomSearchExecute();" id="cse-search-box-form-id">
+    <input type="search" id="cse-search-input-box-id" aria-placeholder="Enter your search term..." class="search-input" tabindex="-1" placeholder="Enter your search term..." />
+    </form>
+    <div id="results" class="results">
+        <gcse:searchresults-only></gcse:searchresults-only>
+    </div></div>
+
+      </div>
+    
+    
+    <div class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+
+        <div class="page__footer-follow">
+  <ul class="social-icons">
+    
+      <li><strong>Follow:</strong></li>
+    
+    
+      <li><a href="https://twitter.com/isugif"><i class="fab fa-fw fa-twitter-square" aria-hidden="true"></i> Twitter</a></li>
+    
+    
+    
+      <li><a href="https://github.com/https://github.com/isugenomics"><i class="fab fa-fw fa-github" aria-hidden="true"></i> GitHub</a></li>
+    
+    
+    
+    
+  </ul>
+</div>
+
+<div class="page__footer-copyright">&copy; 2024 Geospatial Workbook</div>
+
+      </footer>
+    </div>
+
+    
+  <script src="/assets/js/main.min.js"></script>
+  <script src="https://use.fontawesome.com/releases/v5.0.13/js/all.js"></script>
+
+
+<script>
+  (function () {
+    var cx = '009853197685285203469:nsvri1pa88d';
+    var gcse = document.createElement('script');
+    gcse.type = 'text/javascript';
+    gcse.async = true;
+    gcse.src = 'https://cse.google.com/cse.js?cx=' + cx;
+    var s = document.getElementsByTagName('script')[0];
+    s.parentNode.insertBefore(gcse, s);
+  })();
+
+  function googleCustomSearchExecute() {
+    var input = document.getElementById('cse-search-input-box-id');
+    var element = google.search.cse.element.getElement('searchresults-only0');
+    if (input.value == '') {
+      element.clearAllResults();
+    } else {
+      element.execute(input.value);
+    }
+    return false;
+  }
+
+  
+</script>
+
+
+
+
+<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+<script id="MathJax-script" defer
+        src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+</script>
+
+
+
+
+  </body>
+</html>

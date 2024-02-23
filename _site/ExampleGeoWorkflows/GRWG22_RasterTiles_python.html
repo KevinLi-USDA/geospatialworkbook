@@ -1,0 +1,911 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.11.2 by Michael Rose
+  Copyright 2013-2018 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE.txt
+-->
+<html lang="en" class="no-js">
+  <head>
+    <meta charset="utf-8">
+
+<!-- begin _includes/seo.html --><title>Distributing raster calculations with tiles - Geospatial Workbook</title>
+<meta name="description" content="Tutorial on Informatics for Geospatial Information">
+
+
+  <meta name="author" content="Heather Savoy">
+
+
+<meta property="og:type" content="website">
+<meta property="og:locale" content="en_US">
+<meta property="og:site_name" content="Geospatial Workbook">
+<meta property="og:title" content="Distributing raster calculations with tiles">
+<meta property="og:url" content="http://localhost:4000/ExampleGeoWorkflows/GRWG22_RasterTiles_python.html">
+
+
+
+
+  <meta property="og:image" content="http://localhost:4000/assets/images/margaret-weir-GZyjbLNOaFg-unsplash_dark.jpg">
+
+
+
+  <meta name="twitter:site" content="@isugif">
+  <meta name="twitter:title" content="Distributing raster calculations with tiles">
+  <meta name="twitter:description" content="Tutorial on Informatics for Geospatial Information">
+  <meta name="twitter:url" content="http://localhost:4000/ExampleGeoWorkflows/GRWG22_RasterTiles_python.html">
+
+  
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content="http://localhost:4000/assets/images/margaret-weir-GZyjbLNOaFg-unsplash_dark.jpg">
+  
+
+  
+    <meta name="twitter:creator" content="@someone">
+  
+
+
+
+
+
+
+
+  
+
+  
+
+
+<link rel="canonical" href="http://localhost:4000/ExampleGeoWorkflows/GRWG22_RasterTiles_python.html">
+
+
+
+
+
+
+
+  <script type="application/ld+json">
+    {
+      "@context": "http://schema.org",
+      "@type": "Person",
+      "name": "",
+      "url": "http://localhost:4000",
+      "sameAs": null
+    }
+  </script>
+
+
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+<link href="/feed.xml" type="application/atom+xml" rel="alternate" title="Geospatial Workbook Feed">
+
+<!-- http://t.co/dKP3o1e -->
+<meta name="HandheldFriendly" content="True">
+<meta name="MobileOptimized" content="320">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+
+<!--[if lte IE 9]>
+  <style>
+    /* old IE unsupported flexbox fixes */
+    .greedy-nav .site-title {
+      padding-right: 3em;
+    }
+    .greedy-nav button {
+      position: absolute;
+      top: 0;
+      right: 0;
+      height: 100%;
+    }
+  </style>
+<![endif]-->
+
+
+    <!-- start custom head snippets -->
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-E6BZVYF8ZY"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-E6BZVYF8ZY');
+</script>
+
+<!-- insert favicons. use https://realfavicongenerator.net/ -->
+
+<!-- end custom head snippets -->
+
+  </head>
+
+  <body class="layout--single">
+
+    <!--[if lt IE 9]>
+<div class="notice--danger align-center" style="margin: 0;">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience.</div>
+<![endif]-->
+
+    <div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        <a class="site-title" href="/">Geospatial Workbook</a>
+        <ul class="visible-links">
+          
+            
+            <li class="masthead__menu-item">
+              <a href="http://localhost:4000/about.html" >About</a>
+            </li>
+          
+            
+            <li class="masthead__menu-item">
+              <a href="http://localhost:4000/list.html" >Index</a>
+            </li>
+          
+            
+            <li class="masthead__menu-item">
+              <a href="http://localhost:4000/glossary.html" >Glossary</a>
+            </li>
+          
+            
+            <li class="masthead__menu-item">
+              <a href="http://localhost:4000/people.html" >People</a>
+            </li>
+          
+            
+            <li class="masthead__menu-item">
+              <a href="http://localhost:4000/contributing.html" >Contribute</a>
+            </li>
+          
+        </ul>
+        
+        <button class="search__toggle" type="button">
+          <svg class="icon" width="16" height="16" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 15.99 16">
+            <path d="M15.5,13.12L13.19,10.8a1.69,1.69,0,0,0-1.28-.55l-0.06-.06A6.5,6.5,0,0,0,5.77,0,6.5,6.5,0,0,0,2.46,11.59a6.47,6.47,0,0,0,7.74.26l0.05,0.05a1.65,1.65,0,0,0,.5,1.24l2.38,2.38A1.68,1.68,0,0,0,15.5,13.12ZM6.4,2A4.41,4.41,0,1,1,2,6.4,4.43,4.43,0,0,1,6.4,2Z" transform="translate(-.01)"></path>
+          </svg>
+        </button>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">Toggle Menu</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+    <div class="initial-content">
+      
+  
+
+
+
+
+
+
+
+
+
+
+
+<div class="page__hero--overlay"
+  style="background-color: 444444; background-image: url('/assets/images/margaret-weir-GZyjbLNOaFg-unsplash_dark.jpg');"
+>
+  
+    <div class="wrapper">
+      <h1 id="page-title" class="page__title" itemprop="headline">
+        
+          Distributing raster calculations with tiles
+
+        
+      </h1>
+      
+      
+      
+    </div>
+  
+  
+</div>
+
+
+
+
+
+<div id="main" role="main">
+  
+  <div class="sidebar sticky">
+  
+
+
+<div itemscope itemtype="http://schema.org/Person">
+
+  
+    <div class="author__avatar">
+      
+
+      
+        <img src="/assets/images/people/HeatherSavoy.png" alt="Heather Savoy" itemprop="image">
+      
+    </div>
+  
+
+  <div class="author__content">
+    
+      <h3 class="author__name" itemprop="name">Heather Savoy</h3>
+    
+    
+      <p class="author__bio" itemprop="description">
+        Heather is a Computational Biologist (Data Scientist) in the USDA-ARS SCINet Office. Her research interests include applying informatics methods to multidisciplinary agro-ecosystem problems and building data science software tools for geospatial research. She received her Ph.D. in Civil and Environmental Engineering with an emphasis in Computational Data Science and Engineering from the University of California Berkeley. She also holds a B.S. in Environmental Science with a minor in Computational Mathematics from the Florida Institute of Technology.
+      </p>
+    
+  </div>
+
+  <div class="author__urls-wrapper">
+    <button class="btn btn--inverse">Follow</button>
+    <ul class="author__urls social-icons">
+      
+
+      
+
+      
+        <li>
+          <a href="mailto:mailto:heather.savoy@usda.gov">
+            <meta itemprop="email" content="mailto:heather.savoy@usda.gov" />
+            <i class="fas fa-fw fa-envelope-square" aria-hidden="true"></i> Email
+          </a>
+        </li>
+      
+
+      
+
+      
+        <li>
+          <a href="https://twitter.com/someone" itemprop="sameAs">
+            <i class="fab fa-fw fa-twitter-square" aria-hidden="true"></i> Twitter
+          </a>
+        </li>
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      <!--
+  <li>
+    <a href="http://link-to-whatever-social-network.com/user/" itemprop="sameAs">
+      <i class="fas fa-fw" aria-hidden="true"></i> Custom Social Profile Link
+    </a>
+  </li>
+-->
+    </ul>
+  </div>
+</div>
+
+<!-- Create a 2nd author for tutorials -->
+
+
+
+<div itemscope itemtype="http://schema.org/Person">
+
+  
+
+  <div class="author__content">
+    
+      <h3 class="author__name" itemprop="name"></h3>
+    
+    
+  </div>
+
+  <div class="author__urls-wrapper">
+    <button class="btn btn--inverse">Follow</button>
+    <ul class="author__urls social-icons">
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      <!--
+  <li>
+    <a href="http://link-to-whatever-social-network.com/user/" itemprop="sameAs">
+      <i class="fas fa-fw" aria-hidden="true"></i> Custom Social Profile Link
+    </a>
+  </li>
+-->
+    </ul>
+  </div>
+</div>
+
+  
+  </div>
+
+
+  <article class="page" itemscope itemtype="http://schema.org/CreativeWork">
+    <meta itemprop="headline" content="Distributing raster calculations with tiles">
+    
+    
+    
+
+    <div class="page__inner-wrap">
+      
+
+      <section class="page__content" itemprop="text">
+        
+        <p><strong>Last Update:</strong> 7 October 2022 <br />
+<strong>Download Jupyter Notebook</strong>: <a href="https://geospatial.101workbook.org/tutorials/GRWG22_RasterTiles.ipynb">GRWG22_RasterTiles.ipynb</a></p>
+
+<h2 id="overview">Overview</h2>
+<p>A common approach to distribute the workload in raster calculations is to split
+a large raster into smaller ‘tiles’ or ‘chunks’. This tutorial shows how to 
+speed up a NDVI calculation by creating tiles and then distributing the tiles 
+across cores. This process is not specific to calculating NDVI. You can use this
+approach with any calculation that is performed per cell/pixel without depending
+on the data in neighboring pixels (if neighboring data is needed, extra steps are 
+involved).</p>
+
+<p>In this tutorial, parallelization is performed within python using the resources 
+allocated to the launched JupyterLab Server session. If you are interested in seeing
+an example on how to submit your own SLURM job, please see 
+<a href="https://geospatial.101workbook.org/ExampleGeoWorkflows/GRWG22_ZonalStats_wSLURM_python">this tutorial</a>.</p>
+
+<p><em>Language</em>: <code class="language-plaintext highlighter-rouge">Python</code></p>
+
+<p><em>Primary Libraries/Packages</em>:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Description</th>
+      <th>Link</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">rioxarray</code></td>
+      <td>rasterio xarray extension</td>
+      <td>https://corteva.github.io/rioxarray/stable/readme.html</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">rasterio</code></td>
+      <td>access to geospatial raster data</td>
+      <td>https://rasterio.readthedocs.io/en/latest/</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">multiprocessing</code></td>
+      <td>Process-based parallelism</td>
+      <td>https://docs.python.org/3/library/multiprocessing.html</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">dask</code></td>
+      <td>Scale the Python tools you love</td>
+      <td>https://www.dask.org</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="nomenclature">Nomenclature</h2>
+
+<ul>
+  <li><em>Parallel processing:</em> Distributing computational tasks among multiple cores.</li>
+  <li><em>Core:</em> A processor on a central processing unit; a physical or logical component 
+that can execute computational tasks.</li>
+  <li><em>Tile (or chunk):</em> A continuous segment of a raster dataset or multi-dimensional 
+array.</li>
+  <li><em>NDVI:</em> Normalized Difference Vegetation Index, a quantity derived from the red
+and near-infrared bands of imagery to detect vegetation.</li>
+</ul>
+
+<h2 id="analysis-steps">Analysis Steps</h2>
+<ul>
+  <li>Open Imagery and Setup Tiles - Open a GeoTIFF of Landsat 7 imagery and divide
+it into multiple smaller images.</li>
+  <li>Define NDVI function - Write a function to calculate Normalized Difference 
+Vegetation Index from an image file.</li>
+  <li>Compare serial versus parallel computation times - Measure the time it takes to
+perform the NDVI calculation across tiles in serial and in parallel
+    <ul>
+      <li>Option 1: using the <code class="language-plaintext highlighter-rouge">multiprocessing</code> package</li>
+      <li>Option 2: using <code class="language-plaintext highlighter-rouge">Dask</code></li>
+    </ul>
+  </li>
+  <li>Visualize NDVI results - View the NDVI values in tiles as a whole image.</li>
+</ul>
+
+<h3 id="step-0-import-libraries--packages">Step 0: Import Libraries / Packages</h3>
+
+<p>Below are commands to run to create a new Conda environment named ‘geoenv’ that contains the packages used in this tutorial series. To learn more about using Conda environments on Ceres, see <a href="https://scinet.usda.gov/guide/conda/">this guide</a>. NOTE: If you have used other Geospatial Workbook tutorials from the SCINet Geospatial Research Working Group Workshop 2022, you may have aleady created this environment and may skip to launching JupyterHub.</p>
+
+<p>First, we allocate resources on a compute (Ceres) or development (Atlas) node so we do not burden the login node with the conda installations.</p>
+
+<p>On Ceres:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>salloc
+</code></pre></div></div>
+
+<p>On Atlas (you will need to replace <code class="language-plaintext highlighter-rouge">yourProjectName</code> with one of your project’s name):</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>srun <span class="nt">-A</span> yourProjectName <span class="nt">-p</span> development <span class="nt">--pty</span> <span class="nt">--preserve-env</span> bash
+</code></pre></div></div>
+
+<p>Then we load the <code class="language-plaintext highlighter-rouge">miniconda</code> conda module available on Ceres and Atlas to access the <code class="language-plaintext highlighter-rouge">Conda</code> commands to create environments, activate them, and install Python and packages.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>salloc
+module load miniconda
+conda create <span class="nt">--name</span> geoenv
+<span class="nb">source </span>activate geoenv
+conda <span class="nb">install </span>geopandas rioxarray rasterstats plotnine ipython ipykernel dask dask-jobqueue <span class="nt">-c</span> conda-forge
+</code></pre></div></div>
+
+<p>To have JupyterLab use this conda environment, we will make a kernel.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ipython kernel <span class="nb">install</span> <span class="nt">--user</span> <span class="nt">--name</span><span class="o">=</span>geo_kernel
+</code></pre></div></div>
+
+<p>This tutorial assumes you are running this python notebook in JupyterLab. The 
+easiest way to do that is with Open OnDemand (OoD) on <a href="http://ceres-ood.scinet.usda.gov/">Ceres</a>
+or <a href="https://atlas-ood.hpc.msstate.edu/">Atlas</a>. 
+Select the following parameter values when requesting a JupyterLab
+app to be launched depending on which cluster you choose. All other values can 
+be left to their defaults. Note: on Atlas, we are using the development partition
+so that we have internet access to download files since the regular compute nodes
+on the <code class="language-plaintext highlighter-rouge">atlas</code> partition do not have internet access.</p>
+
+<p>Ceres:</p>
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">Slurm Partition</code>: short</li>
+  <li><code class="language-plaintext highlighter-rouge">Number of hours</code>: 1</li>
+  <li><code class="language-plaintext highlighter-rouge">Number of cores</code>: 16</li>
+  <li><code class="language-plaintext highlighter-rouge">Memory required</code>: 24G</li>
+  <li><code class="language-plaintext highlighter-rouge">Jupyer Notebook vs Lab</code>: Lab</li>
+</ul>
+
+<p>Atlas:</p>
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">Partition Name</code>: development</li>
+  <li><code class="language-plaintext highlighter-rouge">QOS</code>: normal</li>
+  <li><code class="language-plaintext highlighter-rouge">Number of hours</code>: 1</li>
+  <li><code class="language-plaintext highlighter-rouge">Number of tasks</code>: 16</li>
+  <li><code class="language-plaintext highlighter-rouge">Additional Slurm Parameters</code>: –mem=24G</li>
+</ul>
+
+<p>To download the python notebook file for this tutorial to either cluster within OoD, 
+you can use the following lines in the python console:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">urllib.request</span>
+<span class="n">tutorial_name</span> <span class="o">=</span> <span class="s">'GRWG22_RasterTiles.ipynb'</span>
+<span class="n">urllib</span><span class="p">.</span><span class="n">request</span><span class="p">.</span><span class="n">urlretrieve</span><span class="p">(</span><span class="s">'https://geospatial.101workbook.org/tutorials/'</span> <span class="o">+</span> <span class="n">tutorial_name</span><span class="p">,</span> 
+                           <span class="n">tutorial_name</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>Once you are in JupyterLab with this notebook open, select your kernel by clicking on the <em>Switch kernel</em> button in the top right corner of the editor. A pop-up will appear with a dropdown menu containing the <em>geo_kernel</em> kernel we made above. Click on the <em>geo_kernel</em> kernel and click the <em>Select</em> button.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">time</span>
+<span class="kn">import</span> <span class="nn">xarray</span>
+<span class="kn">import</span> <span class="nn">rioxarray</span>
+<span class="kn">import</span> <span class="nn">glob</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">rasterio</span>
+<span class="kn">from</span> <span class="nn">rasterio.enums</span> <span class="kn">import</span> <span class="n">Resampling</span>
+<span class="kn">import</span> <span class="nn">multiprocessing</span> <span class="k">as</span> <span class="n">mp</span>
+<span class="kn">from</span> <span class="nn">dask.distributed</span> <span class="kn">import</span> <span class="n">Client</span>
+<span class="kn">from</span> <span class="nn">dask_jobqueue</span> <span class="kn">import</span> <span class="n">SLURMCluster</span>
+</code></pre></div></div>
+
+<h4 id="step-1a-open-imagery">Step 1a: Open imagery</h4>
+
+<p>The imagery file we will use is available from the <code class="language-plaintext highlighter-rouge">stars</code> R package. It is an 
+example image from Landsat 7. In its documentation, it indicates that the first three bands are 
+from the visible part of the electromagnetic spectrum (blue, green, red) and the 
+fourth band in the near-infrared band. We can use <code class="language-plaintext highlighter-rouge">rioxarray</code>’s function <code class="language-plaintext highlighter-rouge">open_rasterio</code> to
+read the imagery file. The <code class="language-plaintext highlighter-rouge">plot.imshow</code> function will let us visualize the image in
+typical RGB. We can see that it is of a coast with forested areas that should 
+have relatively high NDVI values.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">L7_ETMs</span> <span class="o">=</span> <span class="n">rioxarray</span><span class="p">.</span><span class="n">open_rasterio</span><span class="p">(</span><span class="s">'https://geospatial.101workbook.org/ExampleGeoWorkflows/assets/L7_ETMs.tif'</span><span class="p">).</span><span class="n">astype</span><span class="p">(</span><span class="s">'int16'</span><span class="p">)</span>
+
+<span class="c1"># RGB Image using the third-first bands
+</span><span class="n">L7_ETMs</span><span class="p">[[</span><span class="mi">2</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">]].</span><span class="n">plot</span><span class="p">.</span><span class="n">imshow</span><span class="p">()</span>
+</code></pre></div></div>
+
+<p><img src="/ExampleGeoWorkflows/assets/Session8_Tutorial2_2_1.png" alt="png" /></p>
+
+<p>This image is fairly small and we do not actually need to speed-up the NDVI 
+calculation with parallel processing. So we will make it artificially a big data 
+problem by disaggregating the pixels, i.e. making a greater number of smaller 
+cells, for the sake of a portable example. The function <code class="language-plaintext highlighter-rouge">rio.reproject</code> accepts a 
+raster object and a new shape, i.e. a new set of counts for rows and columns. Below, 
+we are using a factor of 20 to disaggregate our raster which 
+will create 400x pixels than the original.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">disagg_factor</span> <span class="o">=</span> <span class="mi">20</span>
+<span class="n">new_width</span> <span class="o">=</span> <span class="n">L7_ETMs</span><span class="p">.</span><span class="n">rio</span><span class="p">.</span><span class="n">width</span> <span class="o">*</span> <span class="n">disagg_factor</span>
+<span class="n">new_height</span> <span class="o">=</span> <span class="n">L7_ETMs</span><span class="p">.</span><span class="n">rio</span><span class="p">.</span><span class="n">height</span> <span class="o">*</span> <span class="n">disagg_factor</span>
+
+<span class="n">nir_red_fine</span> <span class="o">=</span> <span class="n">L7_ETMs</span><span class="p">[[</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">]].</span><span class="n">rio</span><span class="p">.</span><span class="n">reproject</span><span class="p">(</span>
+    <span class="n">L7_ETMs</span><span class="p">.</span><span class="n">rio</span><span class="p">.</span><span class="n">crs</span><span class="p">,</span>
+    <span class="n">shape</span><span class="o">=</span><span class="p">(</span><span class="n">new_height</span><span class="p">,</span> <span class="n">new_width</span><span class="p">),</span>
+    <span class="n">resampling</span><span class="o">=</span><span class="n">Resampling</span><span class="p">.</span><span class="n">nearest</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="c1"># Save to file
+</span><span class="n">nir_red_fine</span><span class="p">.</span><span class="n">rio</span><span class="p">.</span><span class="n">to_raster</span><span class="p">(</span><span class="s">'nr_fine.tif'</span><span class="p">)</span>
+</code></pre></div></div>
+
+<h4 id="step-1b-making-tiles">Step 1b: Making tiles</h4>
+
+<p>First, we will specify how many tiles we want. This example
+will use 4 tiles in each directions for a total of 16 tiles. Next, we will use
+nested <code class="language-plaintext highlighter-rouge">for</code> loops to iterate through our rows and columns of tiles, subset
+our fine-scale image to that region, and then write the tile to a file with 
+the tile indices indicated in the filename.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">num_tiles</span> <span class="o">=</span> <span class="p">[</span><span class="mi">4</span><span class="p">,</span><span class="mi">4</span><span class="p">]</span>
+
+<span class="n">tile_width</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">new_width</span><span class="o">/</span><span class="n">num_tiles</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+<span class="n">tile_height</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">new_height</span><span class="o">/</span><span class="n">num_tiles</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_tiles</span><span class="p">[</span><span class="mi">0</span><span class="p">]):</span>
+    <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_tiles</span><span class="p">[</span><span class="mi">1</span><span class="p">]):</span>
+        <span class="n">nir_red_tile</span> <span class="o">=</span> <span class="n">nir_red_fine</span><span class="p">[:,(</span><span class="n">i</span><span class="o">*</span><span class="n">tile_width</span><span class="p">):((</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">*</span><span class="n">tile_width</span><span class="p">),(</span><span class="n">j</span><span class="o">*</span><span class="n">tile_height</span><span class="p">):((</span><span class="n">j</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">*</span><span class="n">tile_height</span><span class="p">)]</span>
+        <span class="n">nir_red_tile</span><span class="p">.</span><span class="n">rio</span><span class="p">.</span><span class="n">to_raster</span><span class="p">(</span><span class="s">'tile_{0}_{1}.tif'</span><span class="p">.</span><span class="nb">format</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">))</span>
+</code></pre></div></div>
+
+<h3 id="step-2-defining-ndvi-function">Step 2: Defining NDVI function</h3>
+
+<p>Next, we want to define a function that will calculate NDVI for the pixels in 
+one tile. The function will accept a tile’s filename, open that file with <code class="language-plaintext highlighter-rouge">rioxarray</code>,
+calculate NDVI for the pixels, then write the resulting single-band raster to
+a new file.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">normalized_diff_r</span><span class="p">(</span><span class="n">fname</span><span class="p">):</span>
+  <span class="n">nr</span> <span class="o">=</span> <span class="n">rioxarray</span><span class="p">.</span><span class="n">open_rasterio</span><span class="p">(</span><span class="n">fname</span><span class="p">)</span>
+  <span class="n">NDVI_r</span> <span class="o">=</span> <span class="p">(</span><span class="n">nr</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">nr</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span><span class="o">/</span><span class="p">(</span><span class="n">nr</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="n">nr</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+  <span class="n">NDVI_r</span><span class="p">.</span><span class="n">rio</span><span class="p">.</span><span class="n">to_raster</span><span class="p">(</span><span class="s">'NDVI_'</span> <span class="o">+</span> <span class="n">fname</span><span class="p">)</span>
+
+</code></pre></div></div>
+
+<h3 id="step-3-comparing-serial-and-parallel-processing-times">Step 3: Comparing serial and parallel processing times</h3>
+
+<p>To have a baseline to which to compare how long the parallel approach takes, we
+can first time the serial approach. The <code class="language-plaintext highlighter-rouge">time.time()</code> function provides 
+basic time reporting capabilities and when called before and after a computation, we can
+find the processing time as the difference in number of seconds.</p>
+
+<h3 id="step-3a-multiprocessing">Step 3a: <code class="language-plaintext highlighter-rouge">multiprocessing</code></h3>
+
+<h4 id="serial">Serial</h4>
+
+<p>For our serial approach, we will use a <code class="language-plaintext highlighter-rouge">for</code> loop to iterate over our tile files and 
+call our <code class="language-plaintext highlighter-rouge">normalized_diff_r</code> function.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">tile_files</span> <span class="o">=</span> <span class="n">glob</span><span class="p">.</span><span class="n">glob</span><span class="p">(</span><span class="s">'tile*.tif'</span><span class="p">)</span>
+<span class="n">tile_files</span> <span class="o">=</span> <span class="p">[</span><span class="n">os</span><span class="p">.</span><span class="n">path</span><span class="p">.</span><span class="n">basename</span><span class="p">(</span><span class="n">t_f</span><span class="p">)</span> <span class="k">for</span> <span class="n">t_f</span> <span class="ow">in</span> <span class="n">tile_files</span><span class="p">]</span>
+
+<span class="n">st</span> <span class="o">=</span> <span class="n">time</span><span class="p">.</span><span class="n">time</span><span class="p">()</span>
+<span class="k">for</span> <span class="n">t_f</span> <span class="ow">in</span> <span class="n">tile_files</span><span class="p">:</span>
+    <span class="n">normalized_diff_r</span><span class="p">(</span><span class="n">t_f</span><span class="p">)</span>
+    
+<span class="n">et</span> <span class="o">=</span> <span class="n">time</span><span class="p">.</span><span class="n">time</span><span class="p">()</span>
+<span class="k">print</span><span class="p">(</span><span class="s">'Processing time: {:.2f} seconds'</span><span class="p">.</span><span class="nb">format</span><span class="p">(</span><span class="n">et</span> <span class="o">-</span> <span class="n">st</span><span class="p">))</span>
+</code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Processing time: 7.97 seconds
+</code></pre></div></div>
+
+<h4 id="parallel">Parallel</h4>
+
+<p>To modify the serial approach above, we can use the <code class="language-plaintext highlighter-rouge">multiprocessing</code> function
+<code class="language-plaintext highlighter-rouge">Pool</code> to set how many cores we want to use (here, matching the number of tiles) 
+and the <code class="language-plaintext highlighter-rouge">pool.map_async</code> function
+to asynchonously execute <code class="language-plaintext highlighter-rouge">normalized_diff_r</code> for our tiles across those cores.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">st</span> <span class="o">=</span> <span class="n">time</span><span class="p">.</span><span class="n">time</span><span class="p">()</span>
+<span class="n">pool</span> <span class="o">=</span> <span class="n">mp</span><span class="p">.</span><span class="n">Pool</span><span class="p">(</span><span class="n">num_tiles</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">*</span><span class="n">num_tiles</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+<span class="n">results</span> <span class="o">=</span> <span class="n">pool</span><span class="p">.</span><span class="n">map_async</span><span class="p">(</span><span class="n">normalized_diff_r</span><span class="p">,</span> <span class="n">tile_files</span><span class="p">)</span>
+<span class="n">pool</span><span class="p">.</span><span class="n">close</span><span class="p">()</span>    
+<span class="n">pool</span><span class="p">.</span><span class="n">join</span><span class="p">()</span>
+<span class="n">et</span> <span class="o">=</span> <span class="n">time</span><span class="p">.</span><span class="n">time</span><span class="p">()</span>
+
+<span class="k">print</span><span class="p">(</span><span class="s">'Processing time: {:.2f} seconds'</span><span class="p">.</span><span class="nb">format</span><span class="p">(</span><span class="n">et</span> <span class="o">-</span> <span class="n">st</span><span class="p">))</span>
+</code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Processing time: 3.23 seconds
+</code></pre></div></div>
+
+<h3 id="step-4-visualize-results">Step 4: Visualize results</h3>
+
+<p>We have processed each tile, so we can merge the results back and see our NDVI results.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">ndvi_files</span> <span class="o">=</span> <span class="p">[</span><span class="s">'NDVI_'</span> <span class="o">+</span> <span class="n">t_f</span> <span class="k">for</span> <span class="n">t_f</span> <span class="ow">in</span> <span class="n">tile_files</span><span class="p">]</span>
+<span class="n">elements</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="nb">file</span> <span class="ow">in</span> <span class="n">ndvi_files</span><span class="p">:</span>
+    <span class="n">elements</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">rioxarray</span><span class="p">.</span><span class="n">open_rasterio</span><span class="p">(</span><span class="nb">file</span><span class="p">))</span>
+
+<span class="n">merged</span> <span class="o">=</span> <span class="n">xarray</span><span class="p">.</span><span class="n">combine_by_coords</span><span class="p">(</span><span class="n">elements</span><span class="p">).</span><span class="n">squeeze</span><span class="p">()</span>
+
+<span class="n">merged</span><span class="p">.</span><span class="n">plot</span><span class="p">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">cmap</span><span class="o">=</span><span class="s">'YlGn'</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p><img src="/ExampleGeoWorkflows/assets/Session8_Tutorial2_8_1.png" alt="png" /></p>
+
+<h3 id="step-5-parallel---dask">Step 5: Parallel - Dask</h3>
+
+<p>Dask is an alternative approach to this problem. The package <code class="language-plaintext highlighter-rouge">rioxarray</code>, which we used to open our original raster, is a geospatial extension of <code class="language-plaintext highlighter-rouge">xarray</code>, a package for manipulating multi-dimensional arrays that also has built-in connections with <a href="https://docs.dask.org/en/stable/">Dask, a flexible library for parallel computating in Python</a>. We can use the <code class="language-plaintext highlighter-rouge">xarray</code>/<code class="language-plaintext highlighter-rouge">Dask</code> integration to have the tiling work done for us.</p>
+
+<p>First, we will tell Dask that we are on a cluster managed by SLURM and pass a few arguments to tell SLURM what kind of specification we need. Note that you will need to change <code class="language-plaintext highlighter-rouge">yourProjecName</code> name to one of your project’s names.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">cluster</span> <span class="o">=</span> <span class="n">SLURMCluster</span><span class="p">(</span><span class="n">cores</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">memory</span><span class="o">=</span><span class="s">'30GB'</span><span class="p">,</span> <span class="n">account</span><span class="o">=</span><span class="s">'yourProjectName'</span><span class="p">,</span> <span class="n">processes</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>Since we may not need the same number of cores throughout our processing, or we are not quite 
+sure what the optimal number of cores may be, we can take advantage of Dask’s option to have 
+an adaptive cluster. The code chunk below tells Dask to request from SLURM 1 to 16 jobs at 
+a given time depending on what we request Dask to calculate.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">cluster</span><span class="p">.</span><span class="n">adapt</span><span class="p">(</span><span class="n">minimum_jobs</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">maximum_jobs</span><span class="o">=</span><span class="mi">16</span><span class="p">)</span>
+<span class="n">client</span> <span class="o">=</span> <span class="n">Client</span><span class="p">(</span><span class="n">cluster</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>To begin using Dask in our NDVI calculation, we will restart by opening our fine-resolution imagery with 
+<code class="language-plaintext highlighter-rouge">rioxarray.open_rasterio</code>, but this time pass a value to the <code class="language-plaintext highlighter-rouge">chunks</code> argument. By indicating that we
+want chunks, we are telling <code class="language-plaintext highlighter-rouge">xarray</code>/Dask to split up our multi-dimensional array (multi-band image) into
+chunks, or tiles. If you are not sure how to define the size of your chunks, you can just pass <code class="language-plaintext highlighter-rouge">'auto'</code> like
+below and Dask will determine the chunk sizes for you.</p>
+
+<p>When you print the Dask array object information to screen, the chunk sizes (in shape and bytes) are 
+displayed along with a visual of your multi-dimensional array shape and the typical <code class="language-plaintext highlighter-rouge">xarray</code> printed
+information.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">L7_ETMs_fine</span> <span class="o">=</span> <span class="n">rioxarray</span><span class="p">.</span><span class="n">open_rasterio</span><span class="p">(</span><span class="s">'nr_fine.tif'</span><span class="p">,</span> <span class="n">chunks</span><span class="o">=</span> <span class="s">'auto'</span><span class="p">)</span>
+<span class="n">L7_ETMs_fine</span>
+</code></pre></div></div>
+
+<p><img src="/ExampleGeoWorkflows/assets/Session8_Tutorial2_11_1.png" alt="png" /></p>
+
+<p>So now we have our imagery open and our chunks defined, we can continue writing our code as 
+we would operate on a typical <code class="language-plaintext highlighter-rouge">rioxarray</code> object. The key difference is that Dask arrays
+defer computation until needed. So we can execute the line below to calculate NDVI for the
+whole image, but only the instructions are stored - the actual calculation has not happened 
+yet. We print the newly created object and see the Dask-format printed output indicating that
+the result is now a single band, as we expect for NDVI. That is because Dask is keeping track
+of how our multi-dimensional array <em>will</em> be modified.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">NDVI</span> <span class="o">=</span>  <span class="p">(</span><span class="n">L7_ETMs_fine</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">L7_ETMs_fine</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span><span class="o">/</span><span class="p">(</span><span class="n">L7_ETMs_fine</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="n">L7_ETMs_fine</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+<span class="n">NDVI</span>
+</code></pre></div></div>
+<p><img src="/ExampleGeoWorkflows/assets/Session8_Tutorial2_12_1.png" alt="png" /></p>
+
+<p>To have the actual calculation be performed, a function requiring the results needs to be called. This can be an explicit request, e.g. the <code class="language-plaintext highlighter-rouge">compute</code> function below, or implicit, e.g. plotting the array’s values. Below, we request for our <code class="language-plaintext highlighter-rouge">NDVI</code> array to be computed and measure the processing time.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">st</span> <span class="o">=</span> <span class="n">time</span><span class="p">.</span><span class="n">time</span><span class="p">()</span>
+<span class="n">NDVI</span><span class="p">.</span><span class="n">compute</span><span class="p">()</span>
+<span class="n">et</span> <span class="o">=</span> <span class="n">time</span><span class="p">.</span><span class="n">time</span><span class="p">()</span>
+<span class="k">print</span><span class="p">(</span><span class="s">'Processing time: {:.2f} seconds'</span><span class="p">.</span><span class="nb">format</span><span class="p">(</span><span class="n">et</span> <span class="o">-</span> <span class="n">st</span><span class="p">))</span>
+</code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Processing time: 13.72 seconds
+</code></pre></div></div>
+
+<p>During the computation, you can check the SLURM queue by running the <code class="language-plaintext highlighter-rouge">squeue -u firstname.lastname</code> in a shell with your SCINet username and see the jobs Dask submits to perform the calculation.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">NDVI</span><span class="p">.</span><span class="n">plot</span><span class="p">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">cmap</span><span class="o">=</span><span class="s">'YlGn'</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p><img src="/ExampleGeoWorkflows/assets/Session8_Tutorial2_14_1.png" alt="png" /></p>
+
+<h3 id="continue-to-explore">Continue to explore</h3>
+
+<p>Things you can change in this tutorial to see how it affects the difference in
+processing time between serial and parallel (or the two parallel library 
+options):</p>
+
+<ul>
+  <li>The disaggregation factor</li>
+  <li>The number of tiles</li>
+  <li>The number of cores</li>
+</ul>
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+
+
+        
+      </footer>
+
+      
+
+      
+
+    </div>
+
+    
+  </article>
+
+  
+  
+</div>
+    </div>
+
+    
+      <div class="search-content">
+        <div class="search-content__inner-wrap"><form onsubmit="return googleCustomSearchExecute();" id="cse-search-box-form-id">
+    <input type="search" id="cse-search-input-box-id" aria-placeholder="Enter your search term..." class="search-input" tabindex="-1" placeholder="Enter your search term..." />
+    </form>
+    <div id="results" class="results">
+        <gcse:searchresults-only></gcse:searchresults-only>
+    </div></div>
+
+      </div>
+    
+    
+    <div class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+
+        <div class="page__footer-follow">
+  <ul class="social-icons">
+    
+      <li><strong>Follow:</strong></li>
+    
+    
+      <li><a href="https://twitter.com/isugif"><i class="fab fa-fw fa-twitter-square" aria-hidden="true"></i> Twitter</a></li>
+    
+    
+    
+      <li><a href="https://github.com/https://github.com/isugenomics"><i class="fab fa-fw fa-github" aria-hidden="true"></i> GitHub</a></li>
+    
+    
+    
+    
+  </ul>
+</div>
+
+<div class="page__footer-copyright">&copy; 2024 Geospatial Workbook</div>
+
+      </footer>
+    </div>
+
+    
+  <script src="/assets/js/main.min.js"></script>
+  <script src="https://use.fontawesome.com/releases/v5.0.13/js/all.js"></script>
+
+
+<script>
+  (function () {
+    var cx = '009853197685285203469:nsvri1pa88d';
+    var gcse = document.createElement('script');
+    gcse.type = 'text/javascript';
+    gcse.async = true;
+    gcse.src = 'https://cse.google.com/cse.js?cx=' + cx;
+    var s = document.getElementsByTagName('script')[0];
+    s.parentNode.insertBefore(gcse, s);
+  })();
+
+  function googleCustomSearchExecute() {
+    var input = document.getElementById('cse-search-input-box-id');
+    var element = google.search.cse.element.getElement('searchresults-only0');
+    if (input.value == '') {
+      element.clearAllResults();
+    } else {
+      element.execute(input.value);
+    }
+    return false;
+  }
+
+  
+</script>
+
+
+
+
+<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+<script id="MathJax-script" defer
+        src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+</script>
+
+
+
+
+  </body>
+</html>

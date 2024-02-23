@@ -1,0 +1,696 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.11.2 by Michael Rose
+  Copyright 2013-2018 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE.txt
+-->
+<html lang="en" class="no-js">
+  <head>
+    <meta charset="utf-8">
+
+<!-- begin _includes/seo.html --><title>Tutorials - Geospatial Workbook</title>
+<meta name="description" content="Tutorial on Informatics for Geospatial Information">
+
+
+  <meta name="author" content="Kerrie Geil">
+
+
+<meta property="og:type" content="website">
+<meta property="og:locale" content="en_US">
+<meta property="og:site_name" content="Geospatial Workbook">
+<meta property="og:title" content="Tutorials">
+<meta property="og:url" content="http://localhost:4000/Workshops/0b-tutorials.html">
+
+
+
+
+  <meta property="og:image" content="http://localhost:4000/assets/images/margaret-weir-GZyjbLNOaFg-unsplash_dark.jpg">
+
+
+
+  <meta name="twitter:site" content="@isugif">
+  <meta name="twitter:title" content="Tutorials">
+  <meta name="twitter:description" content="Tutorial on Informatics for Geospatial Information">
+  <meta name="twitter:url" content="http://localhost:4000/Workshops/0b-tutorials.html">
+
+  
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content="http://localhost:4000/assets/images/margaret-weir-GZyjbLNOaFg-unsplash_dark.jpg">
+  
+
+  
+    <meta name="twitter:creator" content="@someone">
+  
+
+
+
+
+
+
+
+  
+
+  
+
+
+<link rel="canonical" href="http://localhost:4000/Workshops/0b-tutorials.html">
+
+
+
+
+
+
+
+  <script type="application/ld+json">
+    {
+      "@context": "http://schema.org",
+      "@type": "Person",
+      "name": "",
+      "url": "http://localhost:4000",
+      "sameAs": null
+    }
+  </script>
+
+
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+<link href="/feed.xml" type="application/atom+xml" rel="alternate" title="Geospatial Workbook Feed">
+
+<!-- http://t.co/dKP3o1e -->
+<meta name="HandheldFriendly" content="True">
+<meta name="MobileOptimized" content="320">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+
+<!--[if lte IE 9]>
+  <style>
+    /* old IE unsupported flexbox fixes */
+    .greedy-nav .site-title {
+      padding-right: 3em;
+    }
+    .greedy-nav button {
+      position: absolute;
+      top: 0;
+      right: 0;
+      height: 100%;
+    }
+  </style>
+<![endif]-->
+
+
+    <!-- start custom head snippets -->
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-E6BZVYF8ZY"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-E6BZVYF8ZY');
+</script>
+
+<!-- insert favicons. use https://realfavicongenerator.net/ -->
+
+<!-- end custom head snippets -->
+
+  </head>
+
+  <body class="layout--single">
+
+    <!--[if lt IE 9]>
+<div class="notice--danger align-center" style="margin: 0;">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience.</div>
+<![endif]-->
+
+    <div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        <a class="site-title" href="/">Geospatial Workbook</a>
+        <ul class="visible-links">
+          
+            
+            <li class="masthead__menu-item">
+              <a href="http://localhost:4000/about.html" >About</a>
+            </li>
+          
+            
+            <li class="masthead__menu-item">
+              <a href="http://localhost:4000/list.html" >Index</a>
+            </li>
+          
+            
+            <li class="masthead__menu-item">
+              <a href="http://localhost:4000/glossary.html" >Glossary</a>
+            </li>
+          
+            
+            <li class="masthead__menu-item">
+              <a href="http://localhost:4000/people.html" >People</a>
+            </li>
+          
+            
+            <li class="masthead__menu-item">
+              <a href="http://localhost:4000/contributing.html" >Contribute</a>
+            </li>
+          
+        </ul>
+        
+        <button class="search__toggle" type="button">
+          <svg class="icon" width="16" height="16" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 15.99 16">
+            <path d="M15.5,13.12L13.19,10.8a1.69,1.69,0,0,0-1.28-.55l-0.06-.06A6.5,6.5,0,0,0,5.77,0,6.5,6.5,0,0,0,2.46,11.59a6.47,6.47,0,0,0,7.74.26l0.05,0.05a1.65,1.65,0,0,0,.5,1.24l2.38,2.38A1.68,1.68,0,0,0,15.5,13.12ZM6.4,2A4.41,4.41,0,1,1,2,6.4,4.43,4.43,0,0,1,6.4,2Z" transform="translate(-.01)"></path>
+          </svg>
+        </button>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">Toggle Menu</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+    <div class="initial-content">
+      
+  
+
+
+
+
+
+
+
+
+
+
+
+<div class="page__hero--overlay"
+  style="background-color: 444444; background-image: url('/assets/images/margaret-weir-GZyjbLNOaFg-unsplash_dark.jpg');"
+>
+  
+    <div class="wrapper">
+      <h1 id="page-title" class="page__title" itemprop="headline">
+        
+          Tutorials
+
+        
+      </h1>
+      
+      
+      
+    </div>
+  
+  
+</div>
+
+
+
+
+
+<div id="main" role="main">
+  
+  <div class="sidebar sticky">
+  
+
+
+<div itemscope itemtype="http://schema.org/Person">
+
+  
+    <div class="author__avatar">
+      
+
+      
+        <img src="/assets/images/people/KerrieGeil.png" alt="Kerrie Geil" itemprop="image">
+      
+    </div>
+  
+
+  <div class="author__content">
+    
+      <h3 class="author__name" itemprop="name">Kerrie Geil</h3>
+    
+    
+      <p class="author__bio" itemprop="description">
+        Kerrie is an ARS SCINet postdoc in the research group of Dr. Deb Peters in Las Cruces, NM. Her M.S. and Ph.D. degrees are in Atmospheric Sciences and her research background is in climate modeling.
+      </p>
+    
+  </div>
+
+  <div class="author__urls-wrapper">
+    <button class="btn btn--inverse">Follow</button>
+    <ul class="author__urls social-icons">
+      
+
+      
+
+      
+        <li>
+          <a href="mailto:mailto:someone@iastate.edu">
+            <meta itemprop="email" content="mailto:someone@iastate.edu" />
+            <i class="fas fa-fw fa-envelope-square" aria-hidden="true"></i> Email
+          </a>
+        </li>
+      
+
+      
+
+      
+        <li>
+          <a href="https://twitter.com/someone" itemprop="sameAs">
+            <i class="fab fa-fw fa-twitter-square" aria-hidden="true"></i> Twitter
+          </a>
+        </li>
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      <!--
+  <li>
+    <a href="http://link-to-whatever-social-network.com/user/" itemprop="sameAs">
+      <i class="fas fa-fw" aria-hidden="true"></i> Custom Social Profile Link
+    </a>
+  </li>
+-->
+    </ul>
+  </div>
+</div>
+
+<!-- Create a 2nd author for tutorials -->
+
+
+
+<div itemscope itemtype="http://schema.org/Person">
+
+  
+
+  <div class="author__content">
+    
+      <h3 class="author__name" itemprop="name"></h3>
+    
+    
+  </div>
+
+  <div class="author__urls-wrapper">
+    <button class="btn btn--inverse">Follow</button>
+    <ul class="author__urls social-icons">
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      <!--
+  <li>
+    <a href="http://link-to-whatever-social-network.com/user/" itemprop="sameAs">
+      <i class="fas fa-fw" aria-hidden="true"></i> Custom Social Profile Link
+    </a>
+  </li>
+-->
+    </ul>
+  </div>
+</div>
+
+  
+  </div>
+
+
+  <article class="page" itemscope itemtype="http://schema.org/CreativeWork">
+    <meta itemprop="headline" content="Tutorials">
+    
+    
+    
+
+    <div class="page__inner-wrap">
+      
+
+      <section class="page__content" itemprop="text">
+        
+        <p>All tutorials are hosted on Github at (repo location coming soon).</p>
+
+<p>Below is a brief description of each tutorial as well as an instructional on how to download and run them on the SCINet Ceres HPC system.</p>
+
+<ul>
+  <li><a href="#how-to-run-tutorials-on-ceres"><strong>How to Run Tutorials on Ceres</strong></a></li>
+  <li><a href="#session-2-tutorial-intro-to-the-ceres-hpc-system-environment-ssh-jupyterhub-basic-linux-slurm-batch-script"><strong>Session 2 Tutorial: Intro to the Ceres HPC System Environment (SSH, JupyterHub, Basic Linux, SLURM batch script)</strong></a></li>
+  <li><a href="#session-3-tutorial-intro-to-distributed-computing-on-the-ceres-hpc-system-using-python-and-dask"><strong>Session 3 Tutorial: Intro to Distributed Computing on the Ceres HPC System Using Python and Dask</strong></a></li>
+  <li><a href="#session-4-tutorial-computational-reproducibility-tools-git-github-conda-docker-singularity-containers"><strong>Session 4 Tutorial: Computational Reproducibility Tools (Git/Github, Conda, Docker/Singularity containers</strong></a></li>
+  <li><a href="#session-5-tutorial-distributed-machine-learning-using-gradient-boosting-to-predict-ndvi-dynamics"><strong>Session 5 Tutorial: Distributed Machine Learning: Using Gradient Boosting to Predict NDVI Dynamics</strong></a></li>
+</ul>
+
+<p><strong>card:</strong></p>
+
+<p><br /><br /></p>
+
+<h1 id="how-to-run-tutorials-on-ceres">How to Run Tutorials on Ceres</h1>
+<p><br />
+For Sessions 2 &amp; 4 tutorials (“Intro to Ceres” and “Computational Reproducibility Tools”) login to your SCINet account using SSH (or through JupyterHub and then open a terminal) and work through the html tutorials from the command line (links in the tutorial sections below).</p>
+
+<p>For Sessions 3 &amp; 5 tutorials (“Intro to Distributed Computing” and “Distributed Machine Learning”) follow the instructions in this section to open the tutorial in a Jupyter Notebook:</p>
+
+<ol>
+  <li>Login to your SCINet/Ceres account through the JupyterHub web interface
+    <ul>
+      <li>Go to <a href="https://jupyterhub.scinet.usda.gov">https://jupyterhub.scinet.usda.gov</a></li>
+      <li>Login to the system with your SCINet credentials</li>
+      <li>Submit the Spawning Page with the following information (if not specified below, leave blank):<br />
+      Node Type: <code class="language-plaintext highlighter-rouge">short</code><br />
+      Number of Cores: <code class="language-plaintext highlighter-rouge">4</code><br />
+      Job Duration: <code class="language-plaintext highlighter-rouge">02:00:00</code><br />
+      Path to the container image: <code class="language-plaintext highlighter-rouge">/lustre/project/geospatial_tutorials/wg_2020_ws/data_science_im_rs_vSCINetGeoWS_2020.sif</code><br />
+      Container Exec Args: <code class="language-plaintext highlighter-rouge">--bind /etc/munge --bind /var/log/munge --bind /var/run/munge --bind /usr/bin/squeue --bind /usr/bin/scancel --bind /usr/bin/sbatch --bind /usr/bin/scontrol --bind /usr/bin/sinfo --bind /system/slurm:/etc/slurm --bind /run/munge --bind /usr/lib64/libslurm.so --bind /usr/lib64/libmunge.so.2 --bind /usr/lib64/slurm --bind  /project --bind /lustre</code></li>
+    </ul>
+
+    <p>After a few minutes, a JupyterLab instance, running on the Ceres HPC, should open in your browser. After several attempts, if the spawner fails and JupyterLab does not open correctly, please contact the SCINet Virtual Research Support Core (VRSC) for assistance at scinet_vrsc@usda.gov.</p>
+  </li>
+  <li>Download the tutorial material from the workshop GitHub repo
+    <ul>
+      <li>Open a terminal: File–&gt;New–&gt;terminal (alternatively, click the “+” icon (launcher) on the left and then choose the “terminal” icon on the launcher screen)</li>
+      <li>Download the tutorials
+        <ul>
+          <li>instruction coming soon
+ <!-- ```bash
+ git clone --single-branch https://github.com/kerriegeil/SCINET-GEOSPATIAL-RESEARCH-WG.git
+ ```--></li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>Run a notebook:
+    <ul>
+      <li>instruction coming soon</li>
+    </ul>
+  </li>
+</ol>
+
+<!--
+   * You should now see a folder (file system extension on the left hand side of JuputerLab) titled *SCINET-GEOSPATIAL-RESEARCH-WG*.
+   * Navigate to ```/SCINET-GEOSPATIAL-RESEARCH-WG/tutorials/```
+   * Open the desired tutorial
+   * Select the py_geo kernel (upper right corner in the notebook)
+   * Execute blocks of script by clicking the "play" icon in the notebook or typing Shift+Enter
+-->
+<p><br /><br /></p>
+
+<h1 id="session-2-tutorial-intro-to-the-ceres-hpc-system-environment-ssh-jupyterhub-basic-linux-slurm-batch-script">Session 2 Tutorial: Intro to the Ceres HPC System Environment (SSH, JupyterHub, Basic Linux, SLURM batch script)</h1>
+<p><br />
+<strong>Link to HTML (static) Material:</strong> coming soon <!--[Session 2 Tutorial](/link-to-tutorial)--><br /></p>
+
+<p>Login to your SCINet account using SSH (or through JupyterHub and then open a terminal) and work through the html tutorial from the command line.</p>
+
+<p><strong>Learning Goals:</strong></p>
+
+<ul>
+  <li>access the SCINet Ceres HPC system by using Secure Shell at the command line</li>
+  <li>access the SCINet Ceres HPC system using the JupyterHub web interface</li>
+  <li>access JupyterLab and RStudio on the Ceres HPC through the JupyterHub web interface</li>
+  <li>basic linux commands</li>
+  <li>how to write a SLURM batch script to submit a compute job on the Ceres HPC
+<br /><br /></li>
+</ul>
+
+<h1 id="session-3-tutorial-intro-to-distributed-computing-on-the-ceres-hpc-system-using-python-and-dask">Session 3 Tutorial: Intro to Distributed Computing on the Ceres HPC System Using Python and Dask</h1>
+<p><br />
+<strong>Link to Jupyter Notebook on Github:</strong> coming soon <br />
+<strong>Link to HTML (static) Material:</strong> coming soon <!--[Session 3 Tutorial](/link-to-tutorial)--><br /></p>
+
+<p>To launch JupyterHub and download the workshop materials, see the <a href="#how-to-run-tutorials-on-ceres">How to Run Tutorials on Ceres</a> section above.</p>
+
+<p>Run the notebook titled <em>intro-to-python-dask-on-ceres.ipynb</em></p>
+
+<p><strong>Learning Goals:</strong></p>
+
+<ul>
+  <li>data analysis technique for very large datasets (the tools in this tutorial are most appropriate for analysis of large earth-science-type datasets)</li>
+  <li>set up SLURM cluster to compute “in parallel”</li>
+  <li>scale clusters for heavy compute</li>
+  <li>use adaptive clusters to dynamically scale up and down your computing</li>
+  <li>view Dask diagnostics to visualize cluster computations in real time
+<br /><br /></li>
+</ul>
+
+<h1 id="session-4-tutorial-computational-reproducibility-tools-gitgithub-conda-dockersingularity-containers">Session 4 Tutorial: Computational Reproducibility Tools (Git/Github, Conda, Docker/Singularity containers)</h1>
+<p><br />
+<strong>Link to HTML (static) Material:</strong> coming soon <!--[Session 4 Tutorial](/link-to-tutorial)--><br /></p>
+
+<p>Login to your SCINet account using SSH (or through JupyterHub and then open a terminal) and work through the html tutorial from the command line. <strong>To follow along with the Git/Github portion of this tutorial you must <a href="https://github.com/join">create a free Github account</a> for yourself ahead of time and remember your Github username and password.</strong></p>
+
+<p><strong>Learning Goals:</strong></p>
+
+<ul>
+  <li>versioning and archiving your codes with Git and Github
+    <ul>
+      <li>fork/copy an existing online repo to your SCINet/Ceres account</li>
+      <li>push your local fork/repo online to your own Github account</li>
+      <li>make an edit to your fork/repo</li>
+      <li>make a pull request to have your edits incorporated into the original repo</li>
+    </ul>
+  </li>
+  <li>use the Conda package/environment management system on the Ceres HPC system
+    <ul>
+      <li>access or install Conda on Ceres</li>
+      <li>use Conda to download software on Ceres</li>
+      <li>use Conda environments to document all the software you are using and eliminate dependency issues</li>
+      <li>save your Conda environment details to a specification file so that you can quickly recreate your complete software environment for any project</li>
+    </ul>
+  </li>
+  <li>how containers can allow your codes to run successfully on different operating systems
+    <ul>
+      <li>use (and create) a Docker image</li>
+      <li>use Singularity on the Ceres HPC to run a container from a Docker image
+<br /><br /></li>
+    </ul>
+  </li>
+</ul>
+
+<h1 id="session-5-tutorial-distributed-machine-learning-using-gradient-boosting-to-predict-ndvi-dynamics">Session 5 Tutorial: Distributed Machine Learning: Using Gradient Boosting to Predict NDVI Dynamics</h1>
+<p><br />
+<strong>Link to Jupyter Notebook on Github:</strong> coming soon <br />
+<strong>Link to HTML (static) Material:</strong> coming soon <!--[Session 5 Tutorial](/link-to-tutorial)--><br /></p>
+
+<p>To launch JupyterHub and download the workshop materials, see the <a href="#how-to-run-tutorials-on-ceres">How to Run Tutorials on Ceres</a> section above.</p>
+
+<p>Run the notebook titled <em>Machine_Learning_Tutorial.ipynb</em></p>
+
+<p><strong>Learning Goals:</strong></p>
+
+<ul>
+  <li>use a gradient boosting machine learning model to predict NDVI</li>
+  <li>set up a cluster on Ceres (Dask Distributed)</li>
+  <li>read data and interpolate onto a consistent grid (Xarray, Dask Dataframe)</li>
+  <li>merge/shuffle/split the data (Dask_ML, Scikit Learn)</li>
+  <li>optimize the hyperparameters (Dask_ML, Scikit Learn, XGBoost)</li>
+  <li>train a distributed XGBoost model (Scikit Learn, XGBoost, Dask Distributed, datashader)</li>
+  <li>quantify the accuracy and visualize the results (Scikit Learn, SHAP)</li>
+</ul>
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+
+
+        
+      </footer>
+
+      
+
+      
+
+    </div>
+
+    
+  </article>
+
+  
+  
+</div>
+    </div>
+
+    
+      <div class="search-content">
+        <div class="search-content__inner-wrap"><form onsubmit="return googleCustomSearchExecute();" id="cse-search-box-form-id">
+    <input type="search" id="cse-search-input-box-id" aria-placeholder="Enter your search term..." class="search-input" tabindex="-1" placeholder="Enter your search term..." />
+    </form>
+    <div id="results" class="results">
+        <gcse:searchresults-only></gcse:searchresults-only>
+    </div></div>
+
+      </div>
+    
+    
+    <div class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+
+        <div class="page__footer-follow">
+  <ul class="social-icons">
+    
+      <li><strong>Follow:</strong></li>
+    
+    
+      <li><a href="https://twitter.com/isugif"><i class="fab fa-fw fa-twitter-square" aria-hidden="true"></i> Twitter</a></li>
+    
+    
+    
+      <li><a href="https://github.com/https://github.com/isugenomics"><i class="fab fa-fw fa-github" aria-hidden="true"></i> GitHub</a></li>
+    
+    
+    
+    
+  </ul>
+</div>
+
+<div class="page__footer-copyright">&copy; 2024 Geospatial Workbook</div>
+
+      </footer>
+    </div>
+
+    
+  <script src="/assets/js/main.min.js"></script>
+  <script src="https://use.fontawesome.com/releases/v5.0.13/js/all.js"></script>
+
+
+<script>
+  (function () {
+    var cx = '009853197685285203469:nsvri1pa88d';
+    var gcse = document.createElement('script');
+    gcse.type = 'text/javascript';
+    gcse.async = true;
+    gcse.src = 'https://cse.google.com/cse.js?cx=' + cx;
+    var s = document.getElementsByTagName('script')[0];
+    s.parentNode.insertBefore(gcse, s);
+  })();
+
+  function googleCustomSearchExecute() {
+    var input = document.getElementById('cse-search-input-box-id');
+    var element = google.search.cse.element.getElement('searchresults-only0');
+    if (input.value == '') {
+      element.clearAllResults();
+    } else {
+      element.execute(input.value);
+    }
+    return false;
+  }
+
+  
+</script>
+
+
+
+
+<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+<script id="MathJax-script" defer
+        src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+</script>
+
+
+
+
+  </body>
+</html>

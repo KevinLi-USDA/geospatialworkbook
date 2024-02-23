@@ -1,0 +1,752 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.11.2 by Michael Rose
+  Copyright 2013-2018 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE.txt
+-->
+<html lang="en" class="no-js">
+  <head>
+    <meta charset="utf-8">
+
+<!-- begin _includes/seo.html --><title>Useful Programs and Unix Basics - Geospatial Workbook</title>
+<meta name="description" content="Tutorial on Informatics for Geospatial Information">
+
+
+
+<meta property="og:type" content="website">
+<meta property="og:locale" content="en_US">
+<meta property="og:site_name" content="Geospatial Workbook">
+<meta property="og:title" content="Useful Programs and Unix Basics">
+<meta property="og:url" content="http://localhost:4000/IntroductionToCommandLine/Unix/bioawk-basics.html">
+
+
+
+
+  <meta property="og:image" content="http://localhost:4000/assets/images/margaret-weir-GZyjbLNOaFg-unsplash_dark.jpg">
+
+
+
+  <meta name="twitter:site" content="@isugif">
+  <meta name="twitter:title" content="Useful Programs and Unix Basics">
+  <meta name="twitter:description" content="Tutorial on Informatics for Geospatial Information">
+  <meta name="twitter:url" content="http://localhost:4000/IntroductionToCommandLine/Unix/bioawk-basics.html">
+
+  
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content="http://localhost:4000/assets/images/margaret-weir-GZyjbLNOaFg-unsplash_dark.jpg">
+  
+
+  
+
+
+
+
+
+
+
+  
+
+  
+
+
+<link rel="canonical" href="http://localhost:4000/IntroductionToCommandLine/Unix/bioawk-basics.html">
+
+
+
+
+
+
+
+  <script type="application/ld+json">
+    {
+      "@context": "http://schema.org",
+      "@type": "Person",
+      "name": "",
+      "url": "http://localhost:4000",
+      "sameAs": null
+    }
+  </script>
+
+
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+<link href="/feed.xml" type="application/atom+xml" rel="alternate" title="Geospatial Workbook Feed">
+
+<!-- http://t.co/dKP3o1e -->
+<meta name="HandheldFriendly" content="True">
+<meta name="MobileOptimized" content="320">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+
+<!--[if lte IE 9]>
+  <style>
+    /* old IE unsupported flexbox fixes */
+    .greedy-nav .site-title {
+      padding-right: 3em;
+    }
+    .greedy-nav button {
+      position: absolute;
+      top: 0;
+      right: 0;
+      height: 100%;
+    }
+  </style>
+<![endif]-->
+
+
+    <!-- start custom head snippets -->
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-E6BZVYF8ZY"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-E6BZVYF8ZY');
+</script>
+
+<!-- insert favicons. use https://realfavicongenerator.net/ -->
+
+<!-- end custom head snippets -->
+
+  </head>
+
+  <body class="layout--single">
+
+    <!--[if lt IE 9]>
+<div class="notice--danger align-center" style="margin: 0;">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience.</div>
+<![endif]-->
+
+    <div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        <a class="site-title" href="/">Geospatial Workbook</a>
+        <ul class="visible-links">
+          
+            
+            <li class="masthead__menu-item">
+              <a href="http://localhost:4000/about.html" >About</a>
+            </li>
+          
+            
+            <li class="masthead__menu-item">
+              <a href="http://localhost:4000/list.html" >Index</a>
+            </li>
+          
+            
+            <li class="masthead__menu-item">
+              <a href="http://localhost:4000/glossary.html" >Glossary</a>
+            </li>
+          
+            
+            <li class="masthead__menu-item">
+              <a href="http://localhost:4000/people.html" >People</a>
+            </li>
+          
+            
+            <li class="masthead__menu-item">
+              <a href="http://localhost:4000/contributing.html" >Contribute</a>
+            </li>
+          
+        </ul>
+        
+        <button class="search__toggle" type="button">
+          <svg class="icon" width="16" height="16" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 15.99 16">
+            <path d="M15.5,13.12L13.19,10.8a1.69,1.69,0,0,0-1.28-.55l-0.06-.06A6.5,6.5,0,0,0,5.77,0,6.5,6.5,0,0,0,2.46,11.59a6.47,6.47,0,0,0,7.74.26l0.05,0.05a1.65,1.65,0,0,0,.5,1.24l2.38,2.38A1.68,1.68,0,0,0,15.5,13.12ZM6.4,2A4.41,4.41,0,1,1,2,6.4,4.43,4.43,0,0,1,6.4,2Z" transform="translate(-.01)"></path>
+          </svg>
+        </button>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">Toggle Menu</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+    <div class="initial-content">
+      
+  
+
+
+
+
+
+
+
+
+
+
+
+<div class="page__hero--overlay"
+  style="background-color: 444444; background-image: url('/assets/images/margaret-weir-GZyjbLNOaFg-unsplash_dark.jpg');"
+>
+  
+    <div class="wrapper">
+      <h1 id="page-title" class="page__title" itemprop="headline">
+        
+          Useful Programs and Unix Basics
+
+        
+      </h1>
+      
+      
+      
+    </div>
+  
+  
+</div>
+
+
+
+
+
+<div id="main" role="main">
+  
+  <div class="sidebar sticky">
+  
+
+
+<div itemscope itemtype="http://schema.org/Person">
+
+  
+
+  <div class="author__content">
+    
+      <h3 class="author__name" itemprop="name"></h3>
+    
+    
+  </div>
+
+  <div class="author__urls-wrapper">
+    <button class="btn btn--inverse">Follow</button>
+    <ul class="author__urls social-icons">
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      <!--
+  <li>
+    <a href="http://link-to-whatever-social-network.com/user/" itemprop="sameAs">
+      <i class="fas fa-fw" aria-hidden="true"></i> Custom Social Profile Link
+    </a>
+  </li>
+-->
+    </ul>
+  </div>
+</div>
+
+<!-- Create a 2nd author for tutorials -->
+
+
+
+<div itemscope itemtype="http://schema.org/Person">
+
+  
+
+  <div class="author__content">
+    
+      <h3 class="author__name" itemprop="name"></h3>
+    
+    
+  </div>
+
+  <div class="author__urls-wrapper">
+    <button class="btn btn--inverse">Follow</button>
+    <ul class="author__urls social-icons">
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      <!--
+  <li>
+    <a href="http://link-to-whatever-social-network.com/user/" itemprop="sameAs">
+      <i class="fas fa-fw" aria-hidden="true"></i> Custom Social Profile Link
+    </a>
+  </li>
+-->
+    </ul>
+  </div>
+</div>
+
+  
+  </div>
+
+
+  <article class="page" itemscope itemtype="http://schema.org/CreativeWork">
+    <meta itemprop="headline" content="Useful Programs and Unix Basics">
+    
+    
+    
+
+    <div class="page__inner-wrap">
+      
+
+      <section class="page__content" itemprop="text">
+        
+        <h1 id="bioawk-basics">BioAWK basics</h1>
+<p>Bioawk is an extension of the UNIX core utility command <code class="language-plaintext highlighter-rouge">awk</code>. It provides several features for biological data manipulation in a similar way as that of awk. This tutorial will give a brief introduction and examples for some common tasks that can be done with this command.</p>
+
+<p>Bioawk is developed by <a href="http://lh3lh3.users.sourceforge.net">Heng Li</a>. You can download and install it from the <a href="https://github.com/lh3">Git repository</a>. On Lightning3/Condo, it has already been installed, just load the <code class="language-plaintext highlighter-rouge">bioawk</code> module to start using it.</p>
+
+<h2 id="features">Features</h2>
+
+<ul>
+  <li>It can automatically recognize some popular formats and will parse different features associated with those formats. The format option is passed to bioawk using <code class="language-plaintext highlighter-rouge">-c</code><em>arg</em> flag. Here <em><code class="language-plaintext highlighter-rouge">arg</code></em> can be <code class="language-plaintext highlighter-rouge">bed</code>, <code class="language-plaintext highlighter-rouge">sam</code>, <code class="language-plaintext highlighter-rouge">vcf</code>, <code class="language-plaintext highlighter-rouge">gff</code> or <code class="language-plaintext highlighter-rouge">fastx</code> (for both <code class="language-plaintext highlighter-rouge">fastq</code> and <code class="language-plaintext highlighter-rouge">FASTA</code>). It can also deal with other types of table formats using the <code class="language-plaintext highlighter-rouge">-c header</code> option. When <code class="language-plaintext highlighter-rouge">header</code> is specified, the field names will used for variable names, thus greatly expanding the utility.</li>
+  <li>There are several builtin functions (other than the standard <code class="language-plaintext highlighter-rouge">awk</code> built-ins), that are specific to biological file formats. When a format is read with <code class="language-plaintext highlighter-rouge">bioawk</code>, the fields get automatically parsed. You can apply several functions on these variables to get the desired output. Let’s say, we read <code class="language-plaintext highlighter-rouge">fasta</code> format, now we have <code class="language-plaintext highlighter-rouge">$name</code> and <code class="language-plaintext highlighter-rouge">$seq</code>  that holds sequence name and sequence respectively. You can use the <code class="language-plaintext highlighter-rouge">print</code> function (<code class="language-plaintext highlighter-rouge">awk</code> builtin) to print <code class="language-plaintext highlighter-rouge">$name</code> and <code class="language-plaintext highlighter-rouge">$seq</code>. You can also use <code class="language-plaintext highlighter-rouge">bioawk</code> built-in with the <code class="language-plaintext highlighter-rouge">print</code> function to get length, reverse complement etc by just using <code class="language-plaintext highlighter-rouge">'{print length($seq)}'</code>. Other functions include <code class="language-plaintext highlighter-rouge">reverse</code>, <code class="language-plaintext highlighter-rouge">revcomp</code>, <code class="language-plaintext highlighter-rouge">trimq</code>, <code class="language-plaintext highlighter-rouge">and</code>, <code class="language-plaintext highlighter-rouge">or</code>, <code class="language-plaintext highlighter-rouge">xor</code> etc.</li>
+  <li>It can automatically read gzipped/compressed files</li>
+</ul>
+
+<h2 id="options">Options</h2>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">-t</code> to set input and output filed separator as tab</li>
+  <li><code class="language-plaintext highlighter-rouge">-c</code><em><code class="language-plaintext highlighter-rouge">fmt</code></em> to read and parse the file in desired format</li>
+  <li><code class="language-plaintext highlighter-rouge">-v</code><em>var</em>=<em>value</em> initialize a variable and value [std to awk as well]</li>
+  <li><code class="language-plaintext highlighter-rouge">-H</code> retain header in the output file (for files like SAM)</li>
+  <li>And all standard <code class="language-plaintext highlighter-rouge">awk</code> flags will work with <code class="language-plaintext highlighter-rouge">bioawk</code></li>
+</ul>
+
+<h2 id="variables-for-each-format">Variables for each format</h2>
+
+<p>For the <code class="language-plaintext highlighter-rouge">-c</code> you can either specify <code class="language-plaintext highlighter-rouge">bed</code>, <code class="language-plaintext highlighter-rouge">sam</code>, <code class="language-plaintext highlighter-rouge">vcf</code>, <code class="language-plaintext highlighter-rouge">gff</code>,  <code class="language-plaintext highlighter-rouge">fastx</code> or <code class="language-plaintext highlighter-rouge">header</code>. Bioawk will parse these variables for the respective format</p>
+
+<table>
+  <thead>
+    <tr>
+      <th><code class="language-plaintext highlighter-rouge">bed</code></th>
+      <th><code class="language-plaintext highlighter-rouge">sam</code></th>
+      <th><code class="language-plaintext highlighter-rouge">vcf</code></th>
+      <th><code class="language-plaintext highlighter-rouge">gff</code></th>
+      <th><code class="language-plaintext highlighter-rouge">fastx</code></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>chrom</td>
+      <td>qname</td>
+      <td>chrom</td>
+      <td>seqname</td>
+      <td>name</td>
+    </tr>
+    <tr>
+      <td>start</td>
+      <td>flag</td>
+      <td>pos</td>
+      <td>source</td>
+      <td>seq</td>
+    </tr>
+    <tr>
+      <td>end</td>
+      <td>rname</td>
+      <td>id</td>
+      <td>feature</td>
+      <td>qual</td>
+    </tr>
+    <tr>
+      <td>name</td>
+      <td>pos</td>
+      <td>ref</td>
+      <td>start</td>
+      <td>comment</td>
+    </tr>
+    <tr>
+      <td>score</td>
+      <td>mapq</td>
+      <td>alt</td>
+      <td>end</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>strand</td>
+      <td>cigar</td>
+      <td>qual</td>
+      <td>score</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>thickstart</td>
+      <td>rnext</td>
+      <td>filter</td>
+      <td>filter</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>thickend</td>
+      <td>pnext</td>
+      <td>info</td>
+      <td>strand</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>rgb</td>
+      <td>tlen</td>
+      <td>group</td>
+      <td> </td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>blockcount</td>
+      <td>seq</td>
+      <td>attribute</td>
+      <td> </td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>blocksizes</td>
+      <td>qual</td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>blockstarts</td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+    </tr>
+  </tbody>
+</table>
+
+<p>If <code class="language-plaintext highlighter-rouge">-c header</code> is specified, the field names (first line) will be used as variables (spaces and special character will be changed to under_score).</p>
+
+<h2 id="examples">Examples</h2>
+
+<h3 id="1-for-fasta-files">1. For <code class="language-plaintext highlighter-rouge">FASTA</code> files</h3>
+<p>Once the input file is read, the defline for the <code class="language-plaintext highlighter-rouge">FASTA</code> will be $name variable and the sequence will be $seq variable. you can use any of the standard awk functions on these as well as the bioawk functions. Some_eg.,_</p>
+
+<h4 id="get-length-for-sequences">Get length for sequences</h4>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>bioawk -c fastx '{ print $name, length($seq) }' input.fasta
+</code></pre></div></div>
+<h4 id="get-gc-for-sequences">Get %GC for sequences</h4>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>bioawk -c fastx '{ print $name, gc($seq) }' input.fasta
+</code></pre></div></div>
+<h4 id="get-reverse-complement-for-all-sequences">Get reverse complement for all sequences</h4>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>bioawk -c fastx '{ print "&gt;"$name;print revcomp($seq) }' input.fasta
+</code></pre></div></div>
+<h4 id="print-sequences-with-length-greater-than-100-bases">Print sequences with length greater than 100 bases</h4>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>bioawk -c fastx 'length($seq) &gt; 100{ print "&gt;"$name; print $seq }'  input.fasta
+</code></pre></div></div>
+<h4 id="add-a-prefixsuffix-to-the-sequence-defline">Add a prefix/suffix to the sequence defline</h4>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>bioawk -c fastx '{ print "&gt;PREFIX"$name; $seq }' input.fasta
+bioawk -c fastx '{ print "&gt;"$name"|SUFFIX"; $seq }' input.fasta
+</code></pre></div></div>
+<h4 id="convert-fasta-to-tabular-format">Convert <code class="language-plaintext highlighter-rouge">FASTA</code> to tabular format</h4>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>bioawk -t -c fastx '{ print $name, $seq }' input.fasta
+</code></pre></div></div>
+<h4 id="extract-sequences-based-on-ids-in-a-file">Extract sequences based on ids in a file</h4>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>#for large scale use cdbyank instead
+bioawk -cfastx 'BEGIN{while((getline k &lt;"IDs.txt")&gt;0)i[k]=1}{if(i[$name])print "&gt;"$name"\n"$seq}' input.fasta
+</code></pre></div></div>
+<p>These are just some examples, we can do many more with other standard <code class="language-plaintext highlighter-rouge">awk</code> functions.</p>
+
+<h3 id="2-for-fastq-files">2. For fastq files</h3>
+
+<p>Here, the <code class="language-plaintext highlighter-rouge">-c fastx</code> option remains same but <code class="language-plaintext highlighter-rouge">bioawk</code> will automatically recognize the fastq format and build the required variables, such as <code class="language-plaintext highlighter-rouge">$name</code>  <code class="language-plaintext highlighter-rouge">$seq</code>  <code class="language-plaintext highlighter-rouge">$qual</code> and <code class="language-plaintext highlighter-rouge">$comment</code></p>
+
+<h4 id="count-the-number-of-records-reads">Count the number of records (reads)</h4>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>bioawk -t -c fastx 'END {print NR}' input.fastq
+# note that when fastq is specified, each record is 4 lines
+</code></pre></div></div>
+<h4 id="convert-fastq-to-fasta">Convert fastq to <code class="language-plaintext highlighter-rouge">FASTA</code></h4>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>bioawk -c fastx '{print "&gt;"$name; print $seq}' input.fastq
+</code></pre></div></div>
+<h4 id="get-the-mean-phred-quality-score-from-fastq">Get the mean Phred quality score from fastq</h4>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>bioawk -c fastx '{print "&gt;"$name; print meanqual($qual)}' input.fastq
+</code></pre></div></div>
+
+<h4 id="filter-reads-shorter-than-10-bp-or-any-bp">Filter reads shorter than 10 bp (or any bp)</h4>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>bioawk -cfastx 'length($seq) &gt; 10 {print "@"$name"\n"$seq"\n+\n"$qual}' input.fastq
+</code></pre></div></div>
+<h4 id="trim-fastq-files-based-on-quality">Trim fastq files based on quality</h4>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>bioawk -c fastx ' trimq(30, 0, 5){print $0}' input.fastq
+# trims fastq bases 0 to 5 (beginning to end), scores less than 30.
+</code></pre></div></div>
+
+<h3 id="3-for-bed-files">3. For BED files</h3>
+
+<h4 id="print-the-feature-length">Print the feature length</h4>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>bioawk -c bed '{ print $end - $start }' test.bed
+</code></pre></div></div>
+
+<h3 id="4-for-sam-files">4. For SAM files</h3>
+
+<h4 id="extract-unmapped-reads">Extract unmapped reads</h4>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>bioawk -c sam 'and($flag,4)' input.sam
+</code></pre></div></div>
+
+<h4 id="extract-mapped-reads">Extract mapped reads</h4>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>bioawk -c sam -H '!and($flag,4)' input.sam
+</code></pre></div></div>
+
+<h4 id="create-fasta-from-sam">Create FASTA from SAM</h4>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>bioawk -c sam '{ s=$seq; if(and($flag, 16)) {s=revcomp($seq) } print "&gt;"$qname"\n"s}' input.sam &gt; output.fasta
+</code></pre></div></div>
+
+<h3 id="5-for-vcf-files">5. For VCF files</h3>
+<h4 id="print-the-genotypes-of-sample-foo-and-bar-from-a-vcf">Print the genotypes of sample <code class="language-plaintext highlighter-rouge">foo</code> and <code class="language-plaintext highlighter-rouge">bar</code> from a VCF:</h4>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>grep -v ^## in.vcf | bioawk -tc hdr '{print $foo,$bar}'
+</code></pre></div></div>
+<h3 id="6-for-gff-files">6. For GFF files</h3>
+
+<p>Will be added soon!</p>
+
+<h3 id="7-for-other-types-of-files">7. For other types of files</h3>
+
+<p>Say, if your input file is as follows:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>name</th>
+      <th>phone</th>
+      <th>email</th>
+      <th>age</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Joe</td>
+      <td>6407</td>
+      <td>a@g.com</td>
+      <td>24</td>
+    </tr>
+    <tr>
+      <td>Doe</td>
+      <td>4506</td>
+      <td>b@g.com</td>
+      <td>26</td>
+    </tr>
+  </tbody>
+</table>
+
+<h4 id="list-records-less-than-25-years-age">List records less than 25 years age</h4>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>bioawk -t -c header '$age &lt; "25" {print $0}' input.txt
+</code></pre></div></div>
+
+<p><a href="https://isugenomics.github.io/bioinformatics-workbook/">Table of contents</a></p>
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+
+
+        
+      </footer>
+
+      
+
+      
+
+    </div>
+
+    
+  </article>
+
+  
+  
+</div>
+    </div>
+
+    
+      <div class="search-content">
+        <div class="search-content__inner-wrap"><form onsubmit="return googleCustomSearchExecute();" id="cse-search-box-form-id">
+    <input type="search" id="cse-search-input-box-id" aria-placeholder="Enter your search term..." class="search-input" tabindex="-1" placeholder="Enter your search term..." />
+    </form>
+    <div id="results" class="results">
+        <gcse:searchresults-only></gcse:searchresults-only>
+    </div></div>
+
+      </div>
+    
+    
+    <div class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+
+        <div class="page__footer-follow">
+  <ul class="social-icons">
+    
+      <li><strong>Follow:</strong></li>
+    
+    
+      <li><a href="https://twitter.com/isugif"><i class="fab fa-fw fa-twitter-square" aria-hidden="true"></i> Twitter</a></li>
+    
+    
+    
+      <li><a href="https://github.com/https://github.com/isugenomics"><i class="fab fa-fw fa-github" aria-hidden="true"></i> GitHub</a></li>
+    
+    
+    
+    
+  </ul>
+</div>
+
+<div class="page__footer-copyright">&copy; 2024 Geospatial Workbook</div>
+
+      </footer>
+    </div>
+
+    
+  <script src="/assets/js/main.min.js"></script>
+  <script src="https://use.fontawesome.com/releases/v5.0.13/js/all.js"></script>
+
+
+<script>
+  (function () {
+    var cx = '009853197685285203469:nsvri1pa88d';
+    var gcse = document.createElement('script');
+    gcse.type = 'text/javascript';
+    gcse.async = true;
+    gcse.src = 'https://cse.google.com/cse.js?cx=' + cx;
+    var s = document.getElementsByTagName('script')[0];
+    s.parentNode.insertBefore(gcse, s);
+  })();
+
+  function googleCustomSearchExecute() {
+    var input = document.getElementById('cse-search-input-box-id');
+    var element = google.search.cse.element.getElement('searchresults-only0');
+    if (input.value == '') {
+      element.clearAllResults();
+    } else {
+      element.execute(input.value);
+    }
+    return false;
+  }
+
+  
+</script>
+
+
+
+
+<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+<script id="MathJax-script" defer
+        src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+</script>
+
+
+
+
+  </body>
+</html>

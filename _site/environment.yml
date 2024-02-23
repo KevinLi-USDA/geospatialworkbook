@@ -1,0 +1,27 @@
+name: geospatialworkbook_env
+channels:
+  - conda-forge
+  - defaults
+dependencies:
+  - python=3.8
+  - pip
+  - numpy
+  - keras
+  - scipy
+  - imageio
+  - ipykernel
+  - scikit-learn
+  - scikit-image
+  - matplotlib
+  - seaborn
+  - hdf5
+  - xarray       # Sentinel Tutorial
+  - hvplot
+  - pandas
+  - geopandas
+  - cartopy
+  - geoviews
+  - pyepsg
+  - pip:
+    - stackstac
+    - sat-search

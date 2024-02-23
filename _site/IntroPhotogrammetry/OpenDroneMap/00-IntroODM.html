@@ -1,0 +1,945 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.11.2 by Michael Rose
+  Copyright 2013-2018 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE.txt
+-->
+<html lang="en" class="no-js">
+  <head>
+    <meta charset="utf-8">
+
+<!-- begin _includes/seo.html --><title>Introduction to Open Drone Map - Geospatial Workbook</title>
+<meta name="description" content="Tutorial on Informatics for Geospatial Information">
+
+
+  <meta name="author" content="Aleksandra Badaczewska">
+
+
+<meta property="og:type" content="website">
+<meta property="og:locale" content="en_US">
+<meta property="og:site_name" content="Geospatial Workbook">
+<meta property="og:title" content="Introduction to Open Drone Map">
+<meta property="og:url" content="http://localhost:4000/IntroPhotogrammetry/OpenDroneMap/00-IntroODM.html">
+
+
+
+
+  <meta property="og:image" content="http://localhost:4000/IntroPhotogrammetry/assets/images/geospatial_workbook_banner.png">
+
+
+
+  <meta name="twitter:site" content="@isugif">
+  <meta name="twitter:title" content="Introduction to Open Drone Map">
+  <meta name="twitter:description" content="Tutorial on Informatics for Geospatial Information">
+  <meta name="twitter:url" content="http://localhost:4000/IntroPhotogrammetry/OpenDroneMap/00-IntroODM.html">
+
+  
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content="http://localhost:4000/IntroPhotogrammetry/assets/images/geospatial_workbook_banner.png">
+  
+
+  
+    <meta name="twitter:creator" content="@someone">
+  
+
+
+
+
+
+
+
+  
+
+  
+
+
+<link rel="canonical" href="http://localhost:4000/IntroPhotogrammetry/OpenDroneMap/00-IntroODM.html">
+
+
+
+
+
+
+
+  <script type="application/ld+json">
+    {
+      "@context": "http://schema.org",
+      "@type": "Person",
+      "name": "",
+      "url": "http://localhost:4000",
+      "sameAs": null
+    }
+  </script>
+
+
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+<link href="/feed.xml" type="application/atom+xml" rel="alternate" title="Geospatial Workbook Feed">
+
+<!-- http://t.co/dKP3o1e -->
+<meta name="HandheldFriendly" content="True">
+<meta name="MobileOptimized" content="320">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+
+<!--[if lte IE 9]>
+  <style>
+    /* old IE unsupported flexbox fixes */
+    .greedy-nav .site-title {
+      padding-right: 3em;
+    }
+    .greedy-nav button {
+      position: absolute;
+      top: 0;
+      right: 0;
+      height: 100%;
+    }
+  </style>
+<![endif]-->
+
+
+    <!-- start custom head snippets -->
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-E6BZVYF8ZY"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-E6BZVYF8ZY');
+</script>
+
+<!-- insert favicons. use https://realfavicongenerator.net/ -->
+
+<!-- end custom head snippets -->
+
+  </head>
+
+  <body class="layout--single">
+
+    <!--[if lt IE 9]>
+<div class="notice--danger align-center" style="margin: 0;">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience.</div>
+<![endif]-->
+
+    <div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        <a class="site-title" href="/">Geospatial Workbook</a>
+        <ul class="visible-links">
+          
+            
+            <li class="masthead__menu-item">
+              <a href="http://localhost:4000/about.html" >About</a>
+            </li>
+          
+            
+            <li class="masthead__menu-item">
+              <a href="http://localhost:4000/list.html" >Index</a>
+            </li>
+          
+            
+            <li class="masthead__menu-item">
+              <a href="http://localhost:4000/glossary.html" >Glossary</a>
+            </li>
+          
+            
+            <li class="masthead__menu-item">
+              <a href="http://localhost:4000/people.html" >People</a>
+            </li>
+          
+            
+            <li class="masthead__menu-item">
+              <a href="http://localhost:4000/contributing.html" >Contribute</a>
+            </li>
+          
+        </ul>
+        
+        <button class="search__toggle" type="button">
+          <svg class="icon" width="16" height="16" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 15.99 16">
+            <path d="M15.5,13.12L13.19,10.8a1.69,1.69,0,0,0-1.28-.55l-0.06-.06A6.5,6.5,0,0,0,5.77,0,6.5,6.5,0,0,0,2.46,11.59a6.47,6.47,0,0,0,7.74.26l0.05,0.05a1.65,1.65,0,0,0,.5,1.24l2.38,2.38A1.68,1.68,0,0,0,15.5,13.12ZM6.4,2A4.41,4.41,0,1,1,2,6.4,4.43,4.43,0,0,1,6.4,2Z" transform="translate(-.01)"></path>
+          </svg>
+        </button>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">Toggle Menu</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+    <div class="initial-content">
+      
+  
+
+
+
+
+
+
+
+
+
+
+
+<div class="page__hero--overlay"
+  style="background-color: 444444; background-image: url('/IntroPhotogrammetry/assets/images/geospatial_workbook_banner.png');"
+>
+  
+    <div class="wrapper">
+      <h1 id="page-title" class="page__title" itemprop="headline">
+        
+          Introduction to Open Drone Map
+
+        
+      </h1>
+      
+      
+      
+    </div>
+  
+  
+</div>
+
+
+
+
+
+<div id="main" role="main">
+  
+  <div class="sidebar sticky">
+  
+
+
+<div itemscope itemtype="http://schema.org/Person">
+
+  
+    <div class="author__avatar">
+      
+
+      
+        <img src="/assets/images/people/Alex.png" alt="Aleksandra Badaczewska" itemprop="image">
+      
+    </div>
+  
+
+  <div class="author__content">
+    
+      <h3 class="author__name" itemprop="name">Aleksandra Badaczewska</h3>
+    
+    
+      <p class="author__bio" itemprop="description">
+        Alex is a Research Scientist IV at the Genome Informatics Facility at Iowa State University. Her academic background is in Chemistry and Biotechnology, with a Ph.D. in Computational Biology and broad experience in programming and designing web applications. She develops a comprehensive collection of highly customizable visualization solutions for Bioinformatics and supports software optimization for the USDA Geospatial analyses.
+      </p>
+    
+  </div>
+
+  <div class="author__urls-wrapper">
+    <button class="btn btn--inverse">Follow</button>
+    <ul class="author__urls social-icons">
+      
+
+      
+
+      
+        <li>
+          <a href="mailto:mailto:abadacz@iastate.edu">
+            <meta itemprop="email" content="mailto:abadacz@iastate.edu" />
+            <i class="fas fa-fw fa-envelope-square" aria-hidden="true"></i> Email
+          </a>
+        </li>
+      
+
+      
+
+      
+        <li>
+          <a href="https://twitter.com/someone" itemprop="sameAs">
+            <i class="fab fa-fw fa-twitter-square" aria-hidden="true"></i> Twitter
+          </a>
+        </li>
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      <!--
+  <li>
+    <a href="http://link-to-whatever-social-network.com/user/" itemprop="sameAs">
+      <i class="fas fa-fw" aria-hidden="true"></i> Custom Social Profile Link
+    </a>
+  </li>
+-->
+    </ul>
+  </div>
+</div>
+
+<!-- Create a 2nd author for tutorials -->
+
+
+
+<div itemscope itemtype="http://schema.org/Person">
+
+  
+
+  <div class="author__content">
+    
+      <h3 class="author__name" itemprop="name"></h3>
+    
+    
+  </div>
+
+  <div class="author__urls-wrapper">
+    <button class="btn btn--inverse">Follow</button>
+    <ul class="author__urls social-icons">
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      <!--
+  <li>
+    <a href="http://link-to-whatever-social-network.com/user/" itemprop="sameAs">
+      <i class="fas fa-fw" aria-hidden="true"></i> Custom Social Profile Link
+    </a>
+  </li>
+-->
+    </ul>
+  </div>
+</div>
+
+  
+  </div>
+
+
+  <article class="page" itemscope itemtype="http://schema.org/CreativeWork">
+    <meta itemprop="headline" content="Introduction to Open Drone Map">
+    
+    
+    
+
+    <div class="page__inner-wrap">
+      
+
+      <section class="page__content" itemprop="text">
+        
+        <aside class="sidebar__right">
+<nav class="toc">
+    <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> On This Page</h4></header>
+<ul class="toc__menu" id="markdown-toc">
+  <li><a href="#introduction" id="markdown-toc-introduction">Introduction</a></li>
+  <li><a href="#opendronmap-modules" id="markdown-toc-opendronmap-modules">OpenDronMap Modules</a>    <ul>
+      <li><a href="#odm" id="markdown-toc-odm">ODM</a></li>
+      <li><a href="#webodm" id="markdown-toc-webodm">WebODM</a></li>
+    </ul>
+  </li>
+  <li><a href="#prepare-input-imagery" id="markdown-toc-prepare-input-imagery">Prepare input imagery</a>    <ul>
+      <li><a href="#dng-to-jpg-batch-conversion" id="markdown-toc-dng-to-jpg-batch-conversion">DNG to JPG batch conversion</a>        <ul>
+          <li><a href="#--using-magic" id="markdown-toc---using-magic">- using <strong>magic</strong></a></li>
+          <li><a href="#--using-ufraw" id="markdown-toc---using-ufraw">- using <strong>ufraw</strong></a></li>
+          <li><a href="#--using-sips-macos" id="markdown-toc---using-sips-macos">- using <strong>sips</strong> (macOS)</a></li>
+        </ul>
+      </li>
+      <li><a href="#keep-exif-geo-metadata" id="markdown-toc-keep-exif-geo-metadata">Keep EXIF GEO metadata</a></li>
+    </ul>
+  </li>
+  <li><a href="#further-reading" id="markdown-toc-further-reading">Further Reading</a></li>
+</ul>
+
+  </nav>
+</aside>
+
+<h1 id="introduction">Introduction</h1>
+
+<p><a href="https://www.opendronemap.org">OpenDroneMap</a> is open-source software for processing aerial imagery. In simple terms, it enables digital 3D mapping of objects using overlapping photos showing the scene from different perspectives. Although there are many practical applications, here we will focus on the use of OpenDronMap for processing <strong>drone-taken photos of agricultural land areas</strong> for mapping crops and monitoring woodlands.</p>
+
+<div style="background: #cff4fc; padding: 15px;">
+<span style="font-weight:800;">PRO TIP:</span>
+<br /><span style="font-style:italic;">
+<b>OpenDroneMap</b> is still an actively developing project. To stay up to date with recent releases and new features check out the blog: <a href="https://www.opendronemap.org/blog/" style="color: #3f5a8a;">https://www.opendronemap.org/blog/</a>.
+</span>
+</div>
+<p><br /></p>
+
+<p>OpenDroneMap project has gained scale that is accompanied by a growing community: <a href="https://community.opendronemap.org">https://community.opendronemap.org</a>.
+<span style="color: #ff3870; font-weight: 600;">Do not hesitate to <u>actively join</u> both when you have questions or developed solutions that enrich the <u>user community</u>.</span></p>
+
+<h1 id="opendronmap-modules">OpenDronMap Modules</h1>
+
+<p><strong>OpenDroneMap</strong> is not a single software but rather a modular package that combines individual components which can be assembled in various configurations to meet the needs of a wide range of users and their computing setups.</p>
+
+<p><img src="/IntroPhotogrammetry/assets/images/odm_modules.png" alt="ODM modules" /><br />
+<strong>Figure 1.</strong> OpenDroneMap project includes several modules: <strong>ODM</strong> is the core of software that can be run directly from the command line; <strong>NodeODM</strong> is a communication channel between components; <strong>ClusterODM</strong> allows management of multiple ODM nodes; <strong>WebODM</strong> is a web-based graphical user interface; <strong>CloudODM</strong> faciliotates in-cloud computations; <strong>pyODM</strong> enables incorporation of ODM into the customized  applications.</p>
+
+<h2 id="odm">ODM</h2>
+
+<p>The <strong><a href="https://www.opendronemap.org/odm/">ODM</a></strong> is analytical core of the OpenDroneMap software. It is an open source toolkit that actually process aerial images. The ODM module can be <strong>run directly from the command line</strong> on a local machine or remotely on HPC infrastructure. It generates a complete set of files organized in hierarchical directories (<strong>point clouds, 3D textured models, georeferenced ortophotos and elevation models</strong>). Unfortunately, in this approach there is <strong>NO support to create web tiles</strong> <a href="https://community.opendronemap.org/t/import-odm-output-into-webodm-and-2d-google-map-tiles/2653">�</a>. Thus, the analysis results cannot be directly opened in the complementary WebODM graphical interface. But the files can be still visualized in external software that supports the given format. The other modules of the package are higher-level layers that facilitate the use of the software, but they always call out functions from the built-in ODM core.</p>
+
+<p>To learn how to run <strong>ODM from the command line</strong>, and specifically on HPC infrastructure such as SCINet clusters, go to the hands-on tutorial: <a href="https://geospatial.101workbook.org/IntroPhotogrammetry/OpenDroneMap/02-ODM-modules">Command-line ODM modules</a>.</p>
+
+<h2 id="webodm">WebODM</h2>
+
+<p>The <strong><a href="https://www.opendronemap.org/webodm/">WebODM</a></strong> is a <strong>web-based graphical user interface</strong> (GUI) for the OpenDroneMap software. In the back-end, it employs by default a single NodeODM to facilitate communication with a built-in ODM core. It generates an identical set of outputs to ODM on the command line, but it also <strong>automatically creates web tiles</strong>, so it is possible to <strong>visualize the results</strong> directly in the graphical interface. Other features include project management and the ability to <strong>reopen and/or restart tasks</strong>. There is also a built-in tool for <strong>creating grand control points</strong>.<br />
+In general, after start the GUI is available on localhost (port 8000) in a web browser directly on the machine on which WebODM is running. That’s why it’s a perfect solution <strong>when working on a local machine</strong>. WebODM can also be available <strong>remotely on HPC infrastructure through the OpenOn Demand service</strong>. Depending on the admins’ configuration, it will probably have more processing nodes (multiple NodeODM instances) added, which will increase computing performance. <em>Adding more processing nodes enables to run of many jobs in parallel.</em></p>
+
+<p>To learn how to run <strong>graphical interface of the WebODM</strong> on your local machine or remotely using Open OnDemand service on HPC infrastructure (such as SCINet clusters), go to the hands-on tutorial: <a href="https://geospatial.101workbook.org/IntroPhotogrammetry/OpenDroneMap/01-WebODM">WebODM: web-based graphical interface</a>.</p>
+
+<!--## NodeODM
+
+## ClusterODM
+
+## CloudODM
+
+## pyODM -->
+
+<h1 id="prepare-input-imagery">Prepare input imagery</h1>
+
+<p>As of now (2022), OpenDroneMap only supports imagery inputs in <strong>JPEG</strong> (JPG) and <strong>TIFF</strong> (8 and 16-bit) formats. In some cases, WebODM successfully performs analysis for <strong>PNG</strong> files as well, but the reconstruction performance is worse than using JPEG.</p>
+
+<p>Using raw image formats such as <strong>DNG is NOT currently possible</strong>. Therefore, if you have data of such type it is necessary to <strong>convert the photos</strong> to one of the supported formats, preferably JPEG. Follow the instructions in the next section: <a href="">DNG to JPG conversion</a>, to learn how to effectively convert raw DNG files to JPG to preserve the highest possible resolution.</p>
+
+<p>Sometimes the conversion of the graphic format results in the loss of metadata, especially geolocation details. Without this data, creating <strong>georeferenced results</strong> (i.e., orthophotos, geoTIFF, digital elevation models) with OpenDroneMap will not be possible. In the next section: <a href="">Keep EXIF GEO metadata</a>, you will learn <strong>how to copy EXIF metadata</strong> including geolocation, from the original raw files to JPG files.</p>
+
+<h2 id="dng-to-jpg-batch-conversion">DNG to JPG batch conversion</h2>
+
+<p>Changing the file format can easily be done in many graphics programs with a visual interface, such as <a href="https://www.gimp.org" target="_blank">GIMP</a>. Unfortunately, this usually means having to edit individual files one by one, and with a vast number of files, this is an overkilling task. So it’s good to know that you can automate the procedure for <strong>converting any number of files on the command line</strong>.</p>
+
+<p>I have tested various options for converting the raw DNG images into the format allowed as input for WebODM (JPG, PNG, TIF). Based on the preliminary tests performed on the set of 20 photos, three tools are suitable:</p>
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">ufraw</code>, command-line, easily installable on any system</li>
+  <li>ImageMagick (<code class="language-plaintext highlighter-rouge">magick</code>), command-line, easily installable on any system</li>
+  <li>macOS Preview (<code class="language-plaintext highlighter-rouge">sips</code>), available on macOS, usage from the command-line or graphical interface</li>
+</ul>
+
+<p>The summary of results is provided in the table below, and some visual glimpses are in the pictures below.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>conversion tool:</th>
+      <th>magic</th>
+      <th>magic</th>
+      <th>magic</th>
+      <th>ufraw</th>
+      <th>ufraw</th>
+      <th>ufraw</th>
+      <th>sips (macOS)</th>
+      <th>sips (macOS)</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>format</td>
+      <td>JPG</td>
+      <td><strong>JPEG</strong></td>
+      <td>PNG</td>
+      <td>JPG</td>
+      <td>PNG</td>
+      <td>TIF</td>
+      <td>JPG</td>
+      <td>PNG</td>
+    </tr>
+    <tr>
+      <td>size</td>
+      <td>19MB</td>
+      <td>19MB</td>
+      <td>64MB</td>
+      <td>2.5MB</td>
+      <td>21MB</td>
+      <td>36MB</td>
+      <td>3.6MB</td>
+      <td>45MB</td>
+    </tr>
+    <tr>
+      <td>resolution</td>
+      <td>4000×3000</td>
+      <td>4000×3000</td>
+      <td>4000×3000</td>
+      <td>4000×3000</td>
+      <td>4000×3000</td>
+      <td>4000×3000</td>
+      <td>3992×2992</td>
+      <td>3992×2992</td>
+    </tr>
+    <tr>
+      <td>colors</td>
+      <td>brighter</td>
+      <td>brighter</td>
+      <td>brighter</td>
+      <td>darker</td>
+      <td>darker</td>
+      <td>darker</td>
+      <td>original</td>
+      <td>original</td>
+    </tr>
+    <tr>
+      <td>used Exiftool</td>
+      <td>YES</td>
+      <td>YES</td>
+      <td>YES</td>
+      <td>YES</td>
+      <td>YES</td>
+      <td>YES</td>
+      <td>NO</td>
+      <td>NO</td>
+    </tr>
+    <tr>
+      <td><strong>WebODM success</strong></td>
+      <td>YES</td>
+      <td>YES</td>
+      <td>FAILED</td>
+      <td>YES</td>
+      <td>YES</td>
+      <td>YES</td>
+      <td>YES</td>
+      <td>FAILED</td>
+    </tr>
+    <tr>
+      <td>visual quality</td>
+      <td>good</td>
+      <td>good</td>
+      <td>-</td>
+      <td>good</td>
+      <td>low</td>
+      <td>broken</td>
+      <td>good</td>
+      <td>-</td>
+    </tr>
+    <tr>
+      <td>no. points rebuilt</td>
+      <td>5,31 M</td>
+      <td><strong>5,37 M</strong></td>
+      <td>-</td>
+      <td>1,24 M</td>
+      <td>3,26 M</td>
+      <td>1,00 M</td>
+      <td>4,39 M</td>
+      <td>-</td>
+    </tr>
+    <tr>
+      <td>average GSD</td>
+      <td>1.62 cm</td>
+      <td>1.63 cm</td>
+      <td>-</td>
+      <td>1.9 cm</td>
+      <td>0.72 cm</td>
+      <td>-</td>
+      <td>1.52 cm</td>
+      <td>-</td>
+    </tr>
+    <tr>
+      <td>area</td>
+      <td>1,224 m²</td>
+      <td>1,222 m²</td>
+      <td>-</td>
+      <td>1,283 m²</td>
+      <td>1,299 m²</td>
+      <td>36.01 m²</td>
+      <td>1,343 m²</td>
+      <td>-</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>^ original DNG size ~24MB/photo with resolution 3992 × 2992</p>
+
+<p>In short, the most universal and ensuring best performance is <code class="language-plaintext highlighter-rouge">magick</code> with conversion into the JPG or JPEG format. The size and resolution of the files after conversion are almost the same (24MB DNG vs. 19MB JPG). The only inconvenience is that the color is slightly brighter than the preview of the original DNG. Please review in the picture below the color changes after conversion of the image format.</p>
+
+<p><img src="/IntroPhotogrammetry/assets/images/odm_conversion_colors.png" alt="Image format conversion" /><br /></p>
+
+<p>Despite the altered color intensity, <code class="language-plaintext highlighter-rouge">magick</code> came with the highest performance when reconstructing a 3D model from photos <em>(highest number of rebuilt points, high average GSD, large area)</em>, so it is a recommended method. However, below you will also find usage instructions for the other tools.</p>
+
+<div style="background: #cff4fc; padding: 15px;">
+<span style="font-weight:800;">PRO TIP:</span>
+<br />
+If you are working on a computing machine with multiple cores, it will be advantegous to use the GNU parallel module, which will parallelize the conversions of many files and save your time.<br />
+If running the command throws an error: <i><b>"error: 'parallel' command not found"</b></i>, it means that you do not have the <i>parallel</i> module installed/loaded into your environment.<br />
+</div>
+<p><br /></p>
+
+<ul>
+  <li><strong>install parallel on macOS:</strong>
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>brew install parallel
+</code></pre></div>    </div>
+  </li>
+  <li><strong>install parallel on Linux:</strong>
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sudo apt-get install parallel
+</code></pre></div>    </div>
+  </li>
+  <li><strong>load parallel module on HPC:</strong>
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>module load parallel
+</code></pre></div>    </div>
+  </li>
+</ul>
+
+<h3 id="--using-magic">- using <strong>magic</strong></h3>
+
+<p>Learn more about the <strong>ImageMagick</strong> tool at <a href="https://imagemagick.org" target="_blank">https://imagemagick.org</a> <br />
+Follow <strong>installation</strong> instructions at <a href="https://imagemagick.org/script/download.php" target="_blank">https://imagemagick.org/script/download.php</a></p>
+
+<p><strong>install magic on macOS:</strong></p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>brew update
+brew install imagemagick
+</code></pre></div></div>
+
+<p><strong>install magic on Linux:</strong></p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sudo apt update
+sudo apt install imagemagick
+</code></pre></div></div>
+
+<p><strong>install magic on Windows:</strong></p>
+
+<p>Download ready-to-run executable from: <a href="https://imagemagick.org/script/download.php#windows" target="_blank">https://imagemagick.org/script/download.php#windows</a></p>
+
+<div style="background: #cff4fc; padding: 15px;">
+<span style="font-weight:800;">PRO TIP:</span>
+<br />
+The <b>ImageMagick</b> is a toolkit composed of several utilities for manipulating images. Once installed you can run them directly on the command line by calling specific commands, such as <i><b>magi</b>c, animate, compare, composite, conjure, convert, display, identify, import, mogrify, montage, stream</i>. You can learn more about their use from the documentation: <a href="https://imagemagick.org/script/command-line-tools.php" target="_blank" style="color: #3f5a8a;">ImageMagick Command-line Tools</a>.
+</div>
+<p><br /></p>
+
+<p><strong>DNG to JPG batch conversion using <i>magic</i>:</strong></p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code># run magic in a loop
+
+for i in *.DNG
+do
+    magick -quality 100 -define dng:use-camera-wb=true $i "${i%DNG}jpg"
+done
+</code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code># run magic in parallel
+
+ls *.DNG | sed 's/DNG//g' | parallel magick -quality 100 -define dng:use-camera-wb=true {}DNG {}JPG
+</code></pre></div></div>
+<p><em>^ <code class="language-plaintext highlighter-rouge">-quality 100</code> - the option sets the JPEG quality to 100%. You can customize it as much as you like.</em> <br />
+<em>^ <code class="language-plaintext highlighter-rouge">-define dng:use-camera-wb=true</code> - the option adjust colors to match the original.</em></p>
+
+<h3 id="--using-ufraw">- using <strong>ufraw</strong></h3>
+
+<p>Learn more about the <strong>UFRaw</strong> <em>(Unidentified Flying Raw)</em> tool at <a href="http://ufraw.sourceforge.net" target="_blank">http://ufraw.sourceforge.net</a> <br />
+Follow system-specific <strong>installation</strong> instructions at <a href="http://ufraw.sourceforge.net/Install.html" target="_blank">http://ufraw.sourceforge.net/Install.html</a></p>
+
+<p><strong>DNG to JPG batch conversion using <i>ufraw</i>:</strong></p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code># run ufraw in a loop
+
+for i in *.DNG
+do
+    ufraw-batch --wb=camera --exposure=auto --out-depth=8 --out-type=jpg --output "${i%DNG}jpg" $i
+done
+</code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code># run ufraw in parallel
+
+ls *.DNG | sed 's/DNG//g' | parallel ufraw-batch --wb=camera --exposure=auto --out-depth=8 --out-type=jpg --output {}jpg {}DNG
+</code></pre></div></div>
+
+<h3 id="--using-sips-macos">- using <strong>sips</strong> (macOS)</h3>
+
+<p>The <code class="language-plaintext highlighter-rouge">sips</code> command comes pre-installed on macOS. Simply open a terminal window and copy-paste one of the code snippet given below. The advantage of this solution is also that <strong>sips automatically copies the EXIF metadata</strong> to the file in the new format.</p>
+
+<p><strong>DNG to JPG batch conversion using <i>sips</i>:</strong></p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code># run sips in a loop
+
+for i in *.DNG
+do
+    sips -s format jpeg -s formatOptions 100 "${i}" --out "${i%DNG}jpg"
+done
+</code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code># run sips in parallel
+ls *.DNG | sed 's/DNG//g' | parallel sips -s format jpeg -s formatOptions 100 {}DNG --out {}jpg
+</code></pre></div></div>
+<p><em>^ <code class="language-plaintext highlighter-rouge">-s formatOptions 100</code> - the option sets the JPEG quality to 100%. You can customize it as much as you like.</em></p>
+
+<h2 id="keep-exif-geo-metadata">Keep EXIF GEO metadata</h2>
+
+<p>It often happens that EXIF <em>(Exchangeable Image File Format)</em> metadata, especially geolocation data, is lost when converting image files. Whether GEO data, such as <em>Latitude</em> or <em>Longitude</em>, is recorded in the file’s metadata you can easily check in the image preview. All you have to do is right-click and select <em>‘Get info’</em> or <em>‘Image properties’</em> from the menu that appears.</p>
+
+<p><img src="/IntroPhotogrammetry/assets/images/odm_geo_exif.png" alt="Image geolocation data" /><br /></p>
+
+<div style="background: #cff4fc; padding: 15px;">
+<span style="font-weight:800;">PRO TIP:</span>
+<br />
+You can also use the <b><a href="https://www.gimp.org" target="_blank">GIMP</a></b> tool with a graphical interface to check whether your converted images have geolocation data. Open an image with GIMP and select the options in order: <br />
+<b>Image → Metadata → View Metadata</b>, then click on the <b>EXIF</b> tab, and search for <i>GPSAltitude, GPSLatitude,</i> and <i>GPSLongitude</i> tags.
+</div>
+<p><br /></p>
+
+<p>If the original photo (e.g., DNG) contains GEO metadata, but the file after conversion (e.g. JPG) does not have these tags or they are empty, you have to copy this data manually. You can easily automate this procedure and apply it to batch files using the <code class="language-plaintext highlighter-rouge">Exiftool</code> command-line tool.</p>
+
+<p>Learn more about the <strong>ExifTool</strong> tool at <a href="https://exiftool.org" target="_blank">https://exiftool.org</a><br />
+Download source code and follow system-specific <strong>installation</strong> instructions at <a href="https://exiftool.org/install.html" target="_blank">https://exiftool.org/install.html</a></p>
+
+<p><strong>copy EXIF tags from original images using <i>exiftool</i>:</strong></p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code># run exiftool in a loop
+
+for i in *.DNG
+do
+    exiftool -overwrite_original_in_place -tagsFromFile $i "${i%DNG}jpg"
+done
+</code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code># run exiftool in parallel
+
+ls *.DNG | sed 's/DNG//g' | parallel exiftool -overwrite_original_in_place -tagsFromFile {}DNG {}jpg
+</code></pre></div></div>
+
+<p><strong>add EXIF tags from a text file using <i>exiftool</i>:</strong></p>
+
+<p>You can also use <code class="language-plaintext highlighter-rouge">exiftool</code> to add geolocation information to the image metadata by copying it from the column-like text files. First, prepare a text file with the data by properly ordering and formatting the columns:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>SourceFile  GPSLatitude  GPSLongitude  GPSAltitude  GPSLatitudeRef  GPSLongitudeRef  GPSAltitudeRef
+image1.JPG  43.3565900   116.4459442   198.609      N               W                0
+image2.JPG  43.3524584   116.4458293   198.609      N               W                0
+</code></pre></div></div>
+
+<p>^ the first column should contain the names of your images; you can easily create the list of filenames using the <code class="language-plaintext highlighter-rouge">ls</code> command and redirecting the output into the ` &gt; gps.csv`.</p>
+
+<p>Once the file is ready, execute the <code class="language-plaintext highlighter-rouge">exiftool</code> with the following configuration:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>exiftool -GPSLatitude -GPSLongitude -GPSAltitude -GPSLatitudeRef -GPSLongitudeRef -GPSAltitudeRef -csv="gps.csv" -o geo_output/ input_images/
+</code></pre></div></div>
+
+<p>^ <code class="language-plaintext highlighter-rouge">input_images</code> is a directory with input imagery <br />
+^ <code class="language-plaintext highlighter-rouge">geo_output</code> is a directory with geotagged output imagery <br />
+^ <code class="language-plaintext highlighter-rouge">gps.csv</code> should be stored in a current directory (i.e., a parent dir for both <code class="language-plaintext highlighter-rouge">input_images</code> and <code class="language-plaintext highlighter-rouge">geo_output</code>)</p>
+
+<p>Now that you have a complete imagery in the ODM-supported format (JPG/JPEG/TIFF) and all of them are properly geotagged, you can take one of the following <strong>hands-on tutorials to perform your geospatial analysis using OpenDroneMap</strong> software:</p>
+<ul>
+  <li><a href="01-WebODM">WebODM: web-based graphical user interface</a></li>
+  <li><a href="02-ODM-modules">Command-line ODM modules</a></li>
+</ul>
+
+<hr />
+<h1 id="further-reading">Further Reading</h1>
+<ul>
+  <li><a href="01-WebODM">WebODM: web-based graphical user interface</a></li>
+  <li><a href="02-ODM-modules">Command-line ODM modules</a></li>
+  <li><a href="03-ODM-georeferencing">Geolocation data for the ODM workflow</a></li>
+</ul>
+
+<hr />
+
+<p><a href="../index.md" class="btn btn--primary">Homepage</a>
+<a href="../00-IntroPhotogrammetry-LandingPage" class="btn btn--primary">Section Index</a>
+<a href="01-WebODM" class="btn btn--primary">Next</a></p>
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+
+
+        
+      </footer>
+
+      
+
+      
+
+    </div>
+
+    
+  </article>
+
+  
+  
+</div>
+    </div>
+
+    
+      <div class="search-content">
+        <div class="search-content__inner-wrap"><form onsubmit="return googleCustomSearchExecute();" id="cse-search-box-form-id">
+    <input type="search" id="cse-search-input-box-id" aria-placeholder="Enter your search term..." class="search-input" tabindex="-1" placeholder="Enter your search term..." />
+    </form>
+    <div id="results" class="results">
+        <gcse:searchresults-only></gcse:searchresults-only>
+    </div></div>
+
+      </div>
+    
+    
+    <div class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+
+        <div class="page__footer-follow">
+  <ul class="social-icons">
+    
+      <li><strong>Follow:</strong></li>
+    
+    
+      <li><a href="https://twitter.com/isugif"><i class="fab fa-fw fa-twitter-square" aria-hidden="true"></i> Twitter</a></li>
+    
+    
+    
+      <li><a href="https://github.com/https://github.com/isugenomics"><i class="fab fa-fw fa-github" aria-hidden="true"></i> GitHub</a></li>
+    
+    
+    
+    
+  </ul>
+</div>
+
+<div class="page__footer-copyright">&copy; 2024 Geospatial Workbook</div>
+
+      </footer>
+    </div>
+
+    
+  <script src="/assets/js/main.min.js"></script>
+  <script src="https://use.fontawesome.com/releases/v5.0.13/js/all.js"></script>
+
+
+<script>
+  (function () {
+    var cx = '009853197685285203469:nsvri1pa88d';
+    var gcse = document.createElement('script');
+    gcse.type = 'text/javascript';
+    gcse.async = true;
+    gcse.src = 'https://cse.google.com/cse.js?cx=' + cx;
+    var s = document.getElementsByTagName('script')[0];
+    s.parentNode.insertBefore(gcse, s);
+  })();
+
+  function googleCustomSearchExecute() {
+    var input = document.getElementById('cse-search-input-box-id');
+    var element = google.search.cse.element.getElement('searchresults-only0');
+    if (input.value == '') {
+      element.clearAllResults();
+    } else {
+      element.execute(input.value);
+    }
+    return false;
+  }
+
+  
+</script>
+
+
+
+
+<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+<script id="MathJax-script" defer
+        src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+</script>
+
+
+
+
+  </body>
+</html>

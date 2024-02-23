@@ -1,0 +1,682 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.11.2 by Michael Rose
+  Copyright 2013-2018 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE.txt
+-->
+<html lang="en" class="no-js">
+  <head>
+    <meta charset="utf-8">
+
+<!-- begin _includes/seo.html --><title>R Setup - Geospatial Workbook</title>
+<meta name="description" content="Tutorial on Informatics for Geospatial Information">
+
+
+  <meta name="author" content="Jennifer Chang">
+
+
+<meta property="og:type" content="website">
+<meta property="og:locale" content="en_US">
+<meta property="og:site_name" content="Geospatial Workbook">
+<meta property="og:title" content="R Setup">
+<meta property="og:url" content="http://localhost:4000/Workshops/R_Setup.html">
+
+
+
+
+  <meta property="og:image" content="http://localhost:4000/assets/images/margaret-weir-GZyjbLNOaFg-unsplash_dark.jpg">
+
+
+
+  <meta name="twitter:site" content="@isugif">
+  <meta name="twitter:title" content="R Setup">
+  <meta name="twitter:description" content="Tutorial on Informatics for Geospatial Information">
+  <meta name="twitter:url" content="http://localhost:4000/Workshops/R_Setup.html">
+
+  
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content="http://localhost:4000/assets/images/margaret-weir-GZyjbLNOaFg-unsplash_dark.jpg">
+  
+
+  
+    <meta name="twitter:creator" content="@jenchang212">
+  
+
+
+
+
+
+
+
+  
+
+  
+
+
+<link rel="canonical" href="http://localhost:4000/Workshops/R_Setup.html">
+
+
+
+
+
+
+
+  <script type="application/ld+json">
+    {
+      "@context": "http://schema.org",
+      "@type": "Person",
+      "name": "",
+      "url": "http://localhost:4000",
+      "sameAs": null
+    }
+  </script>
+
+
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+<link href="/feed.xml" type="application/atom+xml" rel="alternate" title="Geospatial Workbook Feed">
+
+<!-- http://t.co/dKP3o1e -->
+<meta name="HandheldFriendly" content="True">
+<meta name="MobileOptimized" content="320">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+
+<!--[if lte IE 9]>
+  <style>
+    /* old IE unsupported flexbox fixes */
+    .greedy-nav .site-title {
+      padding-right: 3em;
+    }
+    .greedy-nav button {
+      position: absolute;
+      top: 0;
+      right: 0;
+      height: 100%;
+    }
+  </style>
+<![endif]-->
+
+
+    <!-- start custom head snippets -->
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-E6BZVYF8ZY"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-E6BZVYF8ZY');
+</script>
+
+<!-- insert favicons. use https://realfavicongenerator.net/ -->
+
+<!-- end custom head snippets -->
+
+  </head>
+
+  <body class="layout--single">
+
+    <!--[if lt IE 9]>
+<div class="notice--danger align-center" style="margin: 0;">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience.</div>
+<![endif]-->
+
+    <div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        <a class="site-title" href="/">Geospatial Workbook</a>
+        <ul class="visible-links">
+          
+            
+            <li class="masthead__menu-item">
+              <a href="http://localhost:4000/about.html" >About</a>
+            </li>
+          
+            
+            <li class="masthead__menu-item">
+              <a href="http://localhost:4000/list.html" >Index</a>
+            </li>
+          
+            
+            <li class="masthead__menu-item">
+              <a href="http://localhost:4000/glossary.html" >Glossary</a>
+            </li>
+          
+            
+            <li class="masthead__menu-item">
+              <a href="http://localhost:4000/people.html" >People</a>
+            </li>
+          
+            
+            <li class="masthead__menu-item">
+              <a href="http://localhost:4000/contributing.html" >Contribute</a>
+            </li>
+          
+        </ul>
+        
+        <button class="search__toggle" type="button">
+          <svg class="icon" width="16" height="16" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 15.99 16">
+            <path d="M15.5,13.12L13.19,10.8a1.69,1.69,0,0,0-1.28-.55l-0.06-.06A6.5,6.5,0,0,0,5.77,0,6.5,6.5,0,0,0,2.46,11.59a6.47,6.47,0,0,0,7.74.26l0.05,0.05a1.65,1.65,0,0,0,.5,1.24l2.38,2.38A1.68,1.68,0,0,0,15.5,13.12ZM6.4,2A4.41,4.41,0,1,1,2,6.4,4.43,4.43,0,0,1,6.4,2Z" transform="translate(-.01)"></path>
+          </svg>
+        </button>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">Toggle Menu</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+    <div class="initial-content">
+      
+  
+
+
+
+
+
+
+
+
+
+
+
+<div class="page__hero--overlay"
+  style="background-color: 444444; background-image: url('/assets/images/margaret-weir-GZyjbLNOaFg-unsplash_dark.jpg');"
+>
+  
+    <div class="wrapper">
+      <h1 id="page-title" class="page__title" itemprop="headline">
+        
+          R Setup
+
+        
+      </h1>
+      
+      
+      
+    </div>
+  
+  
+</div>
+
+
+
+
+
+<div id="main" role="main">
+  
+  <div class="sidebar sticky">
+  
+
+
+<div itemscope itemtype="http://schema.org/Person">
+
+  
+    <div class="author__avatar">
+      
+
+      
+        <img src="/assets/images/people/JenChang.png" alt="Jennifer Chang" itemprop="image">
+      
+    </div>
+  
+
+  <div class="author__content">
+    
+      <h3 class="author__name" itemprop="name">Jennifer Chang</h3>
+    
+    
+      <p class="author__bio" itemprop="description">
+        Her PhD was in Bioinformatics and Computational Biology with a minor in Statistics. During her PhD, she developed the C++ software Mango Graph Studio which has been licensed to a startup. Since then, she has worked on automating the Influenza A Virus in Swine reports and recently has been designing Nextflow pipelines for highly scalable and reproducible pipelines. She enjoys designing workflows to reduce tedium and increase joy of discovery.
+      </p>
+    
+  </div>
+
+  <div class="author__urls-wrapper">
+    <button class="btn btn--inverse">Follow</button>
+    <ul class="author__urls social-icons">
+      
+
+      
+
+      
+        <li>
+          <a href="mailto:mailto:jenchang@iastate.edu">
+            <meta itemprop="email" content="mailto:jenchang@iastate.edu" />
+            <i class="fas fa-fw fa-envelope-square" aria-hidden="true"></i> Email
+          </a>
+        </li>
+      
+
+      
+
+      
+        <li>
+          <a href="https://twitter.com/jenchang212" itemprop="sameAs">
+            <i class="fab fa-fw fa-twitter-square" aria-hidden="true"></i> Twitter
+          </a>
+        </li>
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      <!--
+  <li>
+    <a href="http://link-to-whatever-social-network.com/user/" itemprop="sameAs">
+      <i class="fas fa-fw" aria-hidden="true"></i> Custom Social Profile Link
+    </a>
+  </li>
+-->
+    </ul>
+  </div>
+</div>
+
+<!-- Create a 2nd author for tutorials -->
+
+
+
+<div itemscope itemtype="http://schema.org/Person">
+
+  
+
+  <div class="author__content">
+    
+      <h3 class="author__name" itemprop="name"></h3>
+    
+    
+  </div>
+
+  <div class="author__urls-wrapper">
+    <button class="btn btn--inverse">Follow</button>
+    <ul class="author__urls social-icons">
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      <!--
+  <li>
+    <a href="http://link-to-whatever-social-network.com/user/" itemprop="sameAs">
+      <i class="fas fa-fw" aria-hidden="true"></i> Custom Social Profile Link
+    </a>
+  </li>
+-->
+    </ul>
+  </div>
+</div>
+
+  
+  </div>
+
+
+  <article class="page" itemscope itemtype="http://schema.org/CreativeWork">
+    <meta itemprop="headline" content="R Setup">
+    
+    
+    
+
+    <div class="page__inner-wrap">
+      
+
+      <section class="page__content" itemprop="text">
+        
+        <h1 id="introduction">Introduction</h1>
+
+<p>R is an interactive scripting language originally designed to teach statistics and released in 1993. It was inspired by the S language developed at Bell Labs and later became more widely used for data analysis.</p>
+
+<ul>
+  <li><a href="https://en.wikipedia.org/wiki/R_(programming_language)">Wikipedia - R (programming language)</a></li>
+  <li><a href="https://github.com/topics/r">List of R projects on GitHub</a></li>
+  <li><a href="https://youtu.be/_V8eKsto3Ug">YouTube: R in 2 hours Full Course</a></li>
+</ul>
+
+<h1 id="getting-started-in-r">Getting Started in R</h1>
+
+<p>First you will need to install R or have access to an R environment. It is highly recommended to try to get R installed on your local computing environment by using the installer from CRAN. R environments may also be available on a shared HPC .</p>
+
+<h2 id="setup-r-locally">Setup R Locally</h2>
+
+<ol>
+  <li>Install the latest version of R from CRAN - <a href="https://www.r-project.org/">https://www.r-project.org/</a></li>
+  <li>Install the free version of RStudio IDE - <a href="https://rstudio.com/products/rstudio/download/">https://rstudio.com/products/rstudio/download/</a></li>
+</ol>
+
+<p><img src="/Workshops/images/RStudio_quad.png" alt="RStudio Quad Chart" /></p>
+
+<p>When you first open RStudio, you’ll notice several panes. Note: To see the Code Editor, you may need to create go to Rstudio’s  <code class="language-plaintext highlighter-rouge">File/New File/R Script</code>.</p>
+
+<ol>
+  <li><strong>Code Editor</strong> - The top left pane is where you will be editing an R or R markdown script. You can run commands line by line by placing the cursor on a line and hitting <code class="language-plaintext highlighter-rouge">Ctrl+Enter</code> or <code class="language-plaintext highlighter-rouge">Cmd+Return</code>. Usually scripts are designed (and debugged) in RStudio but then run from the command line when you are processing multiple files.</li>
+  <li><strong>R Console</strong> - R code is run in the bottom left pane. This will display any messages, warnings and error messages. This is useful for copying and pasting the error/warning into a search engine to debug a pipeline.</li>
+  <li><strong>Data and Variables</strong> - This top right pane lists any loaded datasets and functions. If you double-click on <code class="language-plaintext highlighter-rouge">data | 10 obs. of 2 variables</code>, an excel-like view of the data is shown. Check this pane to make sure data is loaded and processed correctly. If items have <code class="language-plaintext highlighter-rouge">0 obs</code> (0 observations or rows), then the dataset has been completely filtered out.</li>
+  <li><strong>Graphics View</strong> - Any plots will show up on the bottom right corner in the Plots pane.</li>
+</ol>
+
+<p>Together these panes allow you to interactively design an R pipeline.</p>
+
+<h3 id="hands-on-exercise---using-rstudio">Hands-On Exercise - using RStudio</h3>
+
+<p>Copy the following into the <strong>Code Editor</strong>, run it line by line, and see if you can recreate the graph in the <strong>Graphics View</strong>.  If you can, try modifying and running the script. Experiment to see what changes break the script.</p>
+
+<div class="language-R highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">#! /usr/bin/env Rscript</span><span class="w">
+
+</span><span class="n">install.packages</span><span class="p">(</span><span class="s2">"ggplot2"</span><span class="p">)</span><span class="w">
+</span><span class="n">library</span><span class="p">(</span><span class="n">ggplot2</span><span class="p">)</span><span class="w">
+
+</span><span class="n">x</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="m">1</span><span class="o">:</span><span class="m">10</span><span class="p">)</span><span class="w">
+</span><span class="n">y</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="m">2</span><span class="o">:</span><span class="m">11</span><span class="p">)</span><span class="w">
+</span><span class="n">data</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">data.frame</span><span class="p">(</span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">y</span><span class="p">)</span><span class="w">
+
+</span><span class="n">ggplot</span><span class="p">(</span><span class="n">data</span><span class="p">,</span><span class="w"> </span><span class="n">aes</span><span class="p">(</span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">y</span><span class="p">))</span><span class="w"> </span><span class="o">+</span><span class="w">
+  </span><span class="n">geom_point</span><span class="p">()</span><span class="w"> </span><span class="o">+</span><span class="w">
+  </span><span class="n">labs</span><span class="p">(</span><span class="n">title</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"Hello World"</span><span class="p">)</span><span class="w">
+</span></code></pre></div></div>
+
+<h2 id="installing-r-libraries">Installing R Libraries</h2>
+
+<p>R functions are made available as libraries (also referred to as packages) which need to be installed from somewhere. R libraries can be indexed on CRAN, bioconductor and GitHub. What’s the difference between installing from these locations?</p>
+
+<ul>
+  <li>
+    <p><strong>CRAN</strong> R libraries have undergone a stringent quality control process. <a href="https://cran.r-project.org/">CRAN Website</a></p>
+
+    <div class="language-R highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">cran_pkgs</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="s2">"ggplot2"</span><span class="p">,</span><span class="w"> </span><span class="s2">"devtools"</span><span class="p">)</span><span class="w">    </span><span class="c1"># List one or multiple libraries</span><span class="w">
+</span><span class="n">install.packages</span><span class="p">(</span><span class="n">cran_pkgs</span><span class="p">)</span><span class="w">
+</span><span class="n">library</span><span class="p">(</span><span class="n">ggplot2</span><span class="p">)</span><span class="w">                        </span><span class="c1"># Load the library</span><span class="w">
+</span></code></pre></div>    </div>
+  </li>
+  <li>
+    <p><strong>Bioconductor</strong> libraries are focused on bioinformatic analysis and may or may not be available on CRAN but can be the latest version of a tools. <a href="https://www.bioconductor.org/install/">Bioconductor Website</a></p>
+
+    <div class="language-R highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">install.packages</span><span class="p">(</span><span class="s2">"BiocManager"</span><span class="p">)</span><span class="w">
+</span><span class="n">biocond_pkgs</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">c</span><span class="w"> </span><span class="p">(</span><span class="s2">"wgcna"</span><span class="p">,</span><span class="w"> </span><span class="s2">"deseq2"</span><span class="p">)</span><span class="w">    </span><span class="c1"># List one or multiple libraries</span><span class="w">
+</span><span class="n">BiocManager</span><span class="o">::</span><span class="n">install</span><span class="p">(</span><span class="n">biocond_pkgs</span><span class="p">)</span><span class="w">
+</span></code></pre></div>    </div>
+  </li>
+  <li>
+    <p><strong>GitHub R libraries</strong> tend to be the most recently developed libraries and may not have been submitted to Bioconductor or CRAN yet.</p>
+
+    <div class="language-R highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">install.packages</span><span class="p">(</span><span class="s2">"devtools"</span><span class="p">)</span><span class="w">
+</span><span class="n">devtools</span><span class="o">::</span><span class="n">install_github</span><span class="p">(</span><span class="s2">"username/reponame"</span><span class="p">)</span><span class="w">      </span><span class="c1"># Github R Library name</span><span class="w">
+</span></code></pre></div>    </div>
+  </li>
+</ul>
+
+<p>In order of preference, first attempt to install from CRAN. If the library is not available on CRAN, check Bioconductor, then the GitHub repo.</p>
+
+<p><img src="/Workshops/images/R_libraries.png" alt="R Libraries" /></p>
+
+<p><strong>Warning:</strong> Have a regular schedule (maybe once every 6 months) to keep your R libraries up to date. Some libraries depend on other libraries and will not install until you have the latest version.</p>
+
+<h3 id="hands-on-exercise---installing-an-r-library-in-three-ways">Hands-On Exercise - installing an R library in three ways</h3>
+
+<p>Write an R script to install one package each from CRAN, bioconductor, and GitHub. Use a search engine (like Google) to find a library. If one library doesn’t install, copy the error message and paste into the search engine and try to figure out why. Don’t get hung up on getting it to install, this is practice.</p>
+
+<div class="language-R highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">install.packages</span><span class="p">()</span><span class="w">
+</span><span class="n">biocManager</span><span class="o">::</span><span class="n">install</span><span class="p">()</span><span class="w">
+</span><span class="n">devtools</span><span class="o">::</span><span class="n">install_github</span><span class="p">()</span><span class="w">
+
+</span><span class="n">remove.packages</span><span class="p">()</span><span class="w">      </span><span class="c1"># &lt;= uninstalls an R package, will need to provide package name</span><span class="w">
+</span></code></pre></div></div>
+
+<h3 id="updating-r-libraries-in-rstudio">Updating R libraries in RStudio</h3>
+
+<p>To get the latest version of R libraries, RStudio has a “Packages” pane in the bottom right. Some libraries depend on other libraries and will not install until you have the latest version.</p>
+
+<p><img src="/Workshops/images/R_updatepkgs.png" alt="RStudio Quad Chart" /></p>
+
+<p>This may take several minutes since we are updating multiple packages. If the “Install Updates” hangs or errors out, install the packages one by one.</p>
+
+<h2 id="using-r-on-scinet">Using R on SCINet</h2>
+
+<p>On the SCINet HPC resources (Ceres and Atlas), R should be available as a module.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>module load R
+R <span class="nt">--version</span>
+</code></pre></div></div>
+
+<p>However since this will load base R without the R libraries, you may need to install your own R libraries which are installed to home directory by default.</p>
+
+<p>Since the home directory may have restricted space, see the SCINet documentation on linking libraries on the HPC.</p>
+
+<ul>
+  <li>SCINet Package Install - <a href="https://scinet.usda.gov/guide/packageinstall/">https://scinet.usda.gov/guide/packageinstall/</a></li>
+</ul>
+
+<h2 id="using-rstudio-server-on-scinet">Using Rstudio Server on SCINet</h2>
+
+<p>Recently, Ceres HPC was configured to run Rstudio Server. This allows you to run an RStudio like interface to the Ceres HPC. See full instructions on the SCINet website: <a href="https://scinet.usda.gov/guide/rstudio/">https://scinet.usda.gov/guide/rstudio/</a></p>
+
+<!--
+## Testing Equations
+https://www.cross-validated.com/How-to-render-math-on-Minimal-Mistakes/
+
+Inline Equations
+
+```
+\\(x = y \times z)
+```
+
+Block Equations
+
+```
+\\[f(a) = \frac{1}{10 \times 11}\\]
+```
+-->
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+
+
+        
+      </footer>
+
+      
+
+      
+
+    </div>
+
+    
+  </article>
+
+  
+  
+</div>
+    </div>
+
+    
+      <div class="search-content">
+        <div class="search-content__inner-wrap"><form onsubmit="return googleCustomSearchExecute();" id="cse-search-box-form-id">
+    <input type="search" id="cse-search-input-box-id" aria-placeholder="Enter your search term..." class="search-input" tabindex="-1" placeholder="Enter your search term..." />
+    </form>
+    <div id="results" class="results">
+        <gcse:searchresults-only></gcse:searchresults-only>
+    </div></div>
+
+      </div>
+    
+    
+    <div class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+
+        <div class="page__footer-follow">
+  <ul class="social-icons">
+    
+      <li><strong>Follow:</strong></li>
+    
+    
+      <li><a href="https://twitter.com/isugif"><i class="fab fa-fw fa-twitter-square" aria-hidden="true"></i> Twitter</a></li>
+    
+    
+    
+      <li><a href="https://github.com/https://github.com/isugenomics"><i class="fab fa-fw fa-github" aria-hidden="true"></i> GitHub</a></li>
+    
+    
+    
+    
+  </ul>
+</div>
+
+<div class="page__footer-copyright">&copy; 2024 Geospatial Workbook</div>
+
+      </footer>
+    </div>
+
+    
+  <script src="/assets/js/main.min.js"></script>
+  <script src="https://use.fontawesome.com/releases/v5.0.13/js/all.js"></script>
+
+
+<script>
+  (function () {
+    var cx = '009853197685285203469:nsvri1pa88d';
+    var gcse = document.createElement('script');
+    gcse.type = 'text/javascript';
+    gcse.async = true;
+    gcse.src = 'https://cse.google.com/cse.js?cx=' + cx;
+    var s = document.getElementsByTagName('script')[0];
+    s.parentNode.insertBefore(gcse, s);
+  })();
+
+  function googleCustomSearchExecute() {
+    var input = document.getElementById('cse-search-input-box-id');
+    var element = google.search.cse.element.getElement('searchresults-only0');
+    if (input.value == '') {
+      element.clearAllResults();
+    } else {
+      element.execute(input.value);
+    }
+    return false;
+  }
+
+  
+</script>
+
+
+
+
+<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+<script id="MathJax-script" defer
+        src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+</script>
+
+
+
+
+  </body>
+</html>

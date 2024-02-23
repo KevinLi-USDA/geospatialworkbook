@@ -1,0 +1,1332 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.11.2 by Michael Rose
+  Copyright 2013-2018 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE.txt
+-->
+<html lang="en" class="no-js">
+  <head>
+    <meta charset="utf-8">
+
+<!-- begin _includes/seo.html --><title>Command-line ODM modules - Geospatial Workbook</title>
+<meta name="description" content="Tutorial on Informatics for Geospatial Information">
+
+
+  <meta name="author" content="Aleksandra Badaczewska">
+
+
+<meta property="og:type" content="website">
+<meta property="og:locale" content="en_US">
+<meta property="og:site_name" content="Geospatial Workbook">
+<meta property="og:title" content="Command-line ODM modules">
+<meta property="og:url" content="http://localhost:4000/IntroPhotogrammetry/OpenDroneMap/02-ODM-modules.html">
+
+
+
+
+  <meta property="og:image" content="http://localhost:4000/IntroPhotogrammetry/assets/images/geospatial_workbook_banner.png">
+
+
+
+  <meta name="twitter:site" content="@isugif">
+  <meta name="twitter:title" content="Command-line ODM modules">
+  <meta name="twitter:description" content="Tutorial on Informatics for Geospatial Information">
+  <meta name="twitter:url" content="http://localhost:4000/IntroPhotogrammetry/OpenDroneMap/02-ODM-modules.html">
+
+  
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content="http://localhost:4000/IntroPhotogrammetry/assets/images/geospatial_workbook_banner.png">
+  
+
+  
+    <meta name="twitter:creator" content="@someone">
+  
+
+
+
+
+
+
+
+  
+
+  
+
+
+<link rel="canonical" href="http://localhost:4000/IntroPhotogrammetry/OpenDroneMap/02-ODM-modules.html">
+
+
+
+
+
+
+
+  <script type="application/ld+json">
+    {
+      "@context": "http://schema.org",
+      "@type": "Person",
+      "name": "",
+      "url": "http://localhost:4000",
+      "sameAs": null
+    }
+  </script>
+
+
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+<link href="/feed.xml" type="application/atom+xml" rel="alternate" title="Geospatial Workbook Feed">
+
+<!-- http://t.co/dKP3o1e -->
+<meta name="HandheldFriendly" content="True">
+<meta name="MobileOptimized" content="320">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+
+<!--[if lte IE 9]>
+  <style>
+    /* old IE unsupported flexbox fixes */
+    .greedy-nav .site-title {
+      padding-right: 3em;
+    }
+    .greedy-nav button {
+      position: absolute;
+      top: 0;
+      right: 0;
+      height: 100%;
+    }
+  </style>
+<![endif]-->
+
+
+    <!-- start custom head snippets -->
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-E6BZVYF8ZY"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-E6BZVYF8ZY');
+</script>
+
+<!-- insert favicons. use https://realfavicongenerator.net/ -->
+
+<!-- end custom head snippets -->
+
+  </head>
+
+  <body class="layout--single">
+
+    <!--[if lt IE 9]>
+<div class="notice--danger align-center" style="margin: 0;">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience.</div>
+<![endif]-->
+
+    <div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        <a class="site-title" href="/">Geospatial Workbook</a>
+        <ul class="visible-links">
+          
+            
+            <li class="masthead__menu-item">
+              <a href="http://localhost:4000/about.html" >About</a>
+            </li>
+          
+            
+            <li class="masthead__menu-item">
+              <a href="http://localhost:4000/list.html" >Index</a>
+            </li>
+          
+            
+            <li class="masthead__menu-item">
+              <a href="http://localhost:4000/glossary.html" >Glossary</a>
+            </li>
+          
+            
+            <li class="masthead__menu-item">
+              <a href="http://localhost:4000/people.html" >People</a>
+            </li>
+          
+            
+            <li class="masthead__menu-item">
+              <a href="http://localhost:4000/contributing.html" >Contribute</a>
+            </li>
+          
+        </ul>
+        
+        <button class="search__toggle" type="button">
+          <svg class="icon" width="16" height="16" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 15.99 16">
+            <path d="M15.5,13.12L13.19,10.8a1.69,1.69,0,0,0-1.28-.55l-0.06-.06A6.5,6.5,0,0,0,5.77,0,6.5,6.5,0,0,0,2.46,11.59a6.47,6.47,0,0,0,7.74.26l0.05,0.05a1.65,1.65,0,0,0,.5,1.24l2.38,2.38A1.68,1.68,0,0,0,15.5,13.12ZM6.4,2A4.41,4.41,0,1,1,2,6.4,4.43,4.43,0,0,1,6.4,2Z" transform="translate(-.01)"></path>
+          </svg>
+        </button>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">Toggle Menu</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+    <div class="initial-content">
+      
+  
+
+
+
+
+
+
+
+
+
+
+
+<div class="page__hero--overlay"
+  style="background-color: 444444; background-image: url('/IntroPhotogrammetry/assets/images/geospatial_workbook_banner.png');"
+>
+  
+    <div class="wrapper">
+      <h1 id="page-title" class="page__title" itemprop="headline">
+        
+          Command-line ODM modules
+
+        
+      </h1>
+      
+      
+      
+    </div>
+  
+  
+</div>
+
+
+
+
+
+<div id="main" role="main">
+  
+  <div class="sidebar sticky">
+  
+
+
+<div itemscope itemtype="http://schema.org/Person">
+
+  
+    <div class="author__avatar">
+      
+
+      
+        <img src="/assets/images/people/Alex.png" alt="Aleksandra Badaczewska" itemprop="image">
+      
+    </div>
+  
+
+  <div class="author__content">
+    
+      <h3 class="author__name" itemprop="name">Aleksandra Badaczewska</h3>
+    
+    
+      <p class="author__bio" itemprop="description">
+        Alex is a Research Scientist IV at the Genome Informatics Facility at Iowa State University. Her academic background is in Chemistry and Biotechnology, with a Ph.D. in Computational Biology and broad experience in programming and designing web applications. She develops a comprehensive collection of highly customizable visualization solutions for Bioinformatics and supports software optimization for the USDA Geospatial analyses.
+      </p>
+    
+  </div>
+
+  <div class="author__urls-wrapper">
+    <button class="btn btn--inverse">Follow</button>
+    <ul class="author__urls social-icons">
+      
+
+      
+
+      
+        <li>
+          <a href="mailto:mailto:abadacz@iastate.edu">
+            <meta itemprop="email" content="mailto:abadacz@iastate.edu" />
+            <i class="fas fa-fw fa-envelope-square" aria-hidden="true"></i> Email
+          </a>
+        </li>
+      
+
+      
+
+      
+        <li>
+          <a href="https://twitter.com/someone" itemprop="sameAs">
+            <i class="fab fa-fw fa-twitter-square" aria-hidden="true"></i> Twitter
+          </a>
+        </li>
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      <!--
+  <li>
+    <a href="http://link-to-whatever-social-network.com/user/" itemprop="sameAs">
+      <i class="fas fa-fw" aria-hidden="true"></i> Custom Social Profile Link
+    </a>
+  </li>
+-->
+    </ul>
+  </div>
+</div>
+
+<!-- Create a 2nd author for tutorials -->
+
+
+
+<div itemscope itemtype="http://schema.org/Person">
+
+  
+
+  <div class="author__content">
+    
+      <h3 class="author__name" itemprop="name"></h3>
+    
+    
+  </div>
+
+  <div class="author__urls-wrapper">
+    <button class="btn btn--inverse">Follow</button>
+    <ul class="author__urls social-icons">
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      <!--
+  <li>
+    <a href="http://link-to-whatever-social-network.com/user/" itemprop="sameAs">
+      <i class="fas fa-fw" aria-hidden="true"></i> Custom Social Profile Link
+    </a>
+  </li>
+-->
+    </ul>
+  </div>
+</div>
+
+  
+  </div>
+
+
+  <article class="page" itemscope itemtype="http://schema.org/CreativeWork">
+    <meta itemprop="headline" content="Command-line ODM modules">
+    
+    
+    
+
+    <div class="page__inner-wrap">
+      
+
+      <section class="page__content" itemprop="text">
+        
+        <aside class="sidebar__right">
+<nav class="toc">
+    <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> On This Page</h4></header>
+<ul class="toc__menu" id="markdown-toc">
+  <li><a href="#getting-started-with-odm" id="markdown-toc-getting-started-with-odm">Getting started with ODM</a></li>
+  <li><a href="#run-odm-in-the-command-line-using-atlas-cluster-of-the-scinet-hpc" id="markdown-toc-run-odm-in-the-command-line-using-atlas-cluster-of-the-scinet-hpc">Run ODM in the command line <br /><i>using Atlas cluster of the SCINet HPC</i></a>    <ul>
+      <li><a href="#create-file-structure" id="markdown-toc-create-file-structure"><strong>Create file structure</strong></a></li>
+      <li><a href="#detect-gcps-on-the-photos" id="markdown-toc-detect-gcps-on-the-photos"><strong>Detect GCPs on the photos</strong></a></li>
+      <li><a href="#copy-input-imagery-on-atlas" id="markdown-toc-copy-input-imagery-on-atlas"><strong>Copy input imagery on Atlas</strong></a>        <ul>
+          <li><a href="#a-export-from-local-machine" id="markdown-toc-a-export-from-local-machine"><em>A. export from local machine</em></a></li>
+          <li><a href="#b-import-from-other-hpc" id="markdown-toc-b-import-from-other-hpc"><em>B. import from other HPC</em></a></li>
+          <li><a href="#c-move-locally-on-atlas" id="markdown-toc-c-move-locally-on-atlas"><em>C. move locally on Atlas</em></a></li>
+        </ul>
+      </li>
+      <li><a href="#setup-slurm-script" id="markdown-toc-setup-slurm-script"><strong>Setup SLURM script</strong></a>        <ul>
+          <li><a href="#a-adjust-script-variables-and-paths" id="markdown-toc-a-adjust-script-variables-and-paths"><em>A. Adjust script variables and paths</em></a></li>
+          <li><a href="#b-choose-odm-options-for-analysis" id="markdown-toc-b-choose-odm-options-for-analysis"><em>B. Choose ODM options for analysis</em></a></li>
+        </ul>
+      </li>
+      <li><a href="#submit-odm-job-into-the-slurm-queue" id="markdown-toc-submit-odm-job-into-the-slurm-queue"><strong>Submit ODM job into the SLURM queue</strong></a></li>
+      <li><a href="#access-odm-analysis-results" id="markdown-toc-access-odm-analysis-results"><strong>Access ODM analysis results</strong></a></li>
+    </ul>
+  </li>
+  <li><a href="#get-odm-on-local-machine" id="markdown-toc-get-odm-on-local-machine">Get ODM on local machine</a>    <ul>
+      <li><a href="#download-the-odm-module" id="markdown-toc-download-the-odm-module"><strong>Download the ODM module</strong></a></li>
+    </ul>
+  </li>
+  <li><a href="#further-reading" id="markdown-toc-further-reading">Further Reading</a></li>
+</ul>
+
+  </nav>
+</aside>
+
+<h1 id="getting-started-with-odm">Getting started with ODM</h1>
+
+<p>ODM stands for OpenDroneMap, an <strong>open-source</strong> photogrammetry software. OpenDroneMap project includes several modules which facilitate geospatial analysis in customized configurations of available computing power and for projects of different scales. The <a href="https://www.opendronemap.org/odm/">OpenDroneMap/ODM</a> [<a href="https://github.com/OpenDroneMap/ODM">GitHub</a>] module is the analytical core of the software. Typically it is employed by the higher-level layers of other OpenDroneMap products that provide a graphical user interface or manage analysis configuration and task scheduling <em>(learn more in the <a href="https://geospatial.101workbook.org/IntroPhotogrammetry/OpenDroneMap/00-IntroODM">Introduction to OpenDroneMap</a> section of the <a href="https://geospatial.101workbook.org">Geospatial Workbook</a></em>.</p>
+
+<p>The point is that you can <strong>directly use the ODM module on the command line</strong> in the terminal for drone imagery mapping. This tutorial will take you <strong>step-by-step</strong> through creating an efficient file structure and setting up a script to send the job to the SLURM queue on an HPC cluster, which will allow you <strong>to collect all the results</strong> of the photogrammetric analysis with OpenDroneMap.</p>
+
+<p><span style="color: #ff3870;font-weight: 500;">
+The complete workflow includes photo alignment and generation of the dense point cloud (DPC), elevation models (DSMs &amp; DTMs), textured 3D meshes, and orthomosaics (georeferenced &amp; orthorectified).
+</span>
+<b>Note that in this approach there is NO support to create web tiles</b>. So, the results can not be directly opened in the complementary WebODM graphical interface. But, the files can be still visualized in external software that supports the given format.</p>
+
+<h1 id="run-odm-in-the-command-line-using-atlas-cluster-of-the-scinet-hpc">Run ODM in the command line <br /><i>using Atlas cluster of the SCINet HPC</i></h1>
+
+<p>The OpenDroneMap/<strong>ODM</strong> module is available on the <strong>Atlas</strong> (and Ceres) clusters as a <u>singularity container</u>. The image of the software can be accessed on the path: <br /></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>/reference/containers/opendronemap/2.8.3/opendronemap-2.8.3.sif
+</code></pre></div></div>
+
+<p>In your scripts, you can either set a variable to this path:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>odm_exe=/reference/containers/opendronemap/2.8.3/opendronemap-2.8.3.sif
+</code></pre></div></div>
+
+<p>or you can create a softlink in your file structure and further use it:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ln -s /reference/containers/opendronemap/2.8.3/opendronemap-2.8.3.sif /&lt;path-to-your-project-on-Atlas/odm.sif
+</code></pre></div></div>
+
+<p>In this tutorial, we will create a sample script that uses <u>a variable</u> to store the path to the original ODM image.</p>
+
+<h2 id="create-file-structure"><strong>Create file structure</strong></h2>
+
+<p>The ODM module for the command-line usage requires the specific file structure to work without issues. Specifically, it requires that input imagery be in the <code class="language-plaintext highlighter-rouge">code/images</code> subdirectories structure of the working directory for a given project.</p>
+
+<p>To facilitate proper path management, I suggest creating the core of ordered file structure for all future projects. Let’s say it will be the <strong>ODM</strong> directory, serving as a working directory for all future ODM analyses. It should contain two main subdirectories: IMAGES and RESULTS. In the <strong>IMAGES</strong> directory, you will create a new folder with a unique name for each new project, where you will place photos in JPG format <em>(e.g., ~/ODM/IMAGES/PROJECT-1)</em>. In the <strong>RESULTS</strong> directory, when submitting an ODM task into the SLURM queue, a subdirectory with ODM outputs will be automatically created for each project. And there, also automatically, an <code class="language-plaintext highlighter-rouge">code/images</code> subdirectories will be created with soft links to photos from the relative project.</p>
+
+<div style="background: #cff4fc; padding: 15px; margin-bottom: 20px;">
+<b>ODM/</b> &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&ensp;<i>(storage directory for all future ODM projects)</i><br />
+|― run_odm.sh &emsp;&emsp;&emsp;&emsp; <i>(SLURM job submission script)</i> <br />
+|― <b>IMAGES/</b> <br />
+ &emsp;&nbsp; |― <b>PROJECT-1/</b> &emsp;&emsp;&ensp;<i>(directory with images in JPG format and gcp_list.txt file with GCPs)</i> <br />
+ &emsp;&nbsp; |― <b>PROJECT-2/</b> <br />
+|― <b>RESULTS/</b> &emsp;&emsp;&emsp;&emsp;&emsp;<i>(parent directory for ODM analysis outputs)</i> <br />
+<span style="color: #8ca3a8;">
+&emsp;&nbsp; |― PROJECT-1-tag/ &ensp; <i>(automatically created directory with ODM analysis outputs)</i> <br />
+&emsp; &nbsp;&emsp;&nbsp; |― code/ &emsp;&emsp;&emsp; &ensp; <i>(automatically created dir for analysis outputs; <u>required!</u>)</i> <br />
+&emsp; &emsp;&emsp; &emsp; |― images/ &emsp; <i>(automatically created dir with soft links to JPG images)</i> <br />
+</span>
+</div>
+
+<p>This way, if you want to perform several analyses with different parameters on the same set of images, you will not need to have a hard copy for each repetition. Instead, you will use soft links to the original photos stored in the IMAGES directory. <strong>That will significantly save storage space and prevent you from accidentally deleting input imagery when resuming the analysis in the working directory.</strong></p>
+
+<p><br /><span style="color: #ff3870;font-weight: 600; font-size:24px;">
+To set up the file structure for ODM analysis follow the steps in the command line:
+</span><br /></p>
+
+<p><strong>0.</strong> Open the terminal window on your local machine and login to the SCINet Atlas cluster <em>(or any HPC infrastructure)</em> using the <code class="language-plaintext highlighter-rouge">ssh</code> command and respective hostname:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ssh &lt;user.name&gt;@atlas-login.hpc.msstate.edu
+</code></pre></div></div>
+
+<p>Then, enter on the keyboard your 1) <a href="https://scinet.usda.gov/guide/multifactor/">multi-factor authenticator</a> number (6 digits), followed by 2) password in a separate prompt.</p>
+
+<p align="center"><img width="800" src="../assets/images/atlas_login.gif" /></p>
+
+<p><em>^ Note that when entering the identification code and password, the characters are not visible on the screen.</em></p>
+
+<div style="background: #cff4fc; padding: 15px;">
+<span style="font-weight:800;">PRO TIP:</span>
+<br /><span style="font-style:italic;">
+If you happen to forget the hostname for the Atlas cluster, you can save the login command to a text file in your home directory on your local machine: <br /><br />
+<span style="color: black;font-weight: 600;">
+$ echo "ssh user.name@atlas-login.hpc.msstate.edu" &gt; ~/login_atlas <br /><br />
+</span>
+Then every time you want to log in, just call the name of this file with a dot and space preceding it: <br /><br />
+<span style="color: black;font-weight: 600;">
+$ . ~/login_atlas <br /><br />
+</span>
+You can also review the HPC clusters available on SCINet at <a href="https://scinet.usda.gov/guide/quickstart#hpc-clusters-on-scinet" style="color: #3f5a8a;">https://scinet.usda.gov/guide/quickstart#hpc-clusters-on-scinet</a>.
+</span>
+</div>
+<p><br /></p>
+
+<p><strong>1.</strong> Once logged in to Atlas HPC, go into your group folder in the <code class="language-plaintext highlighter-rouge">/project</code> location</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>cd /project/&lt;your_account_folder&gt;/
+
+# e.g., cd /project/90daydata
+</code></pre></div></div>
+
+<div style="background: #cff4fc; padding: 15px; margin-bottom: 20px;">
+<span style="font-weight:800;">PRO TIP:</span>
+<br /><span style="font-style:italic;">
+If you do not remember or do not know the name of your group directory in <b>/project</b> location, try the command: <br /><br />
+<span style="color: black;font-weight: 600;">
+$ ls /project
+</span><br /><br />
+That will display all available group directories. You can search for suitable ones by name or you can quickly filter out only the ones you have access to: <br /><br />
+<span style="color: black;font-weight: 600;">
+$ ls /project/* 2&gt; /dev/null
+</span><br /><br /></span>
+</div>
+
+<div style="background: mistyrose; padding: 15px; margin-bottom: 20px;">
+<span style="font-weight:800;">WARNING:</span>
+<br /><span style="font-style:italic;">
+Note that you do NOT have access to all directories in the <b>/project</b> location. You also can NOT create the new directory there on your own. All users have access to <b>/project/90daydata</b>, but data is stored there only for 90 days and the folder is dedicated primarily to collaborative projects between groups. If you do NOT have access to your group's directory or need a directory for a new project <b><a href="https://scinet.usda.gov/support/request-storage#to-request-a-new-project-allocation" style="color: #3f5a8a;">request a new project allocation</a></b>.
+</span>
+</div>
+
+<div style="background: #cff4fc; padding: 15px; margin-bottom: 30px;">
+<span style="font-weight:800;">PRO TIP:</span><br />
+You can display the contents of any directory with access while being in any other location in the file system. To do this, you need to know the relative or absolute path to the target location. <br /><br />
+The <b>absolute path</b> requires defining all intermediate directories starting from the root (shortcutted by a single <b>/</b>): <br />
+$ <b>ls /project/90daydata</b> <br /><br />
+The <b>relative path</b> requires defining all intermediate directories relative to the current location. To indicate the parent directories use the <b>../</b> syntax for each higher level. To point to child directories you must name them directly. Remember, however, that pressing the tab key expands the available options, so you don't have to remember entire paths. <br />
+$ <b>ls ../../inner_folder</b> <br /><br />
+The same principle applies to relocation in the file system using the <b>cd</b> command.
+</div>
+
+<p><strong>2.</strong> Create a working directory (<code class="language-plaintext highlighter-rouge">mkdir</code>) for all future ODM projects and get into it (<code class="language-plaintext highlighter-rouge">cd</code>):</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>mkdir ODM
+cd ODM
+</code></pre></div></div>
+<p><span style="margin-bottom: 30px;"> </span></p>
+
+<p><strong>3.</strong> Create a directory for input images (IMAGES) and ODM analysis outputs (RESULTS):</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>mkdir IMAGES RESULTS
+</code></pre></div></div>
+
+<p align="center"><img width="800" src="../assets/images/geo_project_structure.gif" /></p>
+
+<h2 id="detect-gcps-on-the-photos"><strong>Detect GCPs on the photos</strong></h2>
+
+<p><strong>Ground Control Points</strong> (GCPs) are clearly visible objects which can be easily identified in several images. Using the precise GPS position of these ground points is a good reference that improves significantly the accuracy of the project’s geolocation. Ground control points can be any <strong>steady structure</strong> existing in the mission area, otherwise can be set using <strong>targets placed on the ground</strong>.</p>
+
+<p><strong>ODM</strong> enables using the GCP data from a <code class="language-plaintext highlighter-rouge">gcp_list.txt</code> text file with the <code class="language-plaintext highlighter-rouge">--gcp</code> option.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>--gcp gcp_list.txt
+</code></pre></div></div>
+
+<p>To create the <code class="language-plaintext highlighter-rouge">gcp_list.txt</code> file properly follow the instructions in the “<em>Software for manual detection of GCPs</em>” or “<em>Automatic detection of ARUco targets</em>” sections of the <a href="/IntroPhotogrammetry/OpenDroneMap/03-ODM-georeferencing.html">Geolocation data for the ODM workflow</a> tutorial.</p>
+
+<p><span style="color: #ff3870;font-weight: 600; font-size:20px;">
+When the file is ready, place it in the project directory (within IMAGES dir) along with photos.
+</span><br /></p>
+
+<div style="background: #cff4fc; padding: 15px; margin-bottom: 20px;">
+|― <b>IMAGES/</b> <br />
+ &emsp;&nbsp; |― <b>PROJECT-1/</b> &emsp;&emsp;&ensp;<i>(directory with images in JPG format and gcp_list.txt file with GCPs)</i> <br />
+ &emsp;&nbsp;&emsp;&ensp; |― <b>gcp_list.txt</b> &emsp;&ensp;<i>(GCPs file)</i> <br />
+ &emsp;&nbsp;&emsp;&ensp; |― IMG_0001.jpg &emsp;<i>(photo 1)</i> <br />
+ &emsp;&nbsp;&emsp;&ensp; |― IMG_0002.jpg &emsp;<i>(photo 2)</i> <br />
+  &emsp;&nbsp;&emsp;&ensp; |― ... <br />
+</div>
+
+<h2 id="copy-input-imagery-on-atlas"><strong>Copy input imagery on Atlas</strong></h2>
+
+<h3 id="a-export-from-local-machine"><em>A. export from local machine</em></h3>
+
+<p>In case the input images are on your local machine, you can transfer them to HPC Atlas via the command line using the <code class="language-plaintext highlighter-rouge">scp</code> command with syntax: <br /> <code class="language-plaintext highlighter-rouge">scp &lt;location on local machine&gt; &lt;user.name&gt;@atlas-dtn.hpc.msstate.edu:&lt;project location on Atlas cluster&gt;</code>.</p>
+
+<p>The complete command should look like that:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>scp /local/machine/JPGs/* alex.badacz@atlas-dtn.hpc.msstate.edu:/project/isu_gif/Alex/ODM/IMAGES/project-X
+</code></pre></div></div>
+
+<p>…and it has to be executed in the terminal window from the selected location in the file system on your local machine.</p>
+
+<p align="center"><img width="800" src="../assets/images/transfer_photos.gif" /></p>
+
+<div style="background: mistyrose; padding: 15px; margin-bottom: 20px;">
+<span style="font-weight:800;">WARNING:</span><br />
+Note that you HAVE to use <b>transfer nodes</b> every time you want to move data to a cluster. Transfer nodes <u>differ</u> from login nodes <u>by the hostname</u> while your user.name remains the same. <br />
+For data transfer purposes, always use the transfer hostname:
+user.name@<b>atlas-dtn.hpc.msstate.edu</b>
+</div>
+
+<p>You can also transfer data from your local machine to the Atlas cluster using the web-based Globus approach. Learn more by following the tutorial in the DataScience workbook: <a href="https://datascience.101workbook.org/07-DataParsing/01-FILE-ACCESS/02-1-tutorial-copy-globus">Copying Data using Globus</a>.</p>
+
+<h3 id="b-import-from-other-hpc"><em>B. import from other HPC</em></h3>
+
+<p>You can use the approach from section A to <b>export data from any computing machine</b> (including another HPC, e.g., Ceres) to an Atlas cluster. You need to be physically logged into that other machine and follow the procedure described in step A.</p>
+
+<p>If you want to make a transfer from another machine <u>while logged into Atlas</u> then you will <b>import the data</b>. You can also do this using the <code class="language-plaintext highlighter-rouge">scp</code> command, but you NEED to know the <u>hostname</u> for that other external machine. The idea of syntax is simple: <br />
+<code class="language-plaintext highlighter-rouge">scp source_location destination_location</code>.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>scp username@external-hostname:/path/JPGs/* /project/project_account/on/Atlas/ODM/IMAGES/project-X
+</code></pre></div></div>
+
+<p>Sometimes an external machine may require access from a specific port, in which case you must use the <code class="language-plaintext highlighter-rouge">-P</code> option, i.e., <br />
+<code class="language-plaintext highlighter-rouge">scp -P port_number source_host:location destination_location_on_atlas</code>.</p>
+
+<p>You can probably transfer data from other HPC infrastructure to the Atlas cluster using the web-based Globus approach. Learn more by following the tutorial in the DataScience workbook: <a href="https://datascience.101workbook.org/07-DataParsing/01-FILE-ACCESS/02-2-tutorial-copy-globus">Copying Data using Globus</a>.</p>
+
+<h3 id="c-move-locally-on-atlas"><em>C. move locally on Atlas</em></h3>
+
+<p>To move data locally in the file system on a given machine (such as an Atlas cluster) use the <code class="language-plaintext highlighter-rouge">cp</code> command with the syntax: <br /> <code class="language-plaintext highlighter-rouge">cp source_location destination_location</code>.</p>
+
+<p>The complete command should look like that:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>cp /project/90daydata/shared/project-X/JPGs/* /project/project_account/user/ODM/IMAGES/project-X
+</code></pre></div></div>
+
+<p>…and it has to be executed in the terminal window when logged into Atlas cluster.</p>
+
+<div style="background: #cff4fc; padding: 15px;">
+<span style="font-weight:800;">PRO TIP:</span><br />
+Absolute paths work regardless of the current location in the file system. If you want to simplify the path syntax, first go to the <u>source</u> or <u>destination</u> location and replace them with <b>./*</b> or <b>./</b> respectively. An asterisk (*) means that all files from the source location will be transferred. <br /><br />
+<b>transfer while in the source location: </b> cp ./* /project/.../ODM/IMAGES/project-X <br /><br />
+<b>transfer while in the destination location: </b> cp /project/90daydata/project-X/JPGs/* ./
+</div>
+<p><br /></p>
+
+<h2 id="setup-slurm-script"><strong>Setup SLURM script</strong></h2>
+
+<p>Make sure you are in your ODM working directory at the <strong>/project</strong> path:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>pwd
+</code></pre></div></div>
+
+<p>It should return a string with your current location, something like <strong>/project</strong>/project_account/user/<strong>ODM</strong>. If the basename of your current directory is different from “ODM” use the <code class="language-plaintext highlighter-rouge">cd</code> command to get into it. When you get to the right location in the file system follow the next instructions.</p>
+
+<p><strong>Create an empty file for the SLURM script and open it with your favorite text editor:</strong></p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>touch run_odm_latest.sh
+nano run_odm_latest.sh           # nano, vim, mcedit are good text file editors
+
+</code></pre></div></div>
+
+<p><strong>Copy-paste the template code provided below:</strong></p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>#!/bin/bash
+
+# job standard output will go to the file slurm-%j.out (where %j is the job ID)
+# DEFINE SLURM VARIABLES
+#SBATCH --job-name="geo-odm"                   # custom SLURM job name visible in the queue
+##SBATCH --partition=atlas                      # partition on Atlas: atlas, gpu, bigmem, service
+#SBATCH --partition=short                      # partition on Ceres: short, medium, long, mem, longmem
+#SBATCH --nodes=1                              # number of nodes
+#SBATCH --ntasks=48                            # logical cores: 48 on atlas, 72 on short (Ceres)
+#SBATCH --time=04:00:00                        # walltime limit (HH:MM:SS)
+#SBATCH --account=&lt;project_account&gt;            # EDIT ACCOUNT, provide your SCINet project account
+#SBATCH --mail-user=user.name@usda.gov         # EDIT EMAIL, provide your email address
+#SBATCH --mail-type=BEGIN                      # email notice of job started
+#SBATCH --mail-type=END                        # email notice of job finished
+#SBATCH --mail-type=FAIL                       # email notice of job failure
+
+
+# LOAD MODULES, INSERT CODE, AND RUN YOUR PROGRAMS HERE
+module load apptainer                        # load container dependency
+
+# DEFINE CODE VARIABLES
+workdir=/project/&lt;project_account&gt;/.../ODM     # EDIT PATH, path to your ODM directory; use `pwd` if the script is in ODM workdir
+project=PROJECT-1                              # EDIT PROJECT NAME, name of the directory with input JPG imagery
+ODM=3.3.0
+
+tag=$SLURM_JOB_ID                              # EDIT CUSTOM TAG, by default it is a SLURM job ID
+#tag=`date +%Y%b%d-%T | tr ':' '.'`            # alternative TAG, use date in format 2022Aug16-16.57.59 to make the name unique
+images_dir=$workdir/IMAGES/$project            # automatically generated path to input images when stored in ~/ODM/IMAGES; otherwise provide absolute path
+output_dir=$workdir/RESULTS/$project-$tag      # automatically generated path to project outputs
+mkdir -p $output_dir/code/images               # automatically generated images directory
+ln -s $images_dir/* $output_dir/code/images/   # automatically linked input imagery
+cp $BASH_SOURCE $output_dir/submit_odm.sh      # automatically copied the SLURM script into the outputs directory (e.g., for future reuse or reference of used options)
+odm=/reference/containers/opendronemap/$ODM/opendronemap-$ODM.sif        # pre-configured odm image on Atlas
+
+# DEFINE ODM COMMAND
+apptainer run --writable-tmpfs $odm  \
+--feature-quality ultra --min-num-features 10000 --matcher-type flann \
+--pc-quality ultra --pc-classify --pc-rectify --pc-las \
+--mesh-octree-depth 12 \
+--gcp $output_dir/code/images/gcp_list.txt \
+--dsm --dtm --dem-resolution 1 --smrf-threshold 0.4 --smrf-window 24 \
+--build-overviews \
+--use-hybrid-bundle-adjustment --max-concurrency 72 \
+--project-path $output_dir --ignore-gsd
+</code></pre></div></div>
+
+<p align="center"><img width="800" src="../assets/images/create_script.gif" /></p>
+
+<p><br /><span style="color: #ff3870; font-weight: 600; font-size:24px;">
+Each time before submitting the script to the queue…
+</span><br /></p>
+
+<h3 id="a-adjust-script-variables-and-paths"><em>A. Adjust script variables and paths</em></h3>
+
+<div style="background: mistyrose; padding: 15px;">
+<span style="font-weight:800;">WARNING:</span>
+<br /><span style="font-style:italic;">
+Follow the adjustment steps <u>each time</u> before submitting the job into the SLURM queue. Note that you SHOULD use the same script file every time you arrange an ODM analysis. For your convenience, when you submit a job to the queue, the script with all the settings is automatically copied to the corresponding folder of ODM analysis outputs (located directly in the RESULTS directory).
+</span>
+</div>
+
+<p><br /><span style="font-weight: 500; font-size:22px;"><i>^ <b>Adjust</b> the script lines marked with <b># EDIT</b> comment</i></span><br /></p>
+
+<p><strong>0.</strong> Select Atlas partition in section <strong># DEFINE SLURM VARIABLES</strong> (optional)</p>
+
+<div style="background: #f0f0f0; padding: 15px; margin-bottom: 20px;">
+#SBATCH --partition=<span style="font-weight:800;">atlas</span>
+</div>
+
+<div style="background: #cff4fc; padding: 15px; margin-bottom: 30px;">
+<span style="font-weight:800;">PRO TIP:</span><br />
+For most jobs, Atlas users should specify the <b>atlas</b> partition. The specification for all available Atlas partitions is provided in <b><a href="https://www.hpc.msstate.edu/computing/atlas/" style="color: #3f5a8a;">Atlas Documentation</a></b>, in section <i>Available Atlas Partitions</i>.
+</div>
+
+<p><strong>1.</strong> Enter your SCINet project account in section <strong># DEFINE SLURM VARIABLES</strong> (obligatory)</p>
+
+<div style="background: #f0f0f0; padding: 15px; margin-bottom: 20px;">
+#SBATCH --account=
+<span style="font-weight:800;">project_account</span>
+</div>
+
+<p><em>For example, I use <code class="language-plaintext highlighter-rouge">isu_gif_vrsc</code> account: <code class="language-plaintext highlighter-rouge">#SBATCH --account=isu_gif_vrsc</code></em></p>
+
+<p><strong>2.</strong> Edit path to your ODM directory in section <strong># DEFINE CODE VARIABLES</strong> (obligatory)</p>
+
+<div style="background: #f0f0f0; padding: 15px; margin-bottom: 20px;">
+workdir=
+<span style="font-weight:800;">/project/project_account/.../ODM</span>
+</div>
+
+<p><em>For example, I use the following path: <code class="language-plaintext highlighter-rouge">workdir=/project/isu_gif_vrsc/Alex/geospatial/ODM</code></em></p>
+
+<p><strong>3.</strong> Edit name of the directory with input imagery in section <strong># DEFINE CODE VARIABLES</strong> (obligatory)</p>
+
+<p><span style="color: #ff3870;font-weight: 600;">IMPORTANT:</span>
+This step determines which set of images will be used in the ODM analysis!</p>
+
+<div style="background: #f0f0f0; padding: 15px; margin-bottom: 20px;">
+project=
+<span style="font-weight:800;">PROJECT-1</span>
+</div>
+
+<div style="background: mistyrose; padding: 15px; margin-bottom: 30px;">
+<span style="font-weight:800;">WARNING:</span>
+<br /><span style="font-style:italic;">
+CASE 1: Note that the entered name should match the subdirectory existing directly in your ~/ODM/IMAGES/ where you store imagery for a particular analysis. Then you do NOT need to alter the <b>images_dir</b> variable (with the full path to the input photos) because it will be created automatically. <br />
+<b>Keep images_dir default:</b> <br />
+images_dir=$workdir/IMAGES/$project <br /><br />
+
+CASE 2: Otherwise, give a customized (any) name for the project outputs but remember <u>to provide</u> the absolute path (of any location in the HPC file system) to the input photos in the <b>images_dir</b> variable. <br />
+<b>Provide the absolute path to imagery:</b> <br />
+images_dir=/aboslute/path/to/input/imagery/in/any/location
+</span>
+</div>
+
+<p><strong>4.</strong> Edit tag variable to customize project outputs directory <strong># DEFINE CODE VARIABLES</strong> (optional)</p>
+
+<p>By default, the <code class="language-plaintext highlighter-rouge">tag</code> variable is tagging the name of the directory with the ODM analysis outputs by adding the <code class="language-plaintext highlighter-rouge">$SLURM_JOB_ID</code> when the job is submitted. Alternatively, it could be date and time (in the format: 2022Aug16-16:57:59). This prevents accidental overwriting of results for a project started from the same input images and makes the project name of each analysis unique.</p>
+
+<div style="background: #f0f0f0; padding: 15px; margin-bottom: 20px;">
+tag=<span style="font-weight:800;">$SLURM_JOB_ID</span><br />
+# tag=<span style="font-weight:800;">`date +%Y%b%d-%T | tr ':' '.'`</span>
+</div>
+
+<div style="background: #cff4fc; padding: 15px; margin-bottom: 20px;">
+<span style="font-weight:800;">PRO TIP:</span><br />
+You can overwrite the value of the <b>tag</b> variable in any way that will distinguish the analysis variant and make the name of the new folder unique. <br />
+Avoid overwriting the tag with manually typed words, and remember to always add an automatically generated randomization part in the variable to prevent overwriting the results in a previous project (for example, when you forget to update the tag). <br /><br />
+If you want to assign a value to the tag variable as the result of a command, use <b>backtick</b> bash expansion around it, <code>tag=`command`</code>.
+</div>
+
+<p align="center"><img width="800" src="../assets/images/adjust_options.gif" /></p>
+
+<h3 id="b-choose-odm-options-for-analysis"><em>B. Choose ODM options for analysis</em></h3>
+
+<div style="background: mistyrose; padding: 15px; margin-bottom: 20px;">
+<span style="font-weight:800;">WARNING:</span>
+<br /><span style="font-style:italic;">
+The script template provided in this section has a <b>default configuration</b> of options available in the command-line ODM module. You may find that these settings are not optimal for your project. Follow the instructions in this section to learn more about the <b>available ODM options and their possible values</b>.
+</span>
+</div>
+
+<p><span style="font-weight: 500; font-size:22px;"><i>^ <b>Adjust</b> flags in the <b># DEFINE ODM COMMAND</b> section in the script file</i></span><br /></p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code># DEFINE ODM COMMAND
+singularity run --writable-tmpfs $odm \
+--feature-quality ultra --min-num-features 10000 \                  # photo alignment
+--matcher-type flann
+--pc-quality ultra --pc-classify --pc-rectify --pc-las \            # point cloud
+--mesh-octree-depth 12 \                                            # meshing
+--gcp $output_dir/code/images/gcp_list.txt \                        # georeferencing
+--dsm --dem-resolution 1 \                                          # 3D model: DSM
+--dtm --smrf-threshold 0.4 --smrf-window 24 \                       # 3D model: DTM
+--build-overviews \                                                 # orthophoto
+--use-hybrid-bundle-adjustment --max-concurrency 16 \               # performance
+--project-path $output_dir --ignore-gsd \                           # inputs / outputs
+--time                                                              # runtime info
+</code></pre></div></div>
+
+<p>The syntax of the first line launches via the singularity container the odm image, <code class="language-plaintext highlighter-rouge">$odm</code>. All further <code class="language-plaintext highlighter-rouge">--X</code> flags/arguments define the set of options used in photogrammetry analysis. For clarity and readability, a long command line has been broken into multiple lines using the special character, backslash <b><code> \ </code></b>. Thus, be careful when adding or removing options. Also, <b>do NOT write any characters</b> after backslash character <em>(# comments are placed in this code block only for educational purposes)</em>. The order of the options entered does not matter but they have been grouped by their impact on various outputs. Finally, check that the code block with the <strong>ODM command does NOT contain blank lines between the options</strong> (this may be the case when you manually copy and paste into some text editors).</p>
+
+<div style="background: mistyrose; padding: 15px; margin-bottom: 20px;">
+<span style="font-weight:800;">WARNING:</span>
+<br /><span style="font-style:italic;">
+Note especially to update the path to the GCP file, <code>geo.txt</code> (with the assignment of GCPs to images): <br />
+<b>--gcp $output_dir/code/images/geo.txt</b> <br /><br />
+If you do not have this file, completely <u>remove this line</u> from the script (instead of commenting with #). In that case, the EXIF metadata will be used.
+</span>
+</div>
+
+<p>You can find a complete <b>list of all available options</b> with a description in the official OpenDroneMap documentation: <a href="https://docs.opendronemap.org/arguments/">v2.8.8</a>.
+<span style="color: #ff3870;font-weight: 600;">Click on the selected headline in the list below to expand the corresponding section with options.</span></p>
+
+<details><summary><b>MANAGE WORKFLOW options</b></summary>
+<div><br />
+<b>A.</b> To <b>end processing at selected stage</b> use <code style="background-color:#fafafa;">--end-with</code> option followed by the keyword for respective stage: <br />
+
+<table>
+<tr><td>1. <code>dataset</code></td><td>6. <code>odm_filterpoints</code></td><td>10. <code>odm_dem</code></td></tr>
+<tr><td>2. <code>split</code></td><td>7. <code>odm_meshing</code></td><td>11. <code>odm_orthophoto</code></td></tr>
+<tr><td>3. <code>merge</code></td><td>8. <code>mvs_texturing</code></td><td>12. <code>odm_report</code></td></tr>
+<tr><td>4. <code>opensfm</code></td><td>9. <code>odm_georeferencing</code></td><td>13. <code>odm_postprocess</code> [<i>default</i>]</td></tr>
+<tr><td>5. <code>openmvs</code></td><td> </td><td> </td></tr>
+</table>
+
+
+<b>B.</b> There are several options to restart workflow: <br />
+<ul>
+<li> To <b>restart the selected stage</b> only and stop use <code>--rerun</code> option followed by the keyword for respective stage (see list in section A).</li>
+<li> To resume processing <b>from selected stage to the end</b>, use <code>--rerun-from</code> option followed by the keyword for respective stage (see list in section A).</li>
+<li> To permanently <b>delete all</b> previous results <b>and rerun</b> the processing pipeline use <code>--rerun-all</code> flag.</li>
+</ul>
+
+<b>C.</b> For <b>fast generation of orthophoto</b> skip dense reconstruction and 3D model generation using <code style="background-color:#fafafa;">--fast-orthophoto</code> flag. It creates the orthophoto directly from the sparse reconstruction which saves the time needed to build a full 3D model. <br /><br />
+
+<b>D.</b> Skip individually other stages of the workflow: <br />
+<ul>
+<li> Skip generation of a full 3D model with <code>--skip-3dmodel</code> flag in case you only need 2D results such as orthophotos and DEMs. <i>Saves time!</i></li>
+<li> Skip generation of the orthophoto with <code>--skip-orthophoto</code> flag n case you only need 3D results or DEMs. <i>Saves time!</i></li>
+<li> Skip generation of PDF report with <code>--skip-report</code> flag in case you do not need it. <i>Saves time!</i></li>
+</ul>
+</div>
+</details>
+
+<details><summary><b>PHOTO ALIGNMENT options</b></summary>
+
+<br /><table>
+  <tr style="background-color:#f0f0f0; border-bottom: 1px solid black;">
+    <th width="170">flag</th><th>values</th><th>default</th><th>description</th><th>notes</th></tr>
+  <tr>
+    <td>--feature-type</td><td>akaze, hahog, orb, sift</td><td>sift</td><td>algorithm for extracting keypoints and computing descriptors</td><td> </td></tr>
+  <tr>
+    <td><b>--min-num-features</b></td><td>integer</td><td>10000</td><td>minimum number of features to extract per image</td><td><i>More features ~ more matches between images. Improves reconstruction of areas with little overlap or insufficient features. <br /><b>More features slow down processing.</b></i></td></tr>
+  <tr>
+    <td><b>--feature-quality</b></td><td>ultra, high, medium, low, lowest</td><td>high</td><td>levels of feature extraction quality</td><td><i>Higher quality generates better features, but requires more memory and takes longer.</i></td></tr>
+  <tr>
+    <td>--resize-to</td><td>integer</td><td>2048</td><td>resizes images by the largest side for feature extraction purposes only</td><td><i>Set to <b>-1</b> to disable or use <b>--feature-quality</b> instead. This does not affect the final orthophoto resolution quality and will not resize the original images.</i></td></tr>
+  <tr>
+    <td>--matcher-neighbors</td><td>positive integer</td><td>0</td><td>performs image matching with the nearest N images based on GPS exif data</td><td><i>Set to <b>0</b> to match by triangulation.</i></td></tr>
+  <tr>
+    <td>--matcher-type</td><td>bow, bruteforce, flann</td><td>flann</td><td>image matcher algorithm</td><td><i>FLANN is slower, but more stable. <br />BOW is faster, but can sometimes miss valid matches. <br />BRUTEFORCE is very slow but robust.</i></td></tr>
+</table>
+</details>
+
+<details><summary><b>SfM &amp; DPC options</b></summary>
+
+<br />
+Structure from Motion (SfM) algorithm estimates camera positions in time (motions) and generates a 3D Dense Point Cloud (DPC) of the object from multi-view stereo (MVS) photogrammetry on the set of images.
+
+<br /><table>
+<tr style="background-color:#f0f0f0; border-bottom: 1px solid black;">
+  <th width="140">flag</th><th>values</th><th>default</th><th>description</th><th>notes</th></tr>
+<tr>
+  <td><b>--sfm-algorithm</b></td><td>incremental, triangulation, planar</td><td>incremental</td><td>structure from motion algorithm (SFM)</td><td><i>For aerial datasets, if camera GPS positions and angles are available, triangulation can generate better results. For planar scenes captured at fixed altitude with nadir-only images, planar can be much faster.</i></td></tr>
+<tr>
+  <td>--depthmap-resolution</td><td>positive float</td><td>640</td><td>controls the density of the point cloud by setting the resolution of the depthmap images</td><td><i>Higher values take longer to compute but produce denser point clouds. <br /><b>Overrides --pc-quality</b></i></td></tr>
+<tr>
+  <td><b>--pc-quality</b></td><td>ultra, high, medium, low, lowest</td><td>medium</td><td>the level of point cloud quality</td><td><i>Higher quality generates better, denser point clouds, but requires more memory and takes longer (~4x/level).</i></td></tr>
+<tr>
+  <td>--pc-geometric</td><td> </td><td>off</td><td>improves the accuracy of the point cloud by computing geometrically consistent depthmaps</td><td><i>Increases processing time, but can improve results in urban scenes.</i></td></tr>
+<tr>
+  <td><b>--pc-classify</b></td><td> </td><td>off</td><td>classify the point cloud outputs using a Simple Morphological Filter</td><td><i>You can control the behavior of this option by tweaking the <b>--dem-*</b> parameters.</i></td></tr>
+<tr>
+  <td><b>--pc-rectify</b></td><td> </td><td>off</td><td>performs ground rectification on the point cloud</td><td><i>The wrongly classified ground points will be re-classified and gaps will be filled. <br /><b>Useful for generating DTMs.</b></i></td></tr>
+<tr>
+  <td>--pc-filter</td><td>positive float</td><td>2.5</td><td>filters the point cloud by removing points that deviate more than N standard deviations from the local mean</td><td><i><b>0</b> - disables filtering</i></td></tr>
+<tr>
+  <td>--pc-sample</td><td>positive float</td><td>0.0</td><td>filters the point cloud by keeping only a single point around a radius N [meters]</td><td><i>Useful to limit the output resolution of the point cloud and remove duplicate points. <br /><b>0</b> - disables sampling</i></td></tr>
+<tr>
+  <td>--pc-copc</td><td> </td><td>off</td><td>exports the georeferenced point cloud</td><td><i>Cloud Optimized Point Cloud (COPC) format</i></td></tr>
+<tr>
+  <td>--pc-csv</td><td> </td><td>off</td><td>exports the georeferenced point cloud</td><td><i>Entwine Point Tile (EPT) format</i></td></tr>
+<tr>
+  <td>--pc-ept</td><td> </td><td>off</td><td>CSV format</td><td><i>exports the georeferenced point cloud</i></td></tr>
+<tr>
+  <td>-<b>-pc-las</b></td><td> </td><td>off</td><td>exports the georeferenced point cloud</td><td><i>LAS format</i></td></tr>
+</table>
+</details>
+
+<details><summary><b>MESHING &amp; TEXTURING options</b></summary>
+
+<br /><table>
+<tr style="background-color:#f0f0f0; border-bottom: 1px solid black;">
+  <th width="175">flag</th><th>values</th><th>default</th><th>description</th><th>notes</th></tr>
+<tr>
+  <td><b>--mesh-octree-depth</b></td><td>integer: <br />1 &lt;= x &lt;= 14</td><td>11</td><td>octree depth used in the mesh reconstruction</td><td><i>It should be increased to 10-11 in urban areas to recreate better buildings / roofs.</i></td></tr>
+<tr>
+  <td><b>--mesh-size</b></td><td>positive integer</td><td>200000</td><td>the maximum vertex count of the output mesh</td><td><i>It should be increased to 300000-600000 in urban areas to recreate better buildings / roofs.</i></td></tr>
+<tr>
+  <td>--texturing-data-term</td><td>gmi, area</td><td>gmi</td><td>texturing feature</td><td><i>When texturing the 3D mesh, for each triangle, choose to prioritize images with sharp features (gmi) or those that cover the largest area (area). <br />It should be set to <b>area</b> in forest landscape.</i></td></tr>
+<tr>
+  <td>--texturing-keep-unseen-faces</td><td> </td><td>off</td><td> </td><td><i>keeps faces in the mesh that are not seen in any camera</i></td></tr>
+<tr>
+  <td>--texturing-nadir-weight</td><td><i>positive integer</i></td><td></td><td> </td><td><i>It should be increased to 29-32 in urban areas to reconstruct better edges of roofs. <br />It should be decreased to 0-6 in grassy / flat areas.</i></td></tr>
+<tr>
+  <td>--texturing-outlier-removal-type</td><td>none, gauss_clamping, gauss_damping</td><td>gauss_clamping</td><td>type of photometric outlier removal method</td><td><i> </i></td></tr>
+<tr>
+  <td>--texturing-skip-global-seam-leveling</td><td> </td><td>off</td><td>skips normalization of colors across all images</td><td><i>Useful when processing radiometric data.</i></td></tr>
+<tr>
+  <td>--texturing-skip-local-seam-leveling</td><td> </td><td>off</td><td>skips the blending of colors near seams</td><td><i> </i></td></tr>
+<tr>
+  <td>--texturing-tone-mapping</td><td>none, gamma </td><td>none</td><td>turns on gamma tone mapping or none for no tone mapping</td><td><i> </i></td></tr>
+</table>
+</details>
+
+<details><summary><b>GEOREFERENCING options</b></summary>
+
+<br /><table>
+<tr style="background-color:#f0f0f0; border-bottom: 1px solid black;">
+  <th width="140">flag</th><th>values</th><th>default</th><th>description</th><th>notes</th></tr>
+<tr>
+  <td>--force-gps</td><td> </td><td>off</td><td>uses images’ GPS exif data for reconstruction, even if there are GCPs present</td><td><i>Useful if you have high precision GPS measurements.* <br /><b>If there are no GCPs, it does nothing.</b></i></td></tr>
+<tr>
+  <td><b>--gcp</b></td><td><i>PATH</i> string</td><td>none</td><td>path to the file containing the ground control points used for georeferencing</td><td><i> </i></td></tr>
+<tr>
+  <td>--use-exif</td><td> </td><td>off</td><td>EXIF-based georeferencing</td><td><i>Use this tag if you have a GCP File but want to use the EXIF information for georeferencing instead.</i></td></tr>
+<tr>
+  <td>--geo</td><td><i>PATH</i> string</td><td>none</td><td>path to the image geolocation file containing the camera center coordinates used for georeferencing</td><td><i>Note that omega/phi/kappa are currently not supported (you can set them to 0).</i></td></tr>
+<tr>
+  <td>--gps-accuracy</td><td>positive float</td><td>10</td><td>value in meters for the GPS Dilution of Precision (DOP) information for all images</td><td><i>If you use high precision GPS (RTK), this value will be set automatically. You can manually set it in case the reconstruction fails. Lowering the value can help control bowling-effects over large areas.</i></td></tr>
+</table>
+</details>
+
+<details><summary><b>DSM - Digital Surface Model options</b></summary>
+
+<br /><table>
+<tr style="background-color:#f0f0f0; border-bottom: 1px solid black;">
+  <th width="180">flag</th><th>values</th><th>default</th><th>description</th><th>notes</th></tr>
+<tr>
+  <td><b>--dsm</b></td><td> </td><td>off</td><td>builds DSM (ground + objects) using a progressive morphological filter</td><td><i>Use -<b>--dem*</b> parameters for finer tuning.</i></td></tr>
+<tr>
+  <td><b>--dem-resolution</b></td><td>float</td><td>5.0</td><td>DSM/DTM resolution in cm / pixel</td><td><i>The value is capped to 2x the ground sampling distance (GSD) estimate. <br /> ^ use <b>–-ignore-gsd</b> to remove the cap</i></td></tr>
+<tr>
+  <td>--dem-decimation</td><td>positive integer</td><td>1</td><td>decimates the points before generating the DEM <br /><b>1</b> is no decimation (full quality) <br /><b>100</b> decimates ~99% of the points</td><td><i>Useful for speeding up generation of DEM results in very large datasets.</i></td></tr>
+<tr>
+  <td>--dem-euclidean-map</td><td></td><td>off</td><td>computes an euclidean raster map for each DEM</td><td><i>Useful to isolate the areas that have been filled.</i></td></tr>
+<tr>
+  <td>--dem-gapfill-steps</td><td>positive integer</td><td>3</td><td>number of steps used to fill areas with gaps <br /><b>0</b> disables gap filling</td><td><i>see details in the <a href="https://docs.opendronemap.org/arguments/dem-gapfill-steps/#dem-gapfill-steps" style="color: #3f5a8a;">docs</a> <br />For urban scenes increasing this value to 4-5 can help produce better interpolation results in the areas that are left empty by the SMRF filter.</i></td></tr>
+</table>
+</details>
+
+<details><summary><b>DTM - Digital Terrain Model options</b></summary>
+
+<br /><table>
+<tr style="background-color:#f0f0f0; border-bottom: 1px solid black;">
+  <th width="150">flag</th><th>values</th><th>default</th><th>description</th><th>notes</th></tr>
+<tr>
+  <td><b>--dtm</b></td><td> </td><td>off</td><td>builds DTM (ground only) using a simple morphological filter</td><td><i>Use <b>--dem* </b> and <b>--smrf* </b> parameters for finer tuning.</i></td></tr>
+<tr>
+  <td><b>--smrf-threshold</b></td><td>positive float</td><td>0.5</td><td>Simple Morphological Filter elevation threshold parameter [meters]; elevation threshold</td><td><i>Set this parameter to the minimum height (in meters) that you expect non-ground objects to be. <br />This option has the biggest impact on results!</i></td></tr>
+<tr>
+  <td><b>--smrf-window</b></td><td>positive float &gt; 10</td><td>18.0</td><td>Simple Morphological Filter window radius parameter [meters]</td><td><i>It corresponds to the size of the largest feature (building, trees, etc.) to be removed. Should be set to a value <b>higher than 10</b>.</i></td></tr>
+<tr>
+  <td>--smrf-slope</td><td>positive float in range 0.1 - 1.2</td><td>0.15</td><td>Simple Morphological Filter slope parameter; a measure of “slope tolerance”</td><td><i>Increase this parameter for terrains with lots of height variation.</i></td></tr>
+<tr>
+  <td><b>--smrf-scalar</b></td><td>positive float</td><td>1.25</td><td>Simple Morphological Filter elevation scalar parameter</td><td><i>Increase this parameter for terrains with lots of height variation.</i></td></tr>
+</table>
+</details>
+
+<details><summary><b>ORTHOPHOTO options</b></summary>
+
+<br /><table>
+<tr style="background-color:#f0f0f0; border-bottom: 1px solid black;">
+  <th width="175">flag</th><th>values</th><th>default</th><th>description</th><th>notes</th></tr>
+<tr>
+  <td>--orthophoto-resolution</td><td>float &gt; 0.0</td><td>5.0</td><td>orthophoto resolution in cm / pixel</td><td><i> </i></td></tr>
+<tr>
+  <td>--orthophoto-compression</td><td>JPEG, LZW, LZMA, DEFLATE, PACKBITS, NONE</td><td>DEFLATE</td><td>compression to use for orthophotos</td><td><i> </i></td></tr>
+<tr>
+  <td>--orthophoto-cutline</td><td> </td><td>off</td><td>generates a polygon around the cropping area that cuts the orthophoto around the edges of features</td><td><i>The polygon can be useful for stitching seamless mosaics with multiple overlapping orthophotos.</i></td></tr>
+<tr>
+  <td><b>--orthophoto-png</b></td><td> </td><td>off</td><td>generates rendering of the orthophoto</td><td><i>PNG format</i></td></tr>
+<tr>
+  <td><b>--orthophoto-kmz</b></td><td> </td><td>off</td><td>generates rendering of the orthophoto</td><td><i>Google Earth (KMZ) format</i></td></tr>
+<tr>
+  <td>--orthophoto-no-tiled</td><td> </td><td>off</td><td>generates striped GeoTIFF</td><td><i> </i></td></tr>
+<tr>
+  <td><b>--build-overviews</b></td><td> </td><td>off</td><td>builds orthophoto overviews</td><td><i>Useful for faster display in programs such as QGIS.</i></td></tr>
+<tr>
+  <td>--use-3dmesh</td><td> </td><td>off</td><td>uses a full 3D mesh to compute the orthophoto instead of a 2.5D mesh</td><td><i>This option is a bit faster and provides similar results in planar areas. <br />By default, the 2.5D mesh is used to generate the orthophoto (which tends to work better than the full 3D mesh).</i></td></tr>
+</table>
+</details>
+
+<details><summary><b>GENERAL QUALITY OPTIMIZTION options</b></summary>
+
+<br /><table>
+<tr style="background-color:#f0f0f0; border-bottom: 1px solid black;">
+  <th width="150">flag</th><th>values</th><th>default</th><th>description</th><th>notes</th></tr>
+<tr>
+  <td>--auto-boundary</td><td> </td><td>off</td><td>automatically set a boundary using camera shot locations to limit the area of the reconstruction</td><td><i>Useful to remove far away background artifacts (sky, background landscapes, etc.).</i></td></tr>
+<tr>
+  <td>--boundary</td><td>JSON file</td><td>none</td><td>GeoJSON polygon limiting the area of the reconstruction</td><td><i>Can be specified either as path to a GeoJSON file or as a JSON string representing the contents of a GeoJSON file.</i></td></tr>
+<tr>
+  <td>--camera-lens</td><td>auto, perspective, brown, fisheye, spherical, dual, equirectangular</td><td>auto</td><td>camera projection type</td><td><i>Manually setting a value can help improve geometric undistortion.</i></td></tr>
+<tr>
+  <td>--cameras</td><td>JSON file</td><td>none</td><td>camera parameters computed from another dataset</td><td><i>Use params from text file instead of calculating them. <br />Can be specified either as path to a cameras.json file or as a JSON string representing the contents of a <code>cameras.json</code> file.</i></td></tr>
+<tr>
+  <td>--use-fixed-camera-params</td><td> </td><td>off</td><td>turns off camera parameter optimization during bundle adjustment</td><td><i>This can be sometimes useful for improving results that exhibit doming/bowling or when images are taken with a rolling shutter camera.</i></td></tr>
+<tr>
+  <td>--cog</td><td> </td><td>off</td><td>creates cloud-optimized GeoTIFFs instead of normal GeoTIFFs</td><td><i> </i></td></tr>
+</table>
+</details>
+
+<details><summary><b>PERFORMANCE OPTIMIZATION options</b></summary>
+
+<br /><table>
+<tr style="background-color:#f0f0f0; border-bottom: 1px solid black;">
+  <th width="180">flag</th><th>values</th><th>default</th><th>description</th><th>notes</th></tr>
+<tr>
+  <td><b>--use-hybrid-bundle-adjustment</b></td><td> </td><td>off</td><td>runs local bundle adjustment for every image added to the reconstruction and a global adjustment every 100 images</td><td><i>Speeds up reconstruction for very large datasets.</i></td></tr>
+<tr>
+  <td><b>--max-concurrency</b></td><td>positive integer</td><td>4</td><td>maximum number of processes to use in various processes</td><td><i>Peak memory requirement is ~1GB per thread and 2 megapixel image resolution.</i></td></tr>
+<tr>
+  <td>--no-gpu</td><td> </td><td>off</td><td>does not use GPU acceleration, even if it’s available</td><td><i> </i></td></tr>
+<tr>
+  <td>--optimize-disk-space</td><td> </td><td>off</td><td>deletes heavy intermediate files to optimize disk space usage</td><td><i>This disables restarting the pipeline from an intermediate stage, but allows the analysis on machines that don’t have sufficient disk space available.</i></td></tr>
+</table>
+</details>
+
+<details style="margin-bottom: 30px;"><summary><b>INPUT / OUTPUT MANAGEMENT options</b></summary>
+
+<br /><table>
+<tr style="background-color:#f0f0f0; border-bottom: 1px solid black;">
+  <th width="140">flag</th><th>values</th><th>default</th><th>description</th><th>notes</th></tr>
+<tr>
+  <td><b>--project-path</b></td><td><i>PATH</i> string</td><td>none</td><td>path to the project folder</td><td><i>Your project folder should contain subfolders for each dataset. Each dataset should have an <code>images</code> folder.</i></td></tr>
+<tr>
+  <td>--name</td><td><i>NAME</i> string</td><td>code</td><td>name of dataset</td><td><i>That is the ODM-required subfolder within project folder.</i></td></tr>
+<tr>
+  <td><b>--ignore-gsd</b></td><td> </td><td>off</td><td>ignores Ground Sampling Distance (GSD)</td><td><i>GSD caps the maximum resolution of image outputs and resizes images, resulting in faster processing and lower memory usage. Since GSD is an estimate, sometimes ignoring it can result in slightly better image output quality.</i></td></tr>
+<tr>
+  <td>--crop</td><td>positive float</td><td>3</td><td>crop image outputs by creating a smooth buffer around the dataset boundaries, shrunk by N meters</td><td><i>Use <b>0</b> to disable cropping.</i></td></tr>
+<tr>
+  <td>-copy-to</td><td><i>PATH</i> string</td><td>none</td><td>copies output results to this folder after processing</td><td><i> </i></td></tr>
+</table>
+</details>
+
+<p>See description of other options directly in the OpenDroneMap documentation: <br /></p>
+<ul>
+  <li>general usage: <a href="https://docs.opendronemap.org/arguments/help/#help">help</a>, <a href="https://docs.opendronemap.org/arguments/debug/#debug">debug</a>, <br /></li>
+  <li>large datasets <strong>[<a href="https://docs.opendronemap.org/large/#splitting-large-datasets">ODM docs</a>]</strong>: <a href="https://docs.opendronemap.org/arguments/split/#split">split</a>, <a href="https://docs.opendronemap.org/arguments/split-image-groups/#split-image-groups">split-image-groups</a>, <a href="https://docs.opendronemap.org/arguments/split-overlap/#split-overlap">split-overlap</a>,</li>
+  <li>multispectral datasets <strong>[<a href="https://docs.opendronemap.org/multispectral/#multispectral-support">ODM docs</a>]</strong>: <a href="https://docs.opendronemap.org/arguments/primary-band/#primary-band">primary-band</a>, <a href="https://docs.opendronemap.org/arguments/radiometric-calibration/#radiometric-calibration">radiometric-calibration</a>, <a href="https://docs.opendronemap.org/arguments/skip-band-alignment/#skip-band-alignment">skip-band-alignment</a>, <br /></li>
+  <li>rolling-shutter camera: <a href="https://docs.opendronemap.org/arguments/rolling-shutter/#rolling-shutter">rolling-shutter</a>, <a href="https://docs.opendronemap.org/arguments/rolling-shutter-readout/#rolling-shutter-readout">rolling-shutter-readout</a></li>
+</ul>
+
+<h2 id="submit-odm-job-into-the-slurm-queue"><strong>Submit ODM job into the SLURM queue</strong></h2>
+
+<p>The SLURM is a workload manager available on the Atlas cluster. It is a simple Linux utility for resource management and computing task scheduling. In simple terms, you HAVE to use it every time you want to outsource some computation on HPC infrastructure. To learn more about SLURM take a look at the tutorial <a href="https://datascience.101workbook.org/06-IntroToHPC/05-JOB-QUEUE/01-SLURM/01-slurm-basics">SLURM: Basics of Workload Manager</a> available in the <a href="https://datascience.101workbook.org">DataScience Workbook</a>.</p>
+
+<div style="background: #cff4fc; padding: 15px; margin-bottom: 20px;">
+<span style="font-weight:800;">PRO TIP:</span><br />
+If you are working on an HPC infrastructure that uses the PBS workload manager, take a look at the tutorial <b><a href="https://datascience.101workbook.org/06-IntroToHPC/05-JOB-QUEUE/02-PBS/01-pbs-basics" style="color: #3f5a8a;">PBS: Portable Batch System</a></b> to learn more about the command that sends a task to the queue and the script configuration. <br />
+[<i><a href="https://datascience.101workbook.org" style="color: #3f5a8a;">source: DataScience Workbook</a></i>]
+</div>
+
+<p>Use the <code class="language-plaintext highlighter-rouge">sbatch</code> SLURM command to submit the computing job into the queue:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sbatch run_odm.sh
+</code></pre></div></div>
+
+<div style="background: mistyrose; padding: 15px; margin-bottom: 30px;">
+<span style="font-weight:800;">WARNING:</span>
+<br /><span style="font-style:italic;">
+Tasks submitted into the queue are sent to <b>powerful compute nodes</b>, while all the commands you write in the terminal right after logging in are executed on the <b>capacity-limited login node</b>.<br /><br />
+<b>Never perform an aggravating computation on a logging node.</b><br />
+A. If you want to optimize some computationally demanding procedure and need a live preview for debugging, start an <b><a href="https://datascience.101workbook.org/06-IntroToHPC/05-JOB-QUEUE/01-SLURM/01-slurm-introduction/interactive-session" style="color: #3f5a8a;">interactive session on the compute node</a></b>.<br />
+B. If you want to migrate a large amount of data use transfer node: <b>@atlas-dtn.hpc.msstate.edu</b>.
+</span>
+</div>
+
+<p>Use the <code class="language-plaintext highlighter-rouge">squeue</code> SLURM command to check the status of the job in the queue:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>squeue -u user.name                             # e.g., squeue -u alex.badacz
+</code></pre></div></div>
+
+<p><img src="/IntroPhotogrammetry/assets/images/odm_job_status.png" alt="job status" /></p>
+
+<p align="center"><img width="800" src="../assets/images/odm_submit_job.gif" /></p>
+
+<h2 id="access-odm-analysis-results"><strong>Access ODM analysis results</strong></h2>
+
+<p>Use the <code class="language-plaintext highlighter-rouge">ls</code> command to display contents of the directory with outputs:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ls /project/&lt;scinet_account&gt;/&lt;user-specific-path&gt;/ODM/RESULTS/&lt;project-name&gt;/code
+</code></pre></div></div>
+
+<p>e.g., <code>ls <b>/project/</b>isu_gif_vrsc/Alex/geospatial<b>/ODM/RESULTS/</b>project-1-2022Aug24/<b>code/</b></code></p>
+
+<p><img src="/IntroPhotogrammetry/assets/images/odm_job_outputs.png" alt="job status" /></p>
+
+<p>The figure below shows the file structure of all outputs generated by the ODM command-line module. The original screenshot comes from the official <a href="https://docs.opendronemap.org/outputs/#list-of-all-outputs">OpenDroneMap (v2.8.7) Documentation</a>.</p>
+
+<p><img src="/IntroPhotogrammetry/assets/images/odm_outputs.png" alt="OpenDroneMap outputs" /></p>
+
+<h1 id="get-odm-on-local-machine">Get ODM on local machine</h1>
+
+<h2 id="download-the-odm-module"><strong>Download the ODM module</strong></h2>
+
+<p><strong>A. Download docker image using singularity</strong> <br />
+<em>^ suggested for usage on computing machines where the singularity is available</em></p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code> module load singularity
+ singularity pull --disable-cache  docker://opendronemap/odm:latest
+</code></pre></div></div>
+
+<div style="background: mistyrose; padding: 15px; margin-bottom: 20px;">
+<span style="font-weight:800;">WARNING:</span>
+<br /><span style="font-style:italic;">
+<b>Do it only once (!)</b> when the first time you configure your work with the command-line ODM module. Once created, the singularity image of an ODM tool can be used any number of times.
+</span>
+</div>
+
+<p>Executing the code in the command line should create a new file named <code class="language-plaintext highlighter-rouge">odm_latest.sif</code>. This is an image of an ODM tool whose configuration ensures that it can be used efficiently on an HPC cluster. You can check the presence of the created file using the <code class="language-plaintext highlighter-rouge">ls</code> command, which will display the contents of the current directory.</p>
+
+<p><strong>B. Download docker image using Docker</strong> <br />
+<em>^ suggested for usage on computing machines where the Docker can be installed</em> <br />
+<em>^ requires prior Docker installation, follow instructions for your OS at</em> <a href="https://docs.docker.com/engine/install/#desktop">docs.docker.com</a></p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code># Windows
+docker run -ti --rm -v c:/Users/youruser/datasets:/datasets opendronemap/odm --project-path /datasets project
+
+# Mac or Linux
+docker run -ti --rm -v /home/youruser/datasets:/datasets opendronemap/odm --project-path /datasets project
+</code></pre></div></div>
+
+<p><span style="margin-bottom: 20px;"> </span></p>
+
+<p><strong>C. ODM at GitHub:</strong> <a href="https://github.com/OpenDroneMap/OpenDroneMap/">https://github.com/OpenDroneMap/OpenDroneMap/</a></p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git clone https://github.com/OpenDroneMap/ODM.git
+</code></pre></div></div>
+
+<p><span style="margin-bottom: 20px;"> </span></p>
+
+<p><strong>D. Download zipped source code:</strong> <a href="https://github.com/OpenDroneMap/OpenDroneMap/archive/master.zip">https://github.com/OpenDroneMap/OpenDroneMap/archive/master.zip</a></p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code> get https://github.com/OpenDroneMap/OpenDroneMap/archive/master.zip
+</code></pre></div></div>
+
+<hr />
+<h1 id="further-reading">Further Reading</h1>
+<ul>
+  <li><a href="03-ODM-georeferencing">Geolocation data for the ODM workflow</a></li>
+</ul>
+
+<hr />
+
+<p><a href="../index.md" class="btn btn--primary">Homepage</a>
+<a href="../00-IntroPhotogrammetry-LandingPage" class="btn btn--primary">Section Index</a>
+<a href="01-WebODM" class="btn btn--primary">Previous</a>
+<a href="" class="btn btn--primary">Next</a></p>
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+
+
+        
+      </footer>
+
+      
+
+      
+
+    </div>
+
+    
+  </article>
+
+  
+  
+</div>
+    </div>
+
+    
+      <div class="search-content">
+        <div class="search-content__inner-wrap"><form onsubmit="return googleCustomSearchExecute();" id="cse-search-box-form-id">
+    <input type="search" id="cse-search-input-box-id" aria-placeholder="Enter your search term..." class="search-input" tabindex="-1" placeholder="Enter your search term..." />
+    </form>
+    <div id="results" class="results">
+        <gcse:searchresults-only></gcse:searchresults-only>
+    </div></div>
+
+      </div>
+    
+    
+    <div class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+
+        <div class="page__footer-follow">
+  <ul class="social-icons">
+    
+      <li><strong>Follow:</strong></li>
+    
+    
+      <li><a href="https://twitter.com/isugif"><i class="fab fa-fw fa-twitter-square" aria-hidden="true"></i> Twitter</a></li>
+    
+    
+    
+      <li><a href="https://github.com/https://github.com/isugenomics"><i class="fab fa-fw fa-github" aria-hidden="true"></i> GitHub</a></li>
+    
+    
+    
+    
+  </ul>
+</div>
+
+<div class="page__footer-copyright">&copy; 2024 Geospatial Workbook</div>
+
+      </footer>
+    </div>
+
+    
+  <script src="/assets/js/main.min.js"></script>
+  <script src="https://use.fontawesome.com/releases/v5.0.13/js/all.js"></script>
+
+
+<script>
+  (function () {
+    var cx = '009853197685285203469:nsvri1pa88d';
+    var gcse = document.createElement('script');
+    gcse.type = 'text/javascript';
+    gcse.async = true;
+    gcse.src = 'https://cse.google.com/cse.js?cx=' + cx;
+    var s = document.getElementsByTagName('script')[0];
+    s.parentNode.insertBefore(gcse, s);
+  })();
+
+  function googleCustomSearchExecute() {
+    var input = document.getElementById('cse-search-input-box-id');
+    var element = google.search.cse.element.getElement('searchresults-only0');
+    if (input.value == '') {
+      element.clearAllResults();
+    } else {
+      element.execute(input.value);
+    }
+    return false;
+  }
+
+  
+</script>
+
+
+
+
+<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+<script id="MathJax-script" defer
+        src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+</script>
+
+
+
+
+  </body>
+</html>

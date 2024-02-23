@@ -1,0 +1,1002 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.11.2 by Michael Rose
+  Copyright 2013-2018 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE.txt
+-->
+<html lang="en" class="no-js">
+  <head>
+    <meta charset="utf-8">
+
+<!-- begin _includes/seo.html --><title>Geospatial Common Data Library (GeoCDL) - Geospatial Workbook</title>
+<meta name="description" content="Tutorial on Informatics for Geospatial Information">
+
+
+  <meta name="author" content="Heather Savoy">
+
+
+<meta property="og:type" content="website">
+<meta property="og:locale" content="en_US">
+<meta property="og:site_name" content="Geospatial Workbook">
+<meta property="og:title" content="Geospatial Common Data Library (GeoCDL)">
+<meta property="og:url" content="http://localhost:4000/ExampleGeoWorkflows/GRWG22_GeoCDL_R.html">
+
+
+
+
+  <meta property="og:image" content="http://localhost:4000/assets/images/margaret-weir-GZyjbLNOaFg-unsplash_dark.jpg">
+
+
+
+  <meta name="twitter:site" content="@isugif">
+  <meta name="twitter:title" content="Geospatial Common Data Library (GeoCDL)">
+  <meta name="twitter:description" content="Tutorial on Informatics for Geospatial Information">
+  <meta name="twitter:url" content="http://localhost:4000/ExampleGeoWorkflows/GRWG22_GeoCDL_R.html">
+
+  
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content="http://localhost:4000/assets/images/margaret-weir-GZyjbLNOaFg-unsplash_dark.jpg">
+  
+
+  
+    <meta name="twitter:creator" content="@someone">
+  
+
+
+
+
+
+
+
+  
+
+  
+
+
+<link rel="canonical" href="http://localhost:4000/ExampleGeoWorkflows/GRWG22_GeoCDL_R.html">
+
+
+
+
+
+
+
+  <script type="application/ld+json">
+    {
+      "@context": "http://schema.org",
+      "@type": "Person",
+      "name": "",
+      "url": "http://localhost:4000",
+      "sameAs": null
+    }
+  </script>
+
+
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+<link href="/feed.xml" type="application/atom+xml" rel="alternate" title="Geospatial Workbook Feed">
+
+<!-- http://t.co/dKP3o1e -->
+<meta name="HandheldFriendly" content="True">
+<meta name="MobileOptimized" content="320">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+
+<!--[if lte IE 9]>
+  <style>
+    /* old IE unsupported flexbox fixes */
+    .greedy-nav .site-title {
+      padding-right: 3em;
+    }
+    .greedy-nav button {
+      position: absolute;
+      top: 0;
+      right: 0;
+      height: 100%;
+    }
+  </style>
+<![endif]-->
+
+
+    <!-- start custom head snippets -->
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-E6BZVYF8ZY"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-E6BZVYF8ZY');
+</script>
+
+<!-- insert favicons. use https://realfavicongenerator.net/ -->
+
+<!-- end custom head snippets -->
+
+  </head>
+
+  <body class="layout--single">
+
+    <!--[if lt IE 9]>
+<div class="notice--danger align-center" style="margin: 0;">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience.</div>
+<![endif]-->
+
+    <div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        <a class="site-title" href="/">Geospatial Workbook</a>
+        <ul class="visible-links">
+          
+            
+            <li class="masthead__menu-item">
+              <a href="http://localhost:4000/about.html" >About</a>
+            </li>
+          
+            
+            <li class="masthead__menu-item">
+              <a href="http://localhost:4000/list.html" >Index</a>
+            </li>
+          
+            
+            <li class="masthead__menu-item">
+              <a href="http://localhost:4000/glossary.html" >Glossary</a>
+            </li>
+          
+            
+            <li class="masthead__menu-item">
+              <a href="http://localhost:4000/people.html" >People</a>
+            </li>
+          
+            
+            <li class="masthead__menu-item">
+              <a href="http://localhost:4000/contributing.html" >Contribute</a>
+            </li>
+          
+        </ul>
+        
+        <button class="search__toggle" type="button">
+          <svg class="icon" width="16" height="16" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 15.99 16">
+            <path d="M15.5,13.12L13.19,10.8a1.69,1.69,0,0,0-1.28-.55l-0.06-.06A6.5,6.5,0,0,0,5.77,0,6.5,6.5,0,0,0,2.46,11.59a6.47,6.47,0,0,0,7.74.26l0.05,0.05a1.65,1.65,0,0,0,.5,1.24l2.38,2.38A1.68,1.68,0,0,0,15.5,13.12ZM6.4,2A4.41,4.41,0,1,1,2,6.4,4.43,4.43,0,0,1,6.4,2Z" transform="translate(-.01)"></path>
+          </svg>
+        </button>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">Toggle Menu</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+    <div class="initial-content">
+      
+  
+
+
+
+
+
+
+
+
+
+
+
+<div class="page__hero--overlay"
+  style="background-color: 444444; background-image: url('/assets/images/margaret-weir-GZyjbLNOaFg-unsplash_dark.jpg');"
+>
+  
+    <div class="wrapper">
+      <h1 id="page-title" class="page__title" itemprop="headline">
+        
+          Geospatial Common Data Library (GeoCDL)
+
+        
+      </h1>
+      
+      
+      
+    </div>
+  
+  
+</div>
+
+
+
+
+
+<div id="main" role="main">
+  
+  <div class="sidebar sticky">
+  
+
+
+<div itemscope itemtype="http://schema.org/Person">
+
+  
+    <div class="author__avatar">
+      
+
+      
+        <img src="/assets/images/people/HeatherSavoy.png" alt="Heather Savoy" itemprop="image">
+      
+    </div>
+  
+
+  <div class="author__content">
+    
+      <h3 class="author__name" itemprop="name">Heather Savoy</h3>
+    
+    
+      <p class="author__bio" itemprop="description">
+        Heather is a Computational Biologist (Data Scientist) in the USDA-ARS SCINet Office. Her research interests include applying informatics methods to multidisciplinary agro-ecosystem problems and building data science software tools for geospatial research. She received her Ph.D. in Civil and Environmental Engineering with an emphasis in Computational Data Science and Engineering from the University of California Berkeley. She also holds a B.S. in Environmental Science with a minor in Computational Mathematics from the Florida Institute of Technology.
+      </p>
+    
+  </div>
+
+  <div class="author__urls-wrapper">
+    <button class="btn btn--inverse">Follow</button>
+    <ul class="author__urls social-icons">
+      
+
+      
+
+      
+        <li>
+          <a href="mailto:mailto:heather.savoy@usda.gov">
+            <meta itemprop="email" content="mailto:heather.savoy@usda.gov" />
+            <i class="fas fa-fw fa-envelope-square" aria-hidden="true"></i> Email
+          </a>
+        </li>
+      
+
+      
+
+      
+        <li>
+          <a href="https://twitter.com/someone" itemprop="sameAs">
+            <i class="fab fa-fw fa-twitter-square" aria-hidden="true"></i> Twitter
+          </a>
+        </li>
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      <!--
+  <li>
+    <a href="http://link-to-whatever-social-network.com/user/" itemprop="sameAs">
+      <i class="fas fa-fw" aria-hidden="true"></i> Custom Social Profile Link
+    </a>
+  </li>
+-->
+    </ul>
+  </div>
+</div>
+
+<!-- Create a 2nd author for tutorials -->
+
+
+
+<div itemscope itemtype="http://schema.org/Person">
+
+  
+
+  <div class="author__content">
+    
+      <h3 class="author__name" itemprop="name"></h3>
+    
+    
+  </div>
+
+  <div class="author__urls-wrapper">
+    <button class="btn btn--inverse">Follow</button>
+    <ul class="author__urls social-icons">
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      <!--
+  <li>
+    <a href="http://link-to-whatever-social-network.com/user/" itemprop="sameAs">
+      <i class="fas fa-fw" aria-hidden="true"></i> Custom Social Profile Link
+    </a>
+  </li>
+-->
+    </ul>
+  </div>
+</div>
+
+  
+  </div>
+
+
+  <article class="page" itemscope itemtype="http://schema.org/CreativeWork">
+    <meta itemprop="headline" content="Geospatial Common Data Library (GeoCDL)">
+    
+    
+    
+
+    <div class="page__inner-wrap">
+      
+
+      <section class="page__content" itemprop="text">
+        
+        <p><strong>Last Update:</strong> 5 October 2022 <br />
+<strong>Download RMarkdown</strong>: <a href="https://geospatial.101workbook.org/tutorials/GRWG22_GeoCDL.Rmd">GRWG22_GeoCDL.Rmd</a></p>
+
+<h2 id="overview">Overview</h2>
+
+<p>This tutorial covers the R package <code class="language-plaintext highlighter-rouge">rgeocdl</code> for the SCINet Geospatial Common 
+Data Library (GeoCDL), a community project from the 
+<a href="https://scinet.usda.gov/working-groups/geospatial">Geospatial Research Working Group</a> 
+to reduce the time and effort to access commonly used geospatial datasets. We have
+collected several large gridded data products to store on Ceres and created a 
+REST API for SCINet users to request the spatiotemporal subsets of those data 
+that they need. The geospatial processing to create those subsets executes on 
+Ceres and a service node has been setup to serve the API.</p>
+
+<p>This R package is a user-friendly interface to pass along user requests to the 
+core GeoCDL API from the compute nodes. That is, the R package does not perform 
+the geospatial processing itself. A major benefit of using this R package is that 
+it was designed to integrate into a user’s geospatial data processing workflow in 
+R. For example, a user storing their study area boundary definition as a <code class="language-plaintext highlighter-rouge">sf</code> 
+object can pass along that object to this package’s functions and the package will
+do the necessary formatting of the data to make it compatible with GeoCDL. Other 
+interfaces, a python package for example, will also be released in the near future.</p>
+
+<p>The workflows we will cover are uploading a shapefile of an LTAR site, harmonizing 
+with common gridded environmental data, downloading and visualizing the resulting 
+maps. We also show how to extract point level information from a gridded layer.</p>
+
+<p>This tutorial assumes you are running this Rmarkdown file in RStudio Server on 
+Ceres. The easiest way to do that is with 
+<a href="http://ceres-ood.scinet.usda.gov/">Open OnDemand</a>. As of this writing, the GeoCDL 
+is only available on Ceres and not Atlas.</p>
+
+<p>If you have any questions, problems, or requests related to the R interface, please 
+use the issue tracker on our GitHub repository: 
+<a href="https://github.com/USDA-SCINet/rgeocdl">https://github.com/USDA-SCINet/rgeocdl</a>.</p>
+
+<p><em>Language:</em> <code class="language-plaintext highlighter-rouge">R</code></p>
+
+<p><em>Primary Libraries/Packages:</em></p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left">Name</th>
+      <th style="text-align: left">Description</th>
+      <th style="text-align: left">Link</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">rgeocdl</code></td>
+      <td style="text-align: left">R interface for SCINet GeoCDL API</td>
+      <td style="text-align: left">https://github.com/USDA-SCINet/rgeocdl</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">sf</code></td>
+      <td style="text-align: left">Simple Features for R</td>
+      <td style="text-align: left">https://r-spatial.github.io/sf/</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="nomenclature">Nomenclature</h2>
+
+<ul>
+  <li><em>GeoCDL:</em> Geospatial Common Data Library, a collection of commonly used raster 
+datasets accessible from an API running on SCINet’s Ceres cluster</li>
+  <li><em>Raster:</em> Data defined on a grid of geospatial coordinates</li>
+  <li><em>CRS:</em> Coordinate Reference System, also known as a spatial reference system. A
+system for defining geospatial coordinates.</li>
+</ul>
+
+<h2 id="data-details">Data Details</h2>
+
+<ul>
+  <li>Data: MODIS NDVI Data, Smoothed and Gap-filled, for the Conterminous US: 2000-2015</li>
+  <li>Link: <a href="https://doi.org/10.3334/ORNLDAAC/1299">https://doi.org/10.3334/ORNLDAAC/1299</a></li>
+  <li>
+    <p>Other Details: This data set provides Moderate Resolution Imaging Spectroradiometer 
+(MODIS) normalized difference vegetation index (NDVI) data, smoothed and gap-filled, 
+for the conterminous US for the period 2000-01-01 through 2015-12-31. The data 
+were generated using the NASA Stennis Time Series Product Tool (TSPT) to generate 
+NDVI data streams from the Terra satellite (MODIS MOD13Q1 product) and Aqua 
+satellite (MODIS MYD13Q1 product) instruments. TSPT produces NDVI data that 
+are less affected by clouds and bad pixels.</p>
+  </li>
+  <li>Data: PRISM</li>
+  <li>Link: <a href="https://prism.oregonstate.edu/">https://prism.oregonstate.edu/</a></li>
+  <li>Other Details: The PRISM Climate Group gathers climate observations from a 
+wide range of monitoring networks, applies sophisticated quality control 
+measures, and develops spatial climate datasets to reveal short- and long-term 
+climate patterns. The resulting datasets incorporate a variety of modeling 
+techniques and are available at multiple spatial/temporal resolutions, covering 
+the period from 1895 to the present.</li>
+</ul>
+
+<h2 id="steps">Steps</h2>
+
+<ul>
+  <li>Specify desired data - Define the spatio-temporal scope of the user request:
+    <ul>
+      <li>Specify area and dates of interest</li>
+      <li>Select datasets and their variables</li>
+    </ul>
+  </li>
+  <li>Download requested data - Send request to server and download results</li>
+  <li>Visualize results - View the downloaded data and metadata</li>
+  <li>Request variations - Multiple data request examples</li>
+</ul>
+
+<h2 id="step-0-import-librariespackages">Step 0: Import Libraries/Packages</h2>
+
+<p>The <code class="language-plaintext highlighter-rouge">rgeocdl</code> package is now available to download from GitHub. When the package
+reaches its first stable release, we will have it installed in the R site library
+on Ceres for anyone to load. If you need to install or update <code class="language-plaintext highlighter-rouge">rgeocdl</code> from 
+GitHub, you can use the line below. Note that the <code class="language-plaintext highlighter-rouge">devtools</code> package is in the
+R site library on Ceres so you do not have to install it yourself even if you 
+have not used that package before.</p>
+
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Install SCINet's R interface for GeoCDL</span><span class="w">
+</span><span class="n">devtools</span><span class="o">::</span><span class="n">install_github</span><span class="p">(</span><span class="s1">'USDA-SCINet/rgeocdl'</span><span class="p">)</span><span class="w">
+</span></code></pre></div></div>
+<p>If you have not installed R packages for yourself
+on Ceres before and see an error like the one below when you try to install from
+within RStudio Server, try running the line in the shell instead. See <a href="https://scinet.usda.gov/guide/packageinstall/#installing-r-packages">these 
+instructions</a> 
+for more details about installing packages on Ceres.</p>
+
+<blockquote>
+  <p>lib = “/usr/local/lib/R/site-library”’ is not writable</p>
+</blockquote>
+
+<p>The additional packages below are not necessary to load to use <code class="language-plaintext highlighter-rouge">rgeocdl</code> in every
+case but help with this tutorial. These packages are each available in the R site 
+library for RStudio Server on Ceres Open OnDemand, though not all are in the R site 
+library if you were to load an R module in a shell.</p>
+
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">library</span><span class="p">(</span><span class="n">rgeocdl</span><span class="p">)</span><span class="w">    
+
+</span><span class="c1"># Additional packages in tutorial</span><span class="w">
+</span><span class="n">library</span><span class="p">(</span><span class="n">httr</span><span class="p">)</span><span class="w">       </span><span class="c1"># Access geometry from AgCROS</span><span class="w">
+</span><span class="n">library</span><span class="p">(</span><span class="n">sf</span><span class="p">)</span><span class="w">         </span><span class="c1"># Handle vector data</span><span class="w">
+</span><span class="n">library</span><span class="p">(</span><span class="n">terra</span><span class="p">)</span><span class="w">      </span><span class="c1"># Handle raster data</span><span class="w">
+</span><span class="n">library</span><span class="p">(</span><span class="n">tidyr</span><span class="p">)</span><span class="w">      </span><span class="c1"># General data manipulation</span><span class="w">
+</span><span class="n">library</span><span class="p">(</span><span class="n">stringr</span><span class="p">)</span><span class="w">    </span><span class="c1"># String manipulation</span><span class="w">
+</span><span class="n">library</span><span class="p">(</span><span class="n">ggplot2</span><span class="p">)</span><span class="w">    </span><span class="c1"># Visualizations</span><span class="w">
+</span></code></pre></div></div>
+
+<h2 id="step-1-specify-desired-data">Step 1: Specify desired data</h2>
+
+<h3 id="step-1a-specify-area-and-dates-of-interest">Step 1a: Specify area and dates of interest</h3>
+
+<p>We will specify our area of interest as the USDA-ARS Jornada Experimental Range 
+in southern New Mexico. This site is a part of the Long-Term Agricultural Research 
+(LTAR) network, which has site boundaries available on 
+<a href="https://agcros-usdaars.opendata.arcgis.com/pages/ltar-dm-home">AgCROS</a>. 
+We will download the boundary for the ‘JER’ site and transform its coordinate 
+reference system (CRS) to UTM 13N, a typical CRS for the site.</p>
+
+<p>We will showcase returning raster data overlapping this site.</p>
+
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Read in site boundary and upload to GeoCDL</span><span class="w">
+</span><span class="c1"># AgCROS </span><span class="w">
+</span><span class="n">agcros_url</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="s1">'https://services1.arcgis.com/SyUSN23vOoYdfLC8/arcgis/rest/services/'</span><span class="w">
+</span><span class="n">ltar_features</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="s1">'LTAR_Base/FeatureServer/1/query?'</span><span class="w">
+
+</span><span class="c1"># Specify LTAR site</span><span class="w">
+</span><span class="n">my_site</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="s1">'JER'</span><span class="w">
+</span><span class="n">site_query</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">paste0</span><span class="p">(</span><span class="s2">"where=acronym='"</span><span class="p">,</span><span class="n">my_site</span><span class="p">,</span><span class="s2">"'&amp;f=pgeojson"</span><span class="p">)</span><span class="w">
+
+</span><span class="c1"># Download JER boundary and read into a sf object</span><span class="w">
+</span><span class="n">jer_bounds_sf</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">GET</span><span class="p">(</span><span class="n">paste0</span><span class="p">(</span><span class="n">agcros_url</span><span class="p">,</span><span class="w"> </span><span class="n">ltar_features</span><span class="p">,</span><span class="w"> </span><span class="n">site_query</span><span class="p">))</span><span class="w">  </span><span class="o">%&gt;%</span><span class="w">
+  </span><span class="n">st_read</span><span class="p">(</span><span class="n">quiet</span><span class="o">=</span><span class="kc">TRUE</span><span class="p">)</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">
+  </span><span class="n">st_transform</span><span class="p">(</span><span class="m">32613</span><span class="p">)</span><span class="w"> </span><span class="c1"># EPSG code for UTM 13N with WGS84 datum</span><span class="w">
+
+</span><span class="c1"># View shape</span><span class="w">
+</span><span class="n">ggplot</span><span class="p">()</span><span class="w"> </span><span class="o">+</span><span class="w">
+  </span><span class="n">geom_sf</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">jer_bounds_sf</span><span class="p">)</span><span class="w">
+
+</span></code></pre></div></div>
+
+<p><img src="/ExampleGeoWorkflows/assets/R_space-1.png" alt="JER" /></p>
+
+<p>We can see from the plotted map that the site is an irregular shape. For cases 
+like this where the geometry is defined by many points, it is easiest to provide
+GeoCDL with a file containing the geometry definition. We can upload
+this geometry to GeoCDL using the <code class="language-plaintext highlighter-rouge">upload_geometry</code> function which returns a unique
+geometry upload identifier (GUID) that we will use later in our subset request.
+This stand-alone upload step is optional, but recommended if you are likely to submit
+multiple subset requests with the same geometry so that it is uploaded just once.</p>
+
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Upload to GeoCDL and get Geometry Upload IDentifier</span><span class="w">
+</span><span class="n">guid_bounds</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">upload_geometry</span><span class="p">(</span><span class="n">jer_bounds_sf</span><span class="p">)</span><span class="w">
+
+</span></code></pre></div></div>
+
+<p>To finish the spatial component of our subset request, we will define our target
+spatial resolution and a resampling method. By indicating a target spatial 
+resolution along with our geometry, we are telling GeoCDL that we want a 
+spatially-harmonized ‘datacube’ that has each requested data layer with the
+same CRS, spatial resolution, and spatial extent. The target CRS in this case is
+that of our geometry, but you may specify an alternative one if you wish. The 
+default resampling method is to take the nearest pixel.</p>
+
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Spatial resolution - in meters since that is the unit of the target CRS</span><span class="w">
+</span><span class="n">spat_res</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="m">1000</span><span class="w"> </span><span class="c1"># meters</span><span class="w">
+
+</span><span class="c1"># Resampling method - default is to take the "nearest" pixel. </span><span class="w">
+</span><span class="c1"># The ri_method argument options are clarified in 'download_polygon_subset' </span><span class="w">
+</span><span class="c1"># documentation.</span><span class="w">
+</span><span class="n">resample_method</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="s1">'bilinear'</span><span class="w">
+
+</span></code></pre></div></div>
+
+<p>The GeoCDL accepts multiple temporal range formats so that many different user 
+needs can be met. In this example, we are interested in July-August 2008. One way
+to specify that is with the years and months together as <code class="language-plaintext highlighter-rouge">'2008-07:2008-08'</code> or
+separately as below. By specifying years and months, we are letting GeoCDL know
+that we are interested in monthly data. If we only specify years, then it will
+infer we want annual data and if we also specifies days, then it will infer we
+want daily data. However, users can also request a combination of temporal grains
+by specifying a ‘grain method’. In this example, we are also interested in daily 
+data available within July-August 2008, so we will indicate the ‘finer’ grain 
+method.</p>
+
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Define time of interest and temporal resolution as monthly</span><span class="w">
+</span><span class="n">yrs</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="s1">'2008'</span><span class="w">
+</span><span class="n">mnths</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="s1">'7:8'</span><span class="w">   
+
+</span><span class="c1"># Allow sparse daily NDVI to be returned by specifying that</span><span class="w">
+</span><span class="c1"># finer temporal resolutions can be returned</span><span class="w">
+</span><span class="n">g_method</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="s1">'finer'</span><span class="w"> 
+
+</span></code></pre></div></div>
+
+<h3 id="step-1b-select-datasets-and-their-variables">Step 1b: Select datasets and their variables</h3>
+
+<p>The GeoCDL can be queried to return the currently available datasets and their 
+metadata. We will be using the MODIS NDVI Data, Smoothed and Gap-filled, for the 
+Conterminous US: 2000-2015 data product. 
+We will request monthly PRISM precipitation as well.</p>
+
+<p>The <code class="language-plaintext highlighter-rouge">list_datasets</code> function will return a dataframe listing the currently
+available datasets from GeoCDL.</p>
+
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Query the GeoCDL to list all datasets</span><span class="w">
+</span><span class="n">list_datasets</span><span class="p">()</span><span class="w">
+</span></code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>          id                                                                                  name
+1   DaymetV4                                                                      Daymet Version 4
+2    GTOPO30                                                        Global 30 Arc-Second Elevation
+3 MODIS_NDVI          MODIS NDVI Data, Smoothed and Gap-filled, for the Conterminous US: 2000-2015
+4   NASS_CDL                                                              NASS Cropland Data Layer
+5      PRISM                                                                                 PRISM
+6        VIP Vegetation Index and Phenology (VIP) Vegetation Indices Daily Global 0.05Deg CMG V004
+</code></pre></div></div>
+
+<p>To learn more about a particular dataset, use its
+dataset ID with the <code class="language-plaintext highlighter-rouge">view_metadata</code> function to learn more about the dataset. 
+For example, <em>MODIS_NDVI</em> has one variable, <em>NDVI</em>, and has data 
+available from 2000-01-01 to 2012-12-31. This <em>MODIS_NDVI</em> product has layers 
+for every 8 days over this time period, and so we designate this product as a 
+daily product.</p>
+
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># View a dataset's metadata</span><span class="w">
+</span><span class="n">view_metadata</span><span class="p">(</span><span class="s2">"MODIS_NDVI"</span><span class="p">)</span><span class="w">
+</span></code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Name: MODIS NDVI Data, Smoothed and Gap-filled, for the Conterminous US: 2000-2015
+ID: MODIS_NDVI
+URL: https://doi.org/10.3334/ORNLDAAC/1299
+Description: This data set provides Moderate Resolution Imaging Spectroradiometer (MODIS) normalized difference vegetation &gt; index (NDVI) data, smoothed and gap-filled, for the conterminous US for the period 2000-01-01 through 2015-12-31. The data were generated using the NASA Stennis Time Series Product Tool (TSPT) to generate NDVI data streams from the Terra satellite (MODIS MOD13Q1 product) and Aqua satellite (MODIS MYD13Q1 product) instruments. TSPT produces NDVI data that are less affected by clouds and bad pixels.
+Provider name: ORNL DAAC
+Provider URL: https://daac.ornl.gov
+Grid size: 250
+Grid unit: meters
+Variable ID (description): 
+	NDVI (Normalized Difference Vegetation Index)
+Date ranges: 
+	Annual: (no data for this temporal grain)
+	Monthly: (no data for this temporal grain)
+	Daily: 2000-01-01:2015-12-31
+Temporal resolutions: 
+	Annual: (no data for this temporal grain)
+	Monthly: (no data for this temporal grain)
+	Daily: 8 days
+CRS: 
+	Name: unknown
+	EPSG: 
+	proj4: +proj=laea +lat_0=45 +lon_0=-100 +x_0=0 +y_0=0 +ellps=sphere +units=m +no_defs +type=crs
+	WKT: PROJCRS["unknown",BASEGEOGCRS["unknown",DATUM["Unknown based on Normal Sphere (r=6370997) ellipsoid",ELLIPSOID["Normal Sphere (r=6370997)",6370997,0,LENGTHUNIT["metre",1,ID["EPSG",9001]]]],PRIMEM["Greenwich",0,ANGLEUNIT["degree",0.0174532925199433],ID["EPSG",8901]]],CONVERSION["unknown",METHOD["Lambert Azimuthal Equal Area (Spherical)",ID["EPSG",1027]],PARAMETER["Latitude of natural origin",45,ANGLEUNIT["degree",0.0174532925199433],ID["EPSG",8801]],PARAMETER["Longitude of natural origin",-100,ANGLEUNIT["degree",0.0174532925199433],ID["EPSG",8802]],PARAMETER["False easting",0,LENGTHUNIT["metre",1],ID["EPSG",8806]],PARAMETER["False northing",0,LENGTHUNIT["metre",1],ID["EPSG",8807]]],CS[Cartesian,2],AXIS["(E)",east,ORDER[1],LENGTHUNIT["metre",1,ID["EPSG",9001]]],AXIS["(N)",north,ORDER[2],LENGTHUNIT["metre",1,ID["EPSG",9001]]]]
+	Datum: Unknown based on Normal Sphere (r=6370997) ellipsoid
+	Geographic: FALSE
+	Projected: TRUE
+</code></pre></div></div>
+
+<p>To specify which data layers to include in the data download, you can construct
+a dataframe or tibble listing the dataset ID with variable IDs.</p>
+
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Format datasets and variables</span><span class="w">
+</span><span class="n">dsvars</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">tibble</span><span class="p">(</span><span class="n">dataset</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="s2">"PRISM"</span><span class="p">,</span><span class="s2">"MODIS_NDVI"</span><span class="p">),</span><span class="w">
+                 </span><span class="n">variables</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="s2">"ppt"</span><span class="p">,</span><span class="s2">"NDVI"</span><span class="p">))</span><span class="w">
+
+</span></code></pre></div></div>
+
+<h2 id="step-2-download-the-data">Step 2: Download the data</h2>
+
+<p>Up until now, we have been primarily saving our request specifications as 
+variables. We will now pass each of those variables to the GeoCDL and download 
+our subset using the <code class="language-plaintext highlighter-rouge">download_polygon_subset</code> function. GeoCDL returns a zipped
+folder of results and <code class="language-plaintext highlighter-rouge">rgeocdl</code> unzips it for you. <code class="language-plaintext highlighter-rouge">download_polygon_subset</code> 
+returns the filenames in that folder. We have here two monthly PRISM layers, 7 
+daily MODIS NDVI layers (every 8 days), plus a metadata file that lists metadata 
+related to the geospatial datasets as well as the GeoCDL request itself. The raster
+layer files are GeoTIFFs with the dataset, variable, and date indicated in the 
+filename.</p>
+
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="w">
+</span><span class="n">subset_files</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">download_polygon_subset</span><span class="p">(</span><span class="n">dsvars</span><span class="p">,</span><span class="w"> 
+                                        </span><span class="n">t_geom</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">guid_bounds</span><span class="p">,</span><span class="w">
+                                        </span><span class="n">years</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">yrs</span><span class="p">,</span><span class="w">
+                                        </span><span class="n">months</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">mnths</span><span class="p">,</span><span class="w">
+                                        </span><span class="n">grain_method</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">g_method</span><span class="p">,</span><span class="w">
+                                        </span><span class="n">resolution</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">spat_res</span><span class="p">,</span><span class="w">
+                                        </span><span class="n">ri_method</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">resample_method</span><span class="p">)</span><span class="w">
+</span><span class="n">subset_files</span><span class="w">
+
+</span></code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[1] "10.1.1.80:8000/subset_polygon?datasets=MODIS_NDVI%3ANDVI%3BPRISM%3Appt&amp;years=2008&amp;months=7:8&amp;grain_method=finer&amp;validate_method=strict&amp;geom_guid=da61639a-80f3-4932-b2dc-94d34a345328&amp;resample_method=bilineart&amp;resolution=1000&amp;output_format=geotiff"
+ [1] "./subset3a96d3ebd7555-1/metadata.json"                  "./subset3a96d3ebd7555-1/MODIS_NDVI_NDVI_2008-07-07.tif"
+ [3] "./subset3a96d3ebd7555-1/MODIS_NDVI_NDVI_2008-07-15.tif" "./subset3a96d3ebd7555-1/MODIS_NDVI_NDVI_2008-07-23.tif"
+ [5] "./subset3a96d3ebd7555-1/MODIS_NDVI_NDVI_2008-07-31.tif" "./subset3a96d3ebd7555-1/MODIS_NDVI_NDVI_2008-08-08.tif"
+ [7] "./subset3a96d3ebd7555-1/MODIS_NDVI_NDVI_2008-08-16.tif" "./subset3a96d3ebd7555-1/MODIS_NDVI_NDVI_2008-08-24.tif"
+ [9] "./subset3a96d3ebd7555-1/PRISM_ppt_2008-07.tif"          "./subset3a96d3ebd7555-1/PRISM_ppt_2008-08.tif"  
+</code></pre></div></div>
+
+<h2 id="step-3-visualize-the-results">Step 3: Visualize the results</h2>
+
+<p>Our use of <code class="language-plaintext highlighter-rouge">rgeocdl</code> is complete, but we can visualize the data that we downloaded.
+We can see that in our site, NDVI increased over July-August 2008 during the 
+summer monsoon, but by different degrees within the site.</p>
+
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="w">
+</span><span class="c1"># List NDVI GeoTIFFs and read in together with terra package</span><span class="w">
+</span><span class="n">subset_tifs</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">subset_files</span><span class="p">[</span><span class="n">grepl</span><span class="p">(</span><span class="s2">"tif$"</span><span class="p">,</span><span class="n">subset_files</span><span class="p">)</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">grepl</span><span class="p">(</span><span class="s2">"NDVI"</span><span class="p">,</span><span class="n">subset_files</span><span class="p">)]</span><span class="w">
+</span><span class="n">subset_stack</span><span class="w"> </span><span class="o">&lt;-</span><span class="w">  </span><span class="n">rast</span><span class="p">(</span><span class="n">subset_tifs</span><span class="p">)</span><span class="w"> 
+
+</span><span class="c1"># Rename layers with dates extracted from filenames</span><span class="w">
+</span><span class="nf">names</span><span class="p">(</span><span class="n">subset_stack</span><span class="p">)</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">str_extract</span><span class="p">(</span><span class="n">subset_tifs</span><span class="p">,</span><span class="w"> </span><span class="s2">"[0-9-]{10}"</span><span class="p">)</span><span class="w">
+
+</span><span class="c1"># Convert to long dataframe</span><span class="w">
+</span><span class="n">ndvi_df</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">subset_stack</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">
+  </span><span class="n">as.data.frame</span><span class="p">(</span><span class="n">xy</span><span class="o">=</span><span class="kc">TRUE</span><span class="p">)</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">
+  </span><span class="n">pivot_longer</span><span class="p">(</span><span class="o">-</span><span class="nf">c</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">),</span><span class="w">
+               </span><span class="n">names_to</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'date'</span><span class="p">,</span><span class="w">
+               </span><span class="n">values_to</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'NDVI'</span><span class="p">)</span><span class="w">
+
+</span><span class="c1"># Plot NDVI in facets by date and overlay JER boundary</span><span class="w">
+</span><span class="n">ndvi_df</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">
+  </span><span class="n">ggplot</span><span class="p">()</span><span class="w"> </span><span class="o">+</span><span class="w">
+  </span><span class="n">geom_raster</span><span class="p">(</span><span class="n">aes</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">,</span><span class="n">fill</span><span class="o">=</span><span class="n">NDVI</span><span class="p">))</span><span class="w"> </span><span class="o">+</span><span class="w">
+  </span><span class="n">geom_sf</span><span class="p">(</span><span class="n">fill</span><span class="o">=</span><span class="kc">NA</span><span class="p">,</span><span class="w">
+          </span><span class="n">color</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'red'</span><span class="p">,</span><span class="w">
+          </span><span class="n">size</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0.25</span><span class="p">,</span><span class="w">
+          </span><span class="n">data</span><span class="o">=</span><span class="n">jer_bounds_sf</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w">
+  </span><span class="n">facet_wrap</span><span class="p">(</span><span class="o">~</span><span class="n">date</span><span class="p">,</span><span class="w">
+             </span><span class="n">ncol</span><span class="o">=</span><span class="m">4</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w">
+  </span><span class="n">scale_fill_gradientn</span><span class="p">(</span><span class="n">colors</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">rev</span><span class="p">(</span><span class="n">terrain.colors</span><span class="p">(</span><span class="m">8</span><span class="p">)),</span><span class="w">
+                       </span><span class="n">na.value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'white'</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w">
+  </span><span class="n">theme_bw</span><span class="p">(</span><span class="n">base_size</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">8</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w">
+  </span><span class="n">theme</span><span class="p">(</span><span class="n">legend.position</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="m">0.875</span><span class="p">,</span><span class="m">0.25</span><span class="p">))</span><span class="w"> </span><span class="o">+</span><span class="w">
+  </span><span class="n">scale_y_continuous</span><span class="p">(</span><span class="n">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">NULL</span><span class="p">,</span><span class="w"> </span><span class="n">breaks</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">seq</span><span class="p">(</span><span class="m">32.4</span><span class="p">,</span><span class="m">33</span><span class="p">,</span><span class="m">0.2</span><span class="p">))</span><span class="w"> </span><span class="o">+</span><span class="w">
+  </span><span class="n">scale_x_continuous</span><span class="p">(</span><span class="n">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">NULL</span><span class="p">,</span><span class="w"> </span><span class="n">breaks</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">seq</span><span class="p">(</span><span class="m">-106.9</span><span class="p">,</span><span class="m">-106.5</span><span class="p">,</span><span class="m">0.1</span><span class="p">))</span><span class="w"> 
+
+
+</span></code></pre></div></div>
+<p><img src="/ExampleGeoWorkflows/assets/R_visualize-1.png" alt="JER_NDVI" /></p>
+
+<h2 id="request-variations">Request variations</h2>
+
+<h3 id="point-extractions">Point Extractions</h3>
+
+<p>For the sake of simplicity, we will create some random points from our previous
+area of interest to represent some points of interest to showcase point subsets
+from GeoCDL. Here, we are providing our <code class="language-plaintext highlighter-rouge">sf</code> object directly to 
+<code class="language-plaintext highlighter-rouge">download_points_subset</code> instead of uploading it ahead of time. <code class="language-plaintext highlighter-rouge">rgeocdl</code> is still
+doing the upload, but behind the scenes. We will extract the elevation of these
+points and request the results in a shapefile (the default is a CSV).</p>
+
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Generate N random points within our area of interest</span><span class="w">
+</span><span class="n">N</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="m">50</span><span class="w">
+</span><span class="n">jer_stations</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">st_sample</span><span class="p">(</span><span class="n">jer_bounds_sf</span><span class="p">,</span><span class="w"> </span><span class="n">N</span><span class="p">)</span><span class="w">
+
+</span><span class="n">dsvars</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">tibble</span><span class="p">(</span><span class="n">dataset</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="s2">"GTOPO30"</span><span class="p">),</span><span class="w">
+                 </span><span class="n">variables</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="s2">"elev"</span><span class="p">))</span><span class="w">
+
+</span><span class="n">subset_files</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">download_points_subset</span><span class="p">(</span><span class="n">dsvars</span><span class="p">,</span><span class="w"> 
+                                       </span><span class="n">t_geom</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">jer_stations</span><span class="p">,</span><span class="w">
+                                       </span><span class="n">out_format</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'shapefile'</span><span class="p">)</span><span class="w">
+
+</span><span class="n">subset_shp</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">subset_files</span><span class="p">[</span><span class="n">grepl</span><span class="p">(</span><span class="s2">"shp"</span><span class="p">,</span><span class="n">subset_files</span><span class="p">)]</span><span class="w">
+
+</span><span class="n">station_variables</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">st_read</span><span class="p">(</span><span class="n">subset_shp</span><span class="p">)</span><span class="w">
+
+</span><span class="n">station_variables</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">
+  </span><span class="n">ggplot</span><span class="p">()</span><span class="w"> </span><span class="o">+</span><span class="w">
+  </span><span class="n">geom_sf</span><span class="p">(</span><span class="n">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">jer_bounds_sf</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> 
+  </span><span class="n">geom_sf</span><span class="p">(</span><span class="n">aes</span><span class="p">(</span><span class="n">color</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">value</span><span class="p">),</span><span class="w">
+          </span><span class="n">size</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">3</span><span class="p">)</span><span class="w">  
+</span></code></pre></div></div>
+<p><img src="/ExampleGeoWorkflows/assets/R_points-1.png" alt="JER_elevation" /></p>
+
+<h3 id="additional-examples">Additional examples</h3>
+
+<p>Monthly data from multiple variables of the same dataset within a box and keep 
+the original spatial resolution and CRS.</p>
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">my_vars</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">data.frame</span><span class="p">(</span><span class="n">ds</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="s1">'PRISM'</span><span class="p">,</span><span class="s1">'PRISM'</span><span class="p">,</span><span class="s1">'PRISM'</span><span class="p">),</span><span class="w">
+                     </span><span class="n">vars</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="s1">'ppt'</span><span class="p">,</span><span class="s1">'tmin'</span><span class="p">,</span><span class="s1">'tmax'</span><span class="p">))</span><span class="w">
+
+</span><span class="c1"># Two points representing upper left and lower right corners of a box,</span><span class="w">
+</span><span class="c1"># in CRS of the first requested dataset</span><span class="w">
+</span><span class="n">my_box</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">data.frame</span><span class="p">(</span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="m">-106</span><span class="p">,</span><span class="m">-103</span><span class="p">),</span><span class="w">
+                     </span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="m">40</span><span class="p">,</span><span class="m">30</span><span class="p">))</span><span class="w">
+
+</span><span class="n">download_polygon_subset</span><span class="p">(</span><span class="n">my_vars</span><span class="p">,</span><span class="w">
+                       </span><span class="n">dates</span><span class="w"> </span><span class="o">=</span><span class="w">  </span><span class="s1">'2000-01:2000-12'</span><span class="p">,</span><span class="w">
+                       </span><span class="n">t_geom</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">my_box</span><span class="p">)</span><span class="w">
+</span></code></pre></div></div>
+
+<p>Monthly data from April-September 2000-2010</p>
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">download_polygon_subset</span><span class="p">(</span><span class="n">my_vars</span><span class="p">,</span><span class="w">
+                       </span><span class="n">months</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'4:9'</span><span class="p">,</span><span class="w">
+                       </span><span class="n">years</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'2000:2010'</span><span class="p">,</span><span class="w">
+                       </span><span class="n">t_geom</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">my_box</span><span class="p">)</span><span class="w">
+</span></code></pre></div></div>
+
+<p>Daily data associated with the last day of the month for each month in 2020</p>
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">download_polygon_subset</span><span class="p">(</span><span class="n">my_vars</span><span class="p">,</span><span class="w">
+                        </span><span class="n">days</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"N"</span><span class="p">,</span><span class="w"> </span><span class="c1">#Nth day of month</span><span class="w">
+                        </span><span class="n">months</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'1:12'</span><span class="p">,</span><span class="w">
+                        </span><span class="n">years</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">2020</span><span class="p">,</span><span class="w">
+                        </span><span class="n">t_geom</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">my_box</span><span class="p">)</span><span class="w">
+</span></code></pre></div></div>
+
+<p>Non-harmonized layers from two datasets</p>
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">my_vars2</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">data.frame</span><span class="p">(</span><span class="n">ds</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="s1">'PRISM'</span><span class="p">,</span><span class="s1">'DaymetV4'</span><span class="p">),</span><span class="w">
+                     </span><span class="n">vars</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="s1">'ppt'</span><span class="p">,</span><span class="s1">'prcp'</span><span class="p">))</span><span class="w">
+
+</span><span class="n">download_polygon_subset</span><span class="p">(</span><span class="n">my_vars2</span><span class="p">,</span><span class="w">
+                        </span><span class="n">years</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">2000</span><span class="p">,</span><span class="w">
+                        </span><span class="n">t_geom</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">my_box</span><span class="p">)</span><span class="w">
+</span></code></pre></div></div>
+
+<p>Harmonized datacube from two datasets</p>
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">download_polygon_subset</span><span class="p">(</span><span class="n">my_vars2</span><span class="p">,</span><span class="w">
+                        </span><span class="n">years</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">2000</span><span class="p">,</span><span class="w">
+                        </span><span class="n">t_geom</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">my_box</span><span class="p">,</span><span class="w">
+                        </span><span class="n">t_crs</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'EPSG:4326'</span><span class="p">,</span><span class="w">
+                        </span><span class="n">resolution</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0.05</span><span class="p">)</span><span class="w">
+</span></code></pre></div></div>
+
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+
+
+        
+      </footer>
+
+      
+
+      
+
+    </div>
+
+    
+  </article>
+
+  
+  
+</div>
+    </div>
+
+    
+      <div class="search-content">
+        <div class="search-content__inner-wrap"><form onsubmit="return googleCustomSearchExecute();" id="cse-search-box-form-id">
+    <input type="search" id="cse-search-input-box-id" aria-placeholder="Enter your search term..." class="search-input" tabindex="-1" placeholder="Enter your search term..." />
+    </form>
+    <div id="results" class="results">
+        <gcse:searchresults-only></gcse:searchresults-only>
+    </div></div>
+
+      </div>
+    
+    
+    <div class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+
+        <div class="page__footer-follow">
+  <ul class="social-icons">
+    
+      <li><strong>Follow:</strong></li>
+    
+    
+      <li><a href="https://twitter.com/isugif"><i class="fab fa-fw fa-twitter-square" aria-hidden="true"></i> Twitter</a></li>
+    
+    
+    
+      <li><a href="https://github.com/https://github.com/isugenomics"><i class="fab fa-fw fa-github" aria-hidden="true"></i> GitHub</a></li>
+    
+    
+    
+    
+  </ul>
+</div>
+
+<div class="page__footer-copyright">&copy; 2024 Geospatial Workbook</div>
+
+      </footer>
+    </div>
+
+    
+  <script src="/assets/js/main.min.js"></script>
+  <script src="https://use.fontawesome.com/releases/v5.0.13/js/all.js"></script>
+
+
+<script>
+  (function () {
+    var cx = '009853197685285203469:nsvri1pa88d';
+    var gcse = document.createElement('script');
+    gcse.type = 'text/javascript';
+    gcse.async = true;
+    gcse.src = 'https://cse.google.com/cse.js?cx=' + cx;
+    var s = document.getElementsByTagName('script')[0];
+    s.parentNode.insertBefore(gcse, s);
+  })();
+
+  function googleCustomSearchExecute() {
+    var input = document.getElementById('cse-search-input-box-id');
+    var element = google.search.cse.element.getElement('searchresults-only0');
+    if (input.value == '') {
+      element.clearAllResults();
+    } else {
+      element.execute(input.value);
+    }
+    return false;
+  }
+
+  
+</script>
+
+
+
+
+<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+<script id="MathJax-script" defer
+        src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+</script>
+
+
+
+
+  </body>
+</html>

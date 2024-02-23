@@ -17,3 +17,5 @@ gem "jekyll-include-cache"
 gem "jekyll-algolia"
 gem "rouge"
 end
+
+gem "webrick", "~> 1.8"

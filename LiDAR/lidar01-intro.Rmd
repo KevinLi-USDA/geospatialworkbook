@@ -26,7 +26,19 @@ header:
 
 ## Overview
 
-Brief overview of the objective for this tutorial
+This tutorial will introduce you to the basic concepts of LiDAR data with a focus on data from airbone platforms and geospatial application. 
+
+#### How LiDAR works
+
+LiDAR (Light Detetion and Ranging) is an active remote sensing technique using laser pulses to measure distances to a target in order to make a 3-dimensional model of it in space. Active remote sensing contrasts with passive remote sensing in that active remote sensing produces the radiation that the remote sensing platform uses to take readings off the target, whereas passive remote sensing relies on reflectance from external radiation, such as sunlight. Besides LiDAR, examples of active remote sensing techniques include radar, which uses pulses of radio waves. 
+
+[Picture]
+
+LiDAR platforms emit a high number of laser pulses towards its target (in geospatial applications, this is towards the surface of the Earth), while measuring the exact location of the platform in space, as well as the timing and angle of each pulse. Once these pulses are reflected off the target surface and received back by the platform, the platform has the information needed to calculate the point in 3D space where the pulse bounced off a target surface. This process produces data files containing millions of the point locations of reflections in 3D space, which can be analyzed to create models of the terrain surface, vegetation, and related data products.
+
+### This tutorial
+
+This tutorial is an introduction to working with the products of LiDAR data collection from airborne platforms (e.g., drones) using the statistical software `R`, specifically the library `lidR`. Note that this tutorial series is focusing on discrete LiDAR data, which works with the returns from distinct laser pulses. This is opposed to full-waveform LiDAR data, which interprets additional data gained from recording the entire waveform of a laser pulse.
 
 *Language:* `R`
 
@@ -39,11 +51,12 @@ Brief overview of the objective for this tutorial
 ## Nomenclature
 
 * *LiDAR:* Light Detection and Ranging, a method of remote sensing using pulsed lasers to measure distances.
-* *Name:* < Description >
-* *Name:* < Description >
-* *Name:* < Description >
+* *LAS:* A file format for storing the 3D point cloud data collected by LiDAR. A related file format is LAZ, which is the compressed version of LAS.
+* *Pulse:* A discrete "shot" of laser emission from the LiDAR platform that is used to measure distance from the target surface, which in turn are the basis of point cloud data. 
 
 ## Data Details
+
+We will use point cloud data collected over the [U.S. Dairy Forage Research Center Far](https://www.ars.usda.gov/ARSUserFiles/50901500/About%20Us%20and%20Contact%20Information/pdfs/farm%20at%20PdS.pdf) by the [3D Elevation Program](https://www.usgs.gov/3d-elevation-program), a program at the USGS that is conducting nationwide LiDAR surveys.
 
 * Repository: < Link to Repository >
 * Data: < Name of Dataset >
@@ -52,17 +65,17 @@ Brief overview of the objective for this tutorial
 
 ## Aanlysis Steps
 
-* Title… - desc….
-* Title… - desc….
-  * desc..
-  * desc..
-  * desc..
-* Title… - desc…. - desc….
+* Load in LAS data
+* Exploring the LAS data structure in `lidR`
+  * Attributes
+  * Plotting
+* Larger geographic coverage with the `lasCatalog` in `lidR`
 
 ## Step 0: Import Libraries/Packages
 
 ```{r libraries}
-# Import the libraries/packages used here
+library(lidR)
+
 ```
 
 ## Step 1: Title...
@@ -89,4 +102,8 @@ Brief overview of the objective for this tutorial
 # Put Your code below - be sure to include comments
 ```
 
+## References
 
+Guo, Qinghua; Su, Yanjun; Hu, Tianyu; Guan, Hongcan; Jin, Shichao; Zhang, Jing; Zhao, Xiaoxia; Xu, Kexin; Wei, Dengjie; Kelly, Maggi; Coops, Nicholas C. “Lidar Boosts 3D Ecological Observations and Modelings: A Review and Perspective.” IEEE Geoscience and Remote Sensing Magazine, vol. 9, no. 1, IEEE, 2021, pp. 232–57, doi:10.1109/MGRS.2020.3032713.
+
+National Oceanic and Atmospheric Administration (NOAA) Coastal Services Center. 2012. “Lidar 101: An Introduction to Lidar Technology, Data, and Applications.” Revised. Charleston, SC: NOAA Coastal Services Center.

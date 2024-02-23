@@ -1,0 +1,896 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.11.2 by Michael Rose
+  Copyright 2013-2018 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE.txt
+-->
+<html lang="en" class="no-js">
+  <head>
+    <meta charset="utf-8">
+
+<!-- begin _includes/seo.html --><title>Distributing raster calculations with tiles - Geospatial Workbook</title>
+<meta name="description" content="Tutorial on Informatics for Geospatial Information">
+
+
+  <meta name="author" content="Heather Savoy">
+
+
+<meta property="og:type" content="website">
+<meta property="og:locale" content="en_US">
+<meta property="og:site_name" content="Geospatial Workbook">
+<meta property="og:title" content="Distributing raster calculations with tiles">
+<meta property="og:url" content="http://localhost:4000/ExampleGeoWorkflows/GRWG22_RasterTiles_R.html">
+
+
+
+
+  <meta property="og:image" content="http://localhost:4000/assets/images/margaret-weir-GZyjbLNOaFg-unsplash_dark.jpg">
+
+
+
+  <meta name="twitter:site" content="@isugif">
+  <meta name="twitter:title" content="Distributing raster calculations with tiles">
+  <meta name="twitter:description" content="Tutorial on Informatics for Geospatial Information">
+  <meta name="twitter:url" content="http://localhost:4000/ExampleGeoWorkflows/GRWG22_RasterTiles_R.html">
+
+  
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content="http://localhost:4000/assets/images/margaret-weir-GZyjbLNOaFg-unsplash_dark.jpg">
+  
+
+  
+    <meta name="twitter:creator" content="@someone">
+  
+
+
+
+
+
+
+
+  
+
+  
+
+
+<link rel="canonical" href="http://localhost:4000/ExampleGeoWorkflows/GRWG22_RasterTiles_R.html">
+
+
+
+
+
+
+
+  <script type="application/ld+json">
+    {
+      "@context": "http://schema.org",
+      "@type": "Person",
+      "name": "",
+      "url": "http://localhost:4000",
+      "sameAs": null
+    }
+  </script>
+
+
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+<link href="/feed.xml" type="application/atom+xml" rel="alternate" title="Geospatial Workbook Feed">
+
+<!-- http://t.co/dKP3o1e -->
+<meta name="HandheldFriendly" content="True">
+<meta name="MobileOptimized" content="320">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+
+<!--[if lte IE 9]>
+  <style>
+    /* old IE unsupported flexbox fixes */
+    .greedy-nav .site-title {
+      padding-right: 3em;
+    }
+    .greedy-nav button {
+      position: absolute;
+      top: 0;
+      right: 0;
+      height: 100%;
+    }
+  </style>
+<![endif]-->
+
+
+    <!-- start custom head snippets -->
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-E6BZVYF8ZY"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-E6BZVYF8ZY');
+</script>
+
+<!-- insert favicons. use https://realfavicongenerator.net/ -->
+
+<!-- end custom head snippets -->
+
+  </head>
+
+  <body class="layout--single">
+
+    <!--[if lt IE 9]>
+<div class="notice--danger align-center" style="margin: 0;">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience.</div>
+<![endif]-->
+
+    <div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        <a class="site-title" href="/">Geospatial Workbook</a>
+        <ul class="visible-links">
+          
+            
+            <li class="masthead__menu-item">
+              <a href="http://localhost:4000/about.html" >About</a>
+            </li>
+          
+            
+            <li class="masthead__menu-item">
+              <a href="http://localhost:4000/list.html" >Index</a>
+            </li>
+          
+            
+            <li class="masthead__menu-item">
+              <a href="http://localhost:4000/glossary.html" >Glossary</a>
+            </li>
+          
+            
+            <li class="masthead__menu-item">
+              <a href="http://localhost:4000/people.html" >People</a>
+            </li>
+          
+            
+            <li class="masthead__menu-item">
+              <a href="http://localhost:4000/contributing.html" >Contribute</a>
+            </li>
+          
+        </ul>
+        
+        <button class="search__toggle" type="button">
+          <svg class="icon" width="16" height="16" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 15.99 16">
+            <path d="M15.5,13.12L13.19,10.8a1.69,1.69,0,0,0-1.28-.55l-0.06-.06A6.5,6.5,0,0,0,5.77,0,6.5,6.5,0,0,0,2.46,11.59a6.47,6.47,0,0,0,7.74.26l0.05,0.05a1.65,1.65,0,0,0,.5,1.24l2.38,2.38A1.68,1.68,0,0,0,15.5,13.12ZM6.4,2A4.41,4.41,0,1,1,2,6.4,4.43,4.43,0,0,1,6.4,2Z" transform="translate(-.01)"></path>
+          </svg>
+        </button>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">Toggle Menu</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+    <div class="initial-content">
+      
+  
+
+
+
+
+
+
+
+
+
+
+
+<div class="page__hero--overlay"
+  style="background-color: 444444; background-image: url('/assets/images/margaret-weir-GZyjbLNOaFg-unsplash_dark.jpg');"
+>
+  
+    <div class="wrapper">
+      <h1 id="page-title" class="page__title" itemprop="headline">
+        
+          Distributing raster calculations with tiles
+
+        
+      </h1>
+      
+      
+      
+    </div>
+  
+  
+</div>
+
+
+
+
+
+<div id="main" role="main">
+  
+  <div class="sidebar sticky">
+  
+
+
+<div itemscope itemtype="http://schema.org/Person">
+
+  
+    <div class="author__avatar">
+      
+
+      
+        <img src="/assets/images/people/HeatherSavoy.png" alt="Heather Savoy" itemprop="image">
+      
+    </div>
+  
+
+  <div class="author__content">
+    
+      <h3 class="author__name" itemprop="name">Heather Savoy</h3>
+    
+    
+      <p class="author__bio" itemprop="description">
+        Heather is a Computational Biologist (Data Scientist) in the USDA-ARS SCINet Office. Her research interests include applying informatics methods to multidisciplinary agro-ecosystem problems and building data science software tools for geospatial research. She received her Ph.D. in Civil and Environmental Engineering with an emphasis in Computational Data Science and Engineering from the University of California Berkeley. She also holds a B.S. in Environmental Science with a minor in Computational Mathematics from the Florida Institute of Technology.
+      </p>
+    
+  </div>
+
+  <div class="author__urls-wrapper">
+    <button class="btn btn--inverse">Follow</button>
+    <ul class="author__urls social-icons">
+      
+
+      
+
+      
+        <li>
+          <a href="mailto:mailto:heather.savoy@usda.gov">
+            <meta itemprop="email" content="mailto:heather.savoy@usda.gov" />
+            <i class="fas fa-fw fa-envelope-square" aria-hidden="true"></i> Email
+          </a>
+        </li>
+      
+
+      
+
+      
+        <li>
+          <a href="https://twitter.com/someone" itemprop="sameAs">
+            <i class="fab fa-fw fa-twitter-square" aria-hidden="true"></i> Twitter
+          </a>
+        </li>
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      <!--
+  <li>
+    <a href="http://link-to-whatever-social-network.com/user/" itemprop="sameAs">
+      <i class="fas fa-fw" aria-hidden="true"></i> Custom Social Profile Link
+    </a>
+  </li>
+-->
+    </ul>
+  </div>
+</div>
+
+<!-- Create a 2nd author for tutorials -->
+
+
+
+<div itemscope itemtype="http://schema.org/Person">
+
+  
+
+  <div class="author__content">
+    
+      <h3 class="author__name" itemprop="name"></h3>
+    
+    
+  </div>
+
+  <div class="author__urls-wrapper">
+    <button class="btn btn--inverse">Follow</button>
+    <ul class="author__urls social-icons">
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      <!--
+  <li>
+    <a href="http://link-to-whatever-social-network.com/user/" itemprop="sameAs">
+      <i class="fas fa-fw" aria-hidden="true"></i> Custom Social Profile Link
+    </a>
+  </li>
+-->
+    </ul>
+  </div>
+</div>
+
+  
+  </div>
+
+
+  <article class="page" itemscope itemtype="http://schema.org/CreativeWork">
+    <meta itemprop="headline" content="Distributing raster calculations with tiles">
+    
+    
+    
+
+    <div class="page__inner-wrap">
+      
+
+      <section class="page__content" itemprop="text">
+        
+        <p><strong>Last Update:</strong> 7 October 2022 <br />
+<strong>Download RMarkdown</strong>: <a href="https://geospatial.101workbook.org/tutorials/GRWG22_RasterTiles.Rmd">GRWG22_RasterTiles.Rmd</a></p>
+
+<h2 id="overview">Overview</h2>
+
+<p>A common approach to distribute the workload in raster calculations is to split
+a large raster into smaller ‘tiles’ or ‘chunks’. This tutorial shows how to 
+speed up a NDVI calculation by creating tiles and then distributing the tiles 
+across cores. This process is not specific to calculating NDVI. You can use this
+approach with any calculation that is performed per cell/pixel without depending
+on the data in neighboring pixels (if neighboring data is needed, extra steps are 
+involved).</p>
+
+<p>This tutorial assumes you are running this Rmarkdown file in RStudio Server. The 
+easiest way to do that is with Open OnDemand (OoD) on <a href="http://ceres-ood.scinet.usda.gov/">Ceres</a>
+or <a href="https://atlas-ood.hpc.msstate.edu/">Atlas</a>. 
+Select the following parameter values when requesting a RStudio Server
+app to be launched depending on which cluster you choose. All other values can 
+be left to their defaults. Note: on Atlas, we are using the development partition
+so that we have internet access to download files since the regular compute nodes
+on the <code class="language-plaintext highlighter-rouge">atlas</code> partition do not have internet access.</p>
+
+<p>Ceres:</p>
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">Slurm Partition</code>: short</li>
+  <li><code class="language-plaintext highlighter-rouge">R Version</code>: 4.2.0</li>
+  <li><code class="language-plaintext highlighter-rouge">Number of cores</code>: 16</li>
+  <li><code class="language-plaintext highlighter-rouge">Memory required</code>: 24G</li>
+</ul>
+
+<p>Atlas:</p>
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">R Version</code>: 4.1.0</li>
+  <li><code class="language-plaintext highlighter-rouge">Partition Name</code>: development</li>
+  <li><code class="language-plaintext highlighter-rouge">QOS</code>: normal</li>
+  <li><code class="language-plaintext highlighter-rouge">Number of tasks</code>: 16</li>
+  <li><code class="language-plaintext highlighter-rouge">Additional Slurm Parameters</code>: –mem=24G</li>
+</ul>
+
+<p>To download the Rmarkdown file for this tutorial to either cluster within OoD, 
+you can use the following lines:</p>
+
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">library</span><span class="p">(</span><span class="n">httr</span><span class="p">)</span><span class="w">
+</span><span class="n">tutorial_name</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="s1">'GRWG22_RasterTiles.Rmd'</span><span class="w">
+</span><span class="n">GET</span><span class="p">(</span><span class="n">paste0</span><span class="p">(</span><span class="s1">'https://geospatial.101workbook.org/tutorials/'</span><span class="p">,</span><span class="n">tutorial_name</span><span class="p">),</span><span class="w"> 
+    </span><span class="n">write_disk</span><span class="p">(</span><span class="n">tutorial_name</span><span class="p">))</span><span class="w">
+</span></code></pre></div></div>
+
+<p>In this tutorial, parallelization is performed within R using the resources 
+allocated to the launched RStudio Server session. If you are interested in seeing
+an example on how to submit your own SLURM job, please see 
+<a href="https://geospatial.101workbook.org/ExampleGeoWorkflows/GRWG22_ZonalStats_wSLURM_R">this tutorial</a>.</p>
+
+<p><em>Language:</em> <code class="language-plaintext highlighter-rouge">R</code></p>
+
+<p><em>Primary Libraries/Packages:</em></p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left">Name</th>
+      <th style="text-align: left">Description</th>
+      <th style="text-align: left">Link</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left">terra</td>
+      <td style="text-align: left">Spatial Data Analysis</td>
+      <td style="text-align: left">https://cran.r-project.org/web/packages/terra/index.html</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">foreach</td>
+      <td style="text-align: left">Provides Foreach Looping Construct</td>
+      <td style="text-align: left">https://cran.r-project.org/web/packages/foreach/index.html</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">doParallel</td>
+      <td style="text-align: left">Foreach Parallel Adaptor for the ‘parallel’ Package</td>
+      <td style="text-align: left">https://cran.r-project.org/web/packages/doParallel/index.html</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="nomenclature">Nomenclature</h2>
+
+<ul>
+  <li><em>Parallel processing:</em> Distributing computational tasks among multiple cores.</li>
+  <li><em>Core:</em> A processor on a central processing unit; a physical or logical component 
+that can execute computational tasks.</li>
+  <li><em>Tile (or chunk):</em> A continuous segment of a raster dataset or multi-dimensional 
+array.</li>
+  <li><em>NDVI:</em> Normalized Difference Vegetation Index, a quantity derived from the red
+and near-infrared bands of imagery to detect vegetation.</li>
+</ul>
+
+<h2 id="analysis-steps">Analysis Steps</h2>
+
+<ul>
+  <li>Open Imagery and Setup Tiles - Open a GeoTIFF of Landsat 7 imagery and divide
+it into multiple smaller images.</li>
+  <li>Define NDVI function - Write a function to calculate Normalized Difference 
+Vegetation Index from an image file.</li>
+  <li>Compare serial versus parallel computation times - Measure the time it takes to
+perform the NDVI calculation across tiles in serial and in parallel
+    <ul>
+      <li>Option 1: using the <code class="language-plaintext highlighter-rouge">foreach</code> and <code class="language-plaintext highlighter-rouge">doParallel</code> packages</li>
+      <li>Option 2: using the <code class="language-plaintext highlighter-rouge">parallel</code> package</li>
+    </ul>
+  </li>
+  <li>Visualize NDVI results - View the NDVI values in tiles as a whole image.</li>
+</ul>
+
+<h2 id="step-0-import-librariespackages">Step 0: Import Libraries/Packages</h2>
+
+<p>For this tutorial, we will use the <code class="language-plaintext highlighter-rouge">stars</code> package for one of its example 
+datasets, the <code class="language-plaintext highlighter-rouge">terra</code> package for handling raster data, and the <code class="language-plaintext highlighter-rouge">doParallel</code> and 
+<code class="language-plaintext highlighter-rouge">foreach</code> packages together for distributing our calculations. The <code class="language-plaintext highlighter-rouge">stars</code> and 
+<code class="language-plaintext highlighter-rouge">terra</code> packages are each available in the R site library for RStudio Server on 
+Ceres and Atlas Open OnDemand, though not in the R site library if you were to load an R 
+module in a shell. However, the <code class="language-plaintext highlighter-rouge">terra</code> version on Atlas is not a recent enough 
+version for this tutorial, so we will install the latest version. As of this 
+writing, <code class="language-plaintext highlighter-rouge">foreach</code> and <code class="language-plaintext highlighter-rouge">doParallel</code> are not in the 
+site library and will need to be installed if you have not already done so. To 
+learn more about installing packages on Ceres, see 
+<a href="https://scinet.usda.gov/guide/packageinstall/#installing-r-packages">this guide</a>.</p>
+
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">install.packages</span><span class="p">(</span><span class="nf">c</span><span class="p">(</span><span class="s1">'foreach'</span><span class="p">,</span><span class="s1">'doParallel'</span><span class="p">,</span><span class="s1">'terra'</span><span class="p">))</span><span class="w">
+</span></code></pre></div></div>
+
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">library</span><span class="p">(</span><span class="n">terra</span><span class="p">)</span><span class="w">
+</span><span class="n">library</span><span class="p">(</span><span class="n">foreach</span><span class="p">)</span><span class="w">
+</span><span class="n">library</span><span class="p">(</span><span class="n">doParallel</span><span class="p">)</span><span class="w">
+</span></code></pre></div></div>
+
+<h2 id="step-1-open-imagery-and-setup-tiles">Step 1: Open Imagery and Setup Tiles</h2>
+
+<h3 id="step-1a-open-imagery">Step 1a: Open imagery</h3>
+
+<p>The imagery file we will use is available from the <code class="language-plaintext highlighter-rouge">stars</code> package. It is an 
+example image from Landsat 7 and you can learn more about it by calling 
+<code class="language-plaintext highlighter-rouge">?L7_ETMs</code>. In that documentation, it indicates that the first three bands are 
+from the visible part of the electromagnetic spectrum (blue, green, red) and the 
+fourth band in the near-infrared band. We can use <code class="language-plaintext highlighter-rouge">terra</code>’s function <code class="language-plaintext highlighter-rouge">rast</code> to
+read the imagery file. The <code class="language-plaintext highlighter-rouge">plotRGB</code> function will let us visualize the image in
+typical RGB. We can see that it is of a coast with forested areas that should 
+have relatively high NDVI values.</p>
+
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">L7_ETMs</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">rast</span><span class="p">(</span><span class="n">system.file</span><span class="p">(</span><span class="s2">"tif/L7_ETMs.tif"</span><span class="p">,</span><span class="w"> </span><span class="n">package</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"stars"</span><span class="p">))</span><span class="w">
+
+</span><span class="c1"># RGB Image using the third-first bands</span><span class="w">
+</span><span class="n">plotRGB</span><span class="p">(</span><span class="n">L7_ETMs</span><span class="p">[[</span><span class="m">3</span><span class="o">:</span><span class="m">1</span><span class="p">]])</span><span class="w">
+
+</span></code></pre></div></div>
+<p><img src="/ExampleGeoWorkflows/assets/R_imagery-1.png" alt="imagery" /></p>
+
+<p>This image is fairly small and we do not actually need to speed-up the NDVI 
+calculation with parallel processing. So we will make it artificially a big data 
+problem by disaggregating the pixels, i.e. making a greater number of smaller 
+cells, for the sake of a portable example. The function <code class="language-plaintext highlighter-rouge">disagg</code> accepts a 
+raster object and a disaggregation factor, i.e. the number of cells to create from
+each original cell in each direction. Below, we are using a factor of 20 which 
+will create 400x pixels than the original.</p>
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">disagg_factor</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="m">20</span><span class="w">
+</span><span class="n">nir_red_fine</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">disagg</span><span class="p">(</span><span class="n">L7_ETMs</span><span class="p">[[</span><span class="m">3</span><span class="o">:</span><span class="m">4</span><span class="p">]],</span><span class="w"> </span><span class="n">disagg_factor</span><span class="p">,</span><span class="w">
+                       </span><span class="n">filename</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"nr_test.tif"</span><span class="p">,</span><span class="w">
+                       </span><span class="n">overwrite</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">)</span><span class="w">
+</span></code></pre></div></div>
+
+<h3 id="step-1b-making-tiles">Step 1b: Making tiles</h3>
+
+<p>The <code class="language-plaintext highlighter-rouge">terra</code> package comes with a handy function for making raster tiles called
+<code class="language-plaintext highlighter-rouge">makeTiles</code> to which you pass the raster you want to split up, a template raster
+indicating how to split it up into tiles, and how to name the resulting files
+containing the tiles. First, we will specify how many tiles we want. This example
+will use 4 tiles in each directions for a total of 16 tiles. Next, we will create
+an empty raster template will the number of rows and columns matching our number
+of tiles and our image’s spatial extent and CRS. The we call <code class="language-plaintext highlighter-rouge">makeTiles</code> which
+will write the tiles to file and return the filenames.</p>
+
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Set number of tiles (number of rows, number of columns)</span><span class="w">
+</span><span class="n">num_tiles</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="m">4</span><span class="p">,</span><span class="m">4</span><span class="p">)</span><span class="w">
+
+</span><span class="c1"># Define empty raster template to define tiles</span><span class="w">
+</span><span class="n">tile_template</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">rast</span><span class="p">(</span><span class="n">nrows</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">num_tiles</span><span class="p">[</span><span class="m">1</span><span class="p">],</span><span class="w">
+                      </span><span class="n">ncols</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">num_tiles</span><span class="p">[</span><span class="m">2</span><span class="p">],</span><span class="w">
+                      </span><span class="n">crs</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">crs</span><span class="p">(</span><span class="n">nir_red_fine</span><span class="p">),</span><span class="w">
+                      </span><span class="n">ext</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ext</span><span class="p">(</span><span class="n">nir_red_fine</span><span class="p">))</span><span class="w">
+
+</span><span class="c1"># Generate the tile files using the red and NIR bands only</span><span class="w">
+</span><span class="n">nr_tiles</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">makeTiles</span><span class="p">(</span><span class="n">nir_red_fine</span><span class="p">,</span><span class="w"> 
+                      </span><span class="n">tile_template</span><span class="p">,</span><span class="w"> 
+                      </span><span class="n">filename</span><span class="o">=</span><span class="s2">"tile_.tif"</span><span class="p">,</span><span class="w">
+                      </span><span class="n">overwrite</span><span class="o">=</span><span class="kc">TRUE</span><span class="p">)</span><span class="w">
+</span></code></pre></div></div>
+
+<h2 id="step-2-defining-ndvi-function">Step 2: Defining NDVI function</h2>
+
+<p>Next, we want to define a function that will calculate NDVI for the pixels in 
+one tile. The function will accept a tile’s filename, open that file with <code class="language-plaintext highlighter-rouge">terra</code>,
+calculate NDVI for the pixels, then write the resulting single-band raster to
+a new file.</p>
+
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Define NDVI function that writes results to file</span><span class="w">
+</span><span class="n">normalized_diff_r</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="k">function</span><span class="p">(</span><span class="n">fname</span><span class="p">){</span><span class="w">
+  </span><span class="n">nr</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">rast</span><span class="p">(</span><span class="n">fname</span><span class="p">)</span><span class="w">
+  </span><span class="n">NDVI_r</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="p">(</span><span class="n">nr</span><span class="o">$</span><span class="n">L7_ETMs_4</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">nr</span><span class="o">$</span><span class="n">L7_ETMs_3</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="n">nr</span><span class="o">$</span><span class="n">L7_ETMs_4</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">nr</span><span class="o">$</span><span class="n">L7_ETMs_3</span><span class="p">)</span><span class="w">
+
+  </span><span class="n">writeRaster</span><span class="p">(</span><span class="n">NDVI_r</span><span class="p">,</span><span class="w"> </span><span class="n">filename</span><span class="o">=</span><span class="n">paste0</span><span class="p">(</span><span class="s1">'NDVI_'</span><span class="p">,</span><span class="n">fname</span><span class="p">),</span><span class="w"> </span><span class="n">overwrite</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">)</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div></div>
+
+<h2 id="step-3-comparing-serial-and-parallel-processing-times">Step 3: Comparing serial and parallel processing times</h2>
+
+<p>To have a baseline to which to compare how long the parallel approach takes, we
+can first time the serial approach. The base R <code class="language-plaintext highlighter-rouge">system.time()</code> function provides 
+basic timing capabilities and reports three different timings: <em>user</em>, <em>system</em>, 
+and <em>elapsed</em>. The third timing, <em>elapsed</em>, is the physical or ‘wall’ time elapsed
+and the one we are interested in comparing among our approaches.</p>
+
+<h3 id="step-3a-foreachdoparallel">Step 3a: <code class="language-plaintext highlighter-rouge">foreach</code>/<code class="language-plaintext highlighter-rouge">doParallel</code></h3>
+
+<h4 id="serial">Serial</h4>
+
+<p>In this first option, we are using the <code class="language-plaintext highlighter-rouge">foreach</code> package as a serial backend that
+the <code class="language-plaintext highlighter-rouge">doParallel</code> extends with parallel processing. Using <code class="language-plaintext highlighter-rouge">foreach</code> is similar to
+using a <code class="language-plaintext highlighter-rouge">for</code> loop with a slightly different syntax in the first line:</p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">for</code> is replaced with <code class="language-plaintext highlighter-rouge">foreach</code></li>
+  <li><code class="language-plaintext highlighter-rouge">in</code> is replaced with <code class="language-plaintext highlighter-rouge">=</code></li>
+  <li><code class="language-plaintext highlighter-rouge">){</code> is replaced with <code class="language-plaintext highlighter-rouge">) %do% {</code></li>
+</ul>
+
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># for loop</span><span class="w">
+</span><span class="k">for</span><span class="p">(</span><span class="n">i</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="m">1</span><span class="o">:</span><span class="n">N</span><span class="p">){</span><span class="w">
+  </span><span class="c1"># Do your calculation</span><span class="w">
+</span><span class="p">}</span><span class="w">
+
+</span><span class="c1"># foreach</span><span class="w">
+</span><span class="n">foreach</span><span class="p">(</span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">1</span><span class="o">:</span><span class="n">N</span><span class="p">)</span><span class="w"> </span><span class="o">%do%</span><span class="w"> </span><span class="p">{</span><span class="w">
+  </span><span class="c1"># Do your calculation</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div></div>
+
+<p>To have NDVI calculated for each of our tiles, we will have <code class="language-plaintext highlighter-rouge">foreach</code> iterate 
+over each tile filename (which was returned by <code class="language-plaintext highlighter-rouge">makeTiles</code>) and call our
+<code class="language-plaintext highlighter-rouge">normalized_diff_r</code> function for each iteration.</p>
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Time the serial execution</span><span class="w">
+</span><span class="n">system.time</span><span class="p">({</span><span class="w">
+  </span><span class="n">foreach</span><span class="p">(</span><span class="n">fname</span><span class="o">=</span><span class="n">nr_tiles</span><span class="p">)</span><span class="w"> </span><span class="o">%do%</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="n">normalized_diff_r</span><span class="p">(</span><span class="n">fname</span><span class="p">)</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">})</span><span class="w">
+</span></code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>   user  system elapsed 
+ 10.277   0.296  12.665 
+</code></pre></div></div>
+
+<h4 id="parallel">Parallel</h4>
+
+<p>To use <code class="language-plaintext highlighter-rouge">doParallel</code> to parallelize <code class="language-plaintext highlighter-rouge">foreach</code>, two things must be done:</p>
+
+<ol>
+  <li>You register <code class="language-plaintext highlighter-rouge">doParallel</code> with the number of cores you want to use</li>
+  <li>You change <code class="language-plaintext highlighter-rouge">%do%</code> to <code class="language-plaintext highlighter-rouge">%dopar%</code> in your <code class="language-plaintext highlighter-rouge">foreach</code> statement</li>
+</ol>
+
+<p>Here, we are using as many cores as number of tiles so each core will have
+one task to complete.</p>
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Register doParallel</span><span class="w">
+</span><span class="n">registerDoParallel</span><span class="p">(</span><span class="n">cores</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">prod</span><span class="p">(</span><span class="n">num_tiles</span><span class="p">))</span><span class="w">
+
+</span><span class="c1"># Time the parallel execution</span><span class="w">
+</span><span class="n">system.time</span><span class="p">({</span><span class="w">
+  </span><span class="n">foreach</span><span class="p">(</span><span class="n">fname</span><span class="o">=</span><span class="n">nr_tiles</span><span class="p">)</span><span class="w"> </span><span class="o">%dopar%</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="n">normalized_diff_r</span><span class="p">(</span><span class="n">fname</span><span class="p">)</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">})</span><span class="w">
+</span></code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>   user  system elapsed 
+  9.144   1.426   8.189  
+</code></pre></div></div>
+
+<h3 id="step-3b-parallel">Step 3b: <code class="language-plaintext highlighter-rouge">parallel</code></h3>
+
+<p>There is another similar approach using the <code class="language-plaintext highlighter-rouge">parallel</code> package, which comes with
+base R. Instead of extending <code class="language-plaintext highlighter-rouge">foreach</code>, we will see how <code class="language-plaintext highlighter-rouge">parallel</code> extends base
+R’s <code class="language-plaintext highlighter-rouge">lapply</code> with <code class="language-plaintext highlighter-rouge">mclapply</code>.</p>
+
+<h4 id="serial-1">Serial</h4>
+
+<p>Again, we will first time how long the serial <code class="language-plaintext highlighter-rouge">lapply</code> approach takes to perform
+our NDVI calculation. <code class="language-plaintext highlighter-rouge">lapply</code> accepts a vector of inputs (our tile filenames) 
+and a function that accepts those inputs (<code class="language-plaintext highlighter-rouge">normalized_diff_r</code>).</p>
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Time the serial execution</span><span class="w">
+</span><span class="n">system.time</span><span class="p">({</span><span class="w">
+  </span><span class="n">lapply</span><span class="p">(</span><span class="n">nr_tiles</span><span class="p">,</span><span class="w"> </span><span class="n">normalized_diff_r</span><span class="p">)</span><span class="w">
+</span><span class="p">})</span><span class="w">
+
+</span></code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>   user  system elapsed 
+ 10.302   0.260  12.746  
+</code></pre></div></div>
+
+<h4 id="parallel-1">Parallel</h4>
+
+<p>To use the parallel version of <code class="language-plaintext highlighter-rouge">lapply</code>, two changes are made to our
+code above:</p>
+
+<ol>
+  <li>Call <code class="language-plaintext highlighter-rouge">mclapply</code> instead of <code class="language-plaintext highlighter-rouge">lapply</code></li>
+  <li>Pass the desired number of cores</li>
+</ol>
+
+<p>Like with <code class="language-plaintext highlighter-rouge">doParallel</code>, we are requesting as many cores as the number of tiles.</p>
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Time the parallel execution</span><span class="w">
+</span><span class="n">system.time</span><span class="p">({</span><span class="w">
+  </span><span class="n">mclapply</span><span class="p">(</span><span class="n">nr_tiles</span><span class="p">,</span><span class="w"> </span><span class="n">normalized_diff_r</span><span class="p">,</span><span class="w"> </span><span class="n">mc.cores</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">prod</span><span class="p">(</span><span class="n">num_tiles</span><span class="p">))</span><span class="w">
+</span><span class="p">})</span><span class="w">
+
+</span></code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>   user  system elapsed 
+  6.226   1.213   7.670 
+</code></pre></div></div>
+
+<h2 id="step-4-visualize-ndvi-results">Step 4: Visualize NDVI results</h2>
+
+<p>There is a <code class="language-plaintext highlighter-rouge">terra</code> function <code class="language-plaintext highlighter-rouge">vrt</code> (Virtual Raster Tiles) for visualizing tiles
+without having to mosaic first. Note: if you are familiar with using 
+<a href="https://gdal.org">GDAL</a> (Geospatial Data Abstraction Library), their 
+<a href="https://gdal.org/drivers/raster/vrt.html">VRT</a> is a more general virtual format
+not specific to just tiling.</p>
+
+<p>We can see from the image that the forested areas have the higher NDVI values
+as we expected.</p>
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">virtual_ndvi</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">vrt</span><span class="p">(</span><span class="n">paste0</span><span class="p">(</span><span class="s1">'NDVI_'</span><span class="p">,</span><span class="n">nr_tiles</span><span class="p">))</span><span class="w">
+</span><span class="n">plot</span><span class="p">(</span><span class="n">virtual_ndvi</span><span class="p">)</span><span class="w">
+</span></code></pre></div></div>
+<p><img src="/ExampleGeoWorkflows/assets/R_vrt_ndvi-1.png" alt="vrt_ndvi" /></p>
+
+<h3 id="continue-to-explore">Continue to explore</h3>
+
+<p>Things you can change in this tutorial to see how it affects the difference in
+processing time between serial and parallel (or the two parallel library 
+options):</p>
+
+<ul>
+  <li>The disaggregation factor</li>
+  <li>The number of tiles</li>
+  <li>The number of cores</li>
+</ul>
+
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+
+
+        
+      </footer>
+
+      
+
+      
+
+    </div>
+
+    
+  </article>
+
+  
+  
+</div>
+    </div>
+
+    
+      <div class="search-content">
+        <div class="search-content__inner-wrap"><form onsubmit="return googleCustomSearchExecute();" id="cse-search-box-form-id">
+    <input type="search" id="cse-search-input-box-id" aria-placeholder="Enter your search term..." class="search-input" tabindex="-1" placeholder="Enter your search term..." />
+    </form>
+    <div id="results" class="results">
+        <gcse:searchresults-only></gcse:searchresults-only>
+    </div></div>
+
+      </div>
+    
+    
+    <div class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+
+        <div class="page__footer-follow">
+  <ul class="social-icons">
+    
+      <li><strong>Follow:</strong></li>
+    
+    
+      <li><a href="https://twitter.com/isugif"><i class="fab fa-fw fa-twitter-square" aria-hidden="true"></i> Twitter</a></li>
+    
+    
+    
+      <li><a href="https://github.com/https://github.com/isugenomics"><i class="fab fa-fw fa-github" aria-hidden="true"></i> GitHub</a></li>
+    
+    
+    
+    
+  </ul>
+</div>
+
+<div class="page__footer-copyright">&copy; 2024 Geospatial Workbook</div>
+
+      </footer>
+    </div>
+
+    
+  <script src="/assets/js/main.min.js"></script>
+  <script src="https://use.fontawesome.com/releases/v5.0.13/js/all.js"></script>
+
+
+<script>
+  (function () {
+    var cx = '009853197685285203469:nsvri1pa88d';
+    var gcse = document.createElement('script');
+    gcse.type = 'text/javascript';
+    gcse.async = true;
+    gcse.src = 'https://cse.google.com/cse.js?cx=' + cx;
+    var s = document.getElementsByTagName('script')[0];
+    s.parentNode.insertBefore(gcse, s);
+  })();
+
+  function googleCustomSearchExecute() {
+    var input = document.getElementById('cse-search-input-box-id');
+    var element = google.search.cse.element.getElement('searchresults-only0');
+    if (input.value == '') {
+      element.clearAllResults();
+    } else {
+      element.execute(input.value);
+    }
+    return false;
+  }
+
+  
+</script>
+
+
+
+
+<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+<script id="MathJax-script" defer
+        src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+</script>
+
+
+
+
+  </body>
+</html>

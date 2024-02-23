@@ -1,0 +1,977 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.11.2 by Michael Rose
+  Copyright 2013-2018 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE.txt
+-->
+<html lang="en" class="no-js">
+  <head>
+    <meta charset="utf-8">
+
+<!-- begin _includes/seo.html --><title>Raster file properties: computation time and storage implications - Geospatial Workbook</title>
+<meta name="description" content="Tutorial on Informatics for Geospatial Information">
+
+
+  <meta name="author" content="Heather Savoy">
+
+
+<meta property="og:type" content="website">
+<meta property="og:locale" content="en_US">
+<meta property="og:site_name" content="Geospatial Workbook">
+<meta property="og:title" content="Raster file properties: computation time and storage implications">
+<meta property="og:url" content="http://localhost:4000/FileFormats/GRWG_StorageImplications_gdal.html">
+
+
+
+
+  <meta property="og:image" content="http://localhost:4000/assets/images/margaret-weir-GZyjbLNOaFg-unsplash_dark.jpg">
+
+
+
+  <meta name="twitter:site" content="@isugif">
+  <meta name="twitter:title" content="Raster file properties: computation time and storage implications">
+  <meta name="twitter:description" content="Tutorial on Informatics for Geospatial Information">
+  <meta name="twitter:url" content="http://localhost:4000/FileFormats/GRWG_StorageImplications_gdal.html">
+
+  
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content="http://localhost:4000/assets/images/margaret-weir-GZyjbLNOaFg-unsplash_dark.jpg">
+  
+
+  
+    <meta name="twitter:creator" content="@someone">
+  
+
+
+
+
+
+
+
+  
+
+  
+
+
+<link rel="canonical" href="http://localhost:4000/FileFormats/GRWG_StorageImplications_gdal.html">
+
+
+
+
+
+
+
+  <script type="application/ld+json">
+    {
+      "@context": "http://schema.org",
+      "@type": "Person",
+      "name": "",
+      "url": "http://localhost:4000",
+      "sameAs": null
+    }
+  </script>
+
+
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+<link href="/feed.xml" type="application/atom+xml" rel="alternate" title="Geospatial Workbook Feed">
+
+<!-- http://t.co/dKP3o1e -->
+<meta name="HandheldFriendly" content="True">
+<meta name="MobileOptimized" content="320">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+
+<!--[if lte IE 9]>
+  <style>
+    /* old IE unsupported flexbox fixes */
+    .greedy-nav .site-title {
+      padding-right: 3em;
+    }
+    .greedy-nav button {
+      position: absolute;
+      top: 0;
+      right: 0;
+      height: 100%;
+    }
+  </style>
+<![endif]-->
+
+
+    <!-- start custom head snippets -->
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-E6BZVYF8ZY"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-E6BZVYF8ZY');
+</script>
+
+<!-- insert favicons. use https://realfavicongenerator.net/ -->
+
+<!-- end custom head snippets -->
+
+  </head>
+
+  <body class="layout--single">
+
+    <!--[if lt IE 9]>
+<div class="notice--danger align-center" style="margin: 0;">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience.</div>
+<![endif]-->
+
+    <div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        <a class="site-title" href="/">Geospatial Workbook</a>
+        <ul class="visible-links">
+          
+            
+            <li class="masthead__menu-item">
+              <a href="http://localhost:4000/about.html" >About</a>
+            </li>
+          
+            
+            <li class="masthead__menu-item">
+              <a href="http://localhost:4000/list.html" >Index</a>
+            </li>
+          
+            
+            <li class="masthead__menu-item">
+              <a href="http://localhost:4000/glossary.html" >Glossary</a>
+            </li>
+          
+            
+            <li class="masthead__menu-item">
+              <a href="http://localhost:4000/people.html" >People</a>
+            </li>
+          
+            
+            <li class="masthead__menu-item">
+              <a href="http://localhost:4000/contributing.html" >Contribute</a>
+            </li>
+          
+        </ul>
+        
+        <button class="search__toggle" type="button">
+          <svg class="icon" width="16" height="16" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 15.99 16">
+            <path d="M15.5,13.12L13.19,10.8a1.69,1.69,0,0,0-1.28-.55l-0.06-.06A6.5,6.5,0,0,0,5.77,0,6.5,6.5,0,0,0,2.46,11.59a6.47,6.47,0,0,0,7.74.26l0.05,0.05a1.65,1.65,0,0,0,.5,1.24l2.38,2.38A1.68,1.68,0,0,0,15.5,13.12ZM6.4,2A4.41,4.41,0,1,1,2,6.4,4.43,4.43,0,0,1,6.4,2Z" transform="translate(-.01)"></path>
+          </svg>
+        </button>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">Toggle Menu</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+    <div class="initial-content">
+      
+  
+
+
+
+
+
+
+
+
+
+
+
+<div class="page__hero--overlay"
+  style="background-color: 444444; background-image: url('/assets/images/margaret-weir-GZyjbLNOaFg-unsplash_dark.jpg');"
+>
+  
+    <div class="wrapper">
+      <h1 id="page-title" class="page__title" itemprop="headline">
+        
+          Raster file properties: computation time and storage implications
+
+        
+      </h1>
+      
+      
+      
+    </div>
+  
+  
+</div>
+
+
+
+
+
+<div id="main" role="main">
+  
+  <div class="sidebar sticky">
+  
+
+
+<div itemscope itemtype="http://schema.org/Person">
+
+  
+    <div class="author__avatar">
+      
+
+      
+        <img src="/assets/images/people/HeatherSavoy.png" alt="Heather Savoy" itemprop="image">
+      
+    </div>
+  
+
+  <div class="author__content">
+    
+      <h3 class="author__name" itemprop="name">Heather Savoy</h3>
+    
+    
+      <p class="author__bio" itemprop="description">
+        Heather is a Computational Biologist (Data Scientist) in the USDA-ARS SCINet Office. Her research interests include applying informatics methods to multidisciplinary agro-ecosystem problems and building data science software tools for geospatial research. She received her Ph.D. in Civil and Environmental Engineering with an emphasis in Computational Data Science and Engineering from the University of California Berkeley. She also holds a B.S. in Environmental Science with a minor in Computational Mathematics from the Florida Institute of Technology.
+      </p>
+    
+  </div>
+
+  <div class="author__urls-wrapper">
+    <button class="btn btn--inverse">Follow</button>
+    <ul class="author__urls social-icons">
+      
+
+      
+
+      
+        <li>
+          <a href="mailto:mailto:heather.savoy@usda.gov">
+            <meta itemprop="email" content="mailto:heather.savoy@usda.gov" />
+            <i class="fas fa-fw fa-envelope-square" aria-hidden="true"></i> Email
+          </a>
+        </li>
+      
+
+      
+
+      
+        <li>
+          <a href="https://twitter.com/someone" itemprop="sameAs">
+            <i class="fab fa-fw fa-twitter-square" aria-hidden="true"></i> Twitter
+          </a>
+        </li>
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      <!--
+  <li>
+    <a href="http://link-to-whatever-social-network.com/user/" itemprop="sameAs">
+      <i class="fas fa-fw" aria-hidden="true"></i> Custom Social Profile Link
+    </a>
+  </li>
+-->
+    </ul>
+  </div>
+</div>
+
+<!-- Create a 2nd author for tutorials -->
+
+
+
+<div itemscope itemtype="http://schema.org/Person">
+
+  
+
+  <div class="author__content">
+    
+      <h3 class="author__name" itemprop="name"></h3>
+    
+    
+  </div>
+
+  <div class="author__urls-wrapper">
+    <button class="btn btn--inverse">Follow</button>
+    <ul class="author__urls social-icons">
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      <!--
+  <li>
+    <a href="http://link-to-whatever-social-network.com/user/" itemprop="sameAs">
+      <i class="fas fa-fw" aria-hidden="true"></i> Custom Social Profile Link
+    </a>
+  </li>
+-->
+    </ul>
+  </div>
+</div>
+
+  
+  </div>
+
+
+  <article class="page" itemscope itemtype="http://schema.org/CreativeWork">
+    <meta itemprop="headline" content="Raster file properties: computation time and storage implications">
+    
+    
+    
+
+    <div class="page__inner-wrap">
+      
+
+      <section class="page__content" itemprop="text">
+        
+        <p><strong>Last Update:</strong> 17 September 2023 <br /></p>
+
+<h2 id="overview">Overview</h2>
+
+<p>This tutorial explores raster file properties, how those properties affect file 
+sizes, and how they affect geospatial processing execution times. Commands shown 
+are for direct use of the Geospatial Data Abstraction Library (GDAL) which is a 
+library that is often used by other geospatial software including R packages, 
+Python packages, QGIS, and ESRI products.</p>
+
+<p>Both Atlas and Ceres have GDAL installed as a module. To start 
+using GDAL on either cluster, load the module with the following command:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>module load gdal
+</code></pre></div></div>
+
+<p><em>Language:</em> <code class="language-plaintext highlighter-rouge">bash</code></p>
+
+<p><em>Primary Libraries/Packages:</em></p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left">Name</th>
+      <th style="text-align: left">Description</th>
+      <th style="text-align: left">Link</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left">GDAL</td>
+      <td style="text-align: left">Geospatial Data Abstraction Library</td>
+      <td style="text-align: left">https://gdal.org/</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="nomenclature">Nomenclature</h2>
+
+<ul>
+  <li><em>Raster:</em> Data defined on a grid of geospatial coordinates</li>
+  <li><em>Block:</em> The configuration of how raster values are read from the file.</li>
+  <li><em>Data type:</em> If raster values are stored as integers or floating point numbers, 
+if they are signed, and how many bits are used to store a value.</li>
+</ul>
+
+<h2 id="sections">Sections</h2>
+
+<ul>
+  <li>Print file properties of raster datasets</li>
+  <li>Effects of data types on file sizes</li>
+  <li>Effects of tiles on cropping execution time</li>
+  <li>Effects of virtual rasters on cropping execution time</li>
+</ul>
+
+<h2 id="section-1-print-file-properties-of-raster-datasets">Section 1: Print file properties of raster datasets</h2>
+
+<p>First, we will look into what kind of raster file properties can be provided by GDAL. 
+There is a command called <code class="language-plaintext highlighter-rouge">gdalinfo</code> which will print such information for whichever
+raster filename you pass to it.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>gdalinfo &lt;raster_filepath&gt;
+</code></pre></div></div>
+
+<p>To illustrate a variety of raster file property combinations, we will look at the datasets
+availabile in the Geospatial Common Data Library (GeoCDL) on Ceres (see 
+<a href="/ExampleGeoWorkflows/GRWG22_GeoCDL_R.html">this tutorial</a> 
+to learn more).</p>
+
+<p>For example, calling <code class="language-plaintext highlighter-rouge">gdalinfo</code> on one of the source PRISM data files in the GeoCDL, 
+the output looks like this:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>gdalinfo prism/PRISM_ppt_stable_4kmM3_200807_bil.bil
+</code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Driver: EHdr/ESRI .hdr Labelled
+Files: prism/PRISM_ppt_stable_4kmM3_200807_bil.bil
+       prism/PRISM_ppt_stable_4kmM3_200807_bil.bil.aux.xml
+       prism/PRISM_ppt_stable_4kmM3_200807_bil.hdr
+       prism/PRISM_ppt_stable_4kmM3_200807_bil.stx
+       prism/PRISM_ppt_stable_4kmM3_200807_bil.prj
+Size is 1405, 621
+Coordinate System is:
+GEOGCRS["NAD83",
+    DATUM["North American Datum 1983",
+        ELLIPSOID["GRS 1980",6378137,298.257222101,
+            LENGTHUNIT["metre",1]],
+        ID["EPSG",6269]],
+    PRIMEM["Greenwich",0,
+        ANGLEUNIT["Degree",0.0174532925199433]],
+    CS[ellipsoidal,2],
+        AXIS["longitude",east,
+            ORDER[1],
+            ANGLEUNIT["Degree",0.0174532925199433]],
+        AXIS["latitude",north,
+            ORDER[2],
+            ANGLEUNIT["Degree",0.0174532925199433]]]
+Data axis to CRS axis mapping: 1,2
+Origin = (-125.020833333333357,49.937499999999751)
+Pixel Size = (0.041666666666700,-0.041666666666700)
+Corner Coordinates:
+Upper Left  (-125.0208333,  49.9375000) (125d 1'15.00"W, 49d56'15.00"N)
+Lower Left  (-125.0208333,  24.0625000) (125d 1'15.00"W, 24d 3'45.00"N)
+Upper Right ( -66.4791667,  49.9375000) ( 66d28'45.00"W, 49d56'15.00"N)
+Lower Right ( -66.4791667,  24.0625000) ( 66d28'45.00"W, 24d 3'45.00"N)
+Center      ( -95.7500000,  37.0000000) ( 95d45' 0.00"W, 37d 0' 0.00"N)
+Band 1 Block=1405x1 Type=Float32, ColorInterp=Undefined
+  Min=0.000 Max=556.523 
+  Minimum=0.000, Maximum=556.523, Mean=72.033, StdDev=61.444
+  NoData Value=-9999
+  Metadata:
+    STATISTICS_MAXIMUM=556.52301025391
+    STATISTICS_MEAN=72.033263630928
+    STATISTICS_MINIMUM=0
+    STATISTICS_STDDEV=61.444120607318
+</code></pre></div></div>
+
+<p>This output has some recognizable geospatial metadata such as the coordinate reference 
+system (<code class="language-plaintext highlighter-rouge">Coordinate System</code>) and the spatial resolution (<code class="language-plaintext highlighter-rouge">Pixel Size</code>). The raster file 
+properties discernable from this output that we will be focusing on are:</p>
+
+<ul>
+  <li><em>File format</em> (<code class="language-plaintext highlighter-rouge">Driver</code>, <code class="language-plaintext highlighter-rouge">Files</code>): This is discerned by the file extension of the
+raster file being described and potentially also the GDAL driver used to read
+that type of file. Here, the PRISM file has an extension <code class="language-plaintext highlighter-rouge">.bil</code> for which GDAL 
+uses its <code class="language-plaintext highlighter-rouge">EHdr/ESRI .hdr Labelled</code> driver to read. The <code class="language-plaintext highlighter-rouge">.bil</code> format is developed 
+by ESRI, along with other similar raster file formats, so GDAL uses a combined 
+driver to read these formats. When reading the GDAL documentation about what 
+format-specific options there might be, 
+<a href="https://gdal.org/drivers/raster/index.html">the content will be organized by driver</a>. 
+For example, there is a <a href="https://gdal.org/drivers/raster/gtiff.html">GeoTIFF driver</a>.</li>
+  <li><em>Data type</em> (<code class="language-plaintext highlighter-rouge">Type</code>): If raster values are stored as integers or floating point numbers, 
+if they are signed, and how many bits are used to store a value.</li>
+  <li><em>X-Y dimensions</em> (<code class="language-plaintext highlighter-rouge">Size</code>): This is the number of columns and rows of pixels in the
+image discretizing space (typically horizontal space).</li>
+  <li><em>Block size</em> (<code class="language-plaintext highlighter-rouge">Block</code>): The dimensions (columns and rows) of the tile or strip 
+(or scanline) that represent the file access chunk size. When blocks are configured 
+as square subsets of a raster, they are referred to as tiles.</li>
+</ul>
+
+<p>Here is a table summarizing these properties from several of the GeoCDL datasets:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left">Dataset</th>
+      <th style="text-align: left">File format</th>
+      <th style="text-align: left">Data type</th>
+      <th style="text-align: left">X-Y dimensions</th>
+      <th style="text-align: left">Block size</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left">DaymetV4</td>
+      <td style="text-align: left">.nc</td>
+      <td style="text-align: left">Float32</td>
+      <td style="text-align: left">7814, 8075</td>
+      <td style="text-align: left">1000x1000</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">GTOPO</td>
+      <td style="text-align: left">.dem</td>
+      <td style="text-align: left">Int16</td>
+      <td style="text-align: left">4800, 6000<sup id="fnref:1" role="doc-noteref"><a href="#fn:1" class="footnote" rel="footnote">1</a></sup></td>
+      <td style="text-align: left">4800x1</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">NASS CDL</td>
+      <td style="text-align: left">.tif</td>
+      <td style="text-align: left">Byte</td>
+      <td style="text-align: left">153811, 96523</td>
+      <td style="text-align: left">512x512</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">NLCD</td>
+      <td style="text-align: left">.img</td>
+      <td style="text-align: left">Byte</td>
+      <td style="text-align: left">161190, 104424</td>
+      <td style="text-align: left">512x512</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">PRISM</td>
+      <td style="text-align: left">.bil</td>
+      <td style="text-align: left">Float32</td>
+      <td style="text-align: left">1405, 621</td>
+      <td style="text-align: left">1405x1</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">SMAP-HB 1km</td>
+      <td style="text-align: left">.nc</td>
+      <td style="text-align: left">Float32</td>
+      <td style="text-align: left">6996, 3120</td>
+      <td style="text-align: left">1400x624</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">SRTM</td>
+      <td style="text-align: left">.bil</td>
+      <td style="text-align: left">Int16</td>
+      <td style="text-align: left">3601,3601<sup id="fnref:1:1" role="doc-noteref"><a href="#fn:1" class="footnote" rel="footnote">1</a></sup></td>
+      <td style="text-align: left">3601x1</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">VIP</td>
+      <td style="text-align: left">.hdf</td>
+      <td style="text-align: left">Int16, UInt16, Int8</td>
+      <td style="text-align: left">3600, 7200</td>
+      <td style="text-align: left">512x512</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>The following sections will explore some file storage implications for data types 
+and computation time implications for block sizes.</p>
+
+<h2 id="section-2-effects-of-data-types-on-file-sizes">Section 2: Effects of data types on file sizes</h2>
+
+<p>Data types indicate the range and precision of values that can be stored in 
+the file. There are three main components to differentiate data types:</p>
+
+<ul>
+  <li><strong>Integer or floating point</strong>: is it a whole number (integer) or a decimal 
+(floating point)? It takes more bits to store the extra precision of 1.0001
+than 1, and thus you can store a greater range of values as integers than 
+floats or consume less disk space storing similar ranges of values as integers
+than floats.</li>
+  <li><strong>Signed or unsigned</strong>: do the values range from negative to positive, or 
+are they strictly non-negative? This effects the range of values that can be 
+stored.</li>
+  <li><strong>Number of bits</strong>: how many bits are used to store a value? This is typically 
+8-bit to 64-bit and dictates the ultimate file size.</li>
+</ul>
+
+<p>The values that are able to be stored in a raster depend on the data type. 
+For example, the <code class="language-plaintext highlighter-rouge">UInt16</code> (unsigned 16-bit integer) data type can 
+hold a range of 2^16 integers within [0, 65535]. The <code class="language-plaintext highlighter-rouge">Int16</code> 
+(signed 16-bit integer) data type also covers 2^16 integer values, but within
+[-32768, 32767].</p>
+
+<p>The data types that GDAL supports in ascending order of size are: 
+<code class="language-plaintext highlighter-rouge">Byte</code>, <code class="language-plaintext highlighter-rouge">Int8</code> &lt;  <code class="language-plaintext highlighter-rouge">UInt16</code>, <code class="language-plaintext highlighter-rouge">Int16</code> &lt; <code class="language-plaintext highlighter-rouge">UInt32</code>, <code class="language-plaintext highlighter-rouge">Int32</code>, <code class="language-plaintext highlighter-rouge">Float32</code> &lt; <code class="language-plaintext highlighter-rouge">UInt64</code>, <code class="language-plaintext highlighter-rouge">Int64</code>, <code class="language-plaintext highlighter-rouge">Float64</code>. 
+The support for some of these data types will depend on the version of GDAL 
+installed. Based on our table of GeoCDL datasets, the <code class="language-plaintext highlighter-rouge">Byte</code>, <code class="language-plaintext highlighter-rouge">Int16</code>, and 
+<code class="language-plaintext highlighter-rouge">Float32</code> are common data types. Each band in a raster data file can have 
+its own data type, e.g., VIP has multiple data types in the table above. 
+Note that these data type names are from GDAL’s naming scheme. Other 
+programs might have slightly different names, e.g. ‘uint8’ 
+instead of ‘Byte’ for an unsigned 8-bit integer.</p>
+
+<p>Some datasets, like <a href="https://doi.org/10.5067/MEaSUREs/VIP/VIP01.004">VIP</a>, 
+use scaling factors (e.g., dividing NDVI by 0.0001) 
+to help reduce file size with the use of integer instead of float data types.<br />
+We can explore this concept a bit further to see the effect of modifying a 
+raster’s data type (with and without scaling) on the file size and data loss.</p>
+
+<p>For example, let’s use our example PRISM data file again, which holds precipitation
+(ppt) values as the <code class="language-plaintext highlighter-rouge">Float32</code> data type. Since precipitation is typically a measurement
+of height and a continuous number, storing it as a floating point number makes sense.
+However, depending on the precision needed, disk space could be saved by storing 
+these precipitation values as scaled integers. In the <code class="language-plaintext highlighter-rouge">gdalinfo</code> output printed above,
+the range of precipitation values in the file is [0, 556.523] mm. If we scale those values
+by 100 ([0, 55652.3]) and then save them as integers ([0, 55652]), we could store them as 
+<code class="language-plaintext highlighter-rouge">UInt16</code>, which would take up half the disk space (going from 32-bit to 16-bit data type) 
+while also only losing precision around 0.001 mm of precipitation. We could not, however, 
+successfully store all values as <code class="language-plaintext highlighter-rouge">Int16</code> since 55652 is outside the supported range 
+of [-32768, 32767] (pixels with scaled values &gt;32767 would become no-data pixels). 
+Also, precipitation itself is non-negative, so an unsigned data type is sensible.</p>
+
+<p>The table below summarizes a range of scaling and data type conversion outcomes for
+this PRISM file. Ultimately, scaling by 100 and saving the result as a <code class="language-plaintext highlighter-rouge">UInt16</code> has
+the best balance of reducing file size and preventing data loss out of all scenarios
+considered.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left">Data type</th>
+      <th style="text-align: left">Writing error</th>
+      <th style="text-align: left">File size (MB)</th>
+      <th style="text-align: left">Scaling factor -&gt; RMSE from <br />original file (% pixels lost)</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">Byte</code></td>
+      <td style="text-align: left">Warning: detected values <br />outside of the limits of datatype <br />INT1U (for all scaling factors)</td>
+      <td style="text-align: left">0.873</td>
+      <td style="text-align: left">1 (None) -&gt; 0.56 (1.2%) <br />10 -&gt; 0.054 (70%) <br />100 -&gt; 0.0042 (92%)</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">UInt16</code></td>
+      <td style="text-align: left"> </td>
+      <td style="text-align: left">1.7</td>
+      <td style="text-align: left">1 (None) -&gt; 0.56 <br />10 -&gt; 0.056 <br />100 -&gt; 0.0057</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">Int16</code></td>
+      <td style="text-align: left">Warning: detected values <br />outside of the limits of datatype <br />INT2S (for scaling factor = 100)</td>
+      <td style="text-align: left">1.7</td>
+      <td style="text-align: left">1 (None) -&gt; 0.56 <br />10 -&gt; 0.056 <br />100 -&gt; 0.0057 (0.3%)</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">UInt32</code></td>
+      <td style="text-align: left"> </td>
+      <td style="text-align: left">3.5</td>
+      <td style="text-align: left">1 (None) -&gt; 0.56 <br />10 -&gt; 0.056 <br />100 -&gt; 0.0057</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">Int32</code></td>
+      <td style="text-align: left"> </td>
+      <td style="text-align: left">3.5</td>
+      <td style="text-align: left">1 (None) -&gt; 0.56 <br />10 -&gt; 0.056 <br />100 -&gt; 0.0057</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">Float32</code> <br />(original data type)</td>
+      <td style="text-align: left"> </td>
+      <td style="text-align: left">3.5</td>
+      <td style="text-align: left">N/A</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="section-3-effects-of-tiles-on-cropping-execution-time">Section 3: Effects of tiles on cropping execution time</h2>
+
+<p>Modifying the block size of a raster can improve the computation time of certain
+geospatial analyses. For example, we can look at the effect of setting tiles for a
+GeoTIFF so that values are read in by square (typically of dimensions that are 
+multiples of 16) chunks.</p>
+
+<p>In GDAL, you can create tiles or change tile sizes for a raster with the <code class="language-plaintext highlighter-rouge">gdal_translate</code>
+command with the following parameters:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>gdal_translate <span class="nt">-co</span> <span class="nv">TILED</span><span class="o">=</span>YES <span class="nt">-co</span> <span class="nv">BLOCKXSIZE</span><span class="o">=</span>512 <span class="nt">-co</span> <span class="nv">BLOCKYSIZE</span><span class="o">=</span>512 input.tif interim.tif
+</code></pre></div></div>
+
+<p>Or remove or not create tiles:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>gdal_translate <span class="nt">-co</span> <span class="nv">TILED</span><span class="o">=</span>NO input.tif interim.tif
+</code></pre></div></div>
+
+<p>To illustrate the effect of tiles on computation time, lets take the NASS CDL dataset.
+From our dataset table above, we see that it is already tiled with blocks of 512x512 pixels. 
+We can use the <code class="language-plaintext highlighter-rouge">gdal_translate -co TILED=NO</code> line above to make a copy that is not tiled, 
+which results in a block size of 153811x1 (one row of pixels across the whole image.) 
+This dataset covers CONUS and we will ask GDAL to crop it to some small county-sized area
+specified by a shapefile:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>gdalwarp <span class="nt">-crop_to_cutline</span> <span class="nt">-cutline</span> my_county.shp interim.tif output.tif
+</code></pre></div></div>
+
+<p>The table below shows how long that cropping command took to execute with the without
+the tiles. With tiles, it took half the time! This is because GDAL had to read in a smaller
+amount of the entire raster to cover the small cropping area, a small number of 
+local 512x512 tiles instead of many 153811x1 strips across CONUS. So this computation time benefit
+will depend on the relative sizes of the blocks, the cropping area, and the original raster extent.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left">Tile/block size</th>
+      <th style="text-align: left">Computation time (s)</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left">512x512</td>
+      <td style="text-align: left">~0.8</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">153811x1</td>
+      <td style="text-align: left">~1.5</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="section-4-effects-of-virtual-rasters-on-cropping-execution-time">Section 4: Effects of virtual rasters on cropping execution time</h2>
+
+<p>Another raster file concept that can save computation time is the GDAL Virtual Format raster (VRT). 
+This is essentially a way to store interim raster operation <em>instructions</em>, as opposed to the
+actualy interim raster <em>values</em>, which can save processing time if the total sequence of all
+raster operations needed can be calculated in one combined GDAL operation.</p>
+
+<p>For example, let’s revisit the process of creating tiled GeoTIFFs to improve cropping execution 
+times. If we request first a tiled geoTIFF, then crop it:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>gdal_translate <span class="nt">-co</span> <span class="nv">TILED</span><span class="o">=</span>YES <span class="nt">-co</span> <span class="nv">BLOCKXSIZE</span><span class="o">=</span>512 <span class="nt">-co</span> <span class="nv">BLOCKYSIZE</span><span class="o">=</span>512 input.tif interim.tif
+gdalwarp <span class="nt">-crop_to_cutline</span> <span class="nt">-cutline</span> input.shp interim.tif output.tif
+</code></pre></div></div>
+<p>that can still take several minutes to tile if that GeoTIFF is large, e.g. several GB.</p>
+
+<p>What we can do instead is request a tiled VRT and pass that (essentially instructions, not data)
+to the cropping command:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>gdal_translate <span class="nt">-co</span> <span class="nv">TILED</span><span class="o">=</span>YES <span class="nt">-co</span> <span class="nv">BLOCKXSIZE</span><span class="o">=</span>512 <span class="nt">-co</span> <span class="nv">BLOCKYSIZE</span><span class="o">=</span>512 input.tif interim.vrt
+gdalwarp <span class="nt">-crop_to_cutline</span> <span class="nt">-cutline</span> input.shp interim.vrt output.tif
+</code></pre></div></div>
+
+<p>This generates the same result as making the interim GeoTIFF instead of the VRT, but the
+VRT method takes less than 1 second instead of minutes.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left">VRT</th>
+      <th style="text-align: left">Task</th>
+      <th style="text-align: left">Computation time (s)</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left">N</td>
+      <td style="text-align: left">Creating the tiled GeoTIFF (several GB)</td>
+      <td style="text-align: left">~ 4.5 min</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">N</td>
+      <td style="text-align: left">Cropping the tiled GeoTIFF</td>
+      <td style="text-align: left">&lt; 1 sec</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">Y</td>
+      <td style="text-align: left">Creating the tiled VRT (37 KB)</td>
+      <td style="text-align: left">&lt; 1 sec</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">Y</td>
+      <td style="text-align: left">Cropping the tiled VRT:</td>
+      <td style="text-align: left">&lt; 1 sec</td>
+    </tr>
+  </tbody>
+</table>
+<div class="footnotes" role="doc-endnotes">
+  <ol>
+    <li id="fn:1" role="doc-endnote">
+      <p>This large dataset is stored in multiple individual files covering different geographic areas. The properties listed here are for one of the individual files. <a href="#fnref:1" class="reversefootnote" role="doc-backlink">&#8617;</a> <a href="#fnref:1:1" class="reversefootnote" role="doc-backlink">&#8617;<sup>2</sup></a></p>
+    </li>
+  </ol>
+</div>
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+
+
+        
+      </footer>
+
+      
+
+      
+
+    </div>
+
+    
+  </article>
+
+  
+  
+</div>
+    </div>
+
+    
+      <div class="search-content">
+        <div class="search-content__inner-wrap"><form onsubmit="return googleCustomSearchExecute();" id="cse-search-box-form-id">
+    <input type="search" id="cse-search-input-box-id" aria-placeholder="Enter your search term..." class="search-input" tabindex="-1" placeholder="Enter your search term..." />
+    </form>
+    <div id="results" class="results">
+        <gcse:searchresults-only></gcse:searchresults-only>
+    </div></div>
+
+      </div>
+    
+    
+    <div class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+
+        <div class="page__footer-follow">
+  <ul class="social-icons">
+    
+      <li><strong>Follow:</strong></li>
+    
+    
+      <li><a href="https://twitter.com/isugif"><i class="fab fa-fw fa-twitter-square" aria-hidden="true"></i> Twitter</a></li>
+    
+    
+    
+      <li><a href="https://github.com/https://github.com/isugenomics"><i class="fab fa-fw fa-github" aria-hidden="true"></i> GitHub</a></li>
+    
+    
+    
+    
+  </ul>
+</div>
+
+<div class="page__footer-copyright">&copy; 2024 Geospatial Workbook</div>
+
+      </footer>
+    </div>
+
+    
+  <script src="/assets/js/main.min.js"></script>
+  <script src="https://use.fontawesome.com/releases/v5.0.13/js/all.js"></script>
+
+
+<script>
+  (function () {
+    var cx = '009853197685285203469:nsvri1pa88d';
+    var gcse = document.createElement('script');
+    gcse.type = 'text/javascript';
+    gcse.async = true;
+    gcse.src = 'https://cse.google.com/cse.js?cx=' + cx;
+    var s = document.getElementsByTagName('script')[0];
+    s.parentNode.insertBefore(gcse, s);
+  })();
+
+  function googleCustomSearchExecute() {
+    var input = document.getElementById('cse-search-input-box-id');
+    var element = google.search.cse.element.getElement('searchresults-only0');
+    if (input.value == '') {
+      element.clearAllResults();
+    } else {
+      element.execute(input.value);
+    }
+    return false;
+  }
+
+  
+</script>
+
+
+
+
+<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+<script id="MathJax-script" defer
+        src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+</script>
+
+
+
+
+  </body>
+</html>

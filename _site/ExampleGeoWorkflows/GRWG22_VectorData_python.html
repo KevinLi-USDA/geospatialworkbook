@@ -1,0 +1,839 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.11.2 by Michael Rose
+  Copyright 2013-2018 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE.txt
+-->
+<html lang="en" class="no-js">
+  <head>
+    <meta charset="utf-8">
+
+<!-- begin _includes/seo.html --><title>Handling vector data - Geospatial Workbook</title>
+<meta name="description" content="Tutorial on Informatics for Geospatial Information">
+
+
+  <meta name="author" content="Heather Savoy">
+
+
+<meta property="og:type" content="website">
+<meta property="og:locale" content="en_US">
+<meta property="og:site_name" content="Geospatial Workbook">
+<meta property="og:title" content="Handling vector data">
+<meta property="og:url" content="http://localhost:4000/ExampleGeoWorkflows/GRWG22_VectorData_python.html">
+
+
+
+
+  <meta property="og:image" content="http://localhost:4000/assets/images/margaret-weir-GZyjbLNOaFg-unsplash_dark.jpg">
+
+
+
+  <meta name="twitter:site" content="@isugif">
+  <meta name="twitter:title" content="Handling vector data">
+  <meta name="twitter:description" content="Tutorial on Informatics for Geospatial Information">
+  <meta name="twitter:url" content="http://localhost:4000/ExampleGeoWorkflows/GRWG22_VectorData_python.html">
+
+  
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content="http://localhost:4000/assets/images/margaret-weir-GZyjbLNOaFg-unsplash_dark.jpg">
+  
+
+  
+    <meta name="twitter:creator" content="@someone">
+  
+
+
+
+
+
+
+
+  
+
+  
+
+
+<link rel="canonical" href="http://localhost:4000/ExampleGeoWorkflows/GRWG22_VectorData_python.html">
+
+
+
+
+
+
+
+  <script type="application/ld+json">
+    {
+      "@context": "http://schema.org",
+      "@type": "Person",
+      "name": "",
+      "url": "http://localhost:4000",
+      "sameAs": null
+    }
+  </script>
+
+
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+<link href="/feed.xml" type="application/atom+xml" rel="alternate" title="Geospatial Workbook Feed">
+
+<!-- http://t.co/dKP3o1e -->
+<meta name="HandheldFriendly" content="True">
+<meta name="MobileOptimized" content="320">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+
+<!--[if lte IE 9]>
+  <style>
+    /* old IE unsupported flexbox fixes */
+    .greedy-nav .site-title {
+      padding-right: 3em;
+    }
+    .greedy-nav button {
+      position: absolute;
+      top: 0;
+      right: 0;
+      height: 100%;
+    }
+  </style>
+<![endif]-->
+
+
+    <!-- start custom head snippets -->
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-E6BZVYF8ZY"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-E6BZVYF8ZY');
+</script>
+
+<!-- insert favicons. use https://realfavicongenerator.net/ -->
+
+<!-- end custom head snippets -->
+
+  </head>
+
+  <body class="layout--single">
+
+    <!--[if lt IE 9]>
+<div class="notice--danger align-center" style="margin: 0;">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience.</div>
+<![endif]-->
+
+    <div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        <a class="site-title" href="/">Geospatial Workbook</a>
+        <ul class="visible-links">
+          
+            
+            <li class="masthead__menu-item">
+              <a href="http://localhost:4000/about.html" >About</a>
+            </li>
+          
+            
+            <li class="masthead__menu-item">
+              <a href="http://localhost:4000/list.html" >Index</a>
+            </li>
+          
+            
+            <li class="masthead__menu-item">
+              <a href="http://localhost:4000/glossary.html" >Glossary</a>
+            </li>
+          
+            
+            <li class="masthead__menu-item">
+              <a href="http://localhost:4000/people.html" >People</a>
+            </li>
+          
+            
+            <li class="masthead__menu-item">
+              <a href="http://localhost:4000/contributing.html" >Contribute</a>
+            </li>
+          
+        </ul>
+        
+        <button class="search__toggle" type="button">
+          <svg class="icon" width="16" height="16" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 15.99 16">
+            <path d="M15.5,13.12L13.19,10.8a1.69,1.69,0,0,0-1.28-.55l-0.06-.06A6.5,6.5,0,0,0,5.77,0,6.5,6.5,0,0,0,2.46,11.59a6.47,6.47,0,0,0,7.74.26l0.05,0.05a1.65,1.65,0,0,0,.5,1.24l2.38,2.38A1.68,1.68,0,0,0,15.5,13.12ZM6.4,2A4.41,4.41,0,1,1,2,6.4,4.43,4.43,0,0,1,6.4,2Z" transform="translate(-.01)"></path>
+          </svg>
+        </button>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">Toggle Menu</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+    <div class="initial-content">
+      
+  
+
+
+
+
+
+
+
+
+
+
+
+<div class="page__hero--overlay"
+  style="background-color: 444444; background-image: url('/assets/images/margaret-weir-GZyjbLNOaFg-unsplash_dark.jpg');"
+>
+  
+    <div class="wrapper">
+      <h1 id="page-title" class="page__title" itemprop="headline">
+        
+          Handling vector data
+
+        
+      </h1>
+      
+      
+      
+    </div>
+  
+  
+</div>
+
+
+
+
+
+<div id="main" role="main">
+  
+  <div class="sidebar sticky">
+  
+
+
+<div itemscope itemtype="http://schema.org/Person">
+
+  
+    <div class="author__avatar">
+      
+
+      
+        <img src="/assets/images/people/HeatherSavoy.png" alt="Heather Savoy" itemprop="image">
+      
+    </div>
+  
+
+  <div class="author__content">
+    
+      <h3 class="author__name" itemprop="name">Heather Savoy</h3>
+    
+    
+      <p class="author__bio" itemprop="description">
+        Heather is a Computational Biologist (Data Scientist) in the USDA-ARS SCINet Office. Her research interests include applying informatics methods to multidisciplinary agro-ecosystem problems and building data science software tools for geospatial research. She received her Ph.D. in Civil and Environmental Engineering with an emphasis in Computational Data Science and Engineering from the University of California Berkeley. She also holds a B.S. in Environmental Science with a minor in Computational Mathematics from the Florida Institute of Technology.
+      </p>
+    
+  </div>
+
+  <div class="author__urls-wrapper">
+    <button class="btn btn--inverse">Follow</button>
+    <ul class="author__urls social-icons">
+      
+
+      
+
+      
+        <li>
+          <a href="mailto:mailto:heather.savoy@usda.gov">
+            <meta itemprop="email" content="mailto:heather.savoy@usda.gov" />
+            <i class="fas fa-fw fa-envelope-square" aria-hidden="true"></i> Email
+          </a>
+        </li>
+      
+
+      
+
+      
+        <li>
+          <a href="https://twitter.com/someone" itemprop="sameAs">
+            <i class="fab fa-fw fa-twitter-square" aria-hidden="true"></i> Twitter
+          </a>
+        </li>
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      <!--
+  <li>
+    <a href="http://link-to-whatever-social-network.com/user/" itemprop="sameAs">
+      <i class="fas fa-fw" aria-hidden="true"></i> Custom Social Profile Link
+    </a>
+  </li>
+-->
+    </ul>
+  </div>
+</div>
+
+<!-- Create a 2nd author for tutorials -->
+
+
+
+<div itemscope itemtype="http://schema.org/Person">
+
+  
+
+  <div class="author__content">
+    
+      <h3 class="author__name" itemprop="name"></h3>
+    
+    
+  </div>
+
+  <div class="author__urls-wrapper">
+    <button class="btn btn--inverse">Follow</button>
+    <ul class="author__urls social-icons">
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      <!--
+  <li>
+    <a href="http://link-to-whatever-social-network.com/user/" itemprop="sameAs">
+      <i class="fas fa-fw" aria-hidden="true"></i> Custom Social Profile Link
+    </a>
+  </li>
+-->
+    </ul>
+  </div>
+</div>
+
+  
+  </div>
+
+
+  <article class="page" itemscope itemtype="http://schema.org/CreativeWork">
+    <meta itemprop="headline" content="Handling vector data">
+    
+    
+    
+
+    <div class="page__inner-wrap">
+      
+
+      <section class="page__content" itemprop="text">
+        
+        <p><strong>Last Update:</strong> 7 October 2022 <br />
+<strong>Download Jupyter Notebook</strong>: <a href="https://geospatial.101workbook.org/tutorials/GRWG22_VectorData.ipynb">GRWG22_VectorData.ipynb</a></p>
+
+<h2 id="overview">Overview</h2>
+<p>This tutorial covers how to manipulate geospatial vector datasets in python. A 
+dataset with polygon geometries representing wildfire perimeters is joined with 
+a dataset with point geometries representing air quality monitoring stations to
+determine which stations observed unhealthy concentrations of small particulate 
+matter (PM2.5) in the atmosphere around the time of the Camp Fire in northern CA 
+in 2018.</p>
+
+<p><em>Language</em>: <code class="language-plaintext highlighter-rouge">Python</code></p>
+
+<p><em>Primary Libraries/Packages</em>:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Description</th>
+      <th>Link</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>geopandas</td>
+      <td>GeoPandas is an open source project to make working with geospatial data in python easier.</td>
+      <td>https://geopandas.org/en/stable/</td>
+    </tr>
+    <tr>
+      <td>plotnine</td>
+      <td>A Grammar of Graphics for Python</td>
+      <td>https://plotnine.readthedocs.io/en/stable/</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="nomenclature">Nomenclature</h2>
+
+<ul>
+  <li><em>Vector data:</em> Spatial data defined by simple geometry types (points, lines, 
+and polygons) where each geometry feature can be assigned non-spatial attributes.</li>
+  <li><em>CRS:</em> Coordinate Reference System, also known as a spatial reference system. A
+system for defining geospatial coordinates.</li>
+  <li><em>Spatial join:</em> Combining two spatial datasets by the relationship between their
+geometries.</li>
+</ul>
+
+<h2 id="data-details">Data Details</h2>
+
+<ul>
+  <li>Data: National Interagency Fire Center’s Historic Perimeters dataset</li>
+  <li>Link: <a href="https://data-nifc.opendata.arcgis.com/datasets/nifc::historic-perimeters-combined-2000-2018-geomac/explore">https://data-nifc.opendata.arcgis.com/datasets/nifc::historic-perimeters-combined-2000-2018-geomac/explore</a></li>
+  <li>
+    <p>Other Details: The original dataset contains perimeters of wildfires in the US 
+from 2000-2018 as a polygon feature collection. For this tutorial, the wildfire
+perimeters in CA during 2018 were extracted.</p>
+  </li>
+  <li>Data: US EPA’s Air Quality System (AQS) database</li>
+  <li>Link: <a href="https://aqs.epa.gov/aqsweb/documents/data_api.html">https://aqs.epa.gov/aqsweb/documents/data_api.html</a></li>
+  <li>Other Details: PM2.5 concentration data from this database covering CA in 2018 
+were retrieved and pre-processed for this tutorial.</li>
+</ul>
+
+<h2 id="analysis-steps">Analysis Steps</h2>
+
+<ol>
+  <li><strong>Fire perimeter data</strong>
+    - read in and visualize the wildfire perimeter data
+    <ul>
+      <li>Read in geojson file</li>
+      <li>Visualize perimeters on map of CA</li>
+      <li>Visualize non-spatial attributes</li>
+    </ul>
+  </li>
+  <li><strong>Air quality data</strong>
+    - read in the shapefile</li>
+  <li><strong>Buffer and spatial join</strong>
+    - find the air quality stations within 200km of the fire perimeter</li>
+  <li><strong>Visualize</strong>
+    -  air quality around the Camp Fire</li>
+</ol>
+
+<h3 id="step-0-import-libraries--packages">Step 0: Import Libraries / Packages</h3>
+
+<p>Below are commands to run to create a new Conda environment named ‘geoenv’ that contains the packages used in this tutorial series. To learn more about using Conda environments on Ceres, see <a href="https://scinet.usda.gov/guide/conda/">this guide</a>. NOTE: If you have used other Geospatial Workbook tutorials from the SCINet Geospatial Research Working Group Workshop 2022, you may have aleady created this environment and may skip to launching JupyterHub.</p>
+
+<p>First, we allocate resources on a compute (Ceres) or development (Atlas) node so we do not burden the login node with the conda installations.</p>
+
+<p>On Ceres:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>salloc
+</code></pre></div></div>
+
+<p>On Atlas (you will need to replace <code class="language-plaintext highlighter-rouge">yourProjectName</code> with one of your project’s name):</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>srun <span class="nt">-A</span> yourProjectName <span class="nt">-p</span> development <span class="nt">--pty</span> <span class="nt">--preserve-env</span> bash
+</code></pre></div></div>
+
+<p>Then we load the <code class="language-plaintext highlighter-rouge">miniconda</code> conda module available on Ceres and Atlas to access the <code class="language-plaintext highlighter-rouge">Conda</code> commands to create environments, activate them, and install Python and packages.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>salloc
+module load miniconda
+conda create <span class="nt">--name</span> geoenv
+<span class="nb">source </span>activate geoenv
+conda <span class="nb">install </span>geopandas rioxarray rasterstats plotnine ipython ipykernel dask dask-jobqueue <span class="nt">-c</span> conda-forge
+</code></pre></div></div>
+
+<p>To have JupyterLab use this conda environment, we will make a kernel.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ipython kernel <span class="nb">install</span> <span class="nt">--user</span> <span class="nt">--name</span><span class="o">=</span>geo_kernel
+</code></pre></div></div>
+
+<p>This tutorial assumes you are running this python notebook in JupyterLab. The 
+easiest way to do that is with Open OnDemand (OoD) on <a href="http://ceres-ood.scinet.usda.gov/">Ceres</a>
+or <a href="https://atlas-ood.hpc.msstate.edu/">Atlas</a>. 
+Select the following parameter values when requesting a JupyterLab
+app to be launched depending on which cluster you choose. All other values can 
+be left to their defaults. Note: on Atlas, we are using the development partition
+so that we have internet access to download files since the regular compute nodes
+on the <code class="language-plaintext highlighter-rouge">atlas</code> partition do not have internet access.</p>
+
+<p>Ceres:</p>
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">Slurm Partition</code>: short</li>
+  <li><code class="language-plaintext highlighter-rouge">Number of hours</code>: 1</li>
+  <li><code class="language-plaintext highlighter-rouge">Number of cores</code>: 2</li>
+  <li><code class="language-plaintext highlighter-rouge">Jupyer Notebook vs Lab</code>: Lab</li>
+</ul>
+
+<p>Atlas:</p>
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">Partition Name</code>: development</li>
+  <li><code class="language-plaintext highlighter-rouge">QOS</code>: normal</li>
+  <li><code class="language-plaintext highlighter-rouge">Number of hours</code>: 1</li>
+  <li><code class="language-plaintext highlighter-rouge">Number of tasks</code>: 2</li>
+</ul>
+
+<p>To download the python notebook file for this tutorial to either cluster within OoD, 
+you can use the following lines in the python console:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">urllib.request</span>
+<span class="n">tutorial_name</span> <span class="o">=</span> <span class="s">'GRWG22_VectorData.ipynb'</span>
+<span class="n">urllib</span><span class="p">.</span><span class="n">request</span><span class="p">.</span><span class="n">urlretrieve</span><span class="p">(</span><span class="s">'https://geospatial.101workbook.org/tutorials/'</span> <span class="o">+</span> <span class="n">tutorial_name</span><span class="p">,</span> 
+                           <span class="n">tutorial_name</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>Once you are in JupyterLab with this notebook open, select your kernel by clicking on the <em>Switch kernel</em> button in the top right corner of the editor. A pop-up will appear with a dropdown menu containing the <em>geo_kernel</em> kernel we made above. Click on the <em>geo_kernel</em> kernel and click the <em>Select</em> button.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">geopandas</span> <span class="k">as</span> <span class="n">gpd</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="n">np</span>
+<span class="kn">from</span> <span class="nn">plotnine</span> <span class="kn">import</span> <span class="n">ggplot</span><span class="p">,</span> <span class="n">geom_map</span><span class="p">,</span> <span class="n">aes</span><span class="p">,</span> <span class="n">theme</span><span class="p">,</span> <span class="n">geom_histogram</span><span class="p">,</span> <span class="n">scale_x_datetime</span><span class="p">,</span> <span class="n">geom_line</span><span class="p">,</span> <span class="n">ylab</span><span class="p">,</span> <span class="n">xlab</span><span class="p">,</span> <span class="n">annotate</span><span class="p">,</span> <span class="n">geom_vline</span>
+<span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">datetime</span><span class="p">,</span> <span class="n">date</span>
+</code></pre></div></div>
+
+<h3 id="step-1-read-in-fire-perimeter-data-and-visualize">Step 1: Read in fire perimeter data and visualize</h3>
+
+<p>The National Interagency Fire Center’s Historic Perimeters dataset has 23,776 
+polygons representing wildfire perimeters from 2000-2018. A version of the dataset 
+filtered to wildfires in CA in 2018, since that is when the 
+destructive Camp Fire occurred, will be used in this tutorial.</p>
+
+<p>We will transform to planar coordinates for distance calculations. The 5070 EPSG
+code is for the Equal Area CONUS Albers.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">fire_f</span> <span class="o">=</span> <span class="s">'Historic_Perimeters_Combined_2000-2018_GeoMAC_CA2018.geojson'</span>
+<span class="n">dnld_url</span> <span class="o">=</span> <span class="s">'https://geospatial.101workbook.org/ExampleGeoWorkflows/assets/'</span>
+<span class="n">all_fires</span> <span class="o">=</span> <span class="n">gpd</span><span class="p">.</span><span class="n">read_file</span><span class="p">(</span><span class="n">dnld_url</span> <span class="o">+</span> <span class="n">fire_f</span><span class="p">)</span>
+<span class="n">fire_CA2018</span> <span class="o">=</span> <span class="n">all_fires</span><span class="p">.</span><span class="n">to_crs</span><span class="p">(</span><span class="mi">5070</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>To get an idea of what the data look like, we can create a map. Since this 
+feature collection has several attributes, we can also visualize, for example, 
+when the fires occurred during the year.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># CA boundary
+</span><span class="n">census_states</span> <span class="o">=</span> <span class="n">gpd</span><span class="p">.</span><span class="n">read_file</span><span class="p">(</span><span class="s">'https://www2.census.gov/geo/tiger/GENZ2021/shp/cb_2021_us_state_20m.zip'</span><span class="p">)</span>
+<span class="n">CA</span> <span class="o">=</span> <span class="n">census_states</span><span class="p">.</span><span class="n">loc</span><span class="p">[</span><span class="n">census_states</span><span class="p">[</span><span class="s">'NAME'</span><span class="p">]</span> <span class="o">==</span> <span class="s">'California'</span><span class="p">].</span><span class="n">to_crs</span><span class="p">(</span><span class="n">fire_CA2018</span><span class="p">.</span><span class="n">crs</span><span class="p">)</span>
+
+<span class="c1"># The Camp Fire feature
+</span><span class="n">camp_fire</span> <span class="o">=</span> <span class="n">fire_CA2018</span><span class="p">.</span><span class="n">loc</span><span class="p">[</span><span class="n">fire_CA2018</span><span class="p">[</span><span class="s">'incidentname'</span><span class="p">]</span> <span class="o">==</span> <span class="s">'CAMP'</span><span class="p">]</span>
+
+<span class="c1"># Plot a map of all wildfires and 
+# highlight the Camp Fire.
+</span><span class="n">ggplot</span><span class="p">()</span> <span class="o">+</span> \
+    <span class="n">geom_map</span><span class="p">(</span><span class="n">CA</span><span class="p">,</span> <span class="n">fill</span> <span class="o">=</span> <span class="s">'white'</span><span class="p">)</span> <span class="o">+</span> \
+    <span class="n">geom_map</span><span class="p">(</span><span class="n">fire_CA2018</span><span class="p">,</span> <span class="n">fill</span> <span class="o">=</span> <span class="s">'black'</span><span class="p">,</span> <span class="n">color</span> <span class="o">=</span> <span class="bp">None</span><span class="p">)</span> <span class="o">+</span> \
+    <span class="n">geom_map</span><span class="p">(</span><span class="n">camp_fire</span><span class="p">,</span> <span class="n">fill</span> <span class="o">=</span> <span class="s">'red'</span><span class="p">,</span> <span class="n">color</span> <span class="o">=</span> <span class="bp">None</span><span class="p">)</span> <span class="o">+</span> \
+    <span class="n">theme</span><span class="p">(</span><span class="n">figure_size</span> <span class="o">=</span> <span class="p">(</span><span class="mi">6</span><span class="p">,</span><span class="mi">8</span><span class="p">))</span>
+
+</code></pre></div></div>
+<p><img src="/ExampleGeoWorkflows/assets/Session8_Tutorial1_11_0.png" alt="png" /></p>
+
+<p>Since this feature collection has several attributes, we can also visualize, 
+for example, when the fires occurred during the year. Note that the dates are
+when the fires’ perimeters are established, not when the fires start. Since fires 
+can endure for many days and change their spatial extent over that time, this
+date is when the maximum extent of the fire was determined, which needs to be 
+at the end of the fire.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Plotting when wildfires occurred throughout 2018
+</span><span class="n">ggplot</span><span class="p">(</span><span class="n">fire_CA2018</span><span class="p">,</span> <span class="n">aes</span><span class="p">(</span><span class="s">'perimeterdatetime'</span><span class="p">))</span> <span class="o">+</span> \
+  <span class="n">geom_histogram</span><span class="p">()</span> <span class="o">+</span> \
+  <span class="n">scale_x_datetime</span><span class="p">(</span><span class="n">breaks</span> <span class="o">=</span> <span class="s">'1 month'</span><span class="p">,</span>
+                   <span class="n">date_labels</span> <span class="o">=</span> <span class="s">'%b'</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p><img src="/ExampleGeoWorkflows/assets/Session8_Tutorial1_13_1.png" alt="png" /></p>
+
+<h3 id="step-2-read-in-air-quality-data">Step 2: Read in air quality data</h3>
+
+<p>We will read in an air quality dataset to showcase combining multiple vector 
+datasets. The geometry type is point, representing sampling stations. This 
+dataset can be downloaded with an API, but you need to register an account, so 
+the download process has been done already and the data are available in our 
+GitHub repository. Some pre-processing for this dataset was done to make it into 
+a feature collection.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">CA_PM25</span> <span class="o">=</span> <span class="n">gpd</span><span class="p">.</span><span class="n">read_file</span><span class="p">(</span><span class="n">dnld_url</span> <span class="o">+</span> <span class="s">'air_quality_CA2018.zip'</span><span class="p">).</span><span class="n">to_crs</span><span class="p">(</span><span class="n">fire_CA2018</span><span class="p">.</span><span class="n">crs</span><span class="p">)</span>
+</code></pre></div></div>
+
+<h3 id="step-3-find-the-air-quality-stations-within-200km-of-the-fire-perimeter">Step 3: Find the air quality stations within 200km of the fire perimeter</h3>
+
+<p>We will buffer the Camp Fire polygon and join that to the air quality data to 
+find the nearby stations. Note that the direction of joining is important: the 
+geometry of the left dataset, in this case the air quality points, will be 
+retained and the attributes of intersecting features of the right dataset will 
+be retained.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">camp_zone</span> <span class="o">=</span> <span class="n">camp_fire</span><span class="p">.</span><span class="n">copy</span><span class="p">()</span>   
+<span class="n">camp_zone</span><span class="p">[</span><span class="s">'geometry'</span><span class="p">]</span> <span class="o">=</span> <span class="n">camp_fire</span><span class="p">.</span><span class="nb">buffer</span><span class="p">(</span><span class="mi">200000</span><span class="p">)</span> <span class="c1"># meters, buffer is in unit of CRS
+</span><span class="n">air_fire</span> <span class="o">=</span> <span class="n">CA_PM25</span><span class="p">.</span><span class="n">sjoin</span><span class="p">(</span><span class="n">camp_zone</span><span class="p">,</span> <span class="n">how</span><span class="o">=</span><span class="s">"inner"</span><span class="p">,</span> <span class="n">predicate</span><span class="o">=</span><span class="s">'intersects'</span><span class="p">)</span>
+</code></pre></div></div>
+
+<h3 id="step-4-visualize-air-quality-around-the-camp-fire">Step 4: Visualize air quality around the Camp Fire</h3>
+
+<p>‘Around’ in this case should be in both space and time. We already found the 
+air quality stations within 200 km from the fire perimeter. To make sure we are
+looking at the right time of year, we will relate the non-spatial attributes of
+the two feature collections. Both datasets come with date columns: when the air
+quality was recorded and when the perimeter was determined (so the latter is 
+an approximate time near the end of the fire). We will filter our spatially-
+joined dataset to within 30 days of the fire perimeter date so we only consider
+air quality within a 2-month window around the time of the fire.</p>
+
+<p>We can then plot the air quality metric of PM2.5 concentration (lower is better) 
+as a function of time before/after the fire perimeter date. Each line is an 
+individual air quality station. The figure indicates that there were several 
+stations that recorded unhealthy to hazardous PM2.5 concentrations around the
+time of this wildfire.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Filter to 30 days from fire perimeter date -
+# local date for air quality measurement
+</span><span class="n">air_fire</span><span class="p">[</span><span class="s">'dat_local'</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="n">datetime</span><span class="p">.</span><span class="n">strptime</span><span class="p">(</span><span class="n">dt</span><span class="p">,</span> <span class="s">'%Y-%m-%d'</span><span class="p">).</span><span class="n">date</span><span class="p">()</span> <span class="k">for</span> <span class="n">dt</span> <span class="ow">in</span> <span class="nb">list</span><span class="p">(</span><span class="n">air_fire</span><span class="p">[</span><span class="s">'dat_lcl'</span><span class="p">])]</span> 
+<span class="c1"># fire perimeter date
+</span><span class="n">air_fire</span><span class="p">[</span><span class="s">'perimeterdate'</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="n">dt</span><span class="p">.</span><span class="n">date</span><span class="p">()</span> <span class="k">for</span> <span class="n">dt</span> <span class="ow">in</span> <span class="n">air_fire</span><span class="p">[</span><span class="s">'perimeterdatetime'</span><span class="p">]]</span> 
+<span class="n">air_fire</span><span class="p">[</span><span class="s">'date_shift'</span><span class="p">]</span> <span class="o">=</span> <span class="n">air_fire</span><span class="p">[</span><span class="s">'dat_local'</span><span class="p">]</span> <span class="o">-</span> <span class="n">air_fire</span><span class="p">[</span><span class="s">'perimeterdate'</span><span class="p">]</span>
+<span class="c1"># Arithmetic mean of PM2.5 concentration
+</span><span class="n">air_fire</span><span class="p">[</span><span class="s">'arthmt_'</span><span class="p">]</span> <span class="o">=</span> <span class="n">air_fire</span><span class="p">[</span><span class="s">'arthmt_'</span><span class="p">].</span><span class="n">astype</span><span class="p">(</span><span class="s">'float64'</span><span class="p">)</span>
+<span class="n">air_fire</span><span class="p">[</span><span class="s">'station_id'</span><span class="p">]</span> <span class="o">=</span> <span class="n">air_fire</span><span class="p">[</span><span class="s">'stat_cd'</span><span class="p">]</span> <span class="o">+</span> <span class="n">air_fire</span><span class="p">[</span><span class="s">'cnty_cd'</span><span class="p">]</span> <span class="o">+</span> <span class="n">air_fire</span><span class="p">[</span><span class="s">'st_nmbr'</span><span class="p">]</span>
+<span class="n">air_near_fire</span> <span class="o">=</span> <span class="n">air_fire</span><span class="p">.</span><span class="n">loc</span><span class="p">[</span><span class="nb">abs</span><span class="p">(</span><span class="n">air_fire</span><span class="p">[</span><span class="s">'date_shift'</span><span class="p">]).</span><span class="n">astype</span><span class="p">(</span><span class="s">'timedelta64[D]'</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">30</span><span class="p">]</span>
+
+<span class="c1"># Define bounds of Camp Fire dates for illustrative purposes
+# Camp Fire burned for 17 days- add a polygon to graph to visualize temporal overlap with low air quality
+</span><span class="n">camp_dates</span> <span class="o">=</span> <span class="p">[</span><span class="n">datetime</span><span class="p">.</span><span class="n">strptime</span><span class="p">(</span><span class="n">dt</span><span class="p">,</span> <span class="s">'%Y-%m-%d'</span><span class="p">).</span><span class="n">date</span><span class="p">()</span> <span class="k">for</span> <span class="n">dt</span> <span class="ow">in</span> <span class="p">[</span><span class="s">'2018-11-08'</span><span class="p">,</span><span class="s">'2018-11-25'</span><span class="p">]]</span>
+
+<span class="c1"># Camp Fire's maximum perimeter established at end of fire
+</span><span class="n">fp_date</span> <span class="o">=</span> <span class="n">air_fire</span><span class="p">[</span><span class="s">'perimeterdate'</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+
+<span class="n">ggplot</span><span class="p">(</span><span class="n">air_near_fire</span><span class="p">,</span> <span class="n">aes</span><span class="p">(</span><span class="s">'date_shift'</span><span class="p">,</span><span class="s">'arthmt_'</span><span class="p">))</span> <span class="o">+</span> \
+  <span class="n">annotate</span><span class="p">(</span><span class="s">'rect'</span><span class="p">,</span> <span class="n">xmin</span> <span class="o">=</span> <span class="n">camp_dates</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">xmax</span> <span class="o">=</span> <span class="n">camp_dates</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span>
+           <span class="n">ymin</span> <span class="o">=</span> <span class="o">-</span><span class="n">np</span><span class="p">.</span><span class="n">inf</span><span class="p">,</span> <span class="n">ymax</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="n">inf</span><span class="p">,</span>
+           <span class="n">fill</span> <span class="o">=</span> <span class="s">'firebrick'</span><span class="p">,</span> <span class="n">alpha</span> <span class="o">=</span> <span class="mf">0.5</span><span class="p">)</span> <span class="o">+</span> \
+  <span class="n">geom_line</span><span class="p">(</span><span class="n">aes</span><span class="p">(</span><span class="n">group</span><span class="o">=</span><span class="s">'station_id'</span><span class="p">))</span> <span class="o">+</span> \
+  <span class="n">geom_vline</span><span class="p">(</span><span class="n">xintercept</span> <span class="o">=</span> <span class="n">fp_date</span><span class="p">,</span> 
+             <span class="n">color</span> <span class="o">=</span> <span class="s">'red'</span><span class="p">,</span>
+             <span class="n">size</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span>
+             <span class="n">linetype</span> <span class="o">=</span> <span class="s">'dashed'</span><span class="p">)</span> <span class="o">+</span> \
+  <span class="n">scale_x_datetime</span><span class="p">(</span><span class="n">name</span> <span class="o">=</span> <span class="s">'Date'</span><span class="p">,</span> <span class="n">date_breaks</span> <span class="o">=</span> <span class="s">"10 days"</span><span class="p">,</span> <span class="n">date_labels</span> <span class="o">=</span> <span class="s">"%m-%d-%y"</span><span class="p">)</span> <span class="o">+</span> \
+  <span class="n">ylab</span><span class="p">(</span><span class="s">'PM2.5 [micrograms/cubic meter]'</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p><img src="/ExampleGeoWorkflows/assets/Session8_Tutorial1_19_0.png" alt="png" /></p>
+
+<p>We can then map where those stations were - quite an 
+extensive impact on air quality!</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># 101 micrograms/cubic meter and higher is considered
+# unhealthy for sensitive groups 
+</span><span class="n">unhealthy_air</span> <span class="o">=</span> <span class="n">air_near_fire</span><span class="p">.</span><span class="n">loc</span><span class="p">[</span><span class="n">air_near_fire</span><span class="p">[</span><span class="s">'arthmt_'</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">100</span><span class="p">]</span>
+
+<span class="n">ggplot</span><span class="p">()</span> <span class="o">+</span> \
+   <span class="n">geom_map</span><span class="p">(</span><span class="n">CA</span><span class="p">,</span> <span class="n">fill</span> <span class="o">=</span> <span class="s">'white'</span><span class="p">)</span> <span class="o">+</span> \
+   <span class="n">geom_map</span><span class="p">(</span><span class="n">camp_zone</span><span class="p">,</span> <span class="n">fill</span> <span class="o">=</span> <span class="bp">None</span><span class="p">,</span> <span class="n">color</span> <span class="o">=</span> <span class="s">'red'</span><span class="p">)</span> <span class="o">+</span> \
+   <span class="n">geom_map</span><span class="p">(</span><span class="n">camp_fire</span><span class="p">,</span> <span class="n">fill</span> <span class="o">=</span> <span class="s">'red'</span><span class="p">,</span> <span class="n">color</span> <span class="o">=</span> <span class="bp">None</span><span class="p">)</span> <span class="o">+</span> \
+   <span class="n">geom_map</span><span class="p">(</span><span class="n">unhealthy_air</span><span class="p">,</span> <span class="n">color</span> <span class="o">=</span> <span class="s">'red'</span><span class="p">)</span> <span class="o">+</span> \
+   <span class="n">theme</span><span class="p">(</span><span class="n">figure_size</span> <span class="o">=</span> <span class="p">(</span><span class="mi">6</span><span class="p">,</span><span class="mi">8</span><span class="p">))</span>
+
+</code></pre></div></div>
+
+<p><img src="/ExampleGeoWorkflows/assets/Session8_Tutorial1_21_0.png" alt="png" /></p>
+
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+
+
+        
+      </footer>
+
+      
+
+      
+
+    </div>
+
+    
+  </article>
+
+  
+  
+</div>
+    </div>
+
+    
+      <div class="search-content">
+        <div class="search-content__inner-wrap"><form onsubmit="return googleCustomSearchExecute();" id="cse-search-box-form-id">
+    <input type="search" id="cse-search-input-box-id" aria-placeholder="Enter your search term..." class="search-input" tabindex="-1" placeholder="Enter your search term..." />
+    </form>
+    <div id="results" class="results">
+        <gcse:searchresults-only></gcse:searchresults-only>
+    </div></div>
+
+      </div>
+    
+    
+    <div class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+
+        <div class="page__footer-follow">
+  <ul class="social-icons">
+    
+      <li><strong>Follow:</strong></li>
+    
+    
+      <li><a href="https://twitter.com/isugif"><i class="fab fa-fw fa-twitter-square" aria-hidden="true"></i> Twitter</a></li>
+    
+    
+    
+      <li><a href="https://github.com/https://github.com/isugenomics"><i class="fab fa-fw fa-github" aria-hidden="true"></i> GitHub</a></li>
+    
+    
+    
+    
+  </ul>
+</div>
+
+<div class="page__footer-copyright">&copy; 2024 Geospatial Workbook</div>
+
+      </footer>
+    </div>
+
+    
+  <script src="/assets/js/main.min.js"></script>
+  <script src="https://use.fontawesome.com/releases/v5.0.13/js/all.js"></script>
+
+
+<script>
+  (function () {
+    var cx = '009853197685285203469:nsvri1pa88d';
+    var gcse = document.createElement('script');
+    gcse.type = 'text/javascript';
+    gcse.async = true;
+    gcse.src = 'https://cse.google.com/cse.js?cx=' + cx;
+    var s = document.getElementsByTagName('script')[0];
+    s.parentNode.insertBefore(gcse, s);
+  })();
+
+  function googleCustomSearchExecute() {
+    var input = document.getElementById('cse-search-input-box-id');
+    var element = google.search.cse.element.getElement('searchresults-only0');
+    if (input.value == '') {
+      element.clearAllResults();
+    } else {
+      element.execute(input.value);
+    }
+    return false;
+  }
+
+  
+</script>
+
+
+
+
+<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+<script id="MathJax-script" defer
+        src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+</script>
+
+
+
+
+  </body>
+</html>

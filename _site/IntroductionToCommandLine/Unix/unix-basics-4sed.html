@@ -1,0 +1,455 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.11.2 by Michael Rose
+  Copyright 2013-2018 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE.txt
+-->
+<html lang="en" class="no-js">
+  <head>
+    <meta charset="utf-8">
+
+<!-- begin _includes/seo.html --><title>SED Command - Geospatial Workbook</title>
+<meta name="description" content="Tutorial on Informatics for Geospatial Information">
+
+
+
+<meta property="og:type" content="website">
+<meta property="og:locale" content="en_US">
+<meta property="og:site_name" content="Geospatial Workbook">
+<meta property="og:title" content="SED Command">
+<meta property="og:url" content="http://localhost:4000/IntroductionToCommandLine/Unix/unix-basics-4sed.html">
+
+
+
+
+  <meta property="og:image" content="http://localhost:4000/assets/images/margaret-weir-GZyjbLNOaFg-unsplash_dark.jpg">
+
+
+
+  <meta name="twitter:site" content="@isugif">
+  <meta name="twitter:title" content="SED Command">
+  <meta name="twitter:description" content="Tutorial on Informatics for Geospatial Information">
+  <meta name="twitter:url" content="http://localhost:4000/IntroductionToCommandLine/Unix/unix-basics-4sed.html">
+
+  
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content="http://localhost:4000/assets/images/margaret-weir-GZyjbLNOaFg-unsplash_dark.jpg">
+  
+
+  
+
+
+
+
+
+
+
+  
+
+  
+
+
+<link rel="canonical" href="http://localhost:4000/IntroductionToCommandLine/Unix/unix-basics-4sed.html">
+
+
+
+
+
+
+
+  <script type="application/ld+json">
+    {
+      "@context": "http://schema.org",
+      "@type": "Person",
+      "name": "",
+      "url": "http://localhost:4000",
+      "sameAs": null
+    }
+  </script>
+
+
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+<link href="/feed.xml" type="application/atom+xml" rel="alternate" title="Geospatial Workbook Feed">
+
+<!-- http://t.co/dKP3o1e -->
+<meta name="HandheldFriendly" content="True">
+<meta name="MobileOptimized" content="320">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+
+<!--[if lte IE 9]>
+  <style>
+    /* old IE unsupported flexbox fixes */
+    .greedy-nav .site-title {
+      padding-right: 3em;
+    }
+    .greedy-nav button {
+      position: absolute;
+      top: 0;
+      right: 0;
+      height: 100%;
+    }
+  </style>
+<![endif]-->
+
+
+    <!-- start custom head snippets -->
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-E6BZVYF8ZY"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-E6BZVYF8ZY');
+</script>
+
+<!-- insert favicons. use https://realfavicongenerator.net/ -->
+
+<!-- end custom head snippets -->
+
+  </head>
+
+  <body class="layout--single">
+
+    <!--[if lt IE 9]>
+<div class="notice--danger align-center" style="margin: 0;">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience.</div>
+<![endif]-->
+
+    <div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        <a class="site-title" href="/">Geospatial Workbook</a>
+        <ul class="visible-links">
+          
+            
+            <li class="masthead__menu-item">
+              <a href="http://localhost:4000/about.html" >About</a>
+            </li>
+          
+            
+            <li class="masthead__menu-item">
+              <a href="http://localhost:4000/list.html" >Index</a>
+            </li>
+          
+            
+            <li class="masthead__menu-item">
+              <a href="http://localhost:4000/glossary.html" >Glossary</a>
+            </li>
+          
+            
+            <li class="masthead__menu-item">
+              <a href="http://localhost:4000/people.html" >People</a>
+            </li>
+          
+            
+            <li class="masthead__menu-item">
+              <a href="http://localhost:4000/contributing.html" >Contribute</a>
+            </li>
+          
+        </ul>
+        
+        <button class="search__toggle" type="button">
+          <svg class="icon" width="16" height="16" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 15.99 16">
+            <path d="M15.5,13.12L13.19,10.8a1.69,1.69,0,0,0-1.28-.55l-0.06-.06A6.5,6.5,0,0,0,5.77,0,6.5,6.5,0,0,0,2.46,11.59a6.47,6.47,0,0,0,7.74.26l0.05,0.05a1.65,1.65,0,0,0,.5,1.24l2.38,2.38A1.68,1.68,0,0,0,15.5,13.12ZM6.4,2A4.41,4.41,0,1,1,2,6.4,4.43,4.43,0,0,1,6.4,2Z" transform="translate(-.01)"></path>
+          </svg>
+        </button>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">Toggle Menu</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+    <div class="initial-content">
+      
+  
+
+
+
+
+
+
+
+
+
+
+
+<div class="page__hero--overlay"
+  style="background-color: 444444; background-image: url('/assets/images/margaret-weir-GZyjbLNOaFg-unsplash_dark.jpg');"
+>
+  
+    <div class="wrapper">
+      <h1 id="page-title" class="page__title" itemprop="headline">
+        
+          SED Command
+
+        
+      </h1>
+      
+      
+      
+    </div>
+  
+  
+</div>
+
+
+
+
+
+<div id="main" role="main">
+  
+
+  <article class="page" itemscope itemtype="http://schema.org/CreativeWork">
+    <meta itemprop="headline" content="SED Command">
+    
+    
+    
+
+    <div class="page__inner-wrap">
+      
+
+      <section class="page__content" itemprop="text">
+        
+        <h2 id="all-about-sed-command">All about SED command</h2>
+
+<p>The  <code class="language-plaintext highlighter-rouge">s</code>treamline <code class="language-plaintext highlighter-rouge">ed</code>itor  or <code class="language-plaintext highlighter-rouge">sed</code> command is a stream editor that reads one or more text files, makes changes or edits according to editing script, and writes the results to standard output. First, we will discuss <code class="language-plaintext highlighter-rouge">sed</code> command with respect to search and replace function. Other uses for the <code class="language-plaintext highlighter-rouge">sed</code> can also be found in <a href="http://www.grymoire.com/Unix/Sed.html#uh-47">this</a> official guide, but we will discuss them briefly in this chapter as well.</p>
+
+<h3 id="1-find-and-replace">1. Find and replace</h3>
+<p>Most common use of <code class="language-plaintext highlighter-rouge">sed</code> is to substitute text, matching a pattern. The syntax for doing this in <code class="language-plaintext highlighter-rouge">sed</code> is as follows:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sed 'OPERATION/REGEXP/REPLACEMENT/FLAGS' FILENAME
+</code></pre></div></div>
+
+<ul>
+  <li>Here, <code class="language-plaintext highlighter-rouge">/</code> is the delimiter (you can also use <code class="language-plaintext highlighter-rouge">_</code> (underscore), <code class="language-plaintext highlighter-rouge">|</code> (pipe) or <code class="language-plaintext highlighter-rouge">:</code> (colon) as delimiter as well)</li>
+  <li><code class="language-plaintext highlighter-rouge">OPERATION</code> specifies the action to be performed (sometimes if a condition is satisfied). The most common and widely used operation is <code class="language-plaintext highlighter-rouge">s</code> which does the substitution operation (other useful operators include <code class="language-plaintext highlighter-rouge">y</code> for transformation, <code class="language-plaintext highlighter-rouge">i</code> for insertion, <code class="language-plaintext highlighter-rouge">d</code> for deletion etc.).</li>
+  <li><code class="language-plaintext highlighter-rouge">REGEXP</code> and <code class="language-plaintext highlighter-rouge">REPLACEMENT</code> specify search term and the substitution term respectively for the operation that is being performed.</li>
+  <li><code class="language-plaintext highlighter-rouge">FLAGS</code> are additional parameters that control the operation. Some common <code class="language-plaintext highlighter-rouge">FLAGS</code> include:
+    <ul>
+      <li><code class="language-plaintext highlighter-rouge">g</code>	replace all the instances of <code class="language-plaintext highlighter-rouge">REGEXP</code> with <code class="language-plaintext highlighter-rouge">REPLACEMENT</code> (globally)</li>
+      <li><code class="language-plaintext highlighter-rouge">N</code> where N is any number, to replace Nth instance of the <code class="language-plaintext highlighter-rouge">REGEXP</code> with <code class="language-plaintext highlighter-rouge">REPLACEMENT</code></li>
+      <li><code class="language-plaintext highlighter-rouge">p</code> if substitution was made, then prints the new pattern space</li>
+      <li><code class="language-plaintext highlighter-rouge">i</code> ignores case for matching <code class="language-plaintext highlighter-rouge">REGEXP</code></li>
+      <li><code class="language-plaintext highlighter-rouge">w</code> file If substitution was made, write out the result to the given file</li>
+      <li><code class="language-plaintext highlighter-rouge">d</code> when specified without <code class="language-plaintext highlighter-rouge">REPLACEMENT</code>, deletes the found <code class="language-plaintext highlighter-rouge">REGEXP</code></li>
+    </ul>
+  </li>
+</ul>
+
+<p>Some search and replace examples:</p>
+
+<p>find and replace all chr to chromosome in the file</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sed 's/chr/chromosome/g' FILENAME &gt; NEWFILE
+</code></pre></div></div>
+<p>find and replace, but only the one instance per line (first occurrence of chr will be changed to chromosome)</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sed 's/chr/chromosome/1' FILENAME &gt; NEWFILE
+</code></pre></div></div>
+<p>find and replace, but do it directly on the original file</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sed -i 's/chr/chromosome/g' FILENAME
+</code></pre></div></div>
+<p>find and replace directly, but save a old version too</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sed -i.old 's/chr/chromosome/g' FILENAME
+</code></pre></div></div>
+<p>find and replace, only if you also find MTF1 in the line</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sed '/MTF1/s/chr/chromosome/g' FILENAME &gt; NEWFILE
+</code></pre></div></div>
+
+<h3 id="2-print-specific-lines-of-the-file">2. Print specific lines of the file</h3>
+
+<p>To print a specific line, you can use the address function, note that by deafault, <code class="language-plaintext highlighter-rouge">sed</code> will stream the entire file, so when you are interested in specific lines only, you will have to suppress this feature using the option <code class="language-plaintext highlighter-rouge">-n</code>.</p>
+
+<p>print 10th line</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sed -n '10p' FILENAME
+</code></pre></div></div>
+<p>You can provide any number of additional lines to print using <code class="language-plaintext highlighter-rouge">-e</code> option (you can add any number of lines like this)</p>
+
+<p>print 10th and 15th line</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sed -n -e '10p' -e '15p' FILENAME
+</code></pre></div></div>
+<p>It also accepts range, using <code class="language-plaintext highlighter-rouge">,</code></p>
+
+<p>print lines 10 to 50</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sed -n '10,50p' FILENAME
+</code></pre></div></div>
+<p>or you can create specific pattern, like multiple of a number using <code class="language-plaintext highlighter-rouge">~</code></p>
+
+<p>Every tenth line starting from 10, 20, 30.. to end of the file</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sed -n '10~10p' FILENAME
+</code></pre></div></div>
+<p>print odd-numbered lines</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sed -n '1~2p' FILENAME
+</code></pre></div></div>
+
+<p>Most powerful feature is that you can combine these ranges or multiples in any fashion. Example: <code class="language-plaintext highlighter-rouge">fastq</code> files have header on first line and sequence in second, next two lines will have the quality and a blank extra line (four lines make one read). Sometimes you will only need the sequence and header</p>
+
+<p>to print 1,2,5,6,9,10 so on you can use</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sed -n '1~4p;2~4p' FASTQ_FILE
+</code></pre></div></div>
+<p>pipe this to make a fasta file</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sed -n '1~4p;2~4p' FASTQ_FILE | sed 's/^@/&gt;/g' &gt; FASTA_FILE
+</code></pre></div></div>
+<p>More combinations:</p>
+
+<p>print 1 to 10, and then multiples of 10</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sed -n '1,10~10p'  FILENAME
+</code></pre></div></div>
+
+<h3 id="3-delete-specific-lines-of-the-file">3. Delete specific lines of the file</h3>
+
+<p>All the above address types (specific line, range, multiples), also works with other types of operation, such as deletion and insertion. For deletion, you need to swap <code class="language-plaintext highlighter-rouge">p</code> with <code class="language-plaintext highlighter-rouge">d</code></p>
+
+<p>delete first line</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sed "1d" FILENAME
+</code></pre></div></div>
+<p>delete lines 1 thru 3</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sed "1,3d" FILENAME
+</code></pre></div></div>
+<p>delete blank lines</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sed 's/^$//g' FILENAME
+</code></pre></div></div>
+
+<h3 id="4-insert-specific-lines-to-a-file">4. Insert specific lines to a file</h3>
+<p>Here, you use <code class="language-plaintext highlighter-rouge">i</code> for inserting text anywhere in the file</p>
+
+<p>put “line to insert” in the second line</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sed '2 i line to insert' FILENAME
+</code></pre></div></div>
+
+<h3 id="5-extract-portions-of-the-lines">5. Extract portions of the lines</h3>
+<p>still to come!</p>
+
+<hr />
+<p><a href="../programs.md">Table of contents</a></p>
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+
+
+        
+      </footer>
+
+      
+
+      
+
+    </div>
+
+    
+  </article>
+
+  
+  
+</div>
+    </div>
+
+    
+      <div class="search-content">
+        <div class="search-content__inner-wrap"><form onsubmit="return googleCustomSearchExecute();" id="cse-search-box-form-id">
+    <input type="search" id="cse-search-input-box-id" aria-placeholder="Enter your search term..." class="search-input" tabindex="-1" placeholder="Enter your search term..." />
+    </form>
+    <div id="results" class="results">
+        <gcse:searchresults-only></gcse:searchresults-only>
+    </div></div>
+
+      </div>
+    
+    
+    <div class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+
+        <div class="page__footer-follow">
+  <ul class="social-icons">
+    
+      <li><strong>Follow:</strong></li>
+    
+    
+      <li><a href="https://twitter.com/isugif"><i class="fab fa-fw fa-twitter-square" aria-hidden="true"></i> Twitter</a></li>
+    
+    
+    
+      <li><a href="https://github.com/https://github.com/isugenomics"><i class="fab fa-fw fa-github" aria-hidden="true"></i> GitHub</a></li>
+    
+    
+    
+    
+  </ul>
+</div>
+
+<div class="page__footer-copyright">&copy; 2024 Geospatial Workbook</div>
+
+      </footer>
+    </div>
+
+    
+  <script src="/assets/js/main.min.js"></script>
+  <script src="https://use.fontawesome.com/releases/v5.0.13/js/all.js"></script>
+
+
+<script>
+  (function () {
+    var cx = '009853197685285203469:nsvri1pa88d';
+    var gcse = document.createElement('script');
+    gcse.type = 'text/javascript';
+    gcse.async = true;
+    gcse.src = 'https://cse.google.com/cse.js?cx=' + cx;
+    var s = document.getElementsByTagName('script')[0];
+    s.parentNode.insertBefore(gcse, s);
+  })();
+
+  function googleCustomSearchExecute() {
+    var input = document.getElementById('cse-search-input-box-id');
+    var element = google.search.cse.element.getElement('searchresults-only0');
+    if (input.value == '') {
+      element.clearAllResults();
+    } else {
+      element.execute(input.value);
+    }
+    return false;
+  }
+
+  
+</script>
+
+
+
+
+<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+<script id="MathJax-script" defer
+        src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+</script>
+
+
+
+
+  </body>
+</html>
